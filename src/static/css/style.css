@@ -1,0 +1,303 @@
+/**
+ * Basic
+ */
+
+html,
+body {
+  background: #f6f8f8;
+  color: #393d40;
+}
+
+/**
+ * Header
+ */
+
+
+
+.header {
+  background: #ffffff;
+}
+
+/**
+ * Slider
+ */
+
+.slider {
+  height: 550px;
+  padding: 100px 0;
+  text-align: center;
+  box-sizing: border-box;
+  background: url('../img/slider_bg_1.jpg');
+  background-size: 600px;
+}
+
+.slider__title {
+  color: #ffffff;
+  font-size: 48px;
+  font-weight: bold;
+
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.slider__text {
+  display: inline-block;
+  width: 40%;
+
+  color: #ffffff;
+  font-size: 28px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+/**
+ * Courses
+ */
+
+.courses {
+  padding: 30px 0;
+}
+
+.courses__header {
+  text-align: center;
+}
+
+.courses__title {
+  margin: 0;
+  color: #575a5b;
+  font: 300 32px 'Roboto', Helvetica, sans-serif;
+}
+
+.courses__description {
+  display: inline-block;
+  width: 50%;
+  margin: 10px 0 40px 0;
+  font: 300 18px 'Roboto', Helvetica, sans-serif;
+}
+
+.course {
+  width: 49.5%;
+  margin: 0 0 10px 0;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+.course:hover {
+  border: 1px solid #21abc7;
+}
+
+.course__title {
+  margin: 0 0 10px 0;
+  color: #21abc7;
+  font: 300 24px 'Roboto', Helvetica, sans-serif;
+}
+
+.course__text {
+  font: 300 15px 'Roboto', Helvetica, sans-serif;
+}
+
+.course__link {
+  color: #393d40;
+  display: inline-block;
+}
+
+.course__link:hover {
+  color: #393d40;
+  text-decoration: none;
+}
+
+.right-column {
+  margin-left: 20px;
+}
+
+/**
+ * Reviews
+ */
+
+.reviews {
+  padding: 100px 0;
+}
+
+.reviews__header {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.reviews__title {
+  color: #575a5b;
+  font: 300 32px 'Roboto', Helvetica, sans-serif;
+}
+
+.reviews__body {
+  font: 300 15px 'Roboto', Helvetica, sans-serif;
+}
+
+.review {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.review__header {
+  margin-top: 50px;
+}
+
+.review__title {
+  font: 300 15px 'Roboto', Helvetica, sans-serif;
+}
+
+/**
+ * Works
+ */
+
+.works {
+  padding: 40px 0;
+  background: #ffffff;
+}
+
+.works__header {
+  padding-bottom: 100px;
+  text-align: center
+}
+
+.works__title {
+  margin: 0;
+  color: #575a5b;
+  font: 300 32px 'Roboto', Helvetica, sans-serif;
+}
+
+.step__timeline {
+  border-left: 1px solid #e2e8e9;
+}
+
+.step__img {
+  margin: 40px 70px;
+}
+
+.step__title,
+.step__text {
+  color: #393d40;
+  font: 300 32px 'Roboto', Helvetica, sans-serif;
+}
+
+.step__text {
+  font-size: 18px
+}
+
+.step__description {
+  display: inline-block;
+  width: 60%;
+
+  padding-right: 50px
+}
+
+.step__timeline--circle {
+  position: relative;
+  padding-left: 40px;
+}
+
+.step__timeline--circle:before {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  left: -9px;
+  top: 5%;
+
+  background: #fff;
+  border: 4px solid #9DB0B5;
+  border-radius: 50%;
+}
+
+/**
+ * Page
+ */
+
+.article {
+  margin: 40px 0 !important;
+  padding: 40px;
+  background: #ffffff;
+  border: 1px solid #e2e8e9;
+  border-radius: 5px;
+}
+
+.article h1,
+.article h2 {
+  font: 300 24px 'Roboto', Helvetica, sans-serif;
+}
+
+.article h1 {
+  font-size: 38px;
+}
+
+/**
+ * Icon
+ */
+
+.icon {
+  padding: 0 10px;
+  font-size: 20px;
+}
+
+/**
+ * Footer
+ */
+
+.footer {
+  padding: 40px 0;
+  color: #aebdc1;
+  background-color: #2d3033;
+}
+
+.footer__copyright {
+  padding-top: 20px;
+}
+
+.footer__copyright-light {
+  font-weight: 300;
+}
+
+.footer__about {
+  position: relative;
+  padding-left: 25px;
+  font-weight: 300;
+  font-size: 15px;
+}
+
+.footer__about:before {
+  position: absolute;
+  content: '';
+  left: -1em;
+
+  width: 1px;
+  height: 100%;
+
+  background: #47585c;
+}
+
+.footer-menu__title {
+  margin: 0 0 10px 0;
+  color: #6D7263;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.footer-menu__body {
+  margin: 0;
+  padding: 0;
+
+  list-style: none
+}
+
+.footer-menu__text {
+  color: #aebdc1;
+  font-size: 13px;
+  font-weight: bold;
+  transition: color ease .5s;
+}
+
+.footer-menu__text:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
