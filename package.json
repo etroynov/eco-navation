@@ -9,7 +9,7 @@
     "ssr": "next src",
     "build": "next build src"
   },
-  "devDependencies": {
+  "dependencies": {
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.2.1",
     "koa": "^2.3.0",
@@ -29,7 +29,7 @@
     "typescript": "^2.6.1",
     "webpack": "^3.8.1"
   },
-  "dependencies": {
+  "devDependencies": {
     "@types/jquery": "^3.2.16",
     "@types/koa": "^2.0.39",
     "@types/koa-compose": "^3.2.2",

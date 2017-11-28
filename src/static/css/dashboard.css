@@ -123,6 +123,12 @@
   fill: #4c5d6e;
 }
 
+/* Tabs */
+
+.tabs__link {
+  padding: 20px 0 !important;
+}
+
 
 /* Footer */
 

@@ -5,9 +5,9 @@ import Head from 'next/head';
  * Components
  */
 
-import Header from '../../components/dashboard/common/Header';
-import Footer from '../../components/dashboard/common/Footer';
-import Sidebar from '../../components/dashboard/common/Sidebar';
+import Header from '../../../components/dashboard/common/Header';
+import Footer from '../../../components/dashboard/common/Footer';
+import Sidebar from '../../../components/dashboard/common/Sidebar';
 
 /*!
  * Expo

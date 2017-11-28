@@ -5,9 +5,9 @@ const head_1 = require("next/head");
 /*!
  * Components
  */
-const Header_1 = require("../../components/dashboard/common/Header");
-const Footer_1 = require("../../components/dashboard/common/Footer");
-const Sidebar_1 = require("../../components/dashboard/common/Sidebar");
+const Header_1 = require("../../../components/dashboard/common/Header");
+const Footer_1 = require("../../../components/dashboard/common/Footer");
+const Sidebar_1 = require("../../../components/dashboard/common/Sidebar");
 /*!
  * Expo
  */
