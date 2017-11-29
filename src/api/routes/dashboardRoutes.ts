@@ -16,6 +16,7 @@ import * as Body from 'koa-body';
 import * as dashboard from '../controllers/dashboardController';
 import * as post from '../controllers/postController';
 import * as file from '../controllers/fileController';
+import * as departament from '../controllers/departamentController';
 
 /*!
  * Init
@@ -46,6 +47,18 @@ router
   .get('/posts/destroy/:id', post.destroy)
   .post('/posts/update', post.update)
   .post('/posts/store', post.store);
+
+/*!
+ * Departament
+ */
+
+router
+  .get('/departament', departament.index)
+  .get('/departament/create', departament.create)
+  .get('/departament/edit/:id', departament.edit)
+  .get('/departament/destroy/:id', departament.destroy)
+  .post('/departament/update', departament.update)
+  .post('/departament/store', departament.store);
 
 /*!
  * Files
