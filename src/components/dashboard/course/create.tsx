@@ -1,16 +1,28 @@
 import * as React from 'react';
+import * as fetch from 'isomorphic-fetch';
 
 class Create extends React.Component<{}, {
   name: string;
   description: string;
   departament: string;
+  departaments: any;
   image?: string;
 }> {
   state = {
     name: '',
     description: '',
     departament: '',
+    departaments: [],
   };
+
+  async componentDidMount() {
+    const res = await fetch('/dashboard/departaments/all');
+    const departaments = await res.json();
+
+    this.setState({
+      departaments,
+    });
+  }
 
   submitCourse() {}
 

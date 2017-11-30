@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
+const fetch = require("isomorphic-fetch");
 class Create extends React.Component {
     constructor() {
         super(...arguments);
@@ -8,7 +9,15 @@ class Create extends React.Component {
             name: '',
             description: '',
             departament: '',
+            departaments: [],
         };
+    }
+    async componentDidMount() {
+        const res = await fetch('/dashboard/departaments/all');
+        const departaments = await res.json();
+        this.setState({
+            departaments,
+        });
     }
     submitCourse() { }
     render() {

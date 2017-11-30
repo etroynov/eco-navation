@@ -37,7 +37,10 @@ class Create extends React.Component<{
   }
 
   handleSubmit(event: IEvent) {
-    fetch('/dashboard/departament/create', { method: 'post', body: {} }).then();
+    fetch('/dashboard/departaments/create', {
+      method: 'POST',
+      body: { test: 'test' },
+    }).then();
 
     event.preventDefault();
   }

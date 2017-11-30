@@ -10,7 +10,6 @@ import * as Router from 'koa-router';
  * Controllers
  */
 
-import * as home from '../controllers/homeController';
 import * as post from '../controllers/postController';
 
 /*!
@@ -24,16 +23,11 @@ const router = new Router();
  */
 
 /*!
- * HOME
- */
-
-router.get('/', home.index);
-
-/*!
  * Posts
  */
 
 router
+  .get('/posts', post.index)
   .get('/posts/:slug', post.show);
 
 export const appRoutes = () => router.routes();

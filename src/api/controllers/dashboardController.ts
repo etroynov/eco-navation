@@ -15,9 +15,7 @@ import Post from '../models/Post';
 
 export const index = async (ctx: any) => {
   const posts = await Post.find();
+  ctx.body = { posts };
 
-  return await ctx.render('dashboard/home/index', {
-    posts,
-    title: 'Node Express Mongoose Boilerplate',
-  });
+  return await ctx;
 };

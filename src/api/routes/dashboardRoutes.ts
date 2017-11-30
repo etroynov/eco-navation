@@ -13,7 +13,6 @@ import * as Body from 'koa-body';
  * Controllers
  */
 
-import * as dashboard from '../controllers/dashboardController';
 import * as post from '../controllers/postController';
 import * as file from '../controllers/fileController';
 import * as departament from '../controllers/departamentController';
@@ -31,19 +30,11 @@ const router = new Router({
  */
 
 /*!
- * Home
- */
-
-router.get('/', dashboard.index);
-
-/*!
  * Posts
  */
 
 router
   .get('/posts', post.index)
-  .get('/posts/create', post.create)
-  .get('/posts/edit/:id', post.edit)
   .get('/posts/destroy/:id', post.destroy)
   .post('/posts/update', post.update)
   .post('/posts/store', post.store);
@@ -53,12 +44,10 @@ router
  */
 
 router
-  .get('/departament', departament.index)
-  .get('/departament/create', departament.create)
-  .get('/departament/edit/:id', departament.edit)
-  .get('/departament/destroy/:id', departament.destroy)
-  .post('/departament/update', departament.update)
-  .post('/departament/store', departament.store);
+  .get('/departaments/all', departament.index)
+  .get('/departaments/destroy/:id', departament.destroy)
+  .post('/departaments/update', departament.update)
+  .post('/departaments/create', departament.create);
 
 /*!
  * Files

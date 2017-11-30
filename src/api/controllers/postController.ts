@@ -15,24 +15,17 @@ import Post from '../models/Post';
 
 export const index = async (ctx: any) => {
   const posts = await Post.find().sort({ createAt: -1 });
+  ctx.body =  { posts };
 
-  return await ctx.render('dashboard/post/index', { posts });
+  return await ctx;
 };
 
 export const show = async (ctx: any) => {
   const slug = ctx.params.slug;
   const post = await Post.findOne({ slug });
+  ctx.body =  { post };
 
-  return await ctx.render('site/post/show', { post });
-};
-
-export const create = async (ctx: any) => await ctx.render('dashboard/post/create');
-
-export const edit = async (ctx: any) => {
-  const { id } = ctx.params;
-  const post = await Post.findOne({ _id: id });
-
-  await ctx.render('dashboard/post/edit', { post });
+  return await ctx;
 };
 
 export const store  = async (ctx: any) => {

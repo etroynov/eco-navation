@@ -14,31 +14,33 @@ import Departament from '../models/Departament';
  */
 
 export const index = async (ctx: any) => {
-  const Departaments = await Departament.find().sort({ createAt: -1 });
+  const departaments = await Departament.find().sort({ createAt: -1 });
+  ctx.body = departaments;
 
-  return await ctx.render('dashboard/Departament/index', { Departaments });
+  return await ctx;
 };
 
 export const show = async (ctx: any) => {
   const slug = ctx.params.slug;
-  const Departament = await Departament.findOne({ slug });
+  const departament = await Departament.findOne({ slug });
 
-  return await ctx.render('site/Departament/show', { Departament });
+  ctx.body = departament;
+
+  return await ctx;
 };
 
-export const create = async (ctx: any) => await ctx.render('dashboard/Departament/create');
+export const create = async (ctx: any) => {
+  console.info(ctx.request);
+  // try {
+  //   await Departament.create(ctx.request.body.fields);
+  //   ctx.body = { status: 'done' };
+  // } catch (e) {
+  //   ctx.body = e;
+  // }
+  ctx.body = ctx.request;
 
-export const edit = async (ctx: any) => {
-  const { id } = ctx.params;
-  const Departament = await Departament.findOne({ _id: id });
 
-  await ctx.render('dashboard/Departament/edit', { Departament });
-};
-
-export const store  = async (ctx: any) => {
-  await Departament.create(ctx.request.body.fields);
-
-  return await ctx.redirect('/dashboard/Departaments');
+  return await ctx;
 };
 
 export const update = async (ctx: any) => {
@@ -46,13 +48,15 @@ export const update = async (ctx: any) => {
   const { id } = fields;
 
   await Departament.findOneAndUpdate({ _id: id }, fields);
+  ctx.body = { status: 'done' };
 
-  return await ctx.redirect('/dashboard/Departaments');
+  return await ctx;
 };
 
 export const destroy = async (ctx: any) => {
   const { id } = ctx.params;
   await Departament.findByIdAndRemove(id);
 
-  return await ctx.redirect('/dashboard/Departaments');
+  ctx.body = { status: 'done' };
+  return await ctx;
 };
