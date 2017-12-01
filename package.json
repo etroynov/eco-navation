@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "./node_modules/webpack/bin/webpack.js --watch --progress",
     "api": "nodemon dist/api",
-    "ssr": "next src",
-    "build": "next build src"
+    "ssr": "next src/",
+    "build": "next build src/"
   },
   "dependencies": {
     "jquery": "^3.2.1",
