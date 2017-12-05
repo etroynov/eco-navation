@@ -12,9 +12,9 @@ const Slider = () => (
           <p className="slider__text">Интерактивное учебное задание для начинающих и повышающих квалификацию</p>
         </section>
         <section className="slider__control">
-          <Link href="/registration">
+          {/* <Link href="/registration">
             <a className="uk-button uk-button-default uk-button-secondary uk-button-large">регистрация</a>
-          </Link>
+          </Link> */}
           <Link href="/courses">
             <a className="uk-button uk-button-default uk-button-primary uk-button-large">наши курсы</a>
           </Link>

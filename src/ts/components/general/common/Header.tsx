@@ -36,9 +36,9 @@ export default () => (
         <div className="uk-navbar-right">
           <ul className="uk-navbar-nav">
             <li>
-              <Link href="/login">
+              {/* <Link href="/login">
                 <a><i className="icon ion-locked"></i>вход</a>
-              </Link>
+              </Link> */}
             </li>
           </ul>
         </div>

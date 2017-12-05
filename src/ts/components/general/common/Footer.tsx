@@ -26,7 +26,7 @@ const Footer = () => (
                     <a className="footer-menu__text">работа</a>
                   </Link>
                 </li>
-                <li className="footer-menu__item">
+                {/* <li className="footer-menu__item">
                   <Link href="/pressa">
                     <a className="footer-menu__text">пресса о нас</a>
                   </Link>
@@ -35,7 +35,7 @@ const Footer = () => (
                   <Link href="/rules">
                     <a className="footer-menu__text">правила использования ресурсов</a>
                   </Link>
-                </li>
+                </li> */}
                 <li className="footer-menu__item">
                   <Link href="/oferta">
                     <a className="footer-menu__text">пользовательское соглашение</a>
@@ -44,7 +44,7 @@ const Footer = () => (
               </ul>
             </section>
 
-            <section className="menu uk-width-1-3">
+            {/* <section className="menu uk-width-1-3">
               <header className="footer-menu__header">
                 <h4 className="footer-menu__title">Услуги</h4>
               </header>
@@ -75,9 +75,9 @@ const Footer = () => (
                   </Link>
                 </li>
               </ul>
-            </section>
+            </section> */}
 
-            <section className="menu uk-width-1-3">
+            {/* <section className="menu uk-width-1-3">
               <header className="footer-menu__header">
                 <h4 className="footer-menu__title">Нужна помощь?</h4>
               </header>
@@ -93,7 +93,7 @@ const Footer = () => (
                   </Link>
                 </li>
               </ul>
-            </section>
+            </section> */}
           </div>
         </div>
         <div className="uk-width-1-2">
