@@ -6,10 +6,10 @@ const Slider = () => (
     <div className="uk-container">
       <section className="slider__item">
         <header className="slider__header">
-          <h4 className="slider__title">Дополнительное профессиональное образование.</h4>
+          <h4 className="slider__title">Учебный центр "Автор"</h4>
         </header>
         <section className="slider__body">
-          <p className="slider__text">Интерактивное учебное задание для начинающих и повышающих квалификацию</p>
+          <p className="slider__text">Дополнительное профессиональное образование.</p>
         </section>
         <section className="slider__control">
           {/* <Link href="/registration">

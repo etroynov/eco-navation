@@ -3,6 +3,7 @@
  */
 
 import * as React from 'react';
+import Link from 'next/link';
 
 /**
  * Components
@@ -30,12 +31,12 @@ const category = {
   items: [{
     name: 'Медицинское образование',
     img: '/static/img/badge-pen.svg',
-    description: 'система подготовки медицинских кадров, обеспечивающая изучение специальных дисциплин, а также овладение необходимыми практическими навыками в сфере дополнительного профессионального образования.',
+    description: 'Система подготовки медицинских кадров, обеспечивающая изучение специальных дисциплин, а также овладение необходимыми практическими навыками в сфере дополнительного профессионального образования.',
     href: '/courses/medicina'
   }, {
     name: 'Экологическое образование',
     img: '/static/img/badge-eco.svg',
-    description: 'это непрерывный процесс обучения, направленный на усвоение, систематизацию знаний об окружающей среде, приобретение умений и навыков природоохранной деятельности и формирование общей экологической культуры Экология как система научных и учебных дисциплин должна стать одним из главных компонентов содержания образования в XXI веке.',
+    description: 'Это непрерывный процесс обучения, направленный на усвоение, систематизацию знаний об окружающей среде, приобретение умений и навыков природоохранной деятельности и формирование общей экологической культуры Экология как система научных и учебных дисциплин должна стать одним из главных компонентов содержания образования в XXI веке.',
     href: '/courses/eco-study',
   }, {
     name: 'Промышленная безопасность',
@@ -59,11 +60,45 @@ const category = {
  * Expo
  */
 
-export default () => [
-  <Header key="header" />,
-  <Slider key="slider" />,
-  <Courses key="courses" {...category} />,
-  <Works key="works" />,
-  <Reviews key="reviews" />,
-  <Footer key="footer" />,
-];
+export default () => (
+  <div>
+  <Header key="header" />
+  <Slider key="slider" />
+  <div className="courses uk-container">
+    <header className="courses__header">
+      <h2 className="courses__title">{category.name}</h2>
+      <p className="courses__description">{category.description}</p>
+    </header>
+
+    <div className="uk-flex uk-flex-between uk-flex-wrap">
+    {category.items.map(item => (
+         <article className="course">
+          <Link href={item.href}>
+            <a className="course__link">
+              <div className="uk-flex">
+                <div className="left-column uk-width-1-4">
+                  <figure className="course__img-container">
+                    <img src={item.img} alt={item.name} className="course__img" width="100" height="100" />
+                  </figure>
+                </div>
+                
+                <div className="right-column uk-width-1-1">
+                  <header className="course__header">
+                    <h3 className="course__title">{item.name}</h3>
+                  </header>
+                  <section className="course__body">
+                    <p className="course__text">{item.description}</p>
+                  </section>
+                </div>
+              </div>
+            </a>
+          </Link>
+        </article>
+      ))}
+    </div>
+  </div>
+  <Works key="works" />
+  <Reviews key="reviews" />
+  <Footer key="footer" />
+  </div>
+);
