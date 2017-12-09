@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Link from 'next/link';
 
-const Course = ({ href, img, name, description, price } : {href: string; img: string; name: string; description: string; price: number;}) => (
+const Course = ({ href, img, banner, name, description, duration, price } : {href: string; img: string; banner: string; name: string; description: string; duration: number; price: number;}) => (
   <article className="course">
-    <Link as={`/курс/${name}`} href={`/course?name=${name}&description=${description}&img=${img}&price=${price}`}>
+    <Link as={`/курс/${name}`} href={`/course?name=${name}&description=${description}&img=${img}&banner=${banner}&duration=${duration}&price=${price}`}>
       <a className="course__link">
         <div className="uk-flex">
           <div className="left-column uk-width-1-4">
