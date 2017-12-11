@@ -8,15 +8,15 @@ import * as React from 'react';
  * Components
  */
 
-import Header from '../components/general/common/Header';
-import Footer from '../components/general/common/Footer';
+import Container from '../components/site/common/Container';
+import Site from '../components/site/layout';
 
 /*!
  * Expo
  */
 
 const Content = () => (
-  <div className="uk-container">
+  <Container>
     <div className="article">
       <header className="article__header">
         <h1 className="article__title">Пользовательское соглашение сервиса УЦ "Автор"</h1>
@@ -134,11 +134,11 @@ const Content = () => (
         </section>
       </section>
     </div>
-  </div>
+  </Container>
 );
 
-export default () => [
-  <Header key='header' />,
-  <Content key='content' />,
-  <Footer key='footer' />,
-];
+export default () => (
+  <Site>
+    <Content />
+  </Site>
+);

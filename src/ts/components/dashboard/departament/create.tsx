@@ -5,16 +5,8 @@ interface IEvent extends Event {
   target: HTMLInputElement;
 }
 
-class Create extends React.Component<{
-  name?: string;
-  description?: string;
-  image?: string;
-}, {
-  name?: string;
-  description?: string;
-  image?: string;
-}> { 
-  constructor(props) {
+class Create extends React.Component<IDepartamentCreateProps, IDepartamentCreateState> { 
+  constructor(props: IDepartamentCreate) {
     super(props);
 
     this.state = {
@@ -47,7 +39,7 @@ class Create extends React.Component<{
 
   render() {
     return (
-      <form className="uk-container" onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <fieldset className="uk-fieldset">
           <div className="uk-margin">
             <label htmlFor="departament-name" className="uk-form-label">Название</label>

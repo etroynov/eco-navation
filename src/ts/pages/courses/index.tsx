@@ -3,14 +3,14 @@
  */
 
 import * as React from 'react';
+import Link from 'next/link';
 
 /**
  * Components
  */
 
-import Header from '../../components/general/common/Header';
-import List from '../../components/general/courses/List';
-import Footer from '../../components/general/common/Footer';
+import Header from '../../components/site/common/Header';
+import Footer from '../../components/site/common/Footer';
 
 /*!
  * Data
@@ -23,7 +23,7 @@ const category = {
     name: 'Медицинское образование',
     img: '/static/img/badge-pen.svg',
     description: 'система подготовки медицинских кадров, обеспечивающая изучение специальных дисциплин, а также овладение необходимыми практическими навыками в сфере дополнительного профессионального образования.',
-    href: '/courses/medicina'
+    href: '/courses/medicina',
   }, {
     name: 'Экологическое образование',
     img: '/static/img/badge-eco.svg',
@@ -38,17 +38,17 @@ const category = {
     name: 'Бизнес образование',
     img: '/static/img/badge-electives.svg',
     description: 'Традиционными дисциплинами в бизнес-образовательных программах, являются менеджмент, маркетинг, финансы, управление операциями, управление персоналом, управление информацией и др. Их углублённое изучение осуществляется при подготовке «функциональных менеджеров», а также при повышении квалификации по отдельным аспектам названных дисциплин.',
-    href: '/courses/business-study'
+    href: '/courses/business-study',
   }, {
     name: 'Курсы личностного роста',
     img: '/static/img/badge-ruby.svg',
     description: 'Для тех, кто хочет влиять на аудиторию и вызывать симпатию. Используются как проверенные временем методики театральных вузов и школ телеведущих, так и новые методы В сфере бизнеса наши курсы в первую очередь полезны для: руководителей и директоров с целью построения эффективного общения с подчинёнными и партнёрами, лиц, занимающих руководящие должности: начальников отделов, топ-менеджеров.',
-    href: '/courses/personal-study'
+    href: '/courses/personal-study',
   }, {
     name: 'Педагогика',
     img: '/static/img/badge-ruby.svg',
-    description: 'Данный курс находится в стадии разработки и скоро будет доступен.'
-    href: '/'
+    description: 'Данный курс находится в стадии разработки и скоро будет доступен.',
+    href: '/',
   }]
 };
 

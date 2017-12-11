@@ -8,9 +8,9 @@ import * as React from 'react';
  * Components
  */
 
-import Header from '../../components/general/common/Header';
-import Footer from '../../components/general/common/Footer';
-import List from '../../components/general/courses/List';
+import Header from '../../components/site/common/Header';
+import Footer from '../../components/site/common/Footer';
+import List from '../../components/site/courses/List';
 
 /*!
  * Data
@@ -23,12 +23,12 @@ const category = {
     name: 'Обучение по охране труда',
     img: '/static/img/badge-elixir.svg',
     description: '.',
-    href: '/courses/production-security'
+    href: '/courses/production-security',
   }, {
     name: 'Обучение по ГО и ЧС',
     img: '/static/img/badge-elixir.svg',
     description: '.',
-    href: '/courses/production-security'
+    href: '/courses/production-security',
   }]
 }
 

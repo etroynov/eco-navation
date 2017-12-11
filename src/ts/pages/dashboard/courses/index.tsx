@@ -2,7 +2,6 @@
  * Libs
  */
 
-import * as $ from 'jquery';
 import * as React from 'react';
 import { createStore } from 'redux';
 

@@ -8,9 +8,10 @@ import * as React from 'react';
  * Components
  */
 
-import Header from '../../components/general/common/Header';
-import List from '../../components/general/courses/List';
-import Footer from '../../components/general/common/Footer';
+import Site from '../../components/site/layout';
+import Container from '../../components/site/common/Container'
+
+import { Row, Col } from 'antd';
 
 /*!
  * Expo
@@ -26,10 +27,19 @@ export default ({
       price
     }
   }
+} : {
+  url: {
+    query: {
+      name: string;
+      description: string;
+      banner: string;
+      duration: number;
+      price: number;
+    }
+  }
 }) => (
-  <div>
-    <Header key="header" />
-    <div className="uk-container">
+  <Site>
+    <Container>
       <div className="article">
         <header className="article__header" style={{
           textAlign: 'center'
@@ -42,8 +52,8 @@ export default ({
           }} />
         </header>
 
-        <section className="article__body uk-flex">
-          <section className="article__content uk-width-1-1" style={{
+        <Row className="article__body">
+          <Col span={18} className="article__content" style={{
             borderRight: '1px solid #eee'
           }}>
             <figure style={{
@@ -52,18 +62,17 @@ export default ({
               <img src={banner} />
             </figure>
             <p>{description}</p>
-          </section>
-          <section className="article__properties uk-width-1-3">
+          </Col>
+          <Col span={6} className="article__properties">
             <ul style={{
               listStyle: 'none'
             }}>
               <li>Продолжительность: {duration} часов</li>
               <li>Цена: {price} р.</li>
             </ul>
-          </section>
-        </section>
+          </Col>
+        </Row>
       </div>
-    </div>
-    <Footer key="footer" />
-  </div>
+    </Container>
+  </Site>
 );

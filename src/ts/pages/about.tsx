@@ -8,9 +8,9 @@ import * as React from 'react';
  * Components
  */
 
-import Header from '../components/general/common/Header';
-import Article from '../components/general/home/article/Article';
-import Footer from '../components/general/common/Footer';
+import Header from '../components/site/common/Header';
+import Article from '../components/site/home/article/Article';
+import Footer from '../components/site/common/Footer';
 
 /*!
  * Expo

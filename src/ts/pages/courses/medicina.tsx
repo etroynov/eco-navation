@@ -8,15 +8,15 @@ import * as React from 'react';
  * Components
  */
 
-import Header from '../../components/general/common/Header';
-import List from '../../components/general/courses/List';
-import Footer from '../../components/general/common/Footer';
+import Header from '../../components/site/common/Header';
+import List from '../../components/site/courses/List';
+import Footer from '../../components/site/common/Footer';
 
 /*!
  * Data
  */
 
-import { medicina } from '../../data';
+import medicina from '../../data/medicina';
 
 /*!
  * Expo
