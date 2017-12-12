@@ -1,5 +1,5 @@
 import * as React from 'react';
 
-export default ({ children }) => (
-  <div className="uc-container">{children}</div>
+export default ({ className, children } : { className?: string; children: Element}) => (
+  <div className={`uc-container ${className}`}>{children}</div>
 );

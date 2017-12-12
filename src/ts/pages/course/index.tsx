@@ -11,7 +11,7 @@ import * as React from 'react';
 import Site from '../../components/site/layout';
 import Container from '../../components/site/common/Container'
 
-import { Row, Col } from 'antd';
+import { Row, Col, Icon, Button } from 'antd';
 
 /*!
  * Expo
@@ -56,20 +56,32 @@ export default ({
           <Col span={18} className="article__content" style={{
             borderRight: '1px solid #eee'
           }}>
-            <figure style={{
-              textAlign: 'center'
-            }}>
-              <img src={banner} />
+            <figure className="article__img-container">
+              <img src={banner} className="article__img" />
             </figure>
             <p>{description}</p>
           </Col>
           <Col span={6} className="article__properties">
-            <ul style={{
+            <ul className="params" style={{
               listStyle: 'none'
             }}>
-              <li>Продолжительность: {duration} часов</li>
-              <li>Цена: {price} р.</li>
+              <li className="params__item">
+                <Icon type="clock-circle-o" className="params__icon" />
+                <span className="params__text">{duration} ч.</span>
+              </li>
+              <li className="params__item">
+                <Icon type="shopping-cart" className="params__icon" />
+                <span className="params__text">{price} руб.</span>
+              </li>
             </ul>
+            <div style={{
+              textAlign: 'center'
+            }}>
+              <Button type="primary" size="large" href="/login" style={{
+                width: '100%',
+                margin: '0 20px'
+              }}>Заказать</Button>
+            </div>
           </Col>
         </Row>
       </div>

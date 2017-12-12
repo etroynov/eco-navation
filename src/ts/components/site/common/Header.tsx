@@ -28,6 +28,9 @@ export default () => (
           defaultSelectedKeys={['2']}
           style={{ lineHeight: '64px' }}
         >
+          <Menu.Item key={0}>
+            <img src="/static/img/logo.png" alt="" width={100} />
+          </Menu.Item>
           <Menu.Item key={1}>
             <Link href="/">
               <a>главная</a>
