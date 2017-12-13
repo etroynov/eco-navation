@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dist",
-    "start": "next start dist",
+    "start": "next start dist -p 8083",
     "build": "next build dist"
   },
   "dependencies": {
