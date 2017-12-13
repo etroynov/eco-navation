@@ -33,6 +33,11 @@ const Footer = () => (
                   <a className="footer-menu__text">пользовательское соглашение</a>
                 </Link>
               </li>
+              <li className="footer-menu__item">
+                <Link href="/confidentiality">
+                  <a className="footer-menu__text">Положение о конфиденциальности</a>
+                </Link>
+              </li>
             </ul>
           </section>
         </Col>
