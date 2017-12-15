@@ -7,6 +7,6 @@ import Dashboard from '../../../components/dashboard/layout';
 
 export default () => (
   <Dashboard>
-    <p>Вебинары</p>
+    <p>Главная страница</p>
   </Dashboard>
 );

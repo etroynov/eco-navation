@@ -1,11 +1,12 @@
 import * as React from 'react';
-import Link from 'next/link';
+import Dashboard from '../../../components/dashboard/layout';
 
-const Files = () => (
-    <div>
-        <h1>Медиатека</h1>
-        <Link href="/dashboard/files/upload"><a>Добавить новый</a></Link>
-    </div>
+/*!
+ * Expo
+ */
+
+export default () => (
+  <Dashboard>
+    <p>Курсы</p>
+  </Dashboard>
 );
-
-export default Files;

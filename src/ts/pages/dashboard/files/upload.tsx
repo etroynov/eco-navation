@@ -1,13 +1,12 @@
 import * as React from 'react';
+import Dashboard from '../../../components/dashboard/layout';
 
-class Upload extends React.Component {
-  state = {  };
+/*!
+ * Expo
+ */
 
-  render() {
-    return (
-        <p>Test</p>
-    );
-  }
-}
-
-export default Upload;
+export default () => (
+  <Dashboard>
+    <p>Курсы</p>
+  </Dashboard>
+);
