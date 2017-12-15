@@ -12,7 +12,7 @@ export default () => (
   <div className="reviews">
     <Container>
       <header className="reviews__header">
-        <h2 className="reviews__title">Мнение наших учеников</h2>
+        <h2 className="reviews__title">Мнения наших учеников</h2>
       </header>
 
       <section className="reviews__body">

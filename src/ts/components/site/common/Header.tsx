@@ -6,7 +6,7 @@ import * as React from 'react';
 
 import Head from 'next/head';
 import Link from 'next/link';
-import { Menu } from 'antd';
+import { Menu, Icon } from 'antd';
 
 import Container from './Container';
 
@@ -39,6 +39,14 @@ export default () => (
           <Menu.Item key={2}>
             <Link href="/courses">
               <a>курсы</a>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key={3} style={{ float: 'right' }}>
+            <Link href="/login">
+              <a>
+                <Icon type="lock" style={{ fontSize: '18px' }} />
+                вход
+              </a>
             </Link>
           </Menu.Item>
         </Menu>

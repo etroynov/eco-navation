@@ -71,7 +71,7 @@ export default () => (
       </Container>
     </Content>
     <Works key="works" />
-    <img src="/static/img/specials.jpg" alt=""/>
+    <img src="/static/img/specials.jpg" alt="" style={{ width: '100%' }}/>
     <Reviews key="reviews" />
   </Site>
 );
