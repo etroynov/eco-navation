@@ -2,10 +2,15 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Row, Col } from 'antd';
 
-const Course = ({ href, img, banner, name, description, duration, price } : {href: string; img: string; banner: string; name: string; description: string; duration: number; price: number;}) => (
+const Course = ({ img, banner, name, description, duration, price } : {
+  href: string; img: string; banner: string; name: string; description: string; duration: number; price: number;
+}) => (
   <Col span={12}>
     <article className="course">
-      <Link as={`/курс/${name.toLowerCase().replace(/\s/g, '-')}`} href={`/course?name=${name}&description=${description}&img=${img}&banner=${banner}&duration=${duration}&price=${price}`}>
+      <Link
+        as={`/курс/${name.toLowerCase().replace(/\s/g, '-')}`}
+        href={`/course?name=${name}&description=${description}&img=${img}&banner=${banner}&duration=${duration}&price=${price}`}
+      >
         <a className="course__link">
           <Row>
             <Col span={6} className="left-column">

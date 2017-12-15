@@ -18,3 +18,14 @@ interface IStep {
   img: string;
   odd: boolean;
 }
+
+interface IStepImg {
+  img: string;
+  context?: string;
+}
+
+interface IStepContent {
+  name: string;
+  description: string;
+  context?: string;
+}

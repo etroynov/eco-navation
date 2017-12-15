@@ -9,7 +9,7 @@ import Container from './../../common/Container';
  */
 
 class Works extends React.Component<{}, {
-  steps: any[]
+  steps: any[],
 }> {
   constructor(props) {
     super(props);

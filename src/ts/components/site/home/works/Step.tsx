@@ -6,7 +6,7 @@ import { Row, Col } from 'antd';
  */
 
 
-const Content = ({ name, description, context }) => (
+const Content = ({ name, description, context } : IStepContent) => (
   <Col span={12} className={context}>
     <div className="step__description">
       <header className="step__header">
@@ -20,7 +20,7 @@ const Content = ({ name, description, context }) => (
   </Col>
 );
 
-const Img = ({ img, context }) => (
+const Img = ({ img, context } : IStepImg) => (
   <Col span={12} className={`step__timeline step__timeline--circle ${context}`}>
     <figure className="step__img-container">
       <img src={img} alt="" className="step__img" />
@@ -28,13 +28,23 @@ const Img = ({ img, context }) => (
   </Col>
 );
 
-const Step: IStep = ({ name, description, img, odd }) => {
-  let body = null;
+const Step = ({ name, description, img, odd } : IStep) => {
+  let body;
 
-  if(odd) {
-    body = <Row><Img context="step__timeline--right step__timeline--circle--right" img={img} /><Content context="" name={name} description={description} /></Row>;
+  if (odd) {
+    body = (
+      <Row>
+        <Img context="step__timeline--right step__timeline--circle--right" img={img} />
+        <Content context="" name={name} description={description} />
+      </Row>
+    );
   } else {
-    body = <Row><Content context="ant-text-right" name={name} description={description} /><Img img={img} /></Row>;
+    body = (
+      <Row>
+        <Content context="ant-text-right" name={name} description={description} />
+        <Img img={img} />
+      </Row>
+    );
   }
 
   return (
@@ -42,6 +52,6 @@ const Step: IStep = ({ name, description, img, odd }) => {
       {body}
     </Col>
   );
-}
+};
 
 export default Step;
