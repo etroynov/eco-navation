@@ -126,17 +126,10 @@ class NormalLoginForm extends React.Component<{
                     )}
                   </FormItem>
                   <FormItem>
-                    {getFieldDecorator('directorPosition', {
-                      rules: [{ required: true, message: 'Укажите должность!' }],
+                    {getFieldDecorator('directorPhone', {
+                      rules: [{ required: true, message: 'Укажите телефон!' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="должность" />,
-                    )}
-                  </FormItem>
-                  <FormItem>
-                    {getFieldDecorator('directorPiv', {
-                      rules: [{ required: true, message: 'Укажите документ!' }],
-                    })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="действует на основании" />,
+                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="телефон" />,
                     )}
                   </FormItem>
                 </fieldset>
@@ -152,10 +145,24 @@ class NormalLoginForm extends React.Component<{
                     )}
                   </FormItem>
                   <FormItem>
+                    {getFieldDecorator('position', {
+                      rules: [{ required: true, message: 'Укажите должность!' }],
+                    })(
+                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="должность" />,
+                    )}
+                  </FormItem>
+                  <FormItem>
                     {getFieldDecorator('email', {
                       rules: [{ required: true, message: 'Укажите email!' }],
                     })(
                       <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="example@mail.com" />,
+                    )}
+                  </FormItem>
+                  <FormItem>
+                    {getFieldDecorator('telephone', {
+                      rules: [{ required: true, message: 'Укажите телефон!' }],
+                    })(
+                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="телефон" />,
                     )}
                   </FormItem>
                 </fieldset>

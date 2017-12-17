@@ -16,7 +16,7 @@ export default {
     banner: '/static/img/medicina.jpg',
     description: 'Дополнительная профессиональная программа повышения квалификации врачей по специальности «кардиология»',
     duration: 0,
-    price: 0
+    price: 0,
   }, {
     _id: 0,
     name: 'Организация здравоохранения и общественное здоровье',
@@ -24,7 +24,7 @@ export default {
     banner: '/static/img/medicina.jpg',
     description: 'Дополнительная профессиональная программа повышения квалификации врачей по специальности «организация здравоохранения и общественное здоровье»',
     duration: 0,
-    price: 0
+    price: 0,
   }, {
     _id: 0,
     name: 'Педиатрия',
@@ -32,7 +32,7 @@ export default {
     banner: '/static/img/medicina.jpg',
     description: 'Дополнительная профессиональная программа повышения квалификации врачей по специальности педиатрия',
     duration: 0,
-    price: 0
+    price: 0,
   }, {
     _id: 0,
     name: 'Психиатрия',
@@ -40,7 +40,7 @@ export default {
     banner: '/static/img/medicina.jpg',
     description: 'Дополнительная профессиональная программа повышения квалификации врачей по специальности психиатрия',
     duration: 0,
-    price: 0
+    price: 0,
   }, {
     _id: 0,
     name: 'Психотерапия',
@@ -48,7 +48,7 @@ export default {
     banner: '/static/img/medicina.jpg',
     description: 'Дополнительная профессиональная программа повышения квалификации врачей по специальности психотерапия',
     duration: 0,
-    price: 0
+    price: 0,
   }, {
     _id: 0,
     name: 'Рентгенология',
@@ -56,7 +56,7 @@ export default {
     banner: '/static/img/medicina.jpg',
     description: 'Дополнительная профессиональная программа повышения квалификации врачей по специальности рентгенология',
     duration: 0,
-    price: 0
+    price: 0,
   }, {
     _id: 0,
     name: 'Терапевтическая стоматология',

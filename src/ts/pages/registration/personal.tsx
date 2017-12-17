@@ -40,13 +40,46 @@ class NormalLoginForm extends React.Component<{
           <h2 style={{ textAlign: 'center', textTransform: 'uppercase' }}>
             <img
               alt="example"
-              src="http://www.pvhc.net/img240/uyttxprhsqycyximpzjb.png"
+              src="https://www.annieandre.com/wp-content/uploads/2017/10/briefcase-work-job.png"
               style={{ display: 'inline-block', width: 200, padding: 20 }}
             />
             <p>абитуриент</p>
           </h2>
           <Form onSubmit={this.handleSubmit} className="personal-registration-form">
             <Row type="flex" align="space-between">
+              <Col span={8} style={{ padding: 20 }}>
+                <fieldset>
+                  <legend>Ваши данные</legend>
+                  <FormItem>
+                    {getFieldDecorator('fio', {
+                      rules: [{ required: true, message: 'Укажите ФИО!' }],
+                    })(
+                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Иванов Иван Иванович" />,
+                    )}
+                  </FormItem>
+                  <FormItem>
+                    {getFieldDecorator('position', {
+                      rules: [{ required: true, message: 'Укажите должность!' }],
+                    })(
+                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="должность" />,
+                    )}
+                  </FormItem>
+                  <FormItem>
+                    {getFieldDecorator('email', {
+                      rules: [{ required: true, message: 'Укажите email!' }],
+                    })(
+                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="example@mail.com" />,
+                    )}
+                  </FormItem>
+                  <FormItem>
+                    {getFieldDecorator('accept', {
+                      valuePropName: 'checked',
+                    })(
+                      <Checkbox>я представитель компании</Checkbox>,
+                    )}
+                  </FormItem>
+                </fieldset>
+              </Col>
               <Col span={8} style={{ padding: 20 }}>
               <fieldset>
                   <legend>Данные организации</legend>
@@ -98,13 +131,6 @@ class NormalLoginForm extends React.Component<{
                 <fieldset>
                   <legend>Лицо, подписывающее договор</legend>
                   <FormItem>
-                    {getFieldDecorator('position', {
-                      rules: [{ required: true, message: 'Укажите должность!' }],
-                    })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="должность" />,
-                    )}
-                  </FormItem>
-                  <FormItem>
                     {getFieldDecorator('directorName', {
                       rules: [{ required: true, message: 'Укажите имя!' }],
                     })(
@@ -130,32 +156,6 @@ class NormalLoginForm extends React.Component<{
                       rules: [{ required: true, message: 'Укажите должность!' }],
                     })(
                       <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="должность" />,
-                    )}
-                  </FormItem>
-                  <FormItem>
-                    {getFieldDecorator('directorPiv', {
-                      rules: [{ required: true, message: 'Укажите документ!' }],
-                    })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="действует на основании" />,
-                    )}
-                  </FormItem>
-                </fieldset>
-              </Col>
-              <Col span={8} style={{ padding: 20 }}>
-                <fieldset>
-                  <legend>Представитель организации</legend>
-                  <FormItem>
-                    {getFieldDecorator('fio', {
-                      rules: [{ required: true, message: 'Укажите ФИО!' }],
-                    })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Иванов Иван Иванович" />,
-                    )}
-                  </FormItem>
-                  <FormItem>
-                    {getFieldDecorator('email', {
-                      rules: [{ required: true, message: 'Укажите email!' }],
-                    })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="example@mail.com" />,
                     )}
                   </FormItem>
                 </fieldset>
