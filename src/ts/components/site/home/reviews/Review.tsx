@@ -2,7 +2,9 @@ import * as React from 'react';
 
 const Review = ({ avatar, name, text } : {avatar: string; name: string; text: string;}) => (
   <section className="review"> 
-    <img src={avatar} alt=""/>
+    <figure className="review__img-container">
+      <img className="review__img" src={avatar} alt={name} width="150" />
+    </figure>
     <section className="review__body">{text}</section>
 
     <header className="review__header">

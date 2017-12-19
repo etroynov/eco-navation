@@ -7,12 +7,12 @@ import Head from 'next/head';
 
 import { Layout, Row, Col, Form, Icon, Input, Button, Checkbox } from 'antd';
 
+const { Content } = Layout;
+const FormItem = Form.Item;
+
 /*!
  * Expo
  */
-
-const { Content } = Layout;
-const FormItem = Form.Item;
 
 class NormalLoginForm extends React.Component<{
   form: {
@@ -20,17 +20,28 @@ class NormalLoginForm extends React.Component<{
     getFieldDecorator(name: string, options: object);
   },
 }, {}> {
+  state = {
+    fromCompany: true,
+  };
+
   handleSubmit = (e: Event) => {
     e.preventDefault();
+
     this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
+      if (!err) { console.log('Received values of form: ', values); }
+    });
+  }
+
+  handleFromCompanyCheckbox = (e: { target: { checked: boolean } }) => {
+    this.setState({
+      fromCompany: !e.target.checked,
     });
   }
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { fromCompany } = this.state;
+
     return (
       <div>
         <Head>
@@ -39,8 +50,7 @@ class NormalLoginForm extends React.Component<{
         <Content style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto', width: 900, height: 800 }}>
           <h2 style={{ textAlign: 'center', textTransform: 'uppercase' }}>
             <img
-              alt="example"
-              src="https://www.annieandre.com/wp-content/uploads/2017/10/briefcase-work-job.png"
+              src="/static/img/whitecollar.svg"
               style={{ display: 'inline-block', width: 200, padding: 20 }}
             />
             <p>абитуриент</p>
@@ -54,28 +64,28 @@ class NormalLoginForm extends React.Component<{
                     {getFieldDecorator('fio', {
                       rules: [{ required: true, message: 'Укажите ФИО!' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Иванов Иван Иванович" />,
+                      <Input prefix={<Icon type="user" className="input__icon--gray" />} placeholder="Иванов Иван Иванович" />,
                     )}
                   </FormItem>
                   <FormItem>
                     {getFieldDecorator('position', {
                       rules: [{ required: true, message: 'Укажите должность!' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="должность" />,
+                      <Input prefix={<Icon type="idcard" className="input__icon--gray" />} placeholder="должность" />,
                     )}
                   </FormItem>
                   <FormItem>
                     {getFieldDecorator('email', {
                       rules: [{ required: true, message: 'Укажите email!' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="example@mail.com" />,
+                      <Input prefix={<Icon type="mail" className="input__icon--gray" />} placeholder="example@mail.com" />,
                     )}
                   </FormItem>
                   <FormItem>
-                    {getFieldDecorator('accept', {
+                    {getFieldDecorator('company', {
                       valuePropName: 'checked',
                     })(
-                      <Checkbox>я представитель компании</Checkbox>,
+                      <Checkbox onChange={this.handleFromCompanyCheckbox}>я представитель компании</Checkbox>,
                     )}
                   </FormItem>
                 </fieldset>
@@ -85,44 +95,57 @@ class NormalLoginForm extends React.Component<{
                   <legend>Данные организации</legend>
                   <FormItem>
                     {getFieldDecorator('organization', {
-                      rules: [{ required: true, message: 'Укажите название организации' }],
+                      rules: [{ required: !fromCompany, message: 'Укажите название организации' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="название организации" />,
+                      <Input
+                        disabled={fromCompany}
+                        prefix={<Icon type="schedule" className="input__icon--gray" />}
+                        placeholder="название организации" 
+                      />,
                     )}
                   </FormItem>
                   <FormItem>
                     {getFieldDecorator('inn', {
-                      rules: [{ required: true, message: 'Укажите ИНН' }],
+                      rules: [{ required: !fromCompany, message: 'Укажите ИНН' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="ИНН" />,
+                      <Input
+                        disabled={fromCompany}
+                        prefix={<Icon type="schedule" className="input__icon--gray" />}
+                        placeholder="ИНН"
+                      />,
                     )}
                   </FormItem>
                   <FormItem>
                     {getFieldDecorator('kpp', {
-                      rules: [{ required: true, message: 'Укажите КПП' }],
+                      rules: [{ required: !fromCompany, message: 'Укажите КПП' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="КПП" />,
+                      <Input
+                        disabled={fromCompany}
+                        prefix={<Icon type="schedule" className="input__icon--gray" />}
+                        placeholder="КПП"
+                      />,
                     )}
                   </FormItem>
                   <FormItem>
                     {getFieldDecorator('bankAccount', {
-                      rules: [{ required: true, message: 'Укажите р/с' }],
+                      rules: [{ required: !fromCompany, message: 'Укажите р/с' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="р/с" />,
+                      <Input
+                        disabled={fromCompany}
+                        prefix={<Icon type="schedule" className="input__icon--gray" />}
+                        placeholder="р/с"
+                      />,
                     )}
                   </FormItem>
                   <FormItem>
                     {getFieldDecorator('bic', {
-                      rules: [{ required: true, message: 'Укажите БИК' }],
+                      rules: [{ required: !fromCompany, message: 'Укажите БИК' }],
                     })(
-                      <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="БИК" />,
-                    )}
-                  </FormItem>
-                  <FormItem>
-                    {getFieldDecorator('address', {
-                      rules: [{ required: true, message: 'Укажите почтовый адрес' }],
-                    })(
-                      <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="почтовый адрес" />,
+                      <Input
+                        disabled={fromCompany}
+                        prefix={<Icon type="schedule" className="input__icon--gray" />}
+                        placeholder="БИК"
+                      />,
                     )}
                   </FormItem>
                 </fieldset>
@@ -131,31 +154,36 @@ class NormalLoginForm extends React.Component<{
                 <fieldset>
                   <legend>Лицо, подписывающее договор</legend>
                   <FormItem>
-                    {getFieldDecorator('directorName', {
-                      rules: [{ required: true, message: 'Укажите имя!' }],
+                    {getFieldDecorator('representativeFio', {
+                      rules: [{ required: !fromCompany, message: 'Укажите Фио!' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="имя" />,
+                      <Input
+                        disabled={fromCompany}
+                        prefix={<Icon type="user" className="input__icon--gray" />}
+                        placeholder="Иванов Иван Иванович"
+                      />,
                     )}
                   </FormItem>
                   <FormItem>
-                    {getFieldDecorator('directorLastName', {
-                      rules: [{ required: true, message: 'Укажите фамилию!' }],
+                    {getFieldDecorator('representativePosition', {
+                      rules: [{ required: !fromCompany, message: 'Укажите должность!' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="фамилия" />,
+                      <Input
+                        disabled={fromCompany}
+                        prefix={<Icon type="idcard" className="input__icon--gray" />}
+                        placeholder="должность"
+                      />,
                     )}
                   </FormItem>
                   <FormItem>
-                    {getFieldDecorator('directorSoName', {
-                      rules: [{ required: true, message: 'Укажите отчество!' }],
+                    {getFieldDecorator('representativeEmail', {
+                      rules: [{ required: !fromCompany, message: 'Укажите почтовый адрес' }],
                     })(
-                      <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="отчество" />,
-                    )}
-                  </FormItem>
-                  <FormItem>
-                    {getFieldDecorator('directorPosition', {
-                      rules: [{ required: true, message: 'Укажите должность!' }],
-                    })(
-                      <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="должность" />,
+                      <Input
+                        disabled={fromCompany}
+                        prefix={<Icon type="mail" className="input__icon--gray" />}
+                        placeholder="почтовый адрес"
+                      />,
                     )}
                   </FormItem>
                 </fieldset>

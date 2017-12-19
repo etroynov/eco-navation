@@ -39,8 +39,7 @@ class NormalLoginForm extends React.Component<{
         <Content style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto', width: 900, height: 800 }}>
           <h2 style={{ textAlign: 'center', textTransform: 'uppercase' }}>
             <img
-              alt="example"
-              src="https://www.annieandre.com/wp-content/uploads/2017/10/briefcase-work-job.png"
+              src="/static/img/briefcase.svg"
               style={{ display: 'inline-block', width: 200, padding: 20 }}
             />
             <p>компания</p>
