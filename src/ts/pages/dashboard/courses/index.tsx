@@ -17,7 +17,11 @@ export default () => (
       </Col>
       <Col span={8}>
         <Link href="/dashboard/courses/gchs">
-          <a><Card title="Промышленая безопасность">Обучение по ГО и ЧС</Card></a>
+          <a>
+            <Card title="Промышленая безопасность" className="uc-course-card">
+              <img src="/static/img/gochs.svg" alt="го и чс" className="uc-img-response" />
+            </Card>
+          </a>
         </Link>
       </Col>
       <Col span={8}>

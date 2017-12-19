@@ -24,6 +24,7 @@ class Dashboard extends React.Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Head>
           <link rel="stylesheet" href="/static/css/vendor.min.css"/>
+          <link rel="stylesheet" href="/static/css/dashboard.min.css"/>
         </Head>
         <Sider
           collapsible={true}
