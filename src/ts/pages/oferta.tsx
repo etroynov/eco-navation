@@ -25,7 +25,6 @@ const Content = () => (
       {/* tslint:disable */}
         
       <section className="article__body">
-        <section>
         <p>об оказании платных образовательных услуг</p>
         <p>г. Челябинск "15" декабря 2017 года</p>
 

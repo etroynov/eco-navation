@@ -33,6 +33,7 @@ class NormalLoginForm extends React.Component<{
 
   render() {
     const { getFieldDecorator } = this.props.form;
+
     return (
       <div>
         <Head>
@@ -40,7 +41,7 @@ class NormalLoginForm extends React.Component<{
         </Head>
         <Content style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto', width: 300, height: 500 }}>
           <h2 style={{ textAlign: 'center', textTransform: 'uppercase' }}>авторизация</h2>
-          <Form onSubmit={this.handleSubmit} className="login-form">
+          <Form className="login-form">
             <FormItem>
               {getFieldDecorator('userName', {
                 rules: [{ required: true, message: 'Укажите имя пользователя!' }],

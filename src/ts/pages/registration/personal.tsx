@@ -55,8 +55,8 @@ class NormalLoginForm extends React.Component<{
             />
             <p>абитуриент</p>
           </h2>
-          <Form onSubmit={this.handleSubmit} className="personal-registration-form">
-            <Row type="flex" align="space-between">
+          <Form className="personal-registration-form">
+            <Row type="flex" justify="space-between">
               <Col span={8} style={{ padding: 20 }}>
                 <fieldset>
                   <legend>Ваши данные</legend>

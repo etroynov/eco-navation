@@ -30,7 +30,6 @@ export default () => (
             <Card title="Промышленая безопасность">
               <img src="/static/img/ptm.svg" alt="го и чс" className="uc-img-response" />
             </Card>
-            </Card>
           </a>
         </Link>
       </Col>

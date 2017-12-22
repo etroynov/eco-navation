@@ -39,33 +39,19 @@ class Create extends React.Component<IDepartamentCreateProps, IDepartamentCreate
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <fieldset className="uk-fieldset">
           <div className="uk-margin">
             <label htmlFor="departament-name" className="uk-form-label">Название</label>
             <div className="uk-form-controls">
-              <input
-                type="text"
-                id="departament-name"
-                className="uk-input"
-                name="name"
-                value={this.state.name}
-                onChange={this.handleInputChange}
-              />
+              <input type="text" name="name" />
             </div>
           </div>
 
           <div className="uk-margin">
             <label htmlFor="departament-description" className="uk-form-label">Описание</label>
             <div className="uk-form-controls">
-              <textarea
-                name="description"
-                id="departament-description"
-                rows={5}
-                className="uk-textarea"
-                value={this.state.description}
-                onChange={this.handleInputChange}
-              />
+              <textarea name="description" id="departament-description" rows={5} />
             </div>
           </div>
 

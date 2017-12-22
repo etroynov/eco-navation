@@ -9,7 +9,7 @@ import * as React from 'react';
  */
 
 import Site from '../../components/site/layout';
-import Container from '../../components/site/common/Container'
+import Container from '../../components/site/common/Container';
 
 import { Row, Col, Icon, Button } from 'antd';
 
@@ -24,9 +24,9 @@ export default ({
       description,
       banner,
       duration,
-      price
-    }
-  }
+      price,
+    },
+  },
 } : {
   url: {
     query: {
@@ -35,36 +35,26 @@ export default ({
       banner: string;
       duration: number;
       price: number;
-    }
-  }
+    },
+  },
 }) => (
   <Site>
     <Container>
       <div className="article">
-        <header className="article__header" style={{
-          textAlign: 'center'
-        }}>
+        <header className="article__header" style={{ textAlign: 'center' }}>
           <h1 className="article__title">{name}</h1>
-          <hr style={{
-            width: '15%',
-            margin: '30px auto',
-            borderColor: '#999'
-          }} />
+          <hr style={{ width: '15%', margin: '30px auto', borderColor: '#999' }} />
         </header>
 
         <Row className="article__body">
-          <Col span={18} className="article__content" style={{
-            borderRight: '1px solid #eee'
-          }}>
+          <Col span={18} className="article__content" style={{ borderRight: '1px solid #eee' }}>
             <figure className="article__img-container">
               <img src={banner} className="article__img" />
             </figure>
             <p>{description}</p>
           </Col>
           <Col span={6} className="article__properties">
-            <ul className="params" style={{
-              listStyle: 'none'
-            }}>
+            <ul className="params" style={{ listStyle: 'none' }}>
               <li className="params__item">
                 <Icon type="clock-circle-o" className="params__icon" />
                 <span className="params__text">{duration} ч.</span>
@@ -74,13 +64,8 @@ export default ({
                 <span className="params__text">{price} руб.</span>
               </li>
             </ul>
-            <div style={{
-              textAlign: 'center'
-            }}>
-              <Button type="primary" size="large" href="/login" style={{
-                width: '100%',
-                margin: '0 20px'
-              }}>Заказать</Button>
+            <div style={{ textAlign: 'center' }}>
+              <Button type="primary" size="large" href="/login" style={{ width: '100%', margin: '0 20px' }}>Заказать</Button>
             </div>
           </Col>
         </Row>
