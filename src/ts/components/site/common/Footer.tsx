@@ -1,6 +1,15 @@
+/*!
+ * Vendor
+ */
 import * as React from 'react';
 import Link from 'next/link';
+
 import { Col, Row } from 'antd';
+import { YMInitializer } from 'react-yandex-metrika';
+
+/**
+ * Components
+ */
 
 import Container from './Container';
 
@@ -48,9 +57,7 @@ const Footer = () => (
         </Col>
         <Col span={12}>
           <div className="footer__about">
-            <p>
-              <strong>Учебный центр "Автор"</strong> преподаем в режиме онлайн посредством браузера видео уроки, скринкасты и многое другое. Мы стремимся помочь вам учиться.
-            </p>
+            <p><strong>Учебный центр "Автор"</strong> преподаем в режиме онлайн посредством браузера видео уроки, скринкасты и многое другое. Мы стремимся помочь вам учиться.</p>
           </div>
         </Col>
       </Row>
@@ -58,6 +65,7 @@ const Footer = () => (
         <p className="footer_copyright-light uk-text-small">© 2017 Автор. Россия, Челябинск. | проспект Ленина д.83,офис 510 | +7 (904) 812-57-38 | <a href="mailto:avtorka@list.ru">avtorka@list.ru</a></p>
       </div>
     </Container>
+    <YMInitializer accounts={[47130420]} version="2" />
   </footer>
 );
 
