@@ -13,7 +13,7 @@ const Footer = () => (
     <Container>
       <Row>
         <Col span={12}>
-          <section className="menu-footer uk-width-1-3 uk-first-column">
+          <section className="menu-footer">
             <header className="footer-menu__header">
               <h4 className="footer-menu__title">О нас</h4>
             </header>
@@ -34,6 +34,11 @@ const Footer = () => (
                 </Link>
               </li>
               <li className="footer-menu__item">
+                <Link href="/oferta">
+                  <a className="footer-menu__text">Оферта</a>
+                </Link>
+              </li>
+              <li className="footer-menu__item">
                 <Link href="/confidentiality">
                   <a className="footer-menu__text">Положение о конфиденциальности</a>
                 </Link>
@@ -50,7 +55,7 @@ const Footer = () => (
         </Col>
       </Row>
       <div className="uk-flex-nowrap footer__copyright">
-        <p className="footer_copyright-light uk-text-small">© 2017 Автор. Россия, Челябинск.</p>
+        <p className="footer_copyright-light uk-text-small">© 2017 Автор. Россия, Челябинск. | ул. пр-т Ленина д.83,офис 402 | +7 (904) 812-57-38 | <a href="mailto:avtorka@list.ru">avtorka@list.ru</a></p>
       </div>
     </Container>
   </footer>

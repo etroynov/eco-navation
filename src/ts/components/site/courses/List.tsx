@@ -41,7 +41,7 @@ class List extends React.Component<{ name: string; description: string; items: a
     
     let currentItems = items;
 
-    if (!!selectedTags.length) { currentItems = items.filter(item => selectedTags.includes(item.tags)); }
+    if (!!selectedTags.length) { currentItems = items.filter(({ tags }) => selectedTags.includes(tags)); }
 
     return (
       <Container>
