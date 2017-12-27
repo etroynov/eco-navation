@@ -11,7 +11,7 @@ import * as Router from 'koa-router';
 import { appRoutes, appAllowedMethods } from './api/routes/appRoutes';
 import { dashboardRoutes, dashboardAllowedMethods } from './api/routes/dashboardRoutes';
 
-const port = parseInt(process.env.PORT, 10) || 3000;
+const port = parseInt(process.env.PORT as string, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -37,7 +37,7 @@ app.prepare()
   const app = new Koa();
   const nextRouter = new Router();
 
-  nextRouter.get('*', async ctx => {
+  nextRouter.get('*', async (ctx) => {
     await handle(ctx.req, ctx.res);
     ctx.respond = false;
   });
@@ -69,9 +69,7 @@ app.prepare()
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
   });
 
-  app.listen(port, err => {
-    if (err) throw err;
-
+  app.listen(port, () => {
     console.log(`> Ready on http://localhost:${port}`);
   });
 });

@@ -29,3 +29,15 @@ interface IStepContent {
   description: string;
   context?: string;
 }
+
+interface ICourse {
+  id: number;
+  name: string;
+  img: string;
+  banner: string;
+  description: string;
+  href: string;
+  duration: number;
+  price: number;
+  tags: string;
+}

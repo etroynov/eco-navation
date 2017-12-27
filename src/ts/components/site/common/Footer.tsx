@@ -62,7 +62,7 @@ const Footer = () => (
         </Col>
       </Row>
       <div className="uk-flex-nowrap footer__copyright">
-        <p className="footer_copyright-light uk-text-small">© 2017 Автор. Россия, Челябинск. | проспект Ленина д.83,офис 510 | +7 (904) 812-57-38 | <a href="mailto:avtorka@list.ru">avtorka@list.ru</a></p>
+        <p className="footer_copyright-light uk-text-small">© 2017 Автор. Россия, Челябинск. | проспект Ленина д.83,офис 510 | +7 (904) 812-57-38 | <a href="mailto:kursy@ucavtor.ru">kursy@ucavtor.ru</a></p>
       </div>
     </Container>
     <YMInitializer accounts={[47130420]} version="2" />

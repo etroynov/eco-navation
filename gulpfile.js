@@ -13,18 +13,14 @@ gulp.task('ts', () => tsProject
 
 gulp.task('styl-site', () => gulp
   .src('./src/assets/styl/site/index.styl')
-  .pipe(stylus({
-    compress: true
-  }))
+  .pipe(stylus({ compress: true }))
   .pipe(rename('site.min.css'))
   .pipe(gulp.dest('./dist/static/css'))
 );
 
 gulp.task('styl-dashboard', () => gulp
   .src('./src/assets/styl/dashboard/index.styl')
-  .pipe(stylus({
-    compress: true
-  }))
+  .pipe(stylus({ compress: true }))
   .pipe(rename('dashboard.min.css'))
   .pipe(gulp.dest('./dist/static/css'))
 );
@@ -38,7 +34,7 @@ gulp.task('css', () => gulp
 
 gulp.task('watch', () => {
   gulp.watch('./src/ts/**/*.tsx', ['ts']);
-  gulp.watch('./src/assets/styl/site/**/*.styl', ['styl-site']);
+  gulp.watch('./src/assets/styl/**/*.styl', ['styl-site', 'styl-dashboard']);
 });
 
 

@@ -15,9 +15,7 @@ class Dashboard extends React.Component {
     collapsed: false,
   };
 
-  onCollapse = collapsed => {
-    this.setState({ collapsed });
-  }
+  onCollapse = collapsed => this.setState({ collapsed });
 
   render() {
     return (
@@ -30,9 +28,17 @@ class Dashboard extends React.Component {
           collapsible={true}
           collapsed={this.state.collapsed}
           onCollapse={this.onCollapse}
-          style={{ background: '#fff' }}
+          className="sidebar"
         >
-          <div className="logo" />
+          <div className="profile">
+            <figure className="profile__img-container">
+              <img src="/static/img/whitecollar.svg" alt="" className="profile__img" />
+              <figcaption className="profile__img-caption">
+                Тройнов Евгений Александрович
+                <hr className="profile__divider" />
+              </figcaption>
+            </figure>
+          </div>
           <Menu defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="0">
               <Link href="/dashboard">
@@ -83,7 +89,7 @@ class Dashboard extends React.Component {
               <Breadcrumb.Item>главная</Breadcrumb.Item>
               <Breadcrumb.Item>курсы</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+            <div className="content">
               {this.props.children}
             </div>
           </Content>

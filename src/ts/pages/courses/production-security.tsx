@@ -23,6 +23,6 @@ import production from '../../data/production';
 
 export default () => (
   <Site>
-    <List key="list" {...production} />,
+    <List {...production} />
   </Site>
 );

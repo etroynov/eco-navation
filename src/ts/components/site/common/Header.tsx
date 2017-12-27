@@ -53,7 +53,7 @@ export default () => (
             <Icon type="phone" /> +7 (904) 812-57-38
           </Menu.Item>
           <Menu.Item key={5} style={{ float: 'right' }}>
-            <a href="mailto:avtorka@list.ru"><Icon type="mail" />avtorka@list.ru</a>
+            <a href="mailto:kursy@ucavtor.ru"><Icon type="mail" />kursy@ucavtor.ru</a>
           </Menu.Item>
         </Menu>
       </nav>
