@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
+import * as React from "react";
+import { Link } from "react-router-dom";
 
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon } from "antd";
 const { Header, Content, Footer, Sider } = Layout;
 
 declare const require: any;
@@ -9,7 +9,6 @@ declare const require: any;
 /*!
  * Expo
  */
-
 
 class Dashboard extends React.Component<any, any> {
   state = {
@@ -29,9 +28,13 @@ class Dashboard extends React.Component<any, any> {
         >
           <div className="profile">
             <figure className="profile__img-container">
-              <img src={require('./../assets/img/whitecollar.svg')} alt="" className="profile__img" />
+              <img
+                src={require('./../assets/img/whitecollar.svg')}
+                alt=""
+                className="profile__img"
+              />
               <figcaption className="profile__img-caption">
-                Тройнов Евгений Александрович
+                Администратор
                 <hr className="profile__divider" />
               </figcaption>
             </figure>
@@ -39,32 +42,44 @@ class Dashboard extends React.Component<any, any> {
           <Menu defaultSelectedKeys={['0']} mode="inline">
             <Menu.Item key="0">
               <Link to="/">
-                  <Icon type="desktop" />
-                  <span>Главная</span>
+                <Icon type="desktop" />
+                <span>Главная</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="1">
+              <Link to="/pages">
+                <Icon type="file-text" />
+                <span>Страницы</span>
               </Link>
             </Menu.Item>
             <Menu.Item key="1">
               <Link to="/courses">
-                  <Icon type="book" />
-                  <span>Курсы</span>
+                <Icon type="book" />
+                <span>Курсы</span>
               </Link>
             </Menu.Item>
             <Menu.Item key="2">
-              <Link to="/vebinari">
-                  <Icon type="customer-service" />
-                  <span>Вебинары</span>
+              <Link to="/organizations">
+                <Icon type="schedule" />
+                <span>Организации</span>
               </Link>
             </Menu.Item>
             <Menu.Item key="3">
-              <Link to="/blog">
-                  <Icon type="profile" />
-                  <span>Блог</span>
+              <Link to="/users">
+                <Icon type="idcard" />
+                <span>Пользователи</span>
               </Link>
             </Menu.Item>
             <Menu.Item key="4">
-              <Link to="/career">
-                  <Icon type="contacts" />
-                  <span>Карьера</span>
+              <Link to="/blog">
+                <Icon type="contacts" />
+                <span>Блог</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="4">
+              <Link to="/settings">
+                <Icon type="tool" />
+                <span>Настройки</span>
               </Link>
             </Menu.Item>
           </Menu>
@@ -76,9 +91,7 @@ class Dashboard extends React.Component<any, any> {
               <Breadcrumb.Item>главная</Breadcrumb.Item>
               <Breadcrumb.Item>курсы</Breadcrumb.Item>
             </Breadcrumb>
-            <div className="content">
-              {this.props.children}
-            </div>
+            <div className="content">{this.props.children}</div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             УЦ "Автор" ©2017 разработанно <a href="http://troinof.ru/portfolio/author">troinof.ru</a>

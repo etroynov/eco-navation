@@ -7,60 +7,32 @@
  *
  * Module dependencies
  */
-
+const { send } = require('micro');
 const mongoose = require('mongoose');
-const { hashSync } = require('bcryptjs');
-const path = require('path');
-const passgen = require('password-generator');
-const Etpl = require('email-templates').EmailTemplate;
-const email = require('nodemailer');
 
-console.info(mongoose);
-
-const Company = mongoose.model('Company');
-const User = mongoose.model('User');
+const Organization = mongoose.model('Organization');
 
 /*!
  * Expos
  */
 
 exports.index = async (req, res) => {
-  const [companies, users] = await Promise.all([
-    Company.find(),
-    User.find(),
-  ]);
+  const organizations = await Organization.find();
 
-  return res.render('dashboard/users/index', { companies, users });
-};
-
-exports.create = async (req, res) => {
-  const companies = Company.find();
-
-  return res.render('dashboard/users/create', { companies });
+  return send(res, 200, { organizations });
 };
 
 exports.store = async (req, res) => {
-  await User.create({
+  const user = await User.create({
     name: req.body.name,
     login: req.body.login,
     group: req.body.group,
     lastname: req.body.lastname,
     telephone: req.body.telephone,
-    Company: req.body.Company,
+    Organization: req.body.Organization,
   });
 
-  return res.redirect('/dashboard/users');
-};
-
-exports.edit = async (req, res) => {
-  const id = req.params.id || '';
-
-  const [companies, user] = await Promise.all([
-    Company.find(),
-    User.findById(id),
-  ]);
-
-  return res.render('dashboard/users/edit', { companies, user });
+  return send(res, 200, { user });
 };
 
 exports.update = async (req, res) => {
@@ -74,7 +46,7 @@ exports.update = async (req, res) => {
     group: req.body.group,
     lastname: req.body.lastname,
     telephone: req.body.telephone,
-    Company: req.body.Company,
+    Organization: req.body.Organization,
   });
 
   return res.redirect('/dashboard/users');

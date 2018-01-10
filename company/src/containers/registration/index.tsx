@@ -16,16 +16,16 @@ const { Content } = Layout;
 const FormItem = Form.Item;
 
 class CompanyRegistration extends React.Component<any, any> {
-  handleSubmit = (e: Event) => {
+  handleSubmit = (e: any) => {
     e.preventDefault();
 
     console.info(this);
 
-    this.props.form.validateFields((err: any, values: any) => {
+    this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
         console.log('Received values of form: ', values);
 
-        axios.post('http://localhost:8081/user/create', values);
+        await axios.post('http://localhost:8081/users/create', values);
       }
     });
   }
@@ -47,7 +47,7 @@ class CompanyRegistration extends React.Component<any, any> {
             <fieldset>
                 <legend>Данные организации</legend>
                 <FormItem>
-                  {getFieldDecorator('organization', {
+                  {getFieldDecorator('name', {
                     rules: [{ required: true, message: 'Укажите название организации' }],
                   })(
                     <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="название организации" />,
@@ -94,38 +94,24 @@ class CompanyRegistration extends React.Component<any, any> {
               <fieldset>
                 <legend>Лицо, подписывающее договор</legend>
                 <FormItem>
-                  {getFieldDecorator('position', {
+                  {getFieldDecorator('directorFio', {
+                    rules: [{ required: true, message: 'Укажите ФИО!' }],
+                  })(
+                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Ивано Иван Иванович" />,
+                  )}
+                </FormItem>
+                <FormItem>
+                  {getFieldDecorator('directorPosition', {
                     rules: [{ required: true, message: 'Укажите должность!' }],
                   })(
                     <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="должность" />,
                   )}
                 </FormItem>
                 <FormItem>
-                  {getFieldDecorator('directorName', {
-                    rules: [{ required: true, message: 'Укажите имя!' }],
-                  })(
-                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="имя" />,
-                  )}
-                </FormItem>
-                <FormItem>
-                  {getFieldDecorator('directorLastName', {
-                    rules: [{ required: true, message: 'Укажите фамилию!' }],
-                  })(
-                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="фамилия" />,
-                  )}
-                </FormItem>
-                <FormItem>
-                  {getFieldDecorator('directorSoName', {
-                    rules: [{ required: true, message: 'Укажите отчество!' }],
-                  })(
-                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="отчество" />,
-                  )}
-                </FormItem>
-                <FormItem>
                   {getFieldDecorator('directorPhone', {
                     rules: [{ required: true, message: 'Укажите телефон!' }],
                   })(
-                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="телефон" />,
+                    <Input prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="телефон" />,
                   )}
                 </FormItem>
               </fieldset>
@@ -148,17 +134,17 @@ class CompanyRegistration extends React.Component<any, any> {
                   )}
                 </FormItem>
                 <FormItem>
-                  {getFieldDecorator('email', {
-                    rules: [{ required: true, message: 'Укажите email!' }],
-                  })(
-                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="example@mail.com" />,
-                  )}
-                </FormItem>
-                <FormItem>
                   {getFieldDecorator('telephone', {
                     rules: [{ required: true, message: 'Укажите телефон!' }],
                   })(
-                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="телефон" />,
+                    <Input prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="телефон" />,
+                  )}
+                </FormItem>
+                <FormItem>
+                  {getFieldDecorator('email', {
+                    rules: [{ required: true, message: 'Укажите email!' }],
+                  })(
+                    <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="example@mail.com" />,
                   )}
                 </FormItem>
               </fieldset>

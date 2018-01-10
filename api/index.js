@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const { send } = require('micro');
 const compose = require('micro-compose');
-const { router, get } = require('microrouter');
+const { router, get, post } = require('microrouter');
 const cors = require('micro-cors')();
 
 /**
@@ -31,10 +31,11 @@ fs.readdirSync(path.join(__dirname, '/app/models')).forEach((file) => {
  * Routes
  */
 
-const userController = require('./app/controllers/userController');
+const usersController = require('./app/controllers/usersController');
+const organizationsController = require('./app/controllers/organizationsController');
 
 const notfound = (req, res) =>
-  send(res, 404, 'Not found route')
+  send(res, 404, 'Not found route :)')
 
 /**
  * Expo
@@ -43,6 +44,13 @@ const notfound = (req, res) =>
 module.exports = compose(
   cors
 )(router(
-  get('/users/create', userController.create),
+  /** USERS **/
+  post('/users/create', usersController.create),
+  post('/users/login', usersController.login),
+  
+  /** ORGANIZATIONS **/
+  get('/organizations', organizationsController.index),
+  
+  /** 404 **/
   get('/*', notfound)
 ));

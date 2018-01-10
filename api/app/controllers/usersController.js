@@ -7,32 +7,76 @@
  *
  * Module dependencies
  */
-const { send } = require('micro');
-const mongoose = require('mongoose');
 
-const Company = mongoose.model('Company');
+const { send, json } = require('micro');
+const mongoose = require('mongoose');
+const { hashSync } = require('bcryptjs');
+const path = require('path');
+const passgen = require('password-generator');
+const Etpl = require('email-templates').EmailTemplate;
+const email = require('nodemailer');
+
+const Organization = mongoose.model('Organization');
+const User = mongoose.model('User');
 
 /*!
  * Expos
  */
 
 exports.index = async (req, res) => {
-  const companies = await Company.find();
+  const [organizations, users] = await Promise.all([
+    Organization.find(),
+    User.find(),
+  ]);
 
-  return send(res, 200, { companies });
+  return res.render('dashboard/users/index', { organizations, users });
 };
 
-exports.store = async (req, res) => {
-  const user = await User.create({
-    name: req.body.name,
-    login: req.body.login,
-    group: req.body.group,
-    lastname: req.body.lastname,
-    telephone: req.body.telephone,
-    Company: req.body.Company,
-  });
+exports.login = async (req, res) => {
+  const { email, password } = await json(req);
+  const user = await User.find({ email });
 
-  return send(res, 200, { user });
+  console.log(email, password, user);
+
+  return send(res, 200, 'login')
+};
+
+exports.create = async (req, res) => {
+  try {
+    const {
+      name,
+      inn,
+      kpp,
+      bankAccount,
+      bic,
+      address,
+      directorFio,
+      directorPosition,
+      directorPhone,
+      fio,
+      position,
+      telephone,
+      emai,
+    } = await json(req);
+
+    const organization = await Organization.create({
+      name,
+      inn,
+      kpp,
+      bankAccount,
+      bic,
+      address,
+      directorFio,
+      directorPosition,
+      directorPhone
+    });
+    
+    return send(res, 200, organization);
+  } catch(e) {
+
+    console.info('test', e);
+    return send(res, 500, e);
+  }
 };
 
 exports.update = async (req, res) => {
@@ -46,7 +90,7 @@ exports.update = async (req, res) => {
     group: req.body.group,
     lastname: req.body.lastname,
     telephone: req.body.telephone,
-    Company: req.body.Company,
+    Organization: req.body.Organization,
   });
 
   return res.redirect('/dashboard/users');

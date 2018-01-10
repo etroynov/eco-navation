@@ -3,6 +3,8 @@
  */
 
 import * as React from 'react';
+import axios from 'axios';
+
 import { Link } from 'react-router-dom';
 import { Layout, Form, Icon, Input, Button, Checkbox } from 'antd';
 
@@ -14,12 +16,13 @@ const { Content } = Layout;
 const FormItem = Form.Item;
 
 class LoginForm extends React.Component<any, any> {
-  handleSubmit = (e: Event) => {
+  handleSubmit = (e: any) => {
     e.preventDefault();
 
-    this.props.form.validateFields((err: any, values: any) => {
+    this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        const res = await axios.post('http://localhost:8081/users/login', values);
+        console.info(res);
       }
     });
   }
@@ -42,10 +45,10 @@ class LoginForm extends React.Component<any, any> {
         <h3 style={{ fontSize: 15, textAlign: 'center' }}>( 0.0.1 )</h3>
         <Form className="login-form" onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator('userName', {
-              rules: [{ required: true, message: 'Укажите имя пользователя!' }],
+            {getFieldDecorator('email', {
+              rules: [{ required: true, message: 'Укажите email пользователя!' }],
             })(
-              <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="имя пользователя" />,
+              <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="exmple@gmail.com" />,
             )}
           </FormItem>
           <FormItem>
@@ -56,16 +59,9 @@ class LoginForm extends React.Component<any, any> {
             )}
           </FormItem>
           <FormItem>
-            {getFieldDecorator('remember', {
-              valuePropName: 'checked',
-            })(
-              <Checkbox>запомнить меня</Checkbox>,
-            )}
-            <a className="login-form-forgot" href="">забыли пароль?</a>
             <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: '100%' }}>
               войти
             </Button>
-            или <Link to="/registration">зарегистрироватся!</Link>
           </FormItem>
         </Form>
       </Content>

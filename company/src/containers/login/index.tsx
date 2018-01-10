@@ -3,6 +3,7 @@
  */
 
 import * as React from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Layout, Form, Icon, Input, Button, Checkbox } from 'antd';
 
@@ -14,12 +15,12 @@ const { Content } = Layout;
 const FormItem = Form.Item;
 
 class LoginForm extends React.Component<any, any> {
-  handleSubmit = (e: Event) => {
+  handleSubmit = (e: any) => {
     e.preventDefault();
 
-    this.props.form.validateFields((err: any, values: any) => {
+    this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        await axios.post('http://localhost:8081/users/create', values);
       }
     });
   }
