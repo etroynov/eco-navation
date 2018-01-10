@@ -42,10 +42,12 @@ export default () => (
             </Link>
           </Menu.Item>
           <Menu.Item key={3} style={{ float: 'right' }}>
-            <a href="http://localhost:5000/login">
-              <Icon type="lock" style={{ fontSize: '18px' }} />
-              вход
-            </a>
+            <Link href="/login">
+              <a>
+                <Icon type="lock" style={{ fontSize: '18px' }} />
+                вход
+              </a>
+            </Link>
           </Menu.Item>
           <Menu.Item key={4} style={{ float: 'right' }}>
             <Icon type="phone" /> +7 (904) 812-57-38

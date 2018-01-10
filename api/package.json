@@ -1,0 +1,28 @@
+{
+  "name": "ucavtor-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "micro -p 8081",
+    "start-dev-api": "micro-dev -p 8081"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "email-templates": "^3.3.2",
+    "micro": "^9.1.0",
+    "micro-compose": "0.0.3",
+    "micro-cors": "^0.1.0",
+    "micro-jwt-auth": "^1.9.0",
+    "microrouter": "^3.0.0",
+    "mongoose": "^4.13.9",
+    "nodemailer": "^4.4.1",
+    "password-generator": "^2.2.0"
+  },
+  "devDependencies": {
+    "micro-dev": "^2.2.0"
+  }
+}

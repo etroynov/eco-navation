@@ -17,10 +17,10 @@ export default () => (
     <Head>
       <link rel="stylesheet" href="/static/css/antd.min.css" />
     </Head>
-    <h2 style={{ textAlign: 'center', textTransform: 'uppercase' }}>Войти как:</h2>
+    <h2 style={{ textAlign: 'center', textTransform: 'uppercase' }}>Зарегистрироватся как:</h2>
     <Row type="flex" justify="space-between">
       <Col>
-        <a href="http://dashboard.ucavtor.ru/login">
+        <a href="http://dashboard.ucavtor.ru/registration">
           <Card
             hoverable={true}
             title="абитуриент"
@@ -30,7 +30,7 @@ export default () => (
         </a>
       </Col>
       <Col>
-        <a href="http://company.ucavtor.ru/login">
+        <a href="http://company.ucavtor.ru/registration">
           <Card
             hoverable={true}
             title="компания"
