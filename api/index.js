@@ -35,7 +35,7 @@ const usersController = require('./app/controllers/usersController');
 const organizationsController = require('./app/controllers/organizationsController');
 
 const notfound = (req, res) =>
-  send(res, 404, 'Not found route :)')
+  send(res, 404, 'You shall not pass :)')
 
 /**
  * Expo
