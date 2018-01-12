@@ -1,7 +1,6 @@
 import * as React from 'react';
-import Dashboard from '../../../components/dashboard/layout';
+import Dashboard from '../../components/layout';
 import { Col, Row, Steps, Button, Radio } from 'antd';
-import Link from 'next/link';
 
 const Step = Steps.Step;
 const RadioGroup = Radio.Group;
@@ -16,9 +15,6 @@ class Course extends React.Component<{
   state = {
     currentStep: 0,
     chosenAnswer: 0,
-  };
-
-  static getInitialProps = () => ({
     name: 'Тест по теме: Охрана труда',
     description: '',
     steps: [{
@@ -44,10 +40,14 @@ class Course extends React.Component<{
       ],
       rightAnswer: 0,
     }],
-  })
+  };
 
   handleClickNext = () => {
-    this.setState({
+    const { steps, currentStep } = this.state;
+
+    if (currentStep >= steps.length - 1) { return false; }
+
+    return this.setState({
       currentStep: this.state.currentStep + 1,
     });
   }
@@ -59,8 +59,7 @@ class Course extends React.Component<{
   }
 
   render() {
-    const { name, steps } = this.props;
-    const { currentStep, chosenAnswer } = this.state;
+    const { name, steps, currentStep, chosenAnswer } = this.state;
 
     const step = steps[currentStep];
 

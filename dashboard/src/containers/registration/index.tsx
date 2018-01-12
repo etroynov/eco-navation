@@ -19,7 +19,7 @@ class PersonalRegistration extends React.Component<any, any> {
     fromCompany: true,
   };
 
-  handleSubmit = (e: Event) => {
+  handleSubmit = (e: any) => {
     e.preventDefault();
 
     this.props.form.validateFields((err: any, values: any) => {
@@ -27,7 +27,7 @@ class PersonalRegistration extends React.Component<any, any> {
     });
   }
 
-  handleFromCompanyCheckbox = (e: Event) => {
+  handleFromCompanyCheckbox = (e: any) => {
     this.setState({ fromCompany: !e.target.checked });
   }
 

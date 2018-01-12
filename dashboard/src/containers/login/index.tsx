@@ -14,12 +14,12 @@ const { Content } = Layout;
 const FormItem = Form.Item;
 
 class LoginForm extends React.Component<any, any> {
-  handleSubmit = (e: Event) => {
+  handleSubmit = (e: any) => {
     e.preventDefault();
 
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        return location.pathname = '/';
       }
     });
   }

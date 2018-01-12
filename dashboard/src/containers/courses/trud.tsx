@@ -3756,7 +3756,6 @@ class Course extends React.Component<{
               </header>
               <Steps direction="vertical" size="small" current={currentStep}>
                 {steps.map(({ title }, index) => <Step key={index} title={title} />)}
-                <Step key={steps.length + 1} title="ТЕСТ" />
               </Steps>
             </section>
           </Col>
