@@ -13,7 +13,7 @@ import { Table, Icon, Divider, Button } from 'antd';
  * Expo
  */
 
-class Pages extends React.Component<any, {
+class Courses extends React.Component<any, {
   data: any[];
   loading: boolean;
   pagination: any;
@@ -33,24 +33,20 @@ class Pages extends React.Component<any, {
     });
   }
 
-  handleRecordShow = () => {
-    console.info('test');
-  }
-  handleRecordDelete = () => {
-    console.info('test');
-  }
+  handleRecordShow = () => { console.info('test'); };
+  handleRecordDelete = () => { console.info('test'); };
 
   fetch = () => {
     this.setState({ loading: true });
 
-    axios.get('http://localhost:8081/pages').then(({ data }) => {
+    axios.get('http://localhost:8081/courses').then(({ data }) => {
       const pagination: any = { ...this.state.pagination };
-      pagination.total = data.Pages.length;
+      pagination.total = data.courses.length;
 
       this.setState({
         pagination,
         loading: false,
-        data: data.Pages,
+        data: data.courses,
       });
     });
   }
@@ -60,7 +56,6 @@ class Pages extends React.Component<any, {
   }
 
   render() {
-    const { Pages } = this.props;
     const { data, pagination, loading } = this.state;
 
     return (
@@ -68,7 +63,9 @@ class Pages extends React.Component<any, {
         <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}>
           <h1 style={{ margin: 0 }}>
             Курсы
-            <Button type="primary" style={{ float: 'right', marginTop: 5 }} >Добавить курс</Button>
+            <Button type="primary" style={{ float: 'right', marginTop: 5 }}>
+              <Link to="/courses/create">Добавить курс</Link>
+            </Button>
           </h1>
         </header>
         <Table columns={
@@ -77,17 +74,17 @@ class Pages extends React.Component<any, {
             dataIndex: 'name',
             key: 'name',
           }, {
-            title: 'Руководитель',
-            dataIndex: 'directorFio',
-            key: 'directorFio',
+            title: 'Направление',
+            dataIndex: 'rubrics',
+            key: 'rubrics',
           }, {
-            title: 'Телефон',
-            dataIndex: 'directorPhone',
-            key: 'directorPhone',
+            title: 'Уроков кол-во',
+            dataIndex: 'lessons',
+            key: 'lessons',
           }, {
-            title: 'Адрес',
-            dataIndex: 'address',
-            key: 'address',
+            title: 'Статус',
+            dataIndex: 'status',
+            key: 'status',
           }, {
             title: 'Действия',
             key: 'action',
@@ -109,8 +106,8 @@ class Pages extends React.Component<any, {
   }
 }
 
-const mapStateToProps = ({ Pages }) => ({ Pages });
+const mapStateToProps = ({ courses }) => ({ courses });
 
 export default connect(
   mapStateToProps,
-)(Pages);
+)(Courses);

@@ -29,9 +29,9 @@ class Dashboard extends React.Component<any, any> {
         >
           <div className="profile">
             <figure className="profile__img-container">
-              <img src={require('./../assets/img/whitecollar.svg')} alt="" className="profile__img" />
+              <img src={require('./../assets/img/briefcase.svg')} alt="" className="profile__img" />
               <figcaption className="profile__img-caption">
-                Тройнов Евгений Александрович
+                УЦ "Автор"
                 <hr className="profile__divider" />
               </figcaption>
             </figure>
@@ -47,24 +47,6 @@ class Dashboard extends React.Component<any, any> {
               <Link to="/courses">
                   <Icon type="book" />
                   <span>Курсы</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Link to="/vebinari">
-                  <Icon type="customer-service" />
-                  <span>Вебинары</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Link to="/blog">
-                  <Icon type="profile" />
-                  <span>Блог</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="4">
-              <Link to="/career">
-                  <Icon type="contacts" />
-                  <span>Карьера</span>
               </Link>
             </Menu.Item>
           </Menu>

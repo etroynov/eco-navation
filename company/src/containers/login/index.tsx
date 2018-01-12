@@ -4,7 +4,7 @@
 
 import * as React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Layout, Form, Icon, Input, Button, Checkbox } from 'antd';
 
 /*!
@@ -20,7 +20,8 @@ class LoginForm extends React.Component<any, any> {
 
     this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
-        await axios.post('http://localhost:8081/users/create', values);
+        // await axios.post('http://localhost:8081/users/create', values);
+        return location.pathname = '/';
       }
     });
   }
