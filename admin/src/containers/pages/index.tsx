@@ -16,7 +16,7 @@ import { Table, Icon, Divider, Button } from 'antd';
 class Pages extends React.Component<any, {
   data: any[];
   loading: boolean;
-  pagination: any;
+  pagination: any
 }> {
   state = {
     data: [],
@@ -67,8 +67,8 @@ class Pages extends React.Component<any, {
       <Dashboard>
         <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}>
           <h1 style={{ margin: 0 }}>
-            Курсы
-            <Button type="primary" style={{ float: 'right', marginTop: 5 }} >Добавить курс</Button>
+            Страницы
+            <Button type="primary" style={{ float: 'right', marginTop: 5 }} >Добавить страницу</Button>
           </h1>
         </header>
         <Table columns={
@@ -77,17 +77,13 @@ class Pages extends React.Component<any, {
             dataIndex: 'name',
             key: 'name',
           }, {
-            title: 'Руководитель',
-            dataIndex: 'directorFio',
-            key: 'directorFio',
+            title: 'Дата',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
           }, {
-            title: 'Телефон',
-            dataIndex: 'directorPhone',
-            key: 'directorPhone',
-          }, {
-            title: 'Адрес',
-            dataIndex: 'address',
-            key: 'address',
+            title: 'Статус',
+            dataIndex: 'status',
+            key: 'status',
           }, {
             title: 'Действия',
             key: 'action',

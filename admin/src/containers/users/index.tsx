@@ -13,7 +13,7 @@ import { Table, Icon, Divider, Button } from 'antd';
  * Expo
  */
 
-class Pages extends React.Component<any, {
+class Users extends React.Component<any, {
   data: any[];
   loading: boolean;
   pagination: any;
@@ -43,14 +43,14 @@ class Pages extends React.Component<any, {
   fetch = () => {
     this.setState({ loading: true });
 
-    axios.get('http://localhost:8081/pages').then(({ data }) => {
+    axios.get('http://localhost:8081/organizations').then(({ data }) => {
       const pagination: any = { ...this.state.pagination };
-      pagination.total = data.Pages.length;
+      pagination.total = data.organizations.length;
 
       this.setState({
         pagination,
         loading: false,
-        data: data.Pages,
+        data: data.organizations,
       });
     });
   }
@@ -60,15 +60,14 @@ class Pages extends React.Component<any, {
   }
 
   render() {
-    const { Pages } = this.props;
+    const { organizations } = this.props;
     const { data, pagination, loading } = this.state;
 
     return (
       <Dashboard>
         <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}>
           <h1 style={{ margin: 0 }}>
-            Курсы
-            <Button type="primary" style={{ float: 'right', marginTop: 5 }} >Добавить курс</Button>
+            Пользователи
           </h1>
         </header>
         <Table columns={
@@ -109,8 +108,8 @@ class Pages extends React.Component<any, {
   }
 }
 
-const mapStateToProps = ({ Pages }) => ({ Pages });
+const mapStateToProps = ({ posts }) => ({ posts });
 
 export default connect(
   mapStateToProps,
-)(Pages);
+)(Users);

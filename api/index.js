@@ -32,6 +32,7 @@ fs.readdirSync(path.join(__dirname, '/app/models')).forEach((file) => {
  */
 
 const usersController = require('./app/controllers/usersController');
+const pagesController = require('./app/controllers/pagesController');
 const organizationsController = require('./app/controllers/organizationsController');
 
 const notfound = (req, res) =>
@@ -47,6 +48,10 @@ module.exports = compose(
   /** USERS **/
   post('/users/create', usersController.create),
   post('/users/login', usersController.login),
+  
+  /** PAGES **/
+  get('/pages', pagesController.index),
+  post('/pages/create', usersController.create),
   
   /** ORGANIZATIONS **/
   get('/organizations', organizationsController.index),

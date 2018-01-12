@@ -89,7 +89,6 @@ class Dashboard extends React.Component<any, any> {
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>главная</Breadcrumb.Item>
-              <Breadcrumb.Item>курсы</Breadcrumb.Item>
             </Breadcrumb>
             <div className="content">{this.props.children}</div>
           </Content>
