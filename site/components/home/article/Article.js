@@ -44,6 +44,12 @@ const Article = ({ title } : {title: string}) => (
           <Col span={8}><img src="/static/img/sert_2.jpg" alt="Лицензия учебный центр 'Автор'" style={{ width: '100%' }} /></Col>
           <Col span={8}><img src="/static/img/sert_3.jpg" alt="Лицензия учебный центр 'Автор'" style={{ width: '100%' }} /></Col>
         </Row>
+        <h3>Образцы выдаваемых документов</h3>
+        <hr/>
+        <Row type="flex">
+          <Col span={8}><img src="/static/img/doc_1.jpg" alt="Лицензия учебный центр 'Автор'" style={{ width: '100%' }} /></Col>
+          <Col span={8}><img src="/static/img/doc_2.jpg" alt="Лицензия учебный центр 'Автор'" style={{ width: '100%' }} /></Col>
+        </Row>
       </section>
     </div>
   </Container>

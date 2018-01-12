@@ -29,17 +29,17 @@ const Footer = () => (
             <ul className="footer-menu__body">
               <li className="footer-menu__item">
                 <Link href="/about">
-                  <a className="footer-menu__text">компания</a>
+                  <a className="footer-menu__text">Компания</a>
                 </Link>
               </li>
               <li className="footer-menu__item">
                 <Link href="/job">
-                  <a className="footer-menu__text">работа</a>
+                  <a className="footer-menu__text">Работа</a>
                 </Link>
               </li>
               <li className="footer-menu__item">
                 <Link href="/oferta">
-                  <a className="footer-menu__text">пользовательское соглашение</a>
+                  <a className="footer-menu__text">Пользовательское соглашение</a>
                 </Link>
               </li>
               <li className="footer-menu__item">
