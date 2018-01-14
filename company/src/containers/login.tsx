@@ -5,6 +5,7 @@
 import * as React from 'react';
 import axios from 'axios';
 
+import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Link, Redirect } from 'react-router-dom';
 import { Layout, Form, Icon, Input, Button, Checkbox, Modal } from 'antd';
@@ -22,7 +23,6 @@ class LoginForm extends React.Component<any, any> {
 
     this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
-        const { status } = await axios.post('http://localhost:8081/organizations/login', values);
 
         if (status !== 200) {
           Modal.error({

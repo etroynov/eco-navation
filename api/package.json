@@ -19,8 +19,7 @@
     "micro-cors": "^0.1.0",
     "microrouter": "^3.0.0",
     "mongoose": "^4.13.9",
-    "nodemailer": "^4.4.1",
-    "password-generator": "^2.2.0"
+    "nodemailer": "^4.4.1"
   },
   "devDependencies": {
     "micro-dev": "^2.2.0"
