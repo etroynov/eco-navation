@@ -37,7 +37,7 @@ const coursesController = require('./app/controllers/coursesController');
 const organizationsController = require('./app/controllers/organizationsController');
 
 const notfound = (req, res) =>
-  send(res, 404, 'You shall not pass :)')
+  send(res, 404, 'You shall not passs :)')
 
 /**
  * Expo

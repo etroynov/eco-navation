@@ -24,23 +24,23 @@ class LoginForm extends React.Component<any, any> {
     this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
 
-        if (status !== 200) {
-          Modal.error({
-            title: 'Упс, что то пошло не так!',
-            content: `В ходе регистрации возникла ошибка, попробуйте выполнить регистрацию еще раз. Если ошибка возникает повторно напишите нам на support@ucavtor.ru или в онлайн консультант.`,
-            onOk: () => location.pathname = '/login',
-            onCancel: () => location.pathname = '/login',
-          });
-        }
+        // if (status !== 200) {
+        //   Modal.error({
+        //     title: 'Упс, что то пошло не так!',
+        //     content: `В ходе регистрации возникла ошибка, попробуйте выполнить регистрацию еще раз. Если ошибка возникает повторно напишите нам на support@ucavtor.ru или в онлайн консультант.`,
+        //     onOk: () => location.pathname = '/login',
+        //     onCancel: () => location.pathname = '/login',
+        //   });
+        // }
 
-        if (status === 200) {
-          Modal.success({
-            title: 'Регистрация завершена!',
-            content: `Вы успешно прошли регистрацию на сайте, инструкция с доступами для входа на сайт отправлена на почтовый ящик ${values.email}.`,
-            onOk: () => location.pathname = '/login',
-            onCancel: () => location.pathname = '/login',
-          });
-        }
+        // if (status === 200) {
+        //   Modal.success({
+        //     title: 'Регистрация завершена!',
+        //     content: `Вы успешно прошли регистрацию на сайте, инструкция с доступами для входа на сайт отправлена на почтовый ящик ${values.email}.`,
+        //     onOk: () => location.pathname = '/login',
+        //     onCancel: () => location.pathname = '/login',
+        //   });
+        // }
       }
     });
   }
