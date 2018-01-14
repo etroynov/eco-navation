@@ -7,7 +7,8 @@ import { Switch, Route } from 'react-router-dom';
 
 import Login from './containers/login';
 import Home from './containers/home';
-import Courses from './containers/courses';
+import Users from './containers/users';
+import UsersCreate from './containers/usersCreate';
 import Registration from './containers/registration';
 
 /**
@@ -17,7 +18,8 @@ import Registration from './containers/registration';
 const App = () => (
   <Switch>
     <Route path="/" exact component={Home} />
-    <Route path="/courses" exact component={Courses} />
+    <Route path="/users" exact component={Users} />
+    <Route path="/users/create" exact component={UsersCreate} />
     <Route path="/login" component={Login} />
     <Route path="/registration" exact component={Registration} />
   </Switch>

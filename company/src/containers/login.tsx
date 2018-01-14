@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import { Helmet } from 'react-helmet';
 import { Link, Redirect } from 'react-router-dom';
-import { Layout, Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Layout, Form, Icon, Input, Button, Checkbox, Modal } from 'antd';
 
 /*!
  * Expo
@@ -23,7 +23,15 @@ class LoginForm extends React.Component<any, any> {
     this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
         // await axios.post('http://localhost:8081/users/create', values);
-        return location.pathname = '/';
+
+        if (values.email === 'demo') {
+          return location.pathname = '/';
+        }
+
+        return Modal.error({
+          title: 'Упс, что то пошло не так :(',
+          content: 'К сожалению сервис временно недоступен, приносим свои извинения за причиненные неудобства. Мы вернемся так быстро как только сможем :)',
+        });
       }
     });
   }
@@ -50,7 +58,7 @@ class LoginForm extends React.Component<any, any> {
         <h3 style={{ fontSize: 15, textAlign: 'center' }}>( 0.0.1 )</h3>
         <Form className="login-form" onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator('userName', {
+            {getFieldDecorator('email', {
               rules: [{ required: true, message: 'Укажите имя пользователя!' }],
             })(
               <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="имя пользователя" />,

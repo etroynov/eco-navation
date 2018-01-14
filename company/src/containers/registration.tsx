@@ -5,7 +5,7 @@
 import * as React from 'react';
 import axios from 'axios';
 
-import { Layout, Row, Col, Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Layout, Row, Col, Form, Icon, Input, Button, Checkbox, Modal } from 'antd';
 
 declare const require: any;
 /*!
@@ -19,13 +19,16 @@ class CompanyRegistration extends React.Component<any, any> {
   handleSubmit = (e: any) => {
     e.preventDefault();
 
-    console.info(this);
-
     this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
-        console.log('Received values of form: ', values);
-
-        await axios.post('http://localhost:8081/users/create', values);
+        Modal.success({
+          title: 'Регистрация завершена!',
+          content: `Вы успешно прошли регистрацию на сайте, инструкция с доступами для входа на сайт отправлена на почтовый ящик ${values.email}.`,
+          onOk: () => location.pathname = '/login',
+          onCancel: () => location.pathname = '/login',
+        });
+        
+        // await axios.post('http://localhost:8081/users/create', values);
       }
     });
   }
@@ -36,7 +39,7 @@ class CompanyRegistration extends React.Component<any, any> {
       <Content style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto', width: 900, height: 800 }}>
         <h2 style={{ textAlign: 'center', textTransform: 'uppercase' }}>
           <img
-            src={require('./../../assets/img/briefcase.svg')}
+            src={require('./../assets/img/briefcase.svg')}
             style={{ display: 'inline-block', width: 200, padding: 20 }}
           />
           <p>компания</p>

@@ -43,7 +43,7 @@ const Dashboard = ({ children, title = '', collapsed, onCollapse }) => (
           </Link>
         </Menu.Item>
         <Menu.Item key="1">
-          <Link to="/employees">
+          <Link to="/users">
               <Icon type="book" />
               <span>Сотрудники</span>
           </Link>
