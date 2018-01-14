@@ -39,7 +39,7 @@ class PersonalRegistration extends React.Component<any, any> {
         <Content style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto', width: 900, height: 800 }}>
           <h2 style={{ textAlign: 'center', textTransform: 'uppercase' }}>
             <img
-              src={require('./../../assets/img/whitecollar.svg')}
+              src={require('./../assets/img/whitecollar.svg')}
               style={{ display: 'inline-block', width: 200, padding: 20 }}
             />
             <p>абитуриент</p>

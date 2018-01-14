@@ -10,7 +10,7 @@ declare const require: any;
  */
 
 export default () => (
-  <Dashboard>
+  <Dashboard title="Курсы">
     <header
       style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}
     >

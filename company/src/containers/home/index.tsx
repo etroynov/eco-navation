@@ -91,7 +91,7 @@ class Home extends React.Component<{
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <Dashboard>
+      <Dashboard title="Главная">
         <header
           style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}
         >
@@ -107,36 +107,12 @@ class Home extends React.Component<{
             >
               <figure style={{ textAlign: 'center', paddingTop: '25px 0' }}>
                 <img
-                  src="http://ucavtor.ru/static/img/logo.png"
-                  alt="го и чс"
-                  className="uc-img-response"
+                  src={require('./../../assets/img/briefcase.svg')}
+                  alt=""
                   style={{ width: '50%' }}
                 />
                 <figcaption style={{ fontSize: 20, padding: '20px 0' }}>УЦ "АВТОР"</figcaption>
               </figure>
-            </Col>
-            <Col
-              span={12}
-              style={{ borderRight: '1px solid #eee' }}
-            >
-              <div
-                className="gutter-box"
-                style={{ padding: '0 20px', textAlign: 'justify' }}
-              >
-                <p>
-                  Наш учебный центр оказывает услуги в сфере дополнительного
-                  профессионального образования и профессионального обучения в
-                  различных профессиональных областях, сочетающие в себе элементы
-                  классического образования и новейших образовательных решений и
-                  технологий.
-                </p>
-                <p>
-                  В Учебном центре существует собственная платформа дистанционного
-                  обучения. Это позволяет нам быть гибкими и активно развивать
-                  образовательный процесс. Дистанционное обучение дает возможность
-                  получить качественное образование, не выходя из дома.
-                </p>
-              </div>
             </Col>
             <Col span={8}>
               <div className="gutter-box" style={{ padding: '0 20px' }}>
@@ -164,7 +140,7 @@ class Home extends React.Component<{
                 itemLayout="horizontal"
                 dataSource={this.state.users}
                 renderItem={item => (
-                  <List.Item actions={[<a>изменить</a>, <a>подробнее</a>]}>
+                  <List.Item actions={[<Button type="primary" icon="eye-o" />]}>
                     <List.Item.Meta
                       avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                       title={item.fio}
