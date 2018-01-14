@@ -10,6 +10,8 @@ import { Helmet } from 'react-helmet';
 import { Link, Redirect } from 'react-router-dom';
 import { Layout, Form, Icon, Input, Button, Checkbox, Modal } from 'antd';
 
+import { login } from './../actions/authActions';
+
 /*!
  * Expo
  */
@@ -94,4 +96,10 @@ class LoginForm extends React.Component<any, any> {
 
 const WrappedLoginForm = Form.create()(LoginForm as any);
 
-export default WrappedLoginForm;
+const mapStateToProps = () => ({});
+const mapDispatchToProps = () => ({});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(WrappedLoginForm as any);

@@ -10,7 +10,7 @@ export const setCurrentUser = user => ({
 });
 
 export const login = authData => async (dispatch) => {
-  const { data } = await axios.post('http://app.ucavtor.ru/organizations/login', authData);
+  const { data } = await axios.post('http://localhost:8081/organizations/login', authData);
 
   setAuthorizationToken(data.token);
   dispatch(setCurrentUser(jwt.decode(data.token)));
