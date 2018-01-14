@@ -21,14 +21,25 @@ class CompanyRegistration extends React.Component<any, any> {
 
     this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
-        Modal.success({
-          title: 'Регистрация завершена!',
-          content: `Вы успешно прошли регистрацию на сайте, инструкция с доступами для входа на сайт отправлена на почтовый ящик ${values.email}.`,
-          onOk: () => location.pathname = '/login',
-          onCancel: () => location.pathname = '/login',
-        });
-        
-        // await axios.post('http://localhost:8081/users/create', values);
+        const { status } = await axios.post('http://localhost:8081/organizations/store', values);
+
+        if (status !== 200) {
+          Modal.error({
+            title: 'Упс, что то пошло не так!',
+            content: `В ходе регистрации возникла ошибка, попробуйте выполнить регистрацию еще раз. Если ошибка возникает повторно напишите нам на support@ucavtor.ru или в онлайн консультант.`,
+            onOk: () => location.pathname = '/login',
+            onCancel: () => location.pathname = '/login',
+          });
+        }
+
+        if (status === 200) {
+          Modal.success({
+            title: 'Регистрация завершена!',
+            content: `Вы успешно прошли регистрацию на сайте, инструкция с доступами для входа на сайт отправлена на почтовый ящик ${values.email}.`,
+            onOk: () => location.pathname = '/login',
+            onCancel: () => location.pathname = '/login',
+          });
+        }
       }
     });
   }
@@ -97,21 +108,21 @@ class CompanyRegistration extends React.Component<any, any> {
               <fieldset>
                 <legend>Лицо, подписывающее договор</legend>
                 <FormItem>
-                  {getFieldDecorator('directorFio', {
+                  {getFieldDecorator('representativeFio', {
                     rules: [{ required: true, message: 'Укажите ФИО!' }],
                   })(
                     <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Ивано Иван Иванович" />,
                   )}
                 </FormItem>
                 <FormItem>
-                  {getFieldDecorator('directorPosition', {
+                  {getFieldDecorator('representativePosition', {
                     rules: [{ required: true, message: 'Укажите должность!' }],
                   })(
                     <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="должность" />,
                   )}
                 </FormItem>
                 <FormItem>
-                  {getFieldDecorator('directorPhone', {
+                  {getFieldDecorator('representativePhone', {
                     rules: [{ required: true, message: 'Укажите телефон!' }],
                   })(
                     <Input prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="телефон" />,
@@ -123,21 +134,21 @@ class CompanyRegistration extends React.Component<any, any> {
               <fieldset>
                 <legend>Представитель организации</legend>
                 <FormItem>
-                  {getFieldDecorator('fio', {
+                  {getFieldDecorator('managerFio', {
                     rules: [{ required: true, message: 'Укажите ФИО!' }],
                   })(
                     <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Иванов Иван Иванович" />,
                   )}
                 </FormItem>
                 <FormItem>
-                  {getFieldDecorator('position', {
+                  {getFieldDecorator('managerPosition', {
                     rules: [{ required: true, message: 'Укажите должность!' }],
                   })(
                     <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="должность" />,
                   )}
                 </FormItem>
                 <FormItem>
-                  {getFieldDecorator('telephone', {
+                  {getFieldDecorator('managerPhone', {
                     rules: [{ required: true, message: 'Укажите телефон!' }],
                   })(
                     <Input prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="телефон" />,
@@ -163,6 +174,7 @@ class CompanyRegistration extends React.Component<any, any> {
             <FormItem style={{ padding: '0 20px' }}>
               {getFieldDecorator('accept', {
                 valuePropName: 'checked',
+                rules: [{ required: true, message: 'Необходимо согласие на обработку ваших персональных данных!' }],
               })(
                 <Checkbox>Я согласен на обработку персональных данных</Checkbox>,
               )}

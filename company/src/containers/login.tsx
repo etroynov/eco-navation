@@ -22,16 +22,25 @@ class LoginForm extends React.Component<any, any> {
 
     this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
-        // await axios.post('http://localhost:8081/users/create', values);
+        const { status } = await axios.post('http://localhost:8081/organizations/login', values);
 
-        if (values.email === 'demo') {
-          return location.pathname = '/';
+        if (status !== 200) {
+          Modal.error({
+            title: 'Упс, что то пошло не так!',
+            content: `В ходе регистрации возникла ошибка, попробуйте выполнить регистрацию еще раз. Если ошибка возникает повторно напишите нам на support@ucavtor.ru или в онлайн консультант.`,
+            onOk: () => location.pathname = '/login',
+            onCancel: () => location.pathname = '/login',
+          });
         }
 
-        return Modal.error({
-          title: 'Упс, что то пошло не так :(',
-          content: 'К сожалению сервис временно недоступен, приносим свои извинения за причиненные неудобства. Мы вернемся так быстро как только сможем :)',
-        });
+        if (status === 200) {
+          Modal.success({
+            title: 'Регистрация завершена!',
+            content: `Вы успешно прошли регистрацию на сайте, инструкция с доступами для входа на сайт отправлена на почтовый ящик ${values.email}.`,
+            onOk: () => location.pathname = '/login',
+            onCancel: () => location.pathname = '/login',
+          });
+        }
       }
     });
   }
@@ -55,7 +64,7 @@ class LoginForm extends React.Component<any, any> {
           <title>Авторизация</title>
         </Helmet>
         <h2 style={{ margin: 0, textAlign: 'center', textTransform: 'uppercase' }}>авторизация</h2>
-        <h3 style={{ fontSize: 15, textAlign: 'center' }}>( 0.0.1 )</h3>
+        <h3 style={{ fontSize: 15, textAlign: 'center' }}>( 0.2.0 )</h3>
         <Form className="login-form" onSubmit={this.handleSubmit}>
           <FormItem>
             {getFieldDecorator('email', {
@@ -72,12 +81,6 @@ class LoginForm extends React.Component<any, any> {
             )}
           </FormItem>
           <FormItem>
-            {getFieldDecorator('remember', {
-              valuePropName: 'checked',
-            })(
-              <Checkbox>запомнить меня</Checkbox>,
-            )}
-            <a className="login-form-forgot" href="">забыли пароль?</a>
             <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: '100%' }}>
               войти
             </Button>

@@ -22,7 +22,7 @@ exports.index = async (req, res) => {
   return send(res, 200, { courses });
 };
 
-exports.create = async (req, res) => {
+exports.store = async (req, res) => {
   try {
     const data = await json(req);
 

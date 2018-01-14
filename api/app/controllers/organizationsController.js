@@ -7,10 +7,45 @@
  *
  * Module dependencies
  */
-const { send } = require('micro');
 const mongoose = require('mongoose');
 
+const { send, json } = require('micro');
+const { hashSync, compareSync } = require('bcryptjs');
+const { generate } = require('generate-password');
+const { createTransport } = require('nodemailer');
+const { sign } = 'jsonwebtoken';
+
 const Organization = mongoose.model('Organization');
+
+const sendPasswordToEmail = async ({ email }, password) => {
+  try {
+    const transporter = createTransport({
+      service: 'Yandex',
+      auth: {
+        user: 'access@ucavtor.ru',
+        pass: 'uSFC9keV4nZaOlYbAGVVwB',
+      },
+    });
+
+    const mailOptions = {
+      from: 'access@ucavtor.ru',
+      to: email,
+      subject: 'Доступ к сайту - ucavtor.ru',
+      html: `
+        <p>Доступы для входа на сайт:</p>
+
+        <p><strong>Имя пользователя:</strong> ${email}
+        <p><strong>Пароль:</strong>  ${password}
+
+        <p>Вход на сайт осуществляется через <a href="http://company.ucavtor.ru/login">Панель управления</a></p>
+      `,
+    };
+
+    return transporter.sendMail(mailOptions);
+  } catch(e) {
+    return send(res, 500, e);
+  }
+}
 
 /*!
  * Expos
@@ -22,65 +57,56 @@ exports.index = async (req, res) => {
   return send(res, 200, { organizations });
 };
 
-exports.create = async (req, res) => {
+exports.store = async (req, res) => {
   try {
-    const {
-      name,
-      inn,
-      kpp,
-      bankAccount,
-      bic,
-      address,
-      directorFio,
-      directorPosition,
-      directorPhone,
-      fio,
-      position,
-      telephone,
-      email,
-    } = await json(req);
+    const organization = await json(req);
+    const hashPassword = generate({length: 10, numbers: true });
+    const password = hashSync(hashPassword, 8);
 
-    const organization = await Organization.create({
-      name,
-      inn,
-      kpp,
-      bankAccount,
-      bic,
-      address,
-      directorFio,
-      directorPosition,
-      directorPhone
-    });
-    
-    return send(res, 200, organization);
+    const organiztaionObj = await Organization.create({ ...organization, password });
+
+    const emailStatus = await sendPasswordToEmail(organiztaionObj, hashPassword);
+
+    return send(res, 200);
   } catch(e) {
-
-    console.info('test', e);
     return send(res, 500, e);
   }
 };
 
 exports.update = async (req, res) => {
-  const id = req.body.id || '';
+  try {
+    const organization = await json(req);
 
-  await User.update({
-    _id: id,
-  }, {
-    name: req.body.name,
-    login: req.body.login,
-    group: req.body.group,
-    lastname: req.body.lastname,
-    telephone: req.body.telephone,
-    Organization: req.body.Organization,
-  });
-
-  return res.redirect('/dashboard/users');
+    await Organization.update({_id: organization.id }, organization);
+    return send(res, 200);
+  } catch(e) {
+    return send(res, 500, e);
+  }
 };
 
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = await json(req);
+    const user = await Organization.findOne({ email });
+
+    if (compareSync(password, user.password)) {
+      return send(res, 200, sign(user, 123))
+    }
+
+    return send(res, 200);
+  } catch(e) {
+    return send(res, 500, e)
+  }
+}
+
 exports.destroy = async (req, res) => {
-  const id = req.params.id || '';
+  try {
+    const { id } = await json(req);
 
-  await User.findByIdAndRemove(id);
-
-  return res.redirect('/dashboard/users');
+    await Organization.findByIdAndRemove(id);
+    
+    return send(res, 200);
+  } catch(e) {
+    return send(res, 500, e);
+  }
 };

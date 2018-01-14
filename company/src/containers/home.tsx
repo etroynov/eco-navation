@@ -124,7 +124,7 @@ class Home extends React.Component<{
               <Row>
                 <Col span={24} style={{ padding: '20px', textAlign: 'center' }}>
                   <h2 style={{ textAlign: 'center', textTransform: 'uppercase' }}>
-                    События
+                    Уведомления
                     <hr style={{ width: '20%', border: 'none', borderBottom: '1px solid #eee' }} />
                   </h2>
                   <List

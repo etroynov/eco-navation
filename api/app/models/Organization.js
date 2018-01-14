@@ -22,22 +22,18 @@ const OrganizationSchema = new Schema({
   name: {
     type: String,
     default: '',
-    unique: true,
   },
   inn: {
     type: String,
     default: '',
-    unique: true,
   },
   kpp: {
     type: String,
     default: '',
-    unique: true,
   },
   bankAccount: {
     type: String,
     default: '',
-    unique: true,
   },
   bic: {
     type: String,
@@ -47,15 +43,37 @@ const OrganizationSchema = new Schema({
     type: String,
     default: ''
   },
-  directorFio: {
+  representativeFio: {
     type: String,
     default: ''
   },
-  directorPosition: {
+  representativePosition: {
     type: String,
     default: ''
   },
-  directorPhone: {
+  representativePhone: {
+    type: String,
+    default: ''
+  },
+  managerFio: {
+    type: String,
+    default: ''
+  },
+  managerPosition: {
+    type: String,
+    default: ''
+  },
+  managerPhone: {
+    type: String,
+    default: ''
+  },
+  email: {
+    type: String,
+    default: '',
+    unique: true,
+    required: true
+  },
+  password: {
     type: String,
     default: ''
   }
@@ -78,8 +96,8 @@ const OrganizationSchema = new Schema({
  * Methods
  */
 
-OrganizationSchema.methods.authenticate = (Organization, password) => {
-  return bcrypt.compareSync(password, Organization.password);
+OrganizationSchema.methods.authenticate = (organization, password) => {
+  return bcrypt.compareSync(password, organization.password);
 };
 
 /**

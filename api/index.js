@@ -47,20 +47,22 @@ module.exports = compose(
   cors
 )(router(
   /** USERS **/
-  post('/users/create', usersController.create),
+  post('/users/store', usersController.store),
   post('/users/login', usersController.login),
   
   /** PAGES **/
   get('/pages', pagesController.index),
-  post('/pages/create', pagesController.create),
+  post('/pages/store', pagesController.store),
 
   /** COURSES **/
   get('/courses', coursesController.index),
-  post('/courses/create', coursesController.create),
+  post('/courses/store', coursesController.store),
   
   
   /** ORGANIZATIONS **/
   get('/organizations', organizationsController.index),
+  post('/organizations/store', organizationsController.store),
+  post('/organizations/login', organizationsController.login),
   
   /** 404 **/
   get('/*', notfound)

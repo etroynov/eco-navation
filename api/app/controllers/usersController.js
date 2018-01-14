@@ -8,12 +8,13 @@
  * Module dependencies
  */
 
-const { send, json } = require('micro');
-const mongoose = require('mongoose');
-const { hashSync } = require('bcryptjs');
 const path = require('path');
-const passgen = require('password-generator');
-const Etpl = require('email-templates').EmailTemplate;
+const mongoose = require('mongoose');
+
+const { send, json } = require('micro');
+const { hashSync } = require('bcryptjs');
+const { generate } = require('generate-password');
+
 const email = require('nodemailer');
 
 const Organization = mongoose.model('Organization');
@@ -41,7 +42,7 @@ exports.login = async (req, res) => {
   return send(res, 200, 'login')
 };
 
-exports.create = async (req, res) => {
+exports.store = async (req, res) => {
   try {
     const {
       name,
@@ -106,7 +107,10 @@ exports.destroy = async (req, res) => {
 
 exports.restore = async (req, res) => {
   const id = req.body.id || '';
-  const pass = passgen();
+
+  const hashPassword = generate({length: 10, numbers: true });
+  const password = hashSync(hashPassword, 8);
+  
   const transporter = email.createTransport({
     service: 'Yandex',
     auth: {
@@ -114,8 +118,7 @@ exports.restore = async (req, res) => {
       pass: 'makdoors713',
     },
   });
-  const restoreTpl = path.join(`${__dirname}/../views`, 'emails', 'restore');
-  const restoreLetter = new Etpl(restoreTpl);
+  
   const mailOptions = {
     from: 'access@makdoors.ru',
     to: 'access@makdoors.ru',
@@ -123,14 +126,9 @@ exports.restore = async (req, res) => {
     html: '',
   };
 
-  const user = await User.update({ _id: id }, { password: bcrypt.hashSync(pass, 8) });
+  const user = await User.update({ _id: id }, { password });
 
-  const restoreLetterTemplate = await restoreLetter.render({
-    pass,
-    user,
-  });
-
-  mailOptions.html = restoreLetterTemplate.html;
+  mailOptions.html = '';
 
   await transporter.sendMail(mailOptions);
 

@@ -22,7 +22,7 @@ exports.index = async (req, res) => {
   return send(res, 200, { Pages });
 };
 
-exports.create = async (req, res) => {
+exports.store = async (req, res) => {
   const data = await json(req);
   const page = await Page.create(data);
 
