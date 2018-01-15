@@ -10,7 +10,7 @@ export const setCurrentUser = user => ({
   payload: user,
 });
 
-export const login = data => dispatch => axios.post('http://localhost:8081/organizations/login', data).then(
+export const login = data => dispatch => axios.post('http://api.ucavtor.ru/organizations/login', data).then(
   ({ data }) => {
     const { token } = data;
     localStorage.setItem('jwtToken', token);
