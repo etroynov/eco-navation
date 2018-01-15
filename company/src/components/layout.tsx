@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
 import { withState } from 'recompose';
 import { Helmet } from 'react-helmet';
+
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -13,7 +15,7 @@ declare const require: any;
  */
 
 
-const Dashboard = ({ children, title = '', collapsed, onCollapse }) => (
+const Dashboard = ({ children, title = '', collapsed, onCollapse, auth }) => (
   <Layout style={{ minHeight: '100vh' }}>
     <Helmet>
       <meta charSet="utf-8" />
@@ -30,7 +32,7 @@ const Dashboard = ({ children, title = '', collapsed, onCollapse }) => (
         <figure className="profile__img-container">
           <img src={require('./../assets/img/briefcase.svg')} alt="" className="profile__img" />
           <figcaption className="profile__img-caption">
-            УЦ "Автор"
+            {auth.user.name}
             <hr className="profile__divider" />
           </figcaption>
         </figure>
@@ -68,8 +70,11 @@ const Dashboard = ({ children, title = '', collapsed, onCollapse }) => (
   </Layout>
 );
 
-export default withState(
+
+const mapDispatchToProps = ({ auth }) => ({ auth });
+
+export default connect(mapDispatchToProps)(withState(
   'collapsed',
   'onCollapse',
   false,
-)(Dashboard);
+)(Dashboard) as any);

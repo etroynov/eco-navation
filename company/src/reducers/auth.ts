@@ -1,12 +1,12 @@
 import { SET_CURRENT_USER } from './../actions/types';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from 'lodash';
 
 const initialState = {
   isAuthenticated: false,
   user: {},
 };
 
-export default (state = initialState, action: any = {}) => {
+const authReducer = (state = initialState, action: any = {}) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -18,3 +18,5 @@ export default (state = initialState, action: any = {}) => {
     default: return state;
   }
 };
+
+export default authReducer;

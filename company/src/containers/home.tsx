@@ -3,6 +3,7 @@
  */
 
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Row, Col, Card, List, Avatar, Button, Modal, Form, Icon, Input, Checkbox } from 'antd';
 
@@ -19,6 +20,7 @@ declare const require;
 
 class Home extends React.Component<{
   form: any;
+  auth: any;
 }, {}> {
   state = {
     visible: false,
@@ -35,6 +37,22 @@ class Home extends React.Component<{
   };  
 
   render() {
+    const {
+      email,
+      managerPhone,
+      managerPosition,
+      managerFio,
+      representativePhone,
+      representativePosition,
+      representativeFio,
+      address,
+      bic,
+      bankAccount,
+      kpp,
+      inn,
+      name,
+    } = this.props.auth.user;
+
     return (
       <Dashboard title="Главная">
         <header
@@ -58,7 +76,7 @@ class Home extends React.Component<{
                       alt=""
                       style={{ width: '50%' }}
                     />
-                    <figcaption style={{ fontSize: 20, padding: '20px 0' }}>УЦ "АВТОР"</figcaption>
+                    <figcaption style={{ fontSize: 20, padding: '20px 0' }}>{name}</figcaption>
                   </figure>
                 </Col>
                 <Col span={16}>
@@ -66,12 +84,24 @@ class Home extends React.Component<{
                     <h3 style={{ textAlign: 'center', textTransform: 'uppercase' }}>
                       Контакты
                     </h3>
-                    <ul>
-                      <li><strong>Руководитель:</strong> директор Кожевников Андрей Алексеевич</li>
-                      <li><strong>Адрес:</strong> 454080, г. Челябинск, пр-т Ленина 83, офис 510</li>
-                      <li><strong>Телефон:</strong> 8-(904) 301-93-27</li>
-                      <li><strong>Адрес электронной почты:</strong> avtorka@list.ru</li>
-                    </ul>
+                    <Row>
+                      <Col span={12}>
+                        <ul>
+                          <li><strong>Руководитель:</strong> {representativeFio} - {representativePosition}</li>
+                          <li><strong>Адрес:</strong> {address}</li>
+                          <li><strong>Телефон:</strong> {representativePhone}</li>
+                          <li><strong>Адрес электронной почты:</strong> {email}</li>
+                        </ul>
+                      </Col>
+                      <Col span={12}>
+                        <ul>
+                          <li><strong>БИК:</strong> {bic}</li>
+                          <li><strong>Р/С:</strong> {bankAccount}</li>
+                          <li><strong>КПП:</strong> {kpp}</li>
+                          <li><strong>ИНН:</strong> {inn}</li>
+                        </ul>
+                      </Col>
+                    </Row>
                   </div>
                 </Col>
               </Row>
@@ -84,7 +114,7 @@ class Home extends React.Component<{
                   </h2>
                   <List
                     itemLayout="horizontal"
-                    dataSource={this.state.users}
+                    dataSource={this.props.users}
                     renderItem={item => (
                       <List.Item actions={[<Button type="primary" icon="eye-o" />]}>
                         <List.Item.Meta
@@ -107,7 +137,7 @@ class Home extends React.Component<{
                     <hr style={{ width: '20%', border: 'none', borderBottom: '1px solid #eee' }} />
                   </h2>
                     <Row gutter={16}>
-                      <Col span={8}>
+                      {/* <Col span={8}>
                         <Card className="uc-course-card">
                           <img
                             src={require('./../assets/img/oot.svg')}
@@ -115,7 +145,7 @@ class Home extends React.Component<{
                             className="uc-img-response"
                           />
                         </Card>
-                      </Col>
+                      </Col> */}
                     </Row>
                 </Col>
               </Row>
@@ -129,7 +159,7 @@ class Home extends React.Component<{
                   </h2>
                   <List
                     itemLayout="horizontal"
-                    dataSource={this.state.users}
+                    dataSource={this.props.notifications}
                     renderItem={item => (
                       <List.Item>
                         <List.Item.Meta
@@ -148,4 +178,6 @@ class Home extends React.Component<{
   }
 }
 
-export default Home;
+const mapDispatchToProps = ({ auth }) => ({ auth });
+
+export default connect(mapDispatchToProps)(Home as any);

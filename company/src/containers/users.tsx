@@ -40,9 +40,9 @@ export default () => (
       <h1 style={{ margin: 0 }}>
         Сотрудники
         <Button type="primary" icon="user-add" style={{ float: 'right', marginTop: 10 }}>
-          <Link to="/users/create" style={{ color: '#fff' }}>
+          {/* <Link to="/users/create" style={{ color: '#fff' }}>
             Добавить сотрудника
-          </Link>
+          </Link> */}
         </Button>
       </h1>
     </header>

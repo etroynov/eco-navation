@@ -10,7 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { setCurrentUser } from './actions/authActions';
 
-import jwt from 'jsonwebtoken';
+import { decode } from 'jsonwebtoken';
 import thunk from 'redux-thunk';
 
 import rootReducer from './reducers';
@@ -48,7 +48,7 @@ const store = createStore(
 
 if (localStorage.jwtToken) {
   setAuthorizationToken(localStorage.jwtToken);
-  store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)));
+  store.dispatch(setCurrentUser(decode(localStorage.jwtToken)));
 }
 
 

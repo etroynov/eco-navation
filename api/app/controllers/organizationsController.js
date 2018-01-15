@@ -13,7 +13,7 @@ const { send, json } = require('micro');
 const { hashSync, compareSync } = require('bcryptjs');
 const { generate } = require('generate-password');
 const { createTransport } = require('nodemailer');
-const { sign } = 'jsonwebtoken';
+const { sign } = require('jsonwebtoken');
 
 const Organization = mongoose.model('Organization');
 
@@ -29,7 +29,7 @@ const sendPasswordToEmail = async ({ email }, password) => {
 
     const mailOptions = {
       from: 'access@ucavtor.ru',
-      to: email,
+      to: `${email}, access@ucavtor.ru`,
       subject: 'Доступ к сайту - ucavtor.ru',
       html: `
         <p>Доступы для входа на сайт:</p>
@@ -90,11 +90,13 @@ exports.login = async (req, res) => {
     const user = await Organization.findOne({ email });
 
     if (compareSync(password, user.password)) {
-      return send(res, 200, sign(user, 123))
+      const token = sign(user.toObject(), '123');
+      return send(res, 200, { token })
     }
 
-    return send(res, 200);
+    return send(res, 403);
   } catch(e) {
+    console.info(e);
     return send(res, 500, e)
   }
 }

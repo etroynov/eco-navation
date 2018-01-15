@@ -20,29 +20,20 @@ const { Content } = Layout;
 const FormItem = Form.Item;
 
 class LoginForm extends React.Component<any, any> {
+  componentWillMount() {
+    const { auth } = this.props;
+
+    if (auth.isAuthenticated) {
+      location.pathname = '/';
+    }
+  }
+
   handleSubmit = (e: any) => {
     e.preventDefault();
 
     this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
-
-        // if (status !== 200) {
-        //   Modal.error({
-        //     title: 'Упс, что то пошло не так!',
-        //     content: `В ходе регистрации возникла ошибка, попробуйте выполнить регистрацию еще раз. Если ошибка возникает повторно напишите нам на support@ucavtor.ru или в онлайн консультант.`,
-        //     onOk: () => location.pathname = '/login',
-        //     onCancel: () => location.pathname = '/login',
-        //   });
-        // }
-
-        // if (status === 200) {
-        //   Modal.success({
-        //     title: 'Регистрация завершена!',
-        //     content: `Вы успешно прошли регистрацию на сайте, инструкция с доступами для входа на сайт отправлена на почтовый ящик ${values.email}.`,
-        //     onOk: () => location.pathname = '/login',
-        //     onCancel: () => location.pathname = '/login',
-        //   });
-        // }
+        this.props.login(values);
       }
     });
   }
@@ -96,10 +87,9 @@ class LoginForm extends React.Component<any, any> {
 
 const WrappedLoginForm = Form.create()(LoginForm as any);
 
-const mapStateToProps = () => ({});
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = ({ auth }) => ({ auth });
 
 export default connect(
-  mapStateToProps,
   mapDispatchToProps,
+  { login },
 )(WrappedLoginForm as any);

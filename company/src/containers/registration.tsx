@@ -21,14 +21,12 @@ class CompanyRegistration extends React.Component<any, any> {
 
     this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
-        const { status } = await axios.post('http://app.ucavtor.ru/organizations/store', values);
+        const { status } = await axios.post('http://api.ucavtor.ru/organizations/store', values);
 
         if (status !== 200) {
           Modal.error({
             title: 'Упс, что то пошло не так!',
             content: `В ходе регистрации возникла ошибка, попробуйте выполнить регистрацию еще раз. Если ошибка возникает повторно напишите нам на support@ucavtor.ru или в онлайн консультант.`,
-            onOk: () => location.pathname = '/login',
-            onCancel: () => location.pathname = '/login',
           });
         }
 
