@@ -5,7 +5,6 @@
 import * as React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import Dashboard from '../components/layout';
 import { Link } from 'react-router-dom';
 import { Table, Icon, Divider, Button } from 'antd';
 
@@ -36,6 +35,7 @@ class Pages extends React.Component<any, {
   handleRecordShow = () => {
     console.info('test');
   }
+
   handleRecordDelete = () => {
     console.info('test');
   }
@@ -105,7 +105,7 @@ class Pages extends React.Component<any, {
   }
 }
 
-const mapStateToProps = ({ Pages }) => ({ Pages });
+const mapStateToProps = ({ users }) => ({ users });
 
 export default connect(
   mapStateToProps,

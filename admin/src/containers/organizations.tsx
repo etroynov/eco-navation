@@ -5,7 +5,7 @@
 import * as React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import Dashboard from '../../components/layout';
+import Dashboard from '../components/layout';
 import { Link } from 'react-router-dom';
 import { Table, Icon, Divider, Button } from 'antd';
 

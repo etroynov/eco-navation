@@ -39,7 +39,7 @@ export default ({
         <Row className="article__body">
           <Col span={18} className="article__content" style={{ borderRight: '1px solid #eee' }}>
             <figure className="article__img-container">
-              <img src={banner} className="article__img" />
+              <img src={banner} style={{ maxWidth: 800, width: '100%' }} />
             </figure>
             <p>{description}</p>
           </Col>

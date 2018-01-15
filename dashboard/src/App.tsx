@@ -17,11 +17,11 @@ import Registration from './containers/registration';
 
 const App = () => (
   <Switch>
-    <Route path="/" exact component={Home} />
+    <Route path="/" exact={true} component={Home} />
     <Route path="/courses" component={Courses} />
     <Route path="/tests" component={Test} />
     <Route path="/login" component={Login} />
-    <Route path="/registration" exact component={Registration} />
+    <Route path="/registration" exact={true} component={Registration} />
   </Switch>
 );
 

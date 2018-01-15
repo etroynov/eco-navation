@@ -3,7 +3,7 @@
  */
 
 import * as React from 'react';
-import Dashboard from './../../components/layout';
+import Dashboard from './../components/layout';
 
 /**
  * Expo

@@ -47,7 +47,6 @@ class List extends React.Component<{ name: string; description: string; items: I
     let currentItems = items;
 
     if (!!selectedTags.length) {
-      console.info(items);
       currentItems = items.filter(({ tags }) => selectedTags.includes(tags));
     }
 
