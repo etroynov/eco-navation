@@ -73,6 +73,22 @@ exports.store = async (req, res) => {
   }
 };
 
+exports.employers = (req, res) => {
+  return send(res, 200, { employers: [{
+    key: '1',
+    fio: 'Тройнов Евгений Александрович',
+    position: 'ИТ - Специалист',
+    email: 'troinof@yandex.ru',
+    status: 1
+  }, {
+    key: '2',
+    fio: 'Кожевников Андрей Алексеевич',
+    position: 'Директор',
+    email: 'avtorka@list.ru',
+    status: 0
+  }]});
+}
+
 exports.update = async (req, res) => {
   try {
     const organization = await json(req);

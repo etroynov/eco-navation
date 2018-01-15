@@ -6,7 +6,7 @@ const initialState = {
   user: {},
 };
 
-const authReducer = (state = initialState, action: any = {}) => {
+const auth = (state = initialState, action: IReduxAction = { type: '', payload: {} }) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -19,4 +19,4 @@ const authReducer = (state = initialState, action: any = {}) => {
   }
 };
 
-export default authReducer;
+export default auth;

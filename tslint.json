@@ -12,7 +12,8 @@
     "variable-name": false,
     "no-constant-condition": true,
     "max-line-length": [true, 150],
-    "jsx-no-multiline-js": false
+    "jsx-no-multiline-js": false,
+    "object-shorthand-properties-first": false
   },
   "rulesDirectory": []
 }

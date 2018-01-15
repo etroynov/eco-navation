@@ -1,52 +1,52 @@
+/**
+ * Vendor
+ */
+
 import * as React from 'react';
-import Dashboard from '../components/layout';
+import { connect } from 'react-redux'
+import { lifecycle } from 'recompose';
 import { Button, Table } from 'antd';
 import { Link } from 'react-router-dom';
 
-const dataSource = [{
-  key: '1',
-  fio: 'Тройнов Евгений Александрович',
-  position: 'ИТ - Специалист',
-  email: 'troinof@yandex.ru',
-}, {
-  key: '2',
-  fio: 'Кожевников Андрей Алексеевич',
-  position: 'Директор',
-  email: 'avtorka@list.ru',
-}];
+/**
+ * Actions
+ */
 
-const columns = [{
-  title: 'ФИО',
-  dataIndex: 'fio',
-  key: 'fio',
-}, {
-  title: 'Должность',
-  dataIndex: 'position',
-  key: 'position',
-}, {
-  title: 'Электронная почта',
-  dataIndex: 'email',
-  key: 'email',
-}];
+import { fetchOrganizationEmployers } from './../actions/organizationActions';
 
+/**
+ * Components
+ */
+
+import Dashboard from '../components/layout';
+import UsersList from '../components/users/list';
 
 /*!
  * Expo
  */
 
-export default () => (
+const Users = ({ users = [] }) => (
   <Dashboard title="Сотрудники">
     <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}>
       <h1 style={{ margin: 0 }}>
         Сотрудники
-        <Button type="primary" icon="user-add" style={{ float: 'right', marginTop: 10 }}>
-          {/* <Link to="/users/create" style={{ color: '#fff' }}>
+        {/* <Button type="primary" icon="user-add" style={{ float: 'right', marginTop: 10 }}>
+          <Link to="/users/create" style={{ color: '#fff' }}>
             Добавить сотрудника
-          </Link> */}
-        </Button>
+          </Link>
+        </Button> */}
       </h1>
     </header>
 
-    <Table dataSource={dataSource} columns={columns} />
+    <UsersList />
   </Dashboard>
 );
+
+export default connect(
+  null,
+  { fetchOrganizationEmployers }
+)(lifecycle({
+  componentDidMount() {
+    this.props.fetchOrganizationEmployers();
+  }
+})(Users) as any);

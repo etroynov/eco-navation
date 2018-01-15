@@ -5,6 +5,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
+import organization from './organization';
 import courses from './courses';
 import auth from './auth';
 
@@ -13,7 +14,8 @@ import auth from './auth';
  */
 
 export default combineReducers({
-  auth,
-  courses,
   routing: routerReducer,
+  organization,
+  courses,
+  auth,
 });

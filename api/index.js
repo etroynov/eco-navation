@@ -61,6 +61,7 @@ module.exports = compose(
   
   /** ORGANIZATIONS **/
   get('/organizations', organizationsController.index),
+  get('/organizations/employers', organizationsController.employers),
   post('/organizations/store', organizationsController.store),
   post('/organizations/login', organizationsController.login),
   
