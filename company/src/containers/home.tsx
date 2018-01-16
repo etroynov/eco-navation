@@ -22,20 +22,6 @@ class Home extends React.Component<{
   form: any;
   auth: any;
 }, {}> {
-  state = {
-    visible: false,
-    users: [
-      {
-        fio: 'Тройнов Евгений Александрович',
-        positon: 'ИТ - специалист',
-      },
-      {
-        fio: 'Кожевников Андрей Алексеевич',
-        position: 'Директор',
-      },
-    ],
-  };  
-
   render() {
     const {
       email,
@@ -114,7 +100,7 @@ class Home extends React.Component<{
                   </h2>
                   <List
                     itemLayout="horizontal"
-                    dataSource={this.props.users}
+                    dataSource={[]}
                     renderItem={item => (
                       <List.Item actions={[<Button type="primary" icon="eye-o" />]}>
                         <List.Item.Meta
@@ -159,7 +145,7 @@ class Home extends React.Component<{
                   </h2>
                   <List
                     itemLayout="horizontal"
-                    dataSource={this.props.notifications}
+                    dataSource={[]}
                     renderItem={item => (
                       <List.Item>
                         <List.Item.Meta
@@ -178,6 +164,6 @@ class Home extends React.Component<{
   }
 }
 
-const mapDispatchToProps = ({ auth }) => ({ auth });
+const mapDispatchToProps = ({ auth, notifications, employers }) => ({ auth, notifications, employers });
 
 export default connect(mapDispatchToProps)(Home as any);

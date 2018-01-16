@@ -17,9 +17,9 @@ const Page = mongoose.model('Page');
  */
 
 exports.index = async (req, res) => {
-  const Pages = await Page.find();
+  const pages = await Page.find();
 
-  return send(res, 200, { Pages });
+  return send(res, 200, { pages });
 };
 
 exports.store = async (req, res) => {

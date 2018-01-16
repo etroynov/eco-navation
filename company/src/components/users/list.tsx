@@ -38,10 +38,10 @@ const columns = [{
  * Expo
  */
 
-const UsersList = ({ employers = [] }) => <Table dataSource={employers} columns={columns} />;
+const UsersList = ({ data = [] }) => <Table dataSource={data} columns={columns} />;
 
-const mapStateToProps = ({ organization: { employers } }) => ({ employers });
+const mapStateToProps = ({ employers: { data } }) => ({ data });
 
 export default connect(
   mapStateToProps,
-)(UsersList);
+)(UsersList as any);

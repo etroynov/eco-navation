@@ -7,7 +7,10 @@ import {
   RECEIVE_ORGANIZATIONS,
 } from './../actions/types';
 
-const initialState = [];
+const initialState = {
+  loading: false,
+  data: [],
+};
 
 /**
  * Expo
@@ -15,10 +18,10 @@ const initialState = [];
 
 const organizations = (state = initialState, action: IReduxAction) => {
   const { type, payload } = action;
-  
+
   switch (type) {
-    case RECEIVE_ORGANIZATIONS: return { ...state };
-    case REQUEST_ORGANIZATIONS: return { ...state, payload };
+    case REQUEST_ORGANIZATIONS: return { ...state, ...payload };
+    case RECEIVE_ORGANIZATIONS: return { ...state, loading: false };
     default: return state;
   }
 };

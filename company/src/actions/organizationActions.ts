@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { Modal } from 'antd';
-import { RECEIVE_ORGANIZATION_EMPLOYERS } from './types';
+import { RECEIVE_EMPLOYERS } from './types';
 
 
-export const receiveOrganizationEmployers = ({ employers }) => ({
-  type: RECEIVE_ORGANIZATION_EMPLOYERS,
+export const receiveEmployers = ({ employers }) => ({
+  type: RECEIVE_EMPLOYERS,
   payload: employers,
 });
 
-export const fetchOrganizationEmployers = () => dispatch => axios.get(
+export const fetchEmployers = () => dispatch => axios.get(
   'http://localhost:8081/organizations/employers'
 ).then(
   ({ data }) => {
-    dispatch(receiveOrganizationEmployers(data));
+    dispatch(receiveEmployers(data));
   },
   err => {
     Modal.error({

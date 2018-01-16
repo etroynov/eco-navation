@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Table, Icon, Divider, Button } from 'antd';
 
+import Dashboard from './../components/layout';
+
 /*!
  * Expo
  */

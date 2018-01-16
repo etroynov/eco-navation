@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
  * Actions
  */
 
-import { fetchOrganizationEmployers } from './../actions/organizationActions';
+import { fetchEmployers } from './../actions/organizationActions';
 
 /**
  * Components
@@ -25,7 +25,7 @@ import UsersList from '../components/users/list';
  * Expo
  */
 
-const Users = ({ users = [] }) => (
+const Users = () => (
   <Dashboard title="Сотрудники">
     <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}>
       <h1 style={{ margin: 0 }}>
@@ -44,9 +44,9 @@ const Users = ({ users = [] }) => (
 
 export default connect(
   null,
-  { fetchOrganizationEmployers }
+  { fetchEmployers }
 )(lifecycle({
   componentDidMount() {
-    this.props.fetchOrganizationEmployers();
+    this.props.fetchEmployers();
   }
-})(Users) as any);
+} as any)(Users) as any);

@@ -19,5 +19,14 @@ export default {
     href: '/courses/production-security',
     duration: 72,
     price: 2800
+  }, , {
+    id: 1,
+    name: 'Пожарно технический минимум',
+    img: '/static/img/badge-elixir.svg',
+    banner: '/static/img/prom.jpg',
+    description: 'Законодательная база в области пожарной безопасности.',
+    href: '/courses/production-security',
+    duration: 32,
+    price: 1400 
   }]
 }
