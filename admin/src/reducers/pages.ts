@@ -9,7 +9,12 @@ import {
 
 const initialState = {
   loading: false,
-  data: [],
+  data: [{
+    _id: 1,
+    name: 'Привет мир',
+    createdAt: '16.06.1989',
+    status: 0,
+  }],
 };
 
 /**

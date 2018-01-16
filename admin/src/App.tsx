@@ -5,13 +5,17 @@
 import * as React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Login from './containers/login';
-import Home from './containers/home';
-import Courses from './containers/courses';
-import Pages from './containers/pages';
-import Users from './containers/users';
-import Blog from './containers/blog';
-import Settings from './containers/settings';
+/**
+ * Containers
+ */
+
+import Login         from './containers/login';
+import Home          from './containers/home';
+import Courses       from './containers/courses';
+import Pages         from './containers/pages';
+import Users         from './containers/users';
+import Blog          from './containers/blog';
+import Settings      from './containers/settings';
 import Organizations from './containers/organizations';
 
 /**
@@ -20,14 +24,15 @@ import Organizations from './containers/organizations';
 
 const App = () => (
   <Switch>
-    <Route path="/" exact component={Home} />
-    <Route path="/pages" exact component={Pages} />
-    <Route path="/users" exact component={Users} />
-    <Route path="/courses" exact component={Courses} />
-    <Route path="/organizations" exact component={Organizations} />
-    <Route path="/blog" exact component={Blog} />
-    <Route path="/settings" exact component={Settings} />
-    <Route path="/login" component={Login} />
+    <Route exact path="/"        component={Home} />
+    <Route exact path="/login"   component={Login} />
+    <Route path="/users"         component={Users} />
+    <Route path="/pages"         component={Pages} />
+    <Route path="/courses"       component={Courses} />
+    <Route path="/organizations" component={Organizations} />
+    <Route path="/blog"          component={Blog} />
+    <Route path="/settings"      component={Settings} />
+    <Route component={() => (<p>404</p>)} />
   </Switch>
 );
 

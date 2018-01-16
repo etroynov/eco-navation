@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev-admin": "parcel ./src/index.html --no-cache",
+    "start-dev-admin": "parcel -p 2000 ./src/index.html --no-cache",
     "build": "parcel build ./src/index.html --no-cache --public-url ./"
   },
   "keywords": [],
@@ -29,7 +29,9 @@
     "antd": "^3.1.1",
     "axios": "^0.17.1",
     "react": "^16.2.0",
+    "react-ckeditor-component": "^1.0.7",
     "react-dom": "^16.2.0",
+    "react-helmet": "^5.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",

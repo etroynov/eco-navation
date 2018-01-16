@@ -5,9 +5,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Table, Icon, Divider, Button } from 'antd';
-
-import Dashboard from './../layout';
+import { Table, Button } from 'antd';
 
 /**
  * Columns
@@ -18,10 +16,6 @@ const columns = [{
   dataIndex: 'name',
   key: 'name',
 }, {
-  title: 'Дата',
-  dataIndex: 'createdAt',
-  key: 'createdAt',
-}, {
   title: 'Статус',
   dataIndex: 'status',
   key: 'status',
@@ -31,16 +25,30 @@ const columns = [{
  * Expo
  */
 
-const PagesTable = ({ loading, data }) => (
+const PagesIndex = ({ loading, data }) => (
   <Table columns={[
     ...columns,
     {
+      title: 'Дата',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      render: (text, record) => (
+        <p>1</p>
+      ),
+    }, {
       title: 'Действия',
       key: 'action',
       render: (text, record) => (
-        <div>
-          {/* <Button type="primary" icon="eye" onClick={} /> */}
-          {/* <Button type="primary" icon="delete" onClick={} /> */}
+        <div style={{ textAlign: 'center' }}>
+          <Link to="/pages/show">
+            <Button type="primary" icon="eye" />
+          </Link>
+
+          <Link to={`/pages/edit/${record._id}`}>
+            <Button type="primary" icon="edit" style={{ marginLeft: 10 }} />
+          </Link>
+
+          <Button type="primary" icon="delete" style={{ marginLeft: 10 }} />
         </div>
       ),
     }]
@@ -55,4 +63,4 @@ const mapStateToProps = ({ pages: { loading, data } }) => ({ loading, data });
 
 export default connect(
   mapStateToProps,
-)(PagesTable as any);
+)(PagesIndex as any);

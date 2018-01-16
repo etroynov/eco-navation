@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 
-import { Layout, Menu, Breadcrumb, Icon } from "antd";
+import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 
 declare const require: any;
