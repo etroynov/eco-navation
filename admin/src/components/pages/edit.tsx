@@ -4,12 +4,16 @@
 
 import * as React from 'react';
 import CKEditor from 'react-ckeditor-component';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { connect } from 'react-redux';
+import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
+
+import { createPage } from '../../actions/pagesActions';
 
 /**
  * Components
  */
 
+const Option = Select.Option;
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
@@ -19,14 +23,17 @@ const { TextArea } = Input;
 
 class PageCreateForm extends React.Component<any, any> {
   state = {
-    content: 'content',
-  };
+    content: '',
+    status: 0,
+    page: {},
+  }; 
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        console.info({ ...values, ...this.state });
+        this.props.createPage({ ...values, ...this.state });
       }
     });
   }
@@ -35,23 +42,17 @@ class PageCreateForm extends React.Component<any, any> {
     this.setState({ content });
   }
 
-  onChange = (evt) => {
-    console.log("onChange fired with event info: ", evt);
-    const content = evt.editor.getData();
+  handleChangeContent = (e) => {
+    const content = e.editor.getData();
     
     this.setState({ content });
   }
-
-  onBlur = (evt) => {
-    console.log("onBlur event called with event info: ", evt);
-  }
-
-  afterPaste(evt){
-    console.log("afterPaste event called with event info: ", evt);
-  }
+  
+  handelChangeStatus = status => this.setState({ status });
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { content } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -64,13 +65,11 @@ class PageCreateForm extends React.Component<any, any> {
           <CKEditor 
             config={{
               language: 'ru',
+              allowedContent: true,
             }}
-            activeClass="p10" 
-            content={this.state.content} 
+            content={content} 
             events={{
-              blur: this.onBlur,
-              afterPaste: this.afterPaste,
-              change: this.onChange,
+              change: this.handleChangeContent,
             }}
           />
         </FormItem>
@@ -79,14 +78,16 @@ class PageCreateForm extends React.Component<any, any> {
 
         <h3>СЕО</h3>
         <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
+
         <FormItem>
           {getFieldDecorator('title', {
-            rules: [{ required: true, message: 'Укажите заголовок!' }]
+            rules: [{ required: true, message: 'Укажите заголовок!' }],
           })(<Input placeholder="заголовок страницы ( тег title )" />)}
         </FormItem>
+
         <FormItem>
           {getFieldDecorator('description', {
-            rules: [{ required: true, message: 'Укажите описание!' }]
+            rules: [{ required: true, message: 'Укажите описание!' }],
           })(
             <TextArea
               rows={4}
@@ -95,7 +96,21 @@ class PageCreateForm extends React.Component<any, any> {
           )}
         </FormItem>
 
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
+        <FormItem>
+          {getFieldDecorator('slug', {
+            rules: [{ required: true, message: 'Укажите ЧПУ!' }],
+          })(
+            <Input placeholder="адрес страницы, например: testpage" />,
+          )}
+        </FormItem>
+
+        <FormItem>
+          <Select defaultValue="0" onChange={this.handelChangeStatus}>
+            <Option value="0">Черновик</Option>
+            <Option value="1">Опубликованно</Option>
+          </Select>
+        </FormItem>
+
         <FormItem>
           <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
           <Button type="primary" htmlType="submit" style={{ float: 'right' }}>сохранить</Button>
@@ -107,4 +122,9 @@ class PageCreateForm extends React.Component<any, any> {
 
 const WrappedPageCreateForm = Form.create()(PageCreateForm as any);
 
-export default WrappedPageCreateForm;
+const mapStateToProps = ({ pages }) => ({ pages });
+
+export default connect(
+  mapStateToProps,
+  { createPage },
+)(WrappedPageCreateForm as any);

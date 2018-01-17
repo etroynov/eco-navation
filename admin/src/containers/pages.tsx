@@ -4,8 +4,17 @@
 
 import * as React from 'react';
 import Helmet from 'react-helmet';
+
+import { compose, lifecycle } from 'recompose';
+import { connect } from 'react-redux';
 import { Switch, Route, Link } from 'react-router-dom';
 import { Button } from 'antd';
+
+/**
+ * Actions
+ */
+
+import { fetchPages } from '../actions/pagesActions';
 
 /**
  * Components
@@ -61,4 +70,11 @@ const Pages = ({ location }) => {
   );
 };
 
-export default Pages;
+export default compose(
+  connect(null, { fetchPages }),
+  lifecycle({
+    componentDidMount() {
+      this.props.fetchPages();
+    },
+  }),
+)(Pages as any);

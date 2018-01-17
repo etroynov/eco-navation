@@ -10,9 +10,10 @@
  * Module dependencies
  */
 
-const mongoose = require('mongoose'),
-      bcrypt   = require('bcryptjs'),
-      Schema   = mongoose.Schema;
+const mongoose   = require('mongoose');
+const bcrypt     = require('bcryptjs');
+const timestamps = require('mongoose-timestamp');
+const Schema     = mongoose.Schema;
 
 /**
  * Page schema
@@ -22,41 +23,35 @@ const PageSchema = new Schema({
   title: {
     type: String,
     default: '',
-    unique: true,
   },
   description: {
     type: String,
     default: '',
-    unique: true,
   },
   name: {
     type: String,
     default: '',
-    unique: true,
   },
   content: {
     type: String,
     default: '',
-    unique: true,
   },
   thumb: {
     type: String,
     default: '',
-    unique: true,
   },
   tags: {
     type: String,
     default: '',
-    unique: true,
   },
   rubrics: {
     type: String,
     default: '',
-    unique: true,
   },
   slug: {
     type: String,
-    default: ''
+    default: '',
+    unique: true,
   },
   status: {
     type: Number,
@@ -68,7 +63,7 @@ const PageSchema = new Schema({
  * Page plugin
  */
 
-// PageSchema.plugin(PagePlugin, {});
+PageSchema.plugin(timestamps);
 
 /**
  * Add your

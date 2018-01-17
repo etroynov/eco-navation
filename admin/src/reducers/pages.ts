@@ -5,16 +5,14 @@
 import {
   REQUEST_PAGES,
   RECEIVE_PAGES,
+
+  REQUEST_CREATE_PAGE,
+  RECEIVE_CREATE_PAGE,
 } from './../actions/types';
 
 const initialState = {
   loading: false,
-  data: [{
-    _id: 1,
-    name: 'Привет мир',
-    createdAt: '16.06.1989',
-    status: 0,
-  }],
+  data: [],
 };
 
 /**
@@ -25,8 +23,17 @@ const pages = (state = initialState, action: IReduxAction) => {
   const { type, payload } = action;
 
   switch (type) {
-    case REQUEST_PAGES: return { ...state, ...payload };
-    case RECEIVE_PAGES: return { ...state, loading: false };
+    case REQUEST_PAGES: return { ...state, loading: true };
+    case RECEIVE_PAGES: return { ...state, data: [...payload], loading: false };
+
+    case REQUEST_CREATE_PAGE: return { ...state, loading: true };
+    case RECEIVE_CREATE_PAGE: return {
+      data: [
+        ...state.data,
+        payload.data.page,
+      ],
+      loading: false,
+    };
     default: return state;
   }
 };

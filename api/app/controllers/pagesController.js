@@ -7,7 +7,7 @@
  *
  * Module dependencies
  */
-const { send } = require('micro');
+const { send, json } = require('micro');
 const mongoose = require('mongoose');
 
 const Page = mongoose.model('Page');
@@ -19,7 +19,7 @@ const Page = mongoose.model('Page');
 exports.index = async (req, res) => {
   const pages = await Page.find();
 
-  return send(res, 200, { pages });
+  return send(res, 200, pages);
 };
 
 exports.store = async (req, res) => {
