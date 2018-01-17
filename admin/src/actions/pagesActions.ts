@@ -24,7 +24,7 @@ export const fetchPages = () => (dispatch) => {
   dispatch(requestPages());
 
   return axios.get(
-    'http://localhost:8081/pages',
+    'http://api.ucavtor.ru/pages',
   ).then(
     ({ data }) => dispatch(receivePages(data)),
     err => error(),
@@ -51,7 +51,7 @@ export const createPage = data => (dispatch) => {
   dispatch(requestCreatePage());
 
   return axios.post(
-    'http://localhost:8081/pages/store',
+    'http://api.ucavtor.ru/pages/store',
     data,
   ).then(
     ({ data }) => dispatch(receiveCreatePage(data)),
