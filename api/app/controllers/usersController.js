@@ -8,14 +8,13 @@
  * Module dependencies
  */
 
-const path = require('path');
 const mongoose = require('mongoose');
 
 const { send, json } = require('micro');
-const { hashSync } = require('bcryptjs');
+const { hashSync, compareSync } = require('bcryptjs');
 const { generate } = require('generate-password');
-
-const email = require('nodemailer');
+const { createTransport } = require('nodemailer');
+const { sign } = require('jsonwebtoken');
 
 const Organization = mongoose.model('Organization');
 const User = mongoose.model('User');
@@ -30,19 +29,10 @@ exports.index = async (req, res) => {
     User.find(),
   ]);
 
-  return res.render('dashboard/users/index', { organizations, users });
+  return send(res, 200, { organizations, users });
 };
 
-exports.login = async (req, res) => {
-  const { email, password } = await json(req);
-  const user = await User.find({ email });
-
-  console.log(email, password, user);
-
-  return send(res, 200, 'login')
-};
-
-exports.store = async (req, res) => {
+exports.create = async (req, res) => {
   try {
     const {
       name,
@@ -97,42 +87,31 @@ exports.update = async (req, res) => {
   return res.redirect('/dashboard/users');
 };
 
-exports.destroy = async (req, res) => {
-  const id = req.params.id || '';
+exports.delete = async (req, res) => {
+  try {
+    const { id } = await json(req);
 
-  await User.findByIdAndRemove(id);
+    await Organization.findByIdAndRemove(id);
+    
+    return send(res, 200);
+  } catch(e) {
+    return send(res, 500, e);
+  }
+}
 
-  return res.redirect('/dashboard/users');
-};
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = await json(req);
+    const user = await Organization.findOne({ email });
 
-exports.restore = async (req, res) => {
-  const id = req.body.id || '';
+    if (compareSync(password, user.password)) {
+      const token = sign(user.toObject(), '123');
+      return send(res, 200, { token })
+    }
 
-  const hashPassword = generate({length: 10, numbers: true });
-  const password = hashSync(hashPassword, 8);
-  
-  const transporter = email.createTransport({
-    service: 'Yandex',
-    auth: {
-      user: 'access@makdoors.ru',
-      pass: 'makdoors713',
-    },
-  });
-  
-  const mailOptions = {
-    from: 'access@makdoors.ru',
-    to: 'access@makdoors.ru',
-    subject: 'Доступ к сайту - makdoors.ru',
-    html: '',
-  };
-
-  const user = await User.update({ _id: id }, { password });
-
-  mailOptions.html = '';
-
-  await transporter.sendMail(mailOptions);
-
-  return res.json({
-    code: 200,
-  });
-};
+    return send(res, 403);
+  } catch(e) {
+    console.info(e);
+    return send(res, 500, e)
+  }
+}

@@ -1,32 +1,93 @@
+/*!
+ * Vendor
+ */
+
 import axios from 'axios';
+import { createAction } from 'redux-act';
+
+/*!
+ * Utils
+ */
 
 import { error } from './../utils/modals';
-import {
-  REQUEST_COURSES,
-  RECEIVE_COURSES,
-} from './types';
 
-export const requestCourses = () => ({
-  type: REQUEST_COURSES,
-  payload: { loading: true },
-});
+/*!
+ * Expo
+ */
 
-export const receiveCourses = data => ({
-  type: RECEIVE_COURSES,
-  payload: {
-    data,
-    loading: false,
-  },
-});
+/**
+ * LIST Course
+ */
 
 
-export const fetchPages = () => (dispatch) => {
+export const requestCourses: any = createAction('REQUEST_COURSES');
+export const receiveCourses: any = createAction('RECEIVE_COURSES');
+
+
+export const fetchCourses = () => (dispatch) => {
   dispatch(requestCourses());
 
   return axios.get(
     'http://localhost:8081/courses',
   ).then(
     ({ data }) => dispatch(receiveCourses(data)),
+    err => error(),
+  );
+};
+
+/**
+ * CREATE COURSE
+ */
+
+export const requestCreateCourse: any = createAction('REQUEST_CREATE_COURSE');
+export const receiveCreateCourse: any = createAction('RECEIVE_CREATE_COURSE');
+
+export const createCourse = data => (dispatch) => {
+  dispatch(requestCreateCourse());
+
+  return axios.post(
+    'http://localhost:8081/courses/create',
+    data,
+  ).then(
+    ({ data }) => dispatch(receiveCreateCourse(data)),
+    err => error(),
+  );
+};
+
+/**
+ * UPDATE COURSE
+ */
+
+export const requestUpdateCourse: any = createAction('REQUEST_UPDATE_COURSE');
+export const receiveUpdateCourse: any = createAction('RECEIVE_UPDATE_COURSE');
+
+export const updateCourse = data => (dispatch) => {
+  dispatch(requestUpdateCourse());
+
+  return axios.post(
+    'http://localhost:8081/courses/update',
+    data,
+  ).then(
+    ({ data }) => dispatch(receiveUpdateCourse(data)),
+    err => error(),
+  );
+};
+
+/**
+ * DELETE COURSE
+ */
+
+export const requestDeleteCourse: any = createAction('REQUEST_DELETE_COURSE');
+export const receiveDeleteCourse: any = createAction('RECEIVE_DELETE_COURSE');
+
+export const deleteCourse = data => (dispatch) => {
+  dispatch(requestDeleteCourse());
+
+  return axios.post(
+    'http://localhost:8081/courses/delete',
+    data,
+  ).then(
+    ({ data }) => dispatch(receiveDeleteCourse(data)),
     err => error(),
   );
 };

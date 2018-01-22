@@ -22,34 +22,27 @@ exports.index = async (req, res) => {
   return send(res, 200, pages);
 };
 
-exports.store = async (req, res) => {
+exports.create = async (req, res) => {
   const data = await json(req);
   const page = await Page.create(data);
 
-  return send(res, 200, { page });
+  return send(res, 200, page);
 };
 
 exports.update = async (req, res) => {
-  const id = req.body.id || '';
+  const data = await json(req);
+  const { _id } = data;
 
-  await Page.update({
-    _id: id,
-  }, {
-    name: req.body.name,
-    login: req.body.login,
-    group: req.body.group,
-    lastname: req.body.lastname,
-    telephone: req.body.telephone,
-    Page: req.body.Page,
-  });
+  const page = await Page.findOneAndUpdate({ _id }, data, { new: true });
 
-  return send(res, 200, { page });
+  return send(res, 200, page);
 };
 
-exports.destroy = async (req, res) => {
-  const id = req.params.id || '';
+exports.delete = async (req, res) => {
+  const data = await json(req);
+  const { _id } = data;
 
-  await User.findByIdAndRemove(id);
+  const page = await Page.remove(_id);
 
   return send(res, 200);
 };

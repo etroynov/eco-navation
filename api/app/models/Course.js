@@ -11,7 +11,6 @@
  */
 
 const mongoose = require('mongoose'),
-      bcrypt   = require('bcryptjs'),
       Schema   = mongoose.Schema;
 
 /**
@@ -19,17 +18,32 @@ const mongoose = require('mongoose'),
  */
 
 const CourseSchema = new Schema({
-  name: {
+  title: {
     type: String,
-    unique: true,
+    default: '',
   },
   description: {
+    type: String,
+    default: '',
+  },
+  name: {
+    type: String,
+  },
+  content: {
     type: String,
     default: ''
   },
   thumb: {
     type: String,
     default: ''
+  },
+  price: {
+    type: Number,
+    default: 0,
+  },
+  duration: {
+    type: Number,
+    default: 0,
   },
   rubrics: {
     type: Array
@@ -39,7 +53,13 @@ const CourseSchema = new Schema({
   },
   tests: {
     type: Array
-  }
+  },
+  slug: {
+    type: String,
+    default: '',
+    unique: true,
+    required: true,
+  },
 });
 
 /**
@@ -54,14 +74,6 @@ const CourseSchema = new Schema({
  * - validations
  * - virtuals
  */
-
-/**
- * Methods
- */
-
-CourseSchema.methods.authenticate = (Course, password) => {
-  return bcrypt.compareSync(password, Course.password);
-};
 
 /**
  * Statics

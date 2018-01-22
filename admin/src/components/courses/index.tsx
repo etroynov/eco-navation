@@ -7,13 +7,13 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Table, Button, Switch } from 'antd';
+import { Table, Button } from 'antd';
 
 /*!
  * Actions
  */
 
-import { deletePage } from '../../actions/pagesActions';
+import { deleteCourse } from '../../actions/coursesActions';
 
 /*!
  * Columns
@@ -24,30 +24,41 @@ const columns = [
     title: 'Название',
     dataIndex: 'name',
     key: 'name',
+  }{
+    title: 'Кол - во уроков',
+    dataIndex: 'lessonsCount',
+    key: 'lessonsCount',
   }, {
-    title: 'Дата',
+    title: 'Создан',
     dataIndex: 'createdAt',
     key: 'createdAt',
     render: (text, record) => moment(text).locale('ru').format('L'),
   },  {
-    title: 'Опубликованна',
+    title: 'Статус',
     dataIndex: 'status',
     key: 'status',
-    render: text => <Switch />,
+    render(text) {
+      const status = parseInt(text, 10);
+
+      switch (status) {
+        case 1: return <p>опубликованно</p>;
+        default: return <p>черновик</p>;
+      }
+    },
   }, {
     title: 'Действия',
     key: 'action',
     render: (text, record) => (
       <div>
-        {/* <Link to="/pages/show">
+        {/* <Link to="/courses/show">
           <Button type="primary" icon="eye" />
         </Link> */}
 
-        <Link to={`/pages/edit/${record._id}`}>
+        <Link to={`/courses/edit/${record._id}`}>
           <Button type="primary" icon="edit" style={{ marginLeft: 10 }} />
         </Link>
 
-        <Button type="primary" icon="delete" style={{ marginLeft: 10 }} onClick={() => deletePage(record._id)} />
+        <Button type="primary" icon="delete" style={{ marginLeft: 10 }} onClick={() => deleteCourse(record._id)} />
       </div>
     ),
   },
@@ -57,7 +68,7 @@ const columns = [
  * Expo
  */
 
-const PagesIndex = ({ loading, data }) => (
+const CoursesIndex = ({ loading, data }) => (
   <Table 
     columns={columns}
     rowKey={(record: any) => record._id}
@@ -66,8 +77,8 @@ const PagesIndex = ({ loading, data }) => (
   />
 );
 
-const mapStateToProps = ({ pages: { loading, data } }) => ({ loading, data });
+const mapStateToProps = ({ courses: { loading, data } }) => ({ loading, data });
 
 export default connect(
   mapStateToProps,
-)(PagesIndex as any);
+)(CoursesIndex as any);

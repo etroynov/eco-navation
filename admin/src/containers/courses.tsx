@@ -1,113 +1,80 @@
 /**
- * Dependencies
+ * Vendor
  */
 
 import * as React from 'react';
-import axios from 'axios';
+import Helmet from 'react-helmet';
+
+import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
+import { Switch, Route, Link } from 'react-router-dom';
+import { Button } from 'antd';
+
+/**
+ * Actions
+ */
+
+import { fetchCourses } from '../actions/coursesActions';
+
+/**
+ * Components
+ */
+
 import Dashboard from '../components/layout';
-import { Link } from 'react-router-dom';
-import { Table, Icon, Divider, Button } from 'antd';
+
+import Index from '../components/courses';
+import Create from '../components/courses/create';
+import Edit from '../components/courses/edit';
 
 /*!
  * Expo
  */
 
-class Courses extends React.Component<any, {
-  data: any[];
-  loading: boolean;
-  pagination: any;
-}> {
-  state = {
-    data: [],
-    pagination: {},
-    loading: false,
-  };
+const Courses = ({ location }) => {
+  const { pathname } = location;
 
-  handleTableChange = (pagination, filters, sorter) => {
-    const pager: any = { ...this.state.pagination };
-    pager.current = pagination.current;
+  let title = '';
 
-    this.setState({
-      pagination: pager,
-    });
+  switch (pathname) {
+    case '/courses/create':
+      title = 'Новый курс';
+      break;
+    
+    default:
+      title = 'Курсы';
+      break;
   }
 
-  handleRecordShow = () => { console.info('test'); };
-  handleRecordDelete = () => { console.info('test'); };
+  return (
+    <Dashboard>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
+      <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
+        <h1 style={{ margin: 0 }}>
+          {title}
+          <Button type="primary" style={{ float: 'right', marginTop: 5 }} >
+            <Link to="/courses/create">Добавить курс</Link>
+          </Button>
+        </h1>
+      </header>
 
-  fetch = () => {
-    this.setState({ loading: true });
+      <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
+        <Switch>
+          <Route exact path="/courses" component={Index} />
+          <Route exact path="/courses/create" component={Create} />
+          <Route path="/courses/edit/:id" component={Edit} />
+        </Switch>
+      </section>
+    </Dashboard>
+  );
+};
 
-    axios.get('http://localhost:8081/courses').then(({ data }) => {
-      const pagination: any = { ...this.state.pagination };
-      pagination.total = data.courses.length;
-
-      this.setState({
-        pagination,
-        loading: false,
-        data: data.courses,
-      });
-    });
-  }
-
-  componentDidMount() {
-    this.fetch();
-  }
-
-  render() {
-    const { data, pagination, loading } = this.state;
-
-    return (
-      <Dashboard>
-        <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}>
-          <h1 style={{ margin: 0 }}>
-            Курсы
-            <Button type="primary" style={{ float: 'right', marginTop: 5 }}>
-              <Link to="/courses/create">Добавить курс</Link>
-            </Button>
-          </h1>
-        </header>
-        <Table columns={
-          [{
-            title: 'Название',
-            dataIndex: 'name',
-            key: 'name',
-          }, {
-            title: 'Направление',
-            dataIndex: 'rubrics',
-            key: 'rubrics',
-          }, {
-            title: 'Уроков кол-во',
-            dataIndex: 'lessons',
-            key: 'lessons',
-          }, {
-            title: 'Статус',
-            dataIndex: 'status',
-            key: 'status',
-          }, {
-            title: 'Действия',
-            key: 'action',
-            render: (text, record) => (
-              <div>
-                <Button type="primary" icon="eye" onClick={this.handleRecordShow} />
-                <Button type="primary" icon="delete" onClick={this.handleRecordDelete} />
-              </div>
-            ),
-          }]}
-          rowKey={(record: any) => record._id}
-          dataSource={data}
-          pagination={pagination}
-          loading={loading}
-          onChange={this.handleTableChange}
-        />
-      </Dashboard>
-    );
-  }
-}
-
-const mapStateToProps = ({ courses }) => ({ courses });
-
-export default connect(
-  mapStateToProps,
-)(Courses);
+export default compose(
+  connect(null, { fetchCourses }),
+  lifecycle({
+    componentDidMount() {
+      this.props.fetchCourses();
+    },
+  }),
+)(Courses as any);

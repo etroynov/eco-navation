@@ -13,7 +13,7 @@ import { Table, Button, Switch } from 'antd';
  * Actions
  */
 
-import { deletePage } from '../../actions/pagesActions';
+import { deleteOrganization } from '../../actions/organizationsActions';
 
 /*!
  * Columns
@@ -29,25 +29,24 @@ const columns = [
     dataIndex: 'createdAt',
     key: 'createdAt',
     render: (text, record) => moment(text).locale('ru').format('L'),
+  }, {
+    title: 'Кол-во сотрудников',
+    dataIndex: 'employersCount',
+    key: 'employersCount',
   },  {
-    title: 'Опубликованна',
+    title: 'Подтверждена',
     dataIndex: 'status',
     key: 'status',
-    render: text => <Switch />,
+    render(text) {
+      return <Switch />;
+    },
   }, {
-    title: 'Действия',
     key: 'action',
     render: (text, record) => (
-      <div>
-        {/* <Link to="/pages/show">
-          <Button type="primary" icon="eye" />
-        </Link> */}
-
-        <Link to={`/pages/edit/${record._id}`}>
-          <Button type="primary" icon="edit" style={{ marginLeft: 10 }} />
+      <div style={{ float: 'right' }}>
+        <Link to={`/organizations/show/${record._id}`}>
+          <Button type="primary" icon="eye" style={{ marginLeft: 10 }} />
         </Link>
-
-        <Button type="primary" icon="delete" style={{ marginLeft: 10 }} onClick={() => deletePage(record._id)} />
       </div>
     ),
   },
@@ -57,7 +56,7 @@ const columns = [
  * Expo
  */
 
-const PagesIndex = ({ loading, data }) => (
+const OrganizationsIndex = ({ loading, data }) => (
   <Table 
     columns={columns}
     rowKey={(record: any) => record._id}
@@ -66,8 +65,8 @@ const PagesIndex = ({ loading, data }) => (
   />
 );
 
-const mapStateToProps = ({ pages: { loading, data } }) => ({ loading, data });
+const mapStateToProps = ({ organizations: { loading, data } }) => ({ loading, data });
 
 export default connect(
   mapStateToProps,
-)(PagesIndex as any);
+)(OrganizationsIndex as any);

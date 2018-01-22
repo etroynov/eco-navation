@@ -12,7 +12,7 @@ import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
  */
 
 import { success } from './../../utils/modals';
-import { updatePage } from '../../actions/pagesActions';
+import { updateCourse } from '../../actions/coursesActions';
 
 /*!
  * Components
@@ -26,11 +26,13 @@ const { TextArea } = Input;
  * Expo
  */
 
-class PageEditForm extends React.Component<any, {
+class CourseEditForm extends React.Component<any, {
   title: string;
   description: string;
   name: string;
   content: string;
+  price: number;
+  duration: number;
   status: number;
   slug: string;
 }> {
@@ -44,12 +46,12 @@ class PageEditForm extends React.Component<any, {
   };
 
   private componentDidMount() {
-    const { pages, match: { params } } = this.props;
+    const { courses, match: { params } } = this.props;
 
-    const filteredPage = pages.data.filter(({ _id }) => _id === params.id);
+    const filteredCourse = courses.data.filter(({ _id }) => _id === params.id);
 
     return this.setState({
-      ...filteredPage[0],
+      ...filteredCourse[0],
     });
   }
 
@@ -58,7 +60,7 @@ class PageEditForm extends React.Component<any, {
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.updatePage({ ...this.state, ...values }).then(() => success());
+        this.props.updateCourse({ ...this.state, ...values }).then(() => success());
       }
     });
   }
@@ -82,6 +84,8 @@ class PageEditForm extends React.Component<any, {
       description,
       name,
       content,
+      price,
+      duration,
       slug,
       status,
     } = this.state;
@@ -142,6 +146,28 @@ class PageEditForm extends React.Component<any, {
           )}
         </FormItem>
 
+
+        <h3>Дополнительные параметры</h3>
+        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
+
+        <FormItem>
+          {getFieldDecorator('price', {
+            rules: [{ required: true, message: 'Укажите цену!' }],
+            initialValue: price,
+          })(
+            <Input placeholder="стоимость курса" />,
+          )}
+        </FormItem>
+
+        <FormItem>
+          {getFieldDecorator('duration', {
+            rules: [{ required: true, message: 'Укажите продолжительность курса!' }],
+            initialValue: duration,
+          })(
+            <Input placeholder="продолжительность курса в часах" />,
+          )}
+        </FormItem>
+
         <FormItem>
           <Select defaultValue={String(status)} onChange={this.handelChangeStatus}>
             <Option value="0">Черновик</Option>
@@ -158,11 +184,11 @@ class PageEditForm extends React.Component<any, {
   }
 }
 
-const WrappedPageEditForm = Form.create()(PageEditForm as any);
+const WrappedCourseEditForm = Form.create()(CourseEditForm as any);
 
-const mapStateToProps = ({ pages }) => ({ pages });
+const mapStateToProps = ({ courses }) => ({ courses });
 
 export default connect(
   mapStateToProps,
-  { updatePage },
-)(WrappedPageEditForm as any);
+  { updateCourse },
+)(WrappedCourseEditForm as any);

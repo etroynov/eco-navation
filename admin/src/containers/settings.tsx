@@ -1,115 +1,78 @@
 /**
- * Dependencies
+ * Vendor
  */
 
 import * as React from 'react';
-import axios from 'axios';
+import Helmet from 'react-helmet';
+
+import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
+import { Switch, Route, Link } from 'react-router-dom';
+import { Button } from 'antd';
+
+/**
+ * Actions
+ */
+
+import { fetchSettings } from '../actions/settingsActions';
+
+/**
+ * Components
+ */
+
 import Dashboard from '../components/layout';
-import { Link } from 'react-router-dom';
-import { Table, Icon, Divider, Button } from 'antd';
+
+import Index from '../components/settings';
+import Edit from '../components/settings/edit';
 
 /*!
  * Expo
  */
 
-class Settings extends React.Component<any, {
-  data: any[];
-  loading: boolean;
-  pagination: any;
-}> {
-  state = {
-    data: [],
-    pagination: {},
-    loading: false,
-  };
+const Settings = ({ location }) => {
+  const { pathname } = location;
 
-  handleTableChange = (pagination, filters, sorter) => {
-    const pager: any = { ...this.state.pagination };
-    pager.current = pagination.current;
+  let title = '';
 
-    this.setState({
-      pagination: pager,
-    });
+  switch (pathname) {
+    case '/settings/create':
+      title = 'Новый параметр';
+      break;
+    
+    default:
+      title = 'Настройки';
+      break;
   }
 
-  handleRecordShow = () => {
-    console.info('test');
-  }
-  handleRecordDelete = () => {
-    console.info('test');
-  }
+  return (
+    <Dashboard>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
+      <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
+        <h1 style={{ margin: 0 }}>
+          {title}
+          <Button type="primary" style={{ float: 'right', marginTop: 5 }} >
+            <Link to="/settings/create">Добавить страницу</Link>
+          </Button>
+        </h1>
+      </header>
 
-  fetch = () => {
-    this.setState({ loading: true });
+      <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
+        <Switch>
+          <Route exact path="/settings" component={Index} />
+          <Route path="/settings/edit/:id" component={Edit} />
+        </Switch>
+      </section>
+    </Dashboard>
+  );
+};
 
-    axios.get('http://localhost:8081/organizations').then(({ data }) => {
-      const pagination: any = { ...this.state.pagination };
-      pagination.total = data.organizations.length;
-
-      this.setState({
-        pagination,
-        loading: false,
-        data: data.organizations,
-      });
-    });
-  }
-
-  componentDidMount() {
-    this.fetch();
-  }
-
-  render() {
-    const { organizations } = this.props;
-    const { data, pagination, loading } = this.state;
-
-    return (
-      <Dashboard>
-        <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}>
-          <h1 style={{ margin: 0 }}>
-            Настройки
-          </h1>
-        </header>
-        <Table columns={
-          [{
-            title: 'Название',
-            dataIndex: 'name',
-            key: 'name',
-          }, {
-            title: 'Руководитель',
-            dataIndex: 'directorFio',
-            key: 'directorFio',
-          }, {
-            title: 'Телефон',
-            dataIndex: 'directorPhone',
-            key: 'directorPhone',
-          }, {
-            title: 'Адрес',
-            dataIndex: 'address',
-            key: 'address',
-          }, {
-            title: 'Действия',
-            key: 'action',
-            render: (text, record) => (
-              <div>
-                <Button type="primary" icon="eye" onClick={this.handleRecordShow} />
-                <Button type="primary" icon="delete" onClick={this.handleRecordDelete} />
-              </div>
-            ),
-          }]}
-          rowKey={(record: any) => record._id}
-          dataSource={data}
-          pagination={pagination}
-          loading={loading}
-          onChange={this.handleTableChange}
-        />
-      </Dashboard>
-    );
-  }
-}
-
-const mapStateToProps = ({ posts }) => ({ posts });
-
-export default connect(
-  mapStateToProps,
-)(Settings);
+export default compose(
+  connect(null, { fetchSettings }),
+  lifecycle({
+    componentDidMount() {
+      this.props.fetchSettings();
+    },
+  }),
+)(Settings as any);

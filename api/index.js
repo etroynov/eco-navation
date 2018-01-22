@@ -14,7 +14,7 @@ const cors = require('micro-cors')();
  * DataBase
  */
 
-mongoose.connect('mongodb://localhost/ucavtor', { useMongoClient: true });
+mongoose.connect('mongodb://localhost/ucavtor');
 mongoose.Promise = global.Promise;
 
 /**
@@ -31,10 +31,12 @@ fs.readdirSync(path.join(__dirname, '/app/models')).forEach((file) => {
  * Routes
  */
 
-const usersController = require('./app/controllers/usersController');
 const pagesController = require('./app/controllers/pagesController');
 const coursesController = require('./app/controllers/coursesController');
+const usersController = require('./app/controllers/usersController');
 const organizationsController = require('./app/controllers/organizationsController');
+const postsController = require('./app/controllers/postsController');
+const settingsController = require('./app/controllers/settingsController');
 
 const notfound = (req, res) =>
   send(res, 404, 'You shall not passs :)')
@@ -46,24 +48,42 @@ const notfound = (req, res) =>
 module.exports = compose(
   cors
 )(router(
-  /** USERS **/
-  post('/users/store', usersController.store),
-  post('/users/login', usersController.login),
-  
   /** PAGES **/
-  get('/pages', pagesController.index),
-  post('/pages/store', pagesController.store),
+  get('/pages',         pagesController.index),
+  post('/pages/create',  pagesController.create),
+  post('/pages/update', pagesController.update),
+  post('/pages/delete', pagesController.delete),
 
   /** COURSES **/
-  get('/courses', coursesController.index),
-  post('/courses/store', coursesController.store),
+  get('/courses',         coursesController.index),
+  post('/courses/create',  coursesController.create),
+  post('/courses/update', coursesController.update),
+  post('/courses/delete', coursesController.delete),
   
+  /** USERS **/
+  get('/users',         usersController.index),
+  post('/users/create',  usersController.create),
+  post('/users/update', usersController.update),
+  post('/users/delete', usersController.delete),
+  post('/users/login',  usersController.login),
   
   /** ORGANIZATIONS **/
-  get('/organizations', organizationsController.index),
+  get('/organizations',           organizationsController.index),
   get('/organizations/employers', organizationsController.employers),
-  post('/organizations/store', organizationsController.store),
-  post('/organizations/login', organizationsController.login),
+  post('/organizations/create',    organizationsController.create),
+  post('/organizations/login',    organizationsController.login),
+
+  /** POSTS **/
+  get('/posts',         postsController.index),
+  post('/posts/create',  postsController.create),
+  post('/posts/update', postsController.update),
+  post('/posts/delete', postsController.delete),
+
+  /** COURSES **/
+  get('/settings',         settingsController.index),
+  post('/settings/create',  settingsController.create),
+  post('/settings/update', settingsController.update),
+  post('/settings/delete', settingsController.delete),
   
   /** 404 **/
   get('/*', notfound)

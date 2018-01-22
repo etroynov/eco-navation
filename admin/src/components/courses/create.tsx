@@ -1,4 +1,4 @@
-/*!
+/**
  * Vendor
  */
 
@@ -7,14 +7,9 @@ import CKEditor from 'react-ckeditor-component';
 import { connect } from 'react-redux';
 import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
 
-/*!
- * Actions
- */
+import { createCourse } from '../../actions/coursesActions';
 
-import { success } from './../../utils/modals';
-import { updatePage } from '../../actions/pagesActions';
-
-/*!
+/**
  * Components
  */
 
@@ -22,94 +17,63 @@ const Option = Select.Option;
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
-/*!
+/**
  * Expo
  */
 
-class PageEditForm extends React.Component<any, {
-  title: string;
-  description: string;
-  name: string;
-  content: string;
-  status: number;
-  slug: string;
-}> {
+class CourseCreateForm extends React.Component<any, any> {
   state = {
-    title: '',
-    description: '',
-    name: '',
     content: '',
     status: 0,
-    slug: '',
   };
 
-  private componentDidMount() {
-    const { pages, match: { params } } = this.props;
-
-    const filteredPage = pages.data.filter(({ _id }) => _id === params.id);
-
-    return this.setState({
-      ...filteredPage[0],
-    });
-  }
-
-  private handleSubmit = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
-
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.updatePage({ ...this.state, ...values }).then(() => success());
+        console.info({ ...values, ...this.state });
+        this.props.createCourse({ ...values, ...this.state });
       }
     });
   }
 
-  private updateContent = (content) => {
+  updateContent = (content) => {
     this.setState({ content });
   }
 
-  private handleChangeContent = (e) => {
+  handleChangeContent = (e) => {
     const content = e.editor.getData();
-
+    
     this.setState({ content });
   }
+  
+  handelChangeStatus = status => this.setState({ status });
 
-  private handelChangeStatus = status => this.setState({ status });
-
-  public render() {
+  render() {
     const { getFieldDecorator } = this.props.form;
-    const {
-      title,
-      description,
-      name,
-      content,
-      slug,
-      status,
-    } = this.state;
+    const { content } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem>
           {getFieldDecorator('name', {
-            rules: [
-              { required: true, message: 'Укажите название!' }
-            ],
-            initialValue: name,
-          })(<Input placeholder="название страницы" />)}
+            rules: [{ required: true, message: 'Укажите название!' }],
+          })(<Input placeholder="название курса" />)}
         </FormItem>
         <FormItem>
-          <CKEditor
+          <CKEditor 
             config={{
               language: 'ru',
               allowedContent: true,
             }}
-            content={content}
+            content={content} 
             events={{
               change: this.handleChangeContent,
             }}
           />
         </FormItem>
 
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
+        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} /> 
 
         <h3>СЕО</h3>
         <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
@@ -117,14 +81,12 @@ class PageEditForm extends React.Component<any, {
         <FormItem>
           {getFieldDecorator('title', {
             rules: [{ required: true, message: 'Укажите заголовок!' }],
-            initialValue: title,
           })(<Input placeholder="заголовок страницы ( тег title )" />)}
         </FormItem>
 
         <FormItem>
           {getFieldDecorator('description', {
             rules: [{ required: true, message: 'Укажите описание!' }],
-            initialValue: description,
           })(
             <TextArea
               rows={4}
@@ -136,14 +98,32 @@ class PageEditForm extends React.Component<any, {
         <FormItem>
           {getFieldDecorator('slug', {
             rules: [{ required: true, message: 'Укажите ЧПУ!' }],
-            initialValue: slug,
           })(
             <Input placeholder="адрес страницы, например: testpage" />,
           )}
         </FormItem>
 
+        <h3>Дополнительные параметры</h3>
+        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
+
         <FormItem>
-          <Select defaultValue={String(status)} onChange={this.handelChangeStatus}>
+          {getFieldDecorator('price', {
+            rules: [{ required: true, message: 'Укажите цену!' }]
+          })(
+            <Input placeholder="стоимость курса" />,
+          )}
+        </FormItem>
+
+        <FormItem>
+          {getFieldDecorator('duration', {
+            rules: [{ required: true, message: 'Укажите продолжительность курса!' }]
+          })(
+            <Input placeholder="продолжительность курса в часах" />,
+          )}
+        </FormItem>
+
+        <FormItem>
+          <Select defaultValue="0" onChange={this.handelChangeStatus}>
             <Option value="0">Черновик</Option>
             <Option value="1">Опубликованно</Option>
           </Select>
@@ -158,11 +138,9 @@ class PageEditForm extends React.Component<any, {
   }
 }
 
-const WrappedPageEditForm = Form.create()(PageEditForm as any);
-
-const mapStateToProps = ({ pages }) => ({ pages });
+const WrappedCourseCreateForm = Form.create()(CourseCreateForm as any);
 
 export default connect(
-  mapStateToProps,
-  { updatePage },
-)(WrappedPageEditForm as any);
+  null,
+  { createCourse },
+)(WrappedCourseCreateForm as any);

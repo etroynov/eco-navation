@@ -11,7 +11,7 @@ export default () => (
           <h4 className="slider__title">Учебный центр "Автор"</h4>
         </header>
         <section className="slider__body">
-          <p className="slider__text">Дополнительное профессиональное образование.</p>
+          <p className="slider__text">Дополнительное профессиональное образование</p>
         </section>
         <section className="slider__control">
           <Link href="/registration">

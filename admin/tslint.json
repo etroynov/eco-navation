@@ -5,6 +5,7 @@
     ],
     "jsRules": {},
     "rules": {
+      "align": false,
       "import-name": false,
       "variable-name": false,
       "max-line-length": [true, 150]

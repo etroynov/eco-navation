@@ -1,114 +1,80 @@
 /**
- * Dependencies
+ * Vendor
  */
 
 import * as React from 'react';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Table, Icon, Divider, Button } from 'antd';
+import Helmet from 'react-helmet';
 
-import Dashboard from './../components/layout';
+import { compose, lifecycle } from 'recompose';
+import { connect } from 'react-redux';
+import { Switch, Route, Link } from 'react-router-dom';
+import { Button } from 'antd';
+
+/**
+ * Actions
+ */
+
+import { fetchUsers } from '../actions/usersActions';
+
+/**
+ * Components
+ */
+
+import Dashboard from '../components/layout';
+
+import Index from '../components/users';
+import Create from '../components/users/create';
+import Edit from '../components/users/edit';
 
 /*!
  * Expo
  */
 
-class Pages extends React.Component<any, {
-  data: any[];
-  loading: boolean;
-  pagination: any
-}> {
-  state = {
-    data: [],
-    pagination: {},
-    loading: false,
-  };
+const Users = ({ location }) => {
+  const { pathname } = location;
 
-  handleTableChange = (pagination, filters, sorter) => {
-    const pager: any = { ...this.state.pagination };
-    pager.current = pagination.current;
+  let title = '';
 
-    this.setState({
-      pagination: pager,
-    });
+  switch (pathname) {
+    case '/users/create':
+      title = 'Новый пользователь';
+      break;
+    
+    default:
+      title = 'Пользователи';
+      break;
   }
 
-  handleRecordShow = () => {
-    console.info('test');
-  }
+  return (
+    <Dashboard>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
+      <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
+        <h1 style={{ margin: 0 }}>
+          {title}
+          <Button type="primary" style={{ float: 'right', marginTop: 5 }} >
+            <Link to="/users/create">Добавить страницу</Link>
+          </Button>
+        </h1>
+      </header>
 
-  handleRecordDelete = () => {
-    console.info('test');
-  }
+      <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
+        <Switch>
+          <Route exact path="/users" component={Index} />
+          <Route exact path="/users/create" component={Create} />
+          <Route path="/users/edit/:id" component={Edit} />
+        </Switch>
+      </section>
+    </Dashboard>
+  );
+};
 
-  fetch = () => {
-    this.setState({ loading: true });
-
-    axios.get('http://localhost:8081/pages').then(({ data }) => {
-      const pagination: any = { ...this.state.pagination };
-      pagination.total = data.Pages.length;
-
-      this.setState({
-        pagination,
-        loading: false,
-        data: data.Pages,
-      });
-    });
-  }
-
-  componentDidMount() {
-    this.fetch();
-  }
-
-  render() {
-    const { Pages } = this.props;
-    const { data, pagination, loading } = this.state;
-
-    return (
-      <Dashboard>
-        <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}>
-          <h1 style={{ margin: 0 }}>
-            Страницы
-            <Button type="primary" style={{ float: 'right', marginTop: 5 }} >Добавить страницу</Button>
-          </h1>
-        </header>
-        <Table columns={
-          [{
-            title: 'Название',
-            dataIndex: 'name',
-            key: 'name',
-          }, {
-            title: 'Дата',
-            dataIndex: 'createdAt',
-            key: 'createdAt',
-          }, {
-            title: 'Статус',
-            dataIndex: 'status',
-            key: 'status',
-          }, {
-            title: 'Действия',
-            key: 'action',
-            render: (text, record) => (
-              <div>
-                <Button type="primary" icon="eye" onClick={this.handleRecordShow} />
-                <Button type="primary" icon="delete" onClick={this.handleRecordDelete} />
-              </div>
-            ),
-          }]}
-          rowKey={(record: any) => record._id}
-          dataSource={data}
-          pagination={pagination}
-          loading={loading}
-          onChange={this.handleTableChange}
-        />
-      </Dashboard>
-    );
-  }
-}
-
-const mapStateToProps = ({ users }) => ({ users });
-
-export default connect(
-  mapStateToProps,
-)(Pages);
+export default compose(
+  connect(null, { fetchUsers }),
+  lifecycle({
+    componentDidMount() {
+      this.props.fetchUsers();
+    },
+  }),
+)(Users as any);

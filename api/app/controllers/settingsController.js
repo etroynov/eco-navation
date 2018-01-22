@@ -10,39 +10,39 @@
 const { send, json } = require('micro');
 const mongoose = require('mongoose');
 
-const Course = mongoose.model('Course');
+const Settings = mongoose.model('Settings');
 
 /*!
  * Expos
  */
 
 exports.index = async (req, res) => {
-  const courses = await Course.find();
+  const settings = await Settings.find();
 
-  return send(res, 200, courses);
+  return send(res, 200, settings);
 };
 
 exports.create = async (req, res) => {
   const data = await json(req);
-  const course = await Course.create(data);
+  const settings = await Settings.create(data);
 
-  return send(res, 200, course);
+  return send(res, 200, settings);
 };
 
 exports.update = async (req, res) => {
   const data = await json(req);
   const { _id } = data;
 
-  const course = await Course.findOneAndUpdate({ _id }, data, { new: true });
+  const settings = await Settings.findOneAndUpdate({ _id }, data, { new: true });
 
-  return send(res, 200, course);
+  return send(res, 200, settings);
 };
 
 exports.delete = async (req, res) => {
   const data = await json(req);
   const { _id } = data;
 
-  const course = await Course.remove(_id);
+  const settings = await Settings.remove(_id);
 
   return send(res, 200);
 };

@@ -54,10 +54,10 @@ const sendPasswordToEmail = async ({ email }, password) => {
 exports.index = async (req, res) => {
   const organizations = await Organization.find();
 
-  return send(res, 200, { organizations });
+  return send(res, 200, organizations);
 };
 
-exports.store = async (req, res) => {
+exports.create = async (req, res) => {
   try {
     const organization = await json(req);
     const hashPassword = generate({length: 10, numbers: true });

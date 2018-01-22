@@ -7,7 +7,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Table, Button, Switch } from 'antd';
+import { Table, Button } from 'antd';
 
 /*!
  * Actions
@@ -30,10 +30,17 @@ const columns = [
     key: 'createdAt',
     render: (text, record) => moment(text).locale('ru').format('L'),
   },  {
-    title: 'Опубликованна',
+    title: 'Статус',
     dataIndex: 'status',
     key: 'status',
-    render: text => <Switch />,
+    render(text) {
+      const status = parseInt(text, 10);
+
+      switch (status) {
+        case 1: return <p>опубликованно</p>;
+        default: return <p>черновик</p>;
+      }
+    },
   }, {
     title: 'Действия',
     key: 'action',

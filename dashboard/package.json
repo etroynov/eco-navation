@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev-dashboard": "parcel ./src/index.html --no-cache",
+    "start-dev-dashboard": "parcel ./src/index.html --no-cache -p 2001",
     "build": "parcel build ./src/index.html --no-cache --public-url ./"
   },
   "keywords": [],

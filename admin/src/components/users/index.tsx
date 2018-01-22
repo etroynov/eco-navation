@@ -25,12 +25,16 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
   }, {
-    title: 'Дата',
+    title: 'Компания',
+    dataIndex: 'company',
+    key: 'company',
+  }, {
+    title: 'Зарегистрирован',
     dataIndex: 'createdAt',
     key: 'createdAt',
     render: (text, record) => moment(text).locale('ru').format('L'),
-  },  {
-    title: 'Опубликованна',
+  }, {
+    title: 'Оплачен',
     dataIndex: 'status',
     key: 'status',
     render: text => <Switch />,
