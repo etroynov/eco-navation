@@ -34,6 +34,7 @@ import {
 
 const sectionsReducer = createReducer(
   {
+    // List section
     [requestSections]: (state: IReducerState) => ({ ...state, loading: true }),
     [receiveSections]: (state: IReducerState, payload) => ({
       ...state,
@@ -41,6 +42,7 @@ const sectionsReducer = createReducer(
       loading: false,
     }),
 
+     // Create section
     [requestCreateSection]: (state: IReducerState) => ({
       ...state,
       loading: true,
@@ -50,14 +52,25 @@ const sectionsReducer = createReducer(
       loading: false,
     }),
 
+     // Update section
     [requestUpdateSection]: (state: IReducerState) => ({
       ...state,
       loading: true,
     }),
-    [receiveUpdateSection]: (state: IReducerState, payload) => ({
-      data: [...state.data, payload],
-      loading: true,
-    }),
+    [receiveUpdateSection]: (state: IReducerState, payload) => {
+      const data = state.data.map((item) => {
+        if (item._id === payload._id) {
+          return { ...item, ...payload };
+        }
+
+        return item;
+      });
+
+      return {
+        data,
+        loading: false,
+      };
+    },
   },
   initialState,
 );
