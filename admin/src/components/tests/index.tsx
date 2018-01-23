@@ -24,11 +24,6 @@ const columns = [
     title: 'Название',
     dataIndex: 'name',
     key: 'name',
-  }{
-    title: 'Кол - во уроков',
-    dataIndex: 'lessons',
-    key: 'lessons',
-    render: (lessons, record) => lessons.length,
   }, {
     title: 'Создан',
     dataIndex: 'createdAt',
