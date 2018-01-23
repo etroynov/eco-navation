@@ -29,7 +29,7 @@ export const fetchSettings = () => (dispatch) => {
   dispatch(requestSettings());
 
   return axios.get(
-    'http://localhost:8081/settings',
+    'http://api.ucavtor.ru/settings',
   ).then(
     ({ data }) => dispatch(receiveSettings(data)),
     err => error(),
@@ -47,7 +47,7 @@ export const createSettings = data => (dispatch) => {
   dispatch(requestCreateSettings());
 
   return axios.post(
-    'http://localhost:8081/settings/create',
+    'http://api.ucavtor.ru/settings/create',
     data,
   ).then(
     ({ data }) => dispatch(receiveCreateSettings(data)),
@@ -66,7 +66,7 @@ export const updateSettings = data => (dispatch) => {
   dispatch(requestUpdateSettings());
 
   return axios.post(
-    'http://localhost:8081/settings/update',
+    'http://api.ucavtor.ru/settings/update',
     data,
   ).then(
     ({ data }) => dispatch(receiveUpdateSettings(data)),
@@ -85,7 +85,7 @@ export const deleteSettings = data => (dispatch) => {
   dispatch(requestDeleteSettings());
 
   return axios.post(
-    'http://localhost:8081/settings/delete',
+    'http://api.ucavtor.ru/settings/delete',
     data,
   ).then(
     ({ data }) => dispatch(receiveDeleteSettings(data)),

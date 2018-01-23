@@ -29,7 +29,7 @@ export const fetchUsers = () => (dispatch) => {
   dispatch(requestUsers());
 
   return axios.get(
-    'http://localhost:8081/users',
+    'http://api.ucavtor.ru/users',
   ).then(
     ({ data }) => dispatch(receiveUsers(data)),
     err => error(),
@@ -47,7 +47,7 @@ export const createUser = data => (dispatch) => {
   dispatch(requestCreateUser());
 
   return axios.post(
-    'http://localhost:8081/users/create',
+    'http://api.ucavtor.ru/users/create',
     data,
   ).then(
     ({ data }) => dispatch(receiveCreateUser(data)),
@@ -66,7 +66,7 @@ export const updateUser = data => (dispatch) => {
   dispatch(requestUpdateUser());
 
   return axios.post(
-    'http://localhost:8081/users/update',
+    'http://api.ucavtor.ru/users/update',
     data,
   ).then(
     ({ data }) => dispatch(receiveUpdateUser(data)),
@@ -85,7 +85,7 @@ export const deleteUser = data => (dispatch) => {
   dispatch(requestDeleteUser());
 
   return axios.post(
-    'http://localhost:8081/users/delete',
+    'http://api.ucavtor.ru/users/delete',
     data,
   ).then(
     ({ data }) => dispatch(receiveDeleteUser(data)),

@@ -28,7 +28,7 @@ export const fetchSections = () => (dispatch) => {
   dispatch(requestSections());
 
   return axios.get(
-    'http://localhost:8081/sections',
+    'http://api.ucavtor.ru/sections',
   ).then(
     ({ data }) => dispatch(receiveSections(data)),
     err => error(),
@@ -46,7 +46,7 @@ export const createSection = data => (dispatch) => {
   dispatch(requestCreateSection());
 
   return axios.post(
-    'http://localhost:8081/sections/create',
+    'http://api.ucavtor.ru/sections/create',
     data,
   ).then(
     ({ data }) => dispatch(receiveCreateSection(data)),
@@ -65,7 +65,7 @@ export const updateSection = data => (dispatch) => {
   dispatch(requestUpdateSection());
 
   return axios.post(
-    'http://localhost:8081/sections/update',
+    'http://api.ucavtor.ru/sections/update',
     data,
   ).then(
     ({ data }) => dispatch(receiveUpdateSection(data)),
@@ -84,7 +84,7 @@ export const deleteSection = data => (dispatch) => {
   dispatch(requestDeleteSection());
 
   return axios.post(
-    'http://localhost:8081/sections/delete',
+    'http://api.ucavtor.ru/sections/delete',
     data,
   ).then(
     ({ data }) => dispatch(receiveDeleteSection(data)),
