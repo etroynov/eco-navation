@@ -117,7 +117,7 @@ class CourseCreateForm extends React.Component<any, any> {
                 placeholder="раздел"
                 onChange={this.handleSelectSection}
               >
-                {sections.data.map(({ _id, name }) => <Option value={_id}>{name}</Option>)}
+                {sections.data.map(({ _id, name }) => <Option key={_id} value={_id}>{name}</Option>)}
               </Select>
             </FormItem>
             <FormItem>
