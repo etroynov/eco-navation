@@ -25,16 +25,11 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
   }, {
-    title: 'Кол - во уроков',
-    dataIndex: 'lessons',
-    key: 'lessons',
-    render: (lessons, record) => lessons.length,
-  }, {
     title: 'Создан',
     dataIndex: 'createdAt',
     key: 'createdAt',
     render: (text, record) => moment(text).locale('ru').format('L'),
-  },  {
+  }, {
     title: 'Статус',
     dataIndex: 'status',
     key: 'status',

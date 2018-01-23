@@ -24,7 +24,7 @@ const columns = [
     title: 'Название',
     dataIndex: 'name',
     key: 'name',
-  }, {
+  }{
     title: 'Кол - во уроков',
     dataIndex: 'lessons',
     key: 'lessons',
