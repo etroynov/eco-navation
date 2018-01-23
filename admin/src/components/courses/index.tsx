@@ -26,8 +26,9 @@ const columns = [
     key: 'name',
   }{
     title: 'Кол - во уроков',
-    dataIndex: 'lessonsCount',
-    key: 'lessonsCount',
+    dataIndex: 'lessons',
+    key: 'lessons',
+    render: (lessons, record) => lessons.length,
   }, {
     title: 'Создан',
     dataIndex: 'createdAt',
@@ -50,10 +51,6 @@ const columns = [
     key: 'action',
     render: (text, record) => (
       <div>
-        {/* <Link to="/courses/show">
-          <Button type="primary" icon="eye" />
-        </Link> */}
-
         <Link to={`/courses/edit/${record._id}`}>
           <Button type="primary" icon="edit" style={{ marginLeft: 10 }} />
         </Link>

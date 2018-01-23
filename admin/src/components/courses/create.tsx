@@ -5,7 +5,7 @@
 import * as React from 'react';
 import CKEditor from 'react-ckeditor-component';
 import { connect } from 'react-redux';
-import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Select, Tabs } from 'antd';
 
 /*!
  * Actions
@@ -19,6 +19,7 @@ import { success } from './../../utils/modals';
  */
 
 const Option = Select.Option;
+const TabPane = Tabs.TabPane;
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
@@ -59,72 +60,77 @@ class CourseCreateForm extends React.Component<any, any> {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormItem>
-          {getFieldDecorator('name', {
-            rules: [{ required: true, message: 'Укажите название!' }],
-          })(<Input placeholder="название курса" />)}
-        </FormItem>
-        <FormItem>
-          <CKEditor 
-            config={{
-              language: 'ru',
-              allowedContent: true,
-            }}
-            content={content} 
-            events={{
-              change: this.handleChangeContent,
-            }}
-          />
-        </FormItem>
+        <Tabs defaultActiveKey="1">
+          <TabPane tab="Общее" key="1">
+            <FormItem>
+              {getFieldDecorator('name', {
+                rules: [{ required: true, message: 'Укажите название!' }],
+              })(<Input placeholder="название курса" />)}
+            </FormItem>
+            <FormItem>
+              <CKEditor 
+                config={{
+                  language: 'ru',
+                  allowedContent: true,
+                }}
+                content={content} 
+                events={{
+                  change: this.handleChangeContent,
+                }}
+              />
+            </FormItem>
+          </TabPane>
+          <TabPane tab="Сео" key="2">
+            <FormItem>
+              {getFieldDecorator('title', {
+                rules: [{ required: true, message: 'Укажите заголовок!' }],
+              })(<Input placeholder="заголовок страницы ( тег title )" />)}
+            </FormItem>
 
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} /> 
+            <FormItem>
+              {getFieldDecorator('description', {
+                rules: [{ required: true, message: 'Укажите описание!' }],
+              })(
+                <TextArea
+                  rows={4}
+                  placeholder="краткое описание ( тег meta='description' )"
+                />,
+              )}
+            </FormItem>
 
-        <h3>СЕО</h3>
+            <FormItem>
+              {getFieldDecorator('slug', {
+                rules: [{ required: true, message: 'Укажите ЧПУ!' }],
+              })(
+                <Input placeholder="адрес страницы, например: testpage" />,
+              )}
+            </FormItem>
+          </TabPane>
+          <TabPane tab="Данные" key="3">
+              <FormItem>
+              {getFieldDecorator('price', {
+                rules: [{ required: true, message: 'Укажите цену!' }]
+              })(
+                <Input placeholder="стоимость курса" />,
+              )}
+            </FormItem>
+
+            <FormItem>
+              {getFieldDecorator('duration', {
+                rules: [{ required: true, message: 'Укажите продолжительность курса!' }]
+              })(
+                <Input placeholder="продолжительность курса в часах" />,
+              )}
+            </FormItem>
+          </TabPane>
+          <TabPane tab="Уроки" key="4">
+          </TabPane>
+          
+          <TabPane tab="Тесты" key="5">
+          </TabPane>
+        </Tabs>
+
         <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
-
-        <FormItem>
-          {getFieldDecorator('title', {
-            rules: [{ required: true, message: 'Укажите заголовок!' }],
-          })(<Input placeholder="заголовок страницы ( тег title )" />)}
-        </FormItem>
-
-        <FormItem>
-          {getFieldDecorator('description', {
-            rules: [{ required: true, message: 'Укажите описание!' }],
-          })(
-            <TextArea
-              rows={4}
-              placeholder="краткое описание ( тег meta='description' )"
-            />,
-          )}
-        </FormItem>
-
-        <FormItem>
-          {getFieldDecorator('slug', {
-            rules: [{ required: true, message: 'Укажите ЧПУ!' }],
-          })(
-            <Input placeholder="адрес страницы, например: testpage" />,
-          )}
-        </FormItem>
-
-        <h3>Дополнительные параметры</h3>
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
-
-        <FormItem>
-          {getFieldDecorator('price', {
-            rules: [{ required: true, message: 'Укажите цену!' }]
-          })(
-            <Input placeholder="стоимость курса" />,
-          )}
-        </FormItem>
-
-        <FormItem>
-          {getFieldDecorator('duration', {
-            rules: [{ required: true, message: 'Укажите продолжительность курса!' }]
-          })(
-            <Input placeholder="продолжительность курса в часах" />,
-          )}
-        </FormItem>
 
         <FormItem>
           <Select defaultValue="0" onChange={this.handelChangeStatus}>
