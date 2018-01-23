@@ -53,36 +53,36 @@ class Dashboard extends React.Component<any, any> {
               </Link>
             </Menu.Item>
             <Menu.Item key="2">
-              <Link to="/section">
+              <Link to="/sections">
                 <Icon type="book" />
                 <span>Разделы</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="2">
+            <Menu.Item key="3">
               <Link to="/courses">
                 <Icon type="book" />
                 <span>Курсы</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="3">
+            <Menu.Item key="4">
               <Link to="/organizations">
                 <Icon type="schedule" />
                 <span>Организации</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="4">
+            <Menu.Item key="5">
               <Link to="/users">
                 <Icon type="idcard" />
                 <span>Пользователи</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="5">
+            <Menu.Item key="6">
               <Link to="/blog">
                 <Icon type="contacts" />
                 <span>Блог</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="6">
+            <Menu.Item key="7">
               <Link to="/settings">
                 <Icon type="tool" />
                 <span>Настройки</span>

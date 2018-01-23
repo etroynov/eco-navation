@@ -40,7 +40,7 @@ const usersReducer = createReducer({
   [requestUsers]: (state: IReducerState) => ({ ...state, loading: true }),
   [receiveUsers]: (state: IReducerState, payload) => ({
     ...state,
-    data: [...payload],
+    data: payload,
     loading: false,
   }),
 
@@ -50,8 +50,8 @@ const usersReducer = createReducer({
     loading: true,
   }),
   [receiveCreateUser]: (state: IReducerState, payload) => ({
-    data: [...state.data, payload.data.user],
-    loading: true,
+    data: [...state.data, payload],
+    loading: false,
   }),
 
   // Update user
@@ -62,7 +62,7 @@ const usersReducer = createReducer({
   [receiveUpdateUser]: (state: IReducerState, payload) => {
     const data = state.data.map((item) => {
       if (item._id === payload.user._id) {
-        return { ...item, ...payload.user };
+        return { ...item, ...payload };
       }
 
       return item;

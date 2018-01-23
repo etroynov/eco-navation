@@ -37,7 +37,7 @@ const coursesReducer = createReducer(
     [requestCourses]: (state: IReducerState) => ({ ...state, loading: true }),
     [receiveCourses]: (state: IReducerState, payload) => ({
       ...state,
-      data: [...payload],
+      data: payload,
       loading: false,
     }),
 
@@ -46,8 +46,8 @@ const coursesReducer = createReducer(
       loading: true,
     }),
     [receiveCreateCourse]: (state: IReducerState, payload) => ({
-      data: [...state.data, payload.data.Course],
-      loading: true,
+      data: [...state.data, payload],
+      loading: false,
     }),
 
     [requestUpdateCourse]: (state: IReducerState) => ({
@@ -55,8 +55,8 @@ const coursesReducer = createReducer(
       loading: true,
     }),
     [receiveUpdateCourse]: (state: IReducerState, payload) => ({
-      data: [...state.data, payload.Course],
-      loading: true,
+      data: [...state.data, payload],
+      loading: false,
     }),
   },
   initialState,

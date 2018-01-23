@@ -20,31 +20,11 @@ const Schema     = mongoose.Schema;
  */
 
 const SettingsSchema = new Schema({
-  title: {
-    type: String,
-    default: '',
-  },
-  description: {
-    type: String,
-    default: '',
-  },
   name: {
     type: String,
     default: '',
   },
-  content: {
-    type: String,
-    default: '',
-  },
-  thumb: {
-    type: String,
-    default: '',
-  },
-  tags: {
-    type: String,
-    default: '',
-  },
-  rubrics: {
+  value: {
     type: String,
     default: '',
   },
@@ -53,10 +33,6 @@ const SettingsSchema = new Schema({
     default: '',
     unique: true,
   },
-  status: {
-    type: Number,
-    default: ''
-  }
 });
 
 /**

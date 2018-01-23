@@ -40,18 +40,8 @@ const organizationsReducer = createReducer({
   [requestOrganizations]: (state: IReducerState) => ({ ...state, loading: true }),
   [receiveOrganizations]: (state: IReducerState, payload) => ({
     ...state,
-    data: [...payload],
+    data: payload,
     loading: false,
-  }),
-
-  // Create organization
-  [requestCreateOrganization]: (state: IReducerState) => ({
-    ...state,
-    loading: true,
-  }),
-  [receiveCreateOrganization]: (state: IReducerState, payload) => ({
-    data: [...state.data, payload.data.organization],
-    loading: true,
   }),
 
   // Update organization
@@ -61,8 +51,8 @@ const organizationsReducer = createReducer({
   }),
   [receiveUpdateOrganization]: (state: IReducerState, payload) => {
     const data = state.data.map((item) => {
-      if (item._id === payload.organization._id) {
-        return { ...item, ...payload.organization };
+      if (item._id === payload._id) {
+        return { ...item, ...payload };
       }
 
       return item;
@@ -80,7 +70,7 @@ const organizationsReducer = createReducer({
     loading: true,
   }),
   [receiveDeleteOrganization]: (state: IReducerState, payload) => {
-    const data = state.data.filter(item => item._id !== payload.organization._id);
+    const data = state.data.filter(item => item._id !== payload._id);
 
     return {
       data,

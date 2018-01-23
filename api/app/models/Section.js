@@ -1,10 +1,10 @@
 'use strict';
 
 /**
- * Course model
+ * Section model
  *
  * @module       :: model
- * @description  :: Represent Course in database
+ * @description  :: Represent Section in database
  *
  *
  * Module dependencies
@@ -14,10 +14,10 @@ const mongoose = require('mongoose'),
       Schema   = mongoose.Schema;
 
 /**
- * Course schema
+ * Section schema
  */
 
-const CourseSchema = new Schema({
+const SectionSchema = new Schema({
   title: {
     type: String,
     default: '',
@@ -33,30 +33,13 @@ const CourseSchema = new Schema({
     type: String,
     default: ''
   },
-  thumb: {
-    type: String,
-    default: ''
-  },
   icon: {
     type: String,
     default: ''
   },
-  price: {
+  status: {
     type: Number,
-    default: 0,
-  },
-  duration: {
-    type: Number,
-    default: 0,
-  },
-  rubrics: {
-    type: Array
-  },
-  lessons: {
-    type: Array
-  },
-  tests: {
-    type: Array
+    default: 0
   },
   slug: {
     type: String,
@@ -67,10 +50,10 @@ const CourseSchema = new Schema({
 });
 
 /**
- * Course plugin
+ * Section plugin
  */
 
-// CourseSchema.plugin(CoursePlugin, {});
+// SectionSchema.plugin(SectionPlugin, {});
 
 /**
  * Add your
@@ -83,10 +66,10 @@ const CourseSchema = new Schema({
  * Statics
  */
 
-CourseSchema.statics = {};
+SectionSchema.statics = {};
 
 /**
  * Register
  */
 
-mongoose.model('Course', CourseSchema);
+mongoose.model('Section', SectionSchema);

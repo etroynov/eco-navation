@@ -14,7 +14,7 @@ import { Button } from 'antd';
  * Actions
  */
 
-import { fetchSettings } from '../actions/settingsActions';
+import { fetchSections } from '../actions/sectionsActions';
 
 /**
  * Components
@@ -22,26 +22,26 @@ import { fetchSettings } from '../actions/settingsActions';
 
 import Dashboard from '../components/layout';
 
-import Index from '../components/settings';
-import Create from '../components/settings/create';
-import Edit from '../components/settings/edit';
+import Index from '../components/sections';
+import Create from '../components/sections/create';
+import Edit from '../components/sections/edit';
 
 /*!
  * Expo
  */
 
-const Settings = ({ location }) => {
+const Sections = ({ location }) => {
   const { pathname } = location;
 
   let title = '';
 
   switch (pathname) {
-    case '/settings/create':
-      title = 'Новый параметр';
+    case '/sections/create':
+      title = 'Новый раздел';
       break;
     
     default:
-      title = 'Настройки';
+      title = 'Раздел';
       break;
   }
 
@@ -54,16 +54,16 @@ const Settings = ({ location }) => {
         <h1 style={{ margin: 0 }}>
           {title}
           <Button type="primary" style={{ float: 'right', marginTop: 5 }} >
-            <Link to="/settings/create">Добавить параметр</Link>
+            <Link to="/sections/create">Добавить раздел</Link>
           </Button>
         </h1>
       </header>
 
       <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
         <Switch>
-          <Route exact path="/settings" component={Index} />
-          <Route exact path="/settings/create" component={Create} />
-          <Route path="/settings/edit/:id" component={Edit} />
+          <Route exact path="/sections" component={Index} />
+          <Route exact path="/sections/create" component={Create} />
+          <Route path="/sections/edit/:id" component={Edit} />
         </Switch>
       </section>
     </Dashboard>
@@ -71,10 +71,10 @@ const Settings = ({ location }) => {
 };
 
 export default compose(
-  connect(null, { fetchSettings }),
+  connect(null, { fetchSections }),
   lifecycle({
     componentDidMount() {
-      this.props.fetchSettings();
+      this.props.fetchSections();
     },
   }),
-)(Settings as any);
+)(Sections as any);

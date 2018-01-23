@@ -23,7 +23,6 @@ import { fetchUsers } from '../actions/usersActions';
 import Dashboard from '../components/layout';
 
 import Index from '../components/users';
-import Create from '../components/users/create';
 import Edit from '../components/users/edit';
 
 /*!
@@ -62,7 +61,6 @@ const Users = ({ location }) => {
       <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
         <Switch>
           <Route exact path="/users" component={Index} />
-          <Route exact path="/users/create" component={Create} />
           <Route path="/users/edit/:id" component={Edit} />
         </Switch>
       </section>

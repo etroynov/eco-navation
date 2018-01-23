@@ -6,6 +6,7 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 import pages from './pagesReducer';
+import sections from './sectionsReducer';
 import courses from './coursesReducer';
 import users from './usersReducer';
 import organizations from './organizationsReducer';
@@ -18,10 +19,11 @@ import settings from './settingsReducer';
 
 export default combineReducers({
   pages,
-  courses,
   users,
-  organizations,
   posts,
+  courses,
+  sections,
   settings,
+  organizations,
   routing: routerReducer,
 });

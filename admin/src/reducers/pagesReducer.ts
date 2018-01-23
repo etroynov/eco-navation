@@ -40,7 +40,7 @@ const pagesReducer = createReducer({
   [requestPages]: (state: IReducerState) => ({ ...state, loading: true }),
   [receivePages]: (state: IReducerState, payload) => ({
     ...state,
-    data: [...payload],
+    data: payload,
     loading: false,
   }),
 

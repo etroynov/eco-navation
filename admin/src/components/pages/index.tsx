@@ -25,29 +25,23 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
   }, {
-    title: 'Дата',
+    title: 'Создана',
     dataIndex: 'createdAt',
     key: 'createdAt',
     render: (text, record) => moment(text).locale('ru').format('L'),
-  },  {
-    title: 'Опубликованна',
-    dataIndex: 'status',
-    key: 'status',
-    render: text => <Switch />,
+  }, {
+    title: 'Обновлена',
+    dataIndex: 'updatedAt',
+    key: 'updatedAt',
+    render: (text, record) => moment(text).locale('ru').format('L'),
   }, {
     title: 'Действия',
     key: 'action',
     render: (text, record) => (
       <div>
-        {/* <Link to="/pages/show">
-          <Button type="primary" icon="eye" />
-        </Link> */}
-
         <Link to={`/pages/edit/${record._id}`}>
           <Button type="primary" icon="edit" style={{ marginLeft: 10 }} />
         </Link>
-
-        <Button type="primary" icon="delete" style={{ marginLeft: 10 }} onClick={() => deletePage(record._id)} />
       </div>
     ),
   },

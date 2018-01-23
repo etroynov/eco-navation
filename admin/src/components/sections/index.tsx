@@ -7,13 +7,13 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Table, Button } from 'antd';
+import { Table, Button, Switch } from 'antd';
 
 /*!
  * Actions
  */
 
-import { deleteSettings } from '../../actions/settingsActions';
+import { deletePage } from '../../actions/pagesActions';
 
 /*!
  * Columns
@@ -25,19 +25,21 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
   }, {
-    title: 'Ключ',
-    dataIndex: 'slug',
-    key: 'sulg',
+    title: 'Создана',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    render: (text, record) => moment(text).locale('ru').format('L'),
   }, {
-    title: 'значение',
-    dataIndex: 'value',
-    key: 'value',
+    title: 'Обновлена',
+    dataIndex: 'updatedAt',
+    key: 'updatedAt',
+    render: (text, record) => moment(text).locale('ru').format('L'),
   }, {
     title: 'Действия',
     key: 'action',
     render: (text, record) => (
       <div>
-        <Link to={`/settings/edit/${record._id}`}>
+        <Link to={`/sections/edit/${record._id}`}>
           <Button type="primary" icon="edit" style={{ marginLeft: 10 }} />
         </Link>
       </div>
@@ -49,7 +51,7 @@ const columns = [
  * Expo
  */
 
-const SettingssIndex = ({ loading, data }) => (
+const PagesIndex = ({ loading, data }) => (
   <Table 
     columns={columns}
     rowKey={(record: any) => record._id}
@@ -58,8 +60,8 @@ const SettingssIndex = ({ loading, data }) => (
   />
 );
 
-const mapStateToProps = ({ settings: { loading, data } }) => ({ loading, data });
+const mapStateToProps = ({ sections: { loading, data } }) => ({ loading, data });
 
 export default connect(
   mapStateToProps,
-)(SettingssIndex as any);
+)(PagesIndex as any);

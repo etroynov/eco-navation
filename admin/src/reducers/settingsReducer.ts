@@ -40,7 +40,7 @@ const settingsReducer = createReducer({
   [requestSettings]: (state: IReducerState) => ({ ...state, loading: true }),
   [receiveSettings]: (state: IReducerState, payload) => ({
     ...state,
-    data: [...payload],
+    data: payload,
     loading: false,
   }),
 
@@ -50,8 +50,8 @@ const settingsReducer = createReducer({
     loading: true,
   }),
   [receiveCreateSettings]: (state: IReducerState, payload) => ({
-    data: [...state.data, payload.data.settings],
-    loading: true,
+    data: [...state.data, payload],
+    loading: false,
   }),
 
   // Update settings
@@ -62,7 +62,7 @@ const settingsReducer = createReducer({
   [receiveUpdateSettings]: (state: IReducerState, payload) => {
     const data = state.data.map((item) => {
       if (item._id === payload.settings._id) {
-        return { ...item, ...payload.settings };
+        return { ...item, ...payload };
       }
 
       return item;
@@ -80,7 +80,7 @@ const settingsReducer = createReducer({
     loading: true,
   }),
   [receiveDeleteSettings]: (state: IReducerState, payload) => {
-    const data = state.data.filter(item => item._id !== payload.settings._id);
+    const data = state.data.filter(item => item._id !== payload._id);
 
     return {
       data,

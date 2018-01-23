@@ -1,4 +1,4 @@
-/**
+/*!
  * Vendor
  */
 
@@ -7,9 +7,15 @@ import CKEditor from 'react-ckeditor-component';
 import { connect } from 'react-redux';
 import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
 
-import { createPage } from '../../actions/pagesActions';
+/*!
+ * Actions
+ */
 
-/**
+import { createSettings } from '../../actions/settingsActions';
+
+import { success } from './../../utils/modals';
+
+/*!
  * Components
  */
 
@@ -21,7 +27,7 @@ const { TextArea } = Input;
  * Expo
  */
 
-class PageCreateForm extends React.Component<any, any> {
+class SettingsCreateForm extends React.Component<any, any> {
   state = {
     content: '',
     status: 0,
@@ -31,23 +37,10 @@ class PageCreateForm extends React.Component<any, any> {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.info({ ...values, ...this.state });
-        this.props.createPage({ ...values, ...this.state });
+        this.props.createSettings({ ...values, ...this.state }).then(success);
       }
     });
   }
-
-  updateContent = (content) => {
-    this.setState({ content });
-  }
-
-  handleChangeContent = (e) => {
-    const content = e.editor.getData();
-    
-    this.setState({ content });
-  }
-  
-  handelChangeStatus = status => this.setState({ status });
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -58,56 +51,17 @@ class PageCreateForm extends React.Component<any, any> {
         <FormItem>
           {getFieldDecorator('name', {
             rules: [{ required: true, message: 'Укажите название!' }],
-          })(<Input placeholder="название страницы" />)}
+          })(<Input placeholder="Почтовый адрес" />)}
         </FormItem>
-        <FormItem>
-          <CKEditor 
-            config={{
-              language: 'ru',
-              allowedContent: true,
-            }}
-            content={content} 
-            events={{
-              change: this.handleChangeContent,
-            }}
-          />
-        </FormItem>
-
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} /> 
-
-        <h3>СЕО</h3>
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
-
-        <FormItem>
-          {getFieldDecorator('title', {
-            rules: [{ required: true, message: 'Укажите заголовок!' }],
-          })(<Input placeholder="заголовок страницы ( тег title )" />)}
-        </FormItem>
-
-        <FormItem>
-          {getFieldDecorator('description', {
-            rules: [{ required: true, message: 'Укажите описание!' }],
-          })(
-            <TextArea
-              rows={4}
-              placeholder="краткое описание ( тег meta='description' )"
-            />,
-          )}
-        </FormItem>
-
         <FormItem>
           {getFieldDecorator('slug', {
-            rules: [{ required: true, message: 'Укажите ЧПУ!' }],
-          })(
-            <Input placeholder="адрес страницы, например: testpage" />,
-          )}
+            rules: [{ required: true, message: 'Укажите ключ!' }],
+          })(<Input placeholder="например: email" />)}
         </FormItem>
-
         <FormItem>
-          <Select defaultValue="0" onChange={this.handelChangeStatus}>
-            <Option value="0">Черновик</Option>
-            <Option value="1">Опубликованно</Option>
-          </Select>
+          {getFieldDecorator('value', {
+            rules: [{ required: true, message: 'Укажите значение!' }],
+          })(<Input placeholder="например: test@gmail.com" />)}
         </FormItem>
 
         <FormItem>
@@ -119,9 +73,9 @@ class PageCreateForm extends React.Component<any, any> {
   }
 }
 
-const WrappedPageCreateForm = Form.create()(PageCreateForm as any);
+const WrappedSettingsCreateForm = Form.create()(SettingsCreateForm as any);
 
 export default connect(
   null,
-  { createPage },
-)(WrappedPageCreateForm as any);
+  { createSettings },
+)(WrappedSettingsCreateForm as any);

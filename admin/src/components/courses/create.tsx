@@ -1,4 +1,4 @@
-/**
+/*!
  * Vendor
  */
 
@@ -7,9 +7,14 @@ import CKEditor from 'react-ckeditor-component';
 import { connect } from 'react-redux';
 import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
 
-import { createCourse } from '../../actions/coursesActions';
+/*!
+ * Actions
+ */
 
-/**
+import { createCourse } from '../../actions/coursesActions';
+import { success } from './../../utils/modals';
+
+/*!
  * Components
  */
 
@@ -31,8 +36,7 @@ class CourseCreateForm extends React.Component<any, any> {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.info({ ...values, ...this.state });
-        this.props.createCourse({ ...values, ...this.state });
+        this.props.createCourse({ ...values, ...this.state }).then(success);
       }
     });
   }
