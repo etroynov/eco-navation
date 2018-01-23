@@ -34,6 +34,7 @@ import {
 
 const coursesReducer = createReducer(
   {
+    // List course
     [requestCourses]: (state: IReducerState) => ({ ...state, loading: true }),
     [receiveCourses]: (state: IReducerState, payload) => ({
       ...state,
@@ -41,6 +42,7 @@ const coursesReducer = createReducer(
       loading: false,
     }),
 
+    // Create course
     [requestCreateCourse]: (state: IReducerState) => ({
       ...state,
       loading: true,
@@ -50,14 +52,25 @@ const coursesReducer = createReducer(
       loading: false,
     }),
 
+    // Update course
     [requestUpdateCourse]: (state: IReducerState) => ({
       ...state,
       loading: true,
     }),
-    [receiveUpdateCourse]: (state: IReducerState, payload) => ({
-      data: [...state.data, payload],
-      loading: false,
-    }),
+    [receiveUpdateCourse]: (state: IReducerState, payload) => {
+      const data = state.data.map((item) => {
+        if (item._id === payload._id) {
+          return { ...item, ...payload };
+        }
+
+        return item;
+      });
+
+      return {
+        data,
+        loading: false,
+      };
+    },
   },
   initialState,
 );

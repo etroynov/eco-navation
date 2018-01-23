@@ -51,17 +51,21 @@ class CourseCreateForm extends React.Component<any, any> {
     
     this.setState({ content });
   }
+
+  handleSelectSection = value => console.info(value);
   
   handelChangeStatus = status => this.setState({ status });
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { form: { getFieldDecorator }, sections } = this.props;
     const { content } = this.state;
+
+    console.info(this.props.sections);
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Tabs defaultActiveKey="1">
-          <TabPane tab="Общее" key="1">
+          <TabPane tab="ОБЩЕЕ" key="1">
             <FormItem>
               {getFieldDecorator('name', {
                 rules: [{ required: true, message: 'Укажите название!' }],
@@ -80,7 +84,7 @@ class CourseCreateForm extends React.Component<any, any> {
               />
             </FormItem>
           </TabPane>
-          <TabPane tab="Сео" key="2">
+          <TabPane tab="СЕО" key="2">
             <FormItem>
               {getFieldDecorator('title', {
                 rules: [{ required: true, message: 'Укажите заголовок!' }],
@@ -106,10 +110,19 @@ class CourseCreateForm extends React.Component<any, any> {
               )}
             </FormItem>
           </TabPane>
-          <TabPane tab="Данные" key="3">
-              <FormItem>
+          <TabPane tab="ДАННЫЕ" key="3">
+            <FormItem>
+              <Select
+                mode="tags"
+                placeholder="раздел"
+                onChange={this.handleSelectSection}
+              >
+                {sections.data.map(({ _id, name }) => <Option value={_id}>{name}</Option>)}
+              </Select>
+            </FormItem>
+            <FormItem>
               {getFieldDecorator('price', {
-                rules: [{ required: true, message: 'Укажите цену!' }]
+                rules: [{ required: true, message: 'Укажите цену!' }],
               })(
                 <Input placeholder="стоимость курса" />,
               )}
@@ -123,10 +136,10 @@ class CourseCreateForm extends React.Component<any, any> {
               )}
             </FormItem>
           </TabPane>
-          <TabPane tab="Уроки" key="4">
+          <TabPane tab="УРОКИ" key="4">
           </TabPane>
           
-          <TabPane tab="Тесты" key="5">
+          <TabPane tab="ТЕСТЫ" key="5">
           </TabPane>
         </Tabs>
 
@@ -150,7 +163,9 @@ class CourseCreateForm extends React.Component<any, any> {
 
 const WrappedCourseCreateForm = Form.create()(CourseCreateForm as any);
 
+const mapStateToProps = ({ sections }) => ({ sections });
+
 export default connect(
-  null,
+  mapStateToProps,
   { createCourse },
 )(WrappedCourseCreateForm as any);

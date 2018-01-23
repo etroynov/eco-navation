@@ -15,6 +15,7 @@ import { Button } from 'antd';
  */
 
 import { fetchCourses } from '../actions/coursesActions';
+import { fetchSections } from '../actions/sectionsActions';
 
 /**
  * Components
@@ -71,9 +72,10 @@ const Courses = ({ location }) => {
 };
 
 export default compose(
-  connect(null, { fetchCourses }),
+  connect(null, { fetchSections, fetchCourses }),
   lifecycle({
     componentDidMount() {
+      this.props.fetchSections();
       this.props.fetchCourses();
     },
   }),
