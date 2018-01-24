@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * User model
  *
@@ -21,48 +19,22 @@ const mongoose = require('mongoose'),
  */
 
 const UserSchema = new Schema({
-  name: {
-    type: String,
-    default: ''
+  fio: String,
+  telephone: String,
+  password: String,
+  organization: { type: Schema.Types.ObjectId, ref: 'Organization' },
+  courses: { type: Schema.Types.ObjectId, ref: 'Course' },
+
+  tests: {
+    type: Array,
+    default: []
   },
-  lastname: {
-    type: String,
-    default: ''
-  },
-  login: {
-    type: String,
-    default: ''
-  },
-  telephone: {
-    type: String,
-    default: ''
-  },
-  password: {
-    type: String,
-    default: ''
-  },
-  departament: {
-    type: String,
-    default: ''
-  },
-  group: {
-    type: String,
-    default: ''
+
+  level: {
+    type: Number,
+    default: 0
   }
 });
-
-/**
- * User plugin
- */
-
-// UserSchema.plugin(userPlugin, {});
-
-/**
- * Add your
- * - pre-save hooks
- * - validations
- * - virtuals
- */
 
 /**
  * Methods
@@ -71,12 +43,6 @@ const UserSchema = new Schema({
 UserSchema.methods.authenticate = (user, password) => {
   return bcrypt.compareSync(password, user.password);
 };
-
-/**
- * Statics
- */
-
-UserSchema.statics = {};
 
 /**
  * Register

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Course model
  *
@@ -18,29 +16,12 @@ const mongoose = require('mongoose'),
  */
 
 const CourseSchema = new Schema({
-  title: {
-    type: String,
-    default: '',
-  },
-  description: {
-    type: String,
-    default: '',
-  },
-  name: {
-    type: String,
-  },
-  content: {
-    type: String,
-    default: ''
-  },
-  thumb: {
-    type: String,
-    default: ''
-  },
-  icon: {
-    type: String,
-    default: ''
-  },
+  title: String,
+  description: String,
+  name: String,
+  content: String,
+  thumb: String,
+  icon: String,
   price: {
     type: Number,
     default: 0,
@@ -49,18 +30,11 @@ const CourseSchema = new Schema({
     type: Number,
     default: 0,
   },
-  rubrics: {
-    type: Array
-  },
-  lessons: {
-    type: Array
-  },
-  tests: {
-    type: Array
-  },
+  sections: [{ type: Schema.Types.ObjectId, ref: 'Section' }],
+  lessons: [{ type: Schema.Types.ObjectId, ref: 'Lesson' }],
+  questions: [{ type: Schema.Types.ObjectId, ref: 'Question' }],
   slug: {
     type: String,
-    default: '',
     unique: true,
     required: true,
   },

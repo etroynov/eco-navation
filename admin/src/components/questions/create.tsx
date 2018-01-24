@@ -30,6 +30,7 @@ const { TextArea } = Input;
 class CourseCreateForm extends React.Component<any, any> {
   state = {
     content: '',
+    status: 0,
   };
 
   handleSubmit = (e) => {
@@ -50,17 +51,17 @@ class CourseCreateForm extends React.Component<any, any> {
     
     this.setState({ content });
   }
-
-  handleSelectSection = value => console.info(value);
   
+  handelChangeStatus = status => this.setState({ status });
+
   render() {
-    const { form: { getFieldDecorator }, sections } = this.props;
+    const { getFieldDecorator } = this.props.form;
     const { content } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Tabs defaultActiveKey="1">
-          <TabPane tab="ОБЩЕЕ" key="1">
+          <TabPane tab="Общее" key="1">
             <FormItem>
               {getFieldDecorator('name', {
                 rules: [{ required: true, message: 'Укажите название!' }],
@@ -79,7 +80,7 @@ class CourseCreateForm extends React.Component<any, any> {
               />
             </FormItem>
           </TabPane>
-          <TabPane tab="СЕО" key="2">
+          <TabPane tab="Сео" key="2">
             <FormItem>
               {getFieldDecorator('title', {
                 rules: [{ required: true, message: 'Укажите заголовок!' }],
@@ -105,22 +106,10 @@ class CourseCreateForm extends React.Component<any, any> {
               )}
             </FormItem>
           </TabPane>
-          <TabPane tab="ДАННЫЕ" key="3">
-            <FormItem>
-              {getFieldDecorator('sections', {
-                rules: [{ required: true, message: 'Вы должны выбрать хотя бы один раздел!' }],
-              })(
-                <Select
-                  mode="tags"
-                  placeholder="раздел"
-                >
-                  {sections.data.map(({ _id, name }) => <Option key={_id} value={_id}>{name}</Option>)}
-                </Select>,
-              )}
-            </FormItem>
-            <FormItem>
+          <TabPane tab="Данные" key="3">
+              <FormItem>
               {getFieldDecorator('price', {
-                rules: [{ required: true, message: 'Укажите цену!' }],
+                rules: [{ required: true, message: 'Укажите цену!' }]
               })(
                 <Input placeholder="стоимость курса" />,
               )}
@@ -134,19 +123,20 @@ class CourseCreateForm extends React.Component<any, any> {
               )}
             </FormItem>
           </TabPane>
+          <TabPane tab="Уроки" key="4">
+          </TabPane>
+          
+          <TabPane tab="Тесты" key="5">
+          </TabPane>
         </Tabs>
 
         <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
 
         <FormItem>
-          {getFieldDecorator('status', {
-            initialValue: '0',
-          })(
-            <Select>
-              <Option value="0">Черновик</Option>
-              <Option value="1">Опубликованно</Option>
-            </Select>,
-          )}
+          <Select defaultValue="0" onChange={this.handelChangeStatus}>
+            <Option value="0">Черновик</Option>
+            <Option value="1">Опубликованно</Option>
+          </Select>
         </FormItem>
 
         <FormItem>
@@ -160,9 +150,7 @@ class CourseCreateForm extends React.Component<any, any> {
 
 const WrappedCourseCreateForm = Form.create()(CourseCreateForm as any);
 
-const mapStateToProps = ({ sections }) => ({ sections });
-
 export default connect(
-  mapStateToProps,
+  null,
   { createCourse },
 )(WrappedCourseCreateForm as any);

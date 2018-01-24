@@ -77,7 +77,7 @@ class Dashboard extends React.Component<any, any> {
               </Link>
             </Menu.Item>
             <Menu.Item key="6">
-              <Link to="/blog">
+              <Link to="/posts">
                 <Icon type="contacts" />
                 <span>Блог</span>
               </Link>

@@ -5,7 +5,7 @@
 import * as React from 'react';
 import CKEditor from 'react-ckeditor-component';
 import { connect } from 'react-redux';
-import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Select, Tabs } from 'antd';
 
 /*!
  * Actions
@@ -18,7 +18,11 @@ import { updateCourse } from '../../actions/coursesActions';
  * Components
  */
 
+import Lessons from '../lessons';
+import Questions from '../questions';
+
 const Option = Select.Option;
+const TabPane = Tabs.TabPane;
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
@@ -34,7 +38,9 @@ class CourseEditForm extends React.Component<any, {
   price: number;
   duration: number;
   status: number;
+  sections: string[],
   slug: string;
+
 }> {
   state = {
     title: '',
@@ -42,6 +48,9 @@ class CourseEditForm extends React.Component<any, {
     name: '',
     content: '',
     status: 0,
+    price: 0,
+    duration: 0,
+    sections: [],
     slug: '',
   };
 
@@ -75,10 +84,9 @@ class CourseEditForm extends React.Component<any, {
     this.setState({ content });
   }
 
-  private handelChangeStatus = status => this.setState({ status });
-
   public render() {
     const { getFieldDecorator } = this.props.form;
+
     const {
       title,
       description,
@@ -86,93 +94,115 @@ class CourseEditForm extends React.Component<any, {
       content,
       price,
       duration,
+      sections,
       slug,
       status,
     } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormItem>
-          {getFieldDecorator('name', {
-            rules: [
-              { required: true, message: 'Укажите название!' }
-            ],
-            initialValue: name,
-          })(<Input placeholder="название страницы" />)}
-        </FormItem>
-        <FormItem>
-          <CKEditor
-            config={{
-              language: 'ru',
-              allowedContent: true,
-            }}
-            content={content}
-            events={{
-              change: this.handleChangeContent,
-            }}
-          />
-        </FormItem>
+        <Tabs defaultActiveKey="1">
+          <TabPane tab="ОБЩЕЕ" key="1">
+            <FormItem>
+              {getFieldDecorator('name', {
+                rules: [{ required: true, message: 'Укажите название!' }],
+                initialValue: name,
+              })(<Input placeholder="название курса" />)}
+            </FormItem>
+            <FormItem>
+              <CKEditor 
+                config={{
+                  language: 'ru',
+                  allowedContent: true,
+                }}
+                content={content} 
+                events={{
+                  change: this.handleChangeContent,
+                }}
+              />
+            </FormItem>
+          </TabPane>
+          <TabPane tab="СЕО" key="2">
+            <FormItem>
+              {getFieldDecorator('title', {
+                rules: [{ required: true, message: 'Укажите заголовок!' }],
+                initialValue: title,
+              })(<Input placeholder="заголовок страницы ( тег title )" />)}
+            </FormItem>
+
+            <FormItem>
+              {getFieldDecorator('description', {
+                rules: [{ required: true, message: 'Укажите описание!' }],
+                initialValue: description,
+              })(
+                <TextArea
+                  rows={4}
+                  placeholder="краткое описание ( тег meta='description' )"
+                />,
+              )}
+            </FormItem>
+
+            <FormItem>
+              {getFieldDecorator('slug', {
+                rules: [{ required: true, message: 'Укажите ЧПУ!' }],
+                initialValue: slug,
+              })(
+                <Input placeholder="адрес страницы, например: testpage" />,
+              )}
+            </FormItem>
+          </TabPane>
+          <TabPane tab="ДАННЫЕ" key="3">
+            <FormItem>
+              {getFieldDecorator('sections', {
+                rules: [{ required: true, message: 'Вы должны выбрать хотя бы один раздел!' }],
+                initialValue: sections.map(({ _id }) => _id),
+              })(
+                <Select
+                  mode="tags"
+                  placeholder="раздел"
+                >
+                  {this.props.sections.data.map(({ _id, name }) => <Option key={_id} value={_id}>{name}</Option>)}
+                </Select>,
+              )}
+            </FormItem>
+            <FormItem>
+              {getFieldDecorator('price', {
+                rules: [{ required: true, message: 'Укажите цену!' }],
+                initialValue: price,
+              })(
+                <Input placeholder="стоимость курса" />,
+              )}
+            </FormItem>
+
+            <FormItem>
+              {getFieldDecorator('duration', {
+                rules: [{ required: true, message: 'Укажите продолжительность курса!' }],
+                initialValue: duration,
+              })(
+                <Input placeholder="продолжительность курса в часах" />,
+              )}
+            </FormItem>
+          </TabPane>
+          <TabPane tab="УРОКИ" key="4">
+            <Lessons />
+          </TabPane>
+          
+          <TabPane tab="ТЕСТЫ" key="5">
+            <Questions />
+          </TabPane>
+        </Tabs>
 
         <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
 
-        <h3>СЕО</h3>
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
-
         <FormItem>
-          {getFieldDecorator('title', {
-            rules: [{ required: true, message: 'Укажите заголовок!' }],
-            initialValue: title,
-          })(<Input placeholder="заголовок страницы ( тег title )" />)}
-        </FormItem>
-
-        <FormItem>
-          {getFieldDecorator('description', {
-            rules: [{ required: true, message: 'Укажите описание!' }],
-            initialValue: description,
+          {getFieldDecorator('status', {
+            initialValue: String(status),
           })(
-            <TextArea
-              rows={4}
-              placeholder="краткое описание ( тег meta='description' )"
-            />,
+            <Select>
+              <Option value="0">Черновик</Option>
+              <Option value="1">Опубликованно</Option>
+            </Select>,
           )}
-        </FormItem>
-
-        <FormItem>
-          {getFieldDecorator('slug', {
-            rules: [{ required: true, message: 'Укажите ЧПУ!' }],
-            initialValue: slug,
-          })(
-            <Input placeholder="адрес страницы, например: testpage" />,
-          )}
-        </FormItem>
-
-
-        <h3>Дополнительные параметры</h3>
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
-
-        <FormItem>
-          {getFieldDecorator('price', {
-            rules: [{ required: true, message: 'Укажите цену!' }],
-            initialValue: price,
-          })(
-            <Input placeholder="стоимость курса" />,
-          )}
-        </FormItem>
-
-        <FormItem>
-          {getFieldDecorator('duration', {
-            rules: [{ required: true, message: 'Укажите продолжительность курса!' }],
-            initialValue: duration,
-          })(
-            <Input placeholder="продолжительность курса в часах" />,
-          )}
-        </FormItem>
-
-        <FormItem>
-          <Select defaultValue={String(status)} onChange={this.handelChangeStatus}>
-            <Option value="0">Черновик</Option>
-            <Option value="1">Опубликованно</Option>
-          </Select>
         </FormItem>
 
         <FormItem>
@@ -186,7 +216,7 @@ class CourseEditForm extends React.Component<any, {
 
 const WrappedCourseEditForm = Form.create()(CourseEditForm as any);
 
-const mapStateToProps = ({ courses }) => ({ courses });
+const mapStateToProps = ({ courses, sections }) => ({ courses, sections });
 
 export default connect(
   mapStateToProps,

@@ -24,67 +24,33 @@ const User = mongoose.model('User');
  */
 
 exports.index = async (req, res) => {
-  const [organizations, users] = await Promise.all([
-    Organization.find(),
-    User.find(),
-  ]);
+  const users = await User.find().populate('organizations');
 
-  return send(res, 200, { organizations, users });
+  return send(res, 200, users);
 };
 
 exports.create = async (req, res) => {
-  try {
-    const {
-      name,
-      inn,
-      kpp,
-      bankAccount,
-      bic,
-      address,
-      directorFio,
-      directorPosition,
-      directorPhone,
-      fio,
-      position,
-      telephone,
-      emai,
-    } = await json(req);
+    try {
+    const data = await json(req);
+    const user = await User.create(data);
 
-    const organization = await Organization.create({
-      name,
-      inn,
-      kpp,
-      bankAccount,
-      bic,
-      address,
-      directorFio,
-      directorPosition,
-      directorPhone
-    });
-    
-    return send(res, 200, organization);
+    return send(res, 200, user);
   } catch(e) {
-
-    console.info('test', e);
     return send(res, 500, e);
   }
 };
 
 exports.update = async (req, res) => {
-  const id = req.body.id || '';
+  try {
+    const data = await json(req);
+    const { _id } = data;
 
-  await User.update({
-    _id: id,
-  }, {
-    name: req.body.name,
-    login: req.body.login,
-    group: req.body.group,
-    lastname: req.body.lastname,
-    telephone: req.body.telephone,
-    Organization: req.body.Organization,
-  });
+    const user = await User.findOneAndUpdate({ _id }, data, { new: true });
 
-  return res.redirect('/dashboard/users');
+    return send(res, 200, user)
+  } catch(e) {
+    return send(res, 500, e);
+  }
 };
 
 exports.delete = async (req, res) => {
@@ -96,22 +62,5 @@ exports.delete = async (req, res) => {
     return send(res, 200);
   } catch(e) {
     return send(res, 500, e);
-  }
-}
-
-exports.login = async (req, res) => {
-  try {
-    const { email, password } = await json(req);
-    const user = await Organization.findOne({ email });
-
-    if (compareSync(password, user.password)) {
-      const token = sign(user.toObject(), '123');
-      return send(res, 200, { token })
-    }
-
-    return send(res, 403);
-  } catch(e) {
-    console.info(e);
-    return send(res, 500, e)
   }
 }

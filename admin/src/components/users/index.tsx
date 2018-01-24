@@ -13,7 +13,7 @@ import { Table, Button, Switch } from 'antd';
  * Actions
  */
 
-import { deletePage } from '../../actions/pagesActions';
+import { deleteUser } from '../../actions/usersActions';
 
 /*!
  * Columns
@@ -21,7 +21,7 @@ import { deletePage } from '../../actions/pagesActions';
 
 const columns = [
   {
-    title: 'Название',
+    title: 'ФИО',
     dataIndex: 'name',
     key: 'name',
   }, {
@@ -43,15 +43,15 @@ const columns = [
     key: 'action',
     render: (text, record) => (
       <div>
-        {/* <Link to="/pages/show">
+        {/* <Link to="/users/show">
           <Button type="primary" icon="eye" />
         </Link> */}
 
-        <Link to={`/pages/edit/${record._id}`}>
+        <Link to={`/users/edit/${record._id}`}>
           <Button type="primary" icon="edit" style={{ marginLeft: 10 }} />
         </Link>
 
-        <Button type="primary" icon="delete" style={{ marginLeft: 10 }} onClick={() => deletePage(record._id)} />
+        <Button type="primary" icon="delete" style={{ marginLeft: 10 }} onClick={() => deleteUser(record._id)} />
       </div>
     ),
   },
@@ -61,7 +61,7 @@ const columns = [
  * Expo
  */
 
-const PagesIndex = ({ loading, data }) => (
+const Index = ({ loading, data }) => (
   <Table 
     columns={columns}
     rowKey={(record: any) => record._id}
@@ -70,8 +70,8 @@ const PagesIndex = ({ loading, data }) => (
   />
 );
 
-const mapStateToProps = ({ pages: { loading, data } }) => ({ loading, data });
+const mapStateToProps = ({ users: { loading, data } }) => ({ loading, data });
 
 export default connect(
   mapStateToProps,
-)(PagesIndex as any);
+)(Index as any);

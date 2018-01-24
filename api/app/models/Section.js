@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Section model
  *
@@ -18,32 +16,17 @@ const mongoose = require('mongoose'),
  */
 
 const SectionSchema = new Schema({
-  title: {
-    type: String,
-    default: '',
-  },
-  description: {
-    type: String,
-    default: '',
-  },
-  name: {
-    type: String,
-  },
-  content: {
-    type: String,
-    default: ''
-  },
-  icon: {
-    type: String,
-    default: ''
-  },
+  title: String,
+  description: String,
+  name: String,
+  content: String,
+  icon: String,
   status: {
     type: Number,
     default: 0
   },
   slug: {
     type: String,
-    default: '',
     unique: true,
     required: true,
   },

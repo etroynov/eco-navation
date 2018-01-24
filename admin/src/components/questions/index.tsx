@@ -13,7 +13,7 @@ import { Table, Button } from 'antd';
  * Actions
  */
 
-import { deleteLesson } from '../../actions/lessonsActions';
+import { deleteQuestion } from '../../actions/questionsActions';
 
 /*!
  * Columns
@@ -21,9 +21,9 @@ import { deleteLesson } from '../../actions/lessonsActions';
 
 const columns = [
   {
-    title: 'Тема',
-    dataIndex: 'name',
-    key: 'name',
+    title: 'Вопрос',
+    dataIndex: 'question',
+    key: 'question',
   }, {
     title: 'Создан',
     dataIndex: 'createdAt',
@@ -34,11 +34,11 @@ const columns = [
     key: 'action',
     render: (text, record) => (
       <div>
-        <Link to={`/lessons/edit/${record._id}`}>
+        <Link to={`/questions/edit/${record._id}`}>
           <Button type="primary" icon="edit" style={{ marginLeft: 10 }} />
         </Link>
 
-        <Button type="primary" icon="delete" style={{ marginLeft: 10 }} onClick={() => deleteLesson(record._id)} />
+        <Button type="primary" icon="delete" style={{ marginLeft: 10 }} onClick={() => deleteQuestion(record._id)} />
       </div>
     ),
   },
@@ -48,7 +48,7 @@ const columns = [
  * Expo
  */
 
-const LessonsIndex = ({ loading, data }) => (
+const QuestionsIndex = ({ loading, data }) => (
   <div>
     <Table 
       columns={columns}
@@ -57,15 +57,15 @@ const LessonsIndex = ({ loading, data }) => (
       loading={loading}
     />
     <div style={{ float: 'right', margin: '10px 0 5px 0' }}>
-      <Link to="/lesson/create">
-        <Button type="primary" style={{ marginLeft: 10 }}>Добавить урок</Button>
+      <Link to="/questions/create">
+        <Button type="primary" style={{ marginLeft: 10 }}>Добавить вопрос</Button>
       </Link>
     </div>
   </div>
 );
 
-const mapStateToProps = ({ lessons: { loading, data } }) => ({ loading, data });
+const mapStateToProps = ({ questions: { loading, data } }) => ({ loading, data });
 
 export default connect(
   mapStateToProps,
-)(LessonsIndex as any);
+)(QuestionsIndex as any);

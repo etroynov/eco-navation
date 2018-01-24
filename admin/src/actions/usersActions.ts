@@ -21,8 +21,8 @@ import { error } from './../utils/modals';
  */
 
 
-export const requestUsers: any = createAction('REQUEST_Users');
-export const receiveUsers: any = createAction('RECEIVE_Users');
+export const requestUsers: any = createAction('REQUEST_USERS');
+export const receiveUsers: any = createAction('RECEIVE_USERS');
 
 
 export const fetchUsers = () => (dispatch) => {
@@ -32,25 +32,6 @@ export const fetchUsers = () => (dispatch) => {
     'http://api.ucavtor.ru/users',
   ).then(
     ({ data }) => dispatch(receiveUsers(data)),
-    err => error(),
-  );
-};
-
-/**
- * CREATE USER
- */
-
-export const requestCreateUser: any = createAction('REQUEST_CREATE_USER');
-export const receiveCreateUser: any = createAction('RECEIVE_CREATE_USER');
-
-export const createUser = data => (dispatch) => {
-  dispatch(requestCreateUser());
-
-  return axios.post(
-    'http://api.ucavtor.ru/users/create',
-    data,
-  ).then(
-    ({ data }) => dispatch(receiveCreateUser(data)),
     err => error(),
   );
 };

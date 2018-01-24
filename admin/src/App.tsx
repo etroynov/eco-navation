@@ -15,7 +15,7 @@ import Courses       from './containers/courses';
 import Sections      from './containers/sections';
 import Pages         from './containers/pages';
 import Users         from './containers/users';
-import Blog          from './containers/blog';
+import Posts         from './containers/posts';
 import Settings      from './containers/settings';
 import Organizations from './containers/organizations';
 
@@ -32,7 +32,7 @@ const App = () => (
     <Route path="/courses"       component={Courses} />
     <Route path="/sections"      component={Sections} />
     <Route path="/organizations" component={Organizations} />
-    <Route path="/blog"          component={Blog} />
+    <Route path="/posts"         component={Posts} />
     <Route path="/settings"      component={Settings} />
     <Route component={() => (<p>404</p>)} />
   </Switch>

@@ -5,13 +5,13 @@
 import * as React from 'react';
 import CKEditor from 'react-ckeditor-component';
 import { connect } from 'react-redux';
-import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Select, Tabs } from 'antd';
 
 /*!
  * Actions
  */
 
-import { createPage } from '../../actions/pagesActions';
+import { createPost } from '../../actions/postsActions';
 import { success } from './../../utils/modals';
 
 /*!
@@ -19,6 +19,7 @@ import { success } from './../../utils/modals';
  */
 
 const Option = Select.Option;
+const TabPane = Tabs.TabPane;
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
@@ -26,7 +27,7 @@ const { TextArea } = Input;
  * Expo
  */
 
-class PageCreateForm extends React.Component<any, any> {
+class PostCreateForm extends React.Component<any, any> {
   state = {
     content: '',
     status: 0,
@@ -36,7 +37,7 @@ class PageCreateForm extends React.Component<any, any> {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.createPage({ ...values, ...this.state }).then(success);
+        this.props.createPost({ ...values, ...this.state }).then(success);
       }
     });
   }
@@ -59,53 +60,53 @@ class PageCreateForm extends React.Component<any, any> {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormItem>
-          {getFieldDecorator('name', {
-            rules: [{ required: true, message: 'Укажите название!' }],
-          })(<Input placeholder="название страницы" />)}
-        </FormItem>
-        <FormItem>
-          <CKEditor 
-            config={{
-              language: 'ru',
-              allowedContent: true,
-            }}
-            content={content} 
-            events={{
-              change: this.handleChangeContent,
-            }}
-          />
-        </FormItem>
+        <Tabs defaultActiveKey="1">
+          <TabPane tab="ОБЩЕЕ" key="1">
+            <FormItem>
+              {getFieldDecorator('name', {
+                rules: [{ required: true, message: 'Укажите название!' }],
+              })(<Input placeholder="название страницы" />)}
+            </FormItem>
+            <FormItem>
+              <CKEditor 
+                config={{
+                  language: 'ru',
+                  allowedContent: true,
+                }}
+                content={content} 
+                events={{
+                  change: this.handleChangeContent,
+                }}
+              />
+            </FormItem>
+          </TabPane>
+          <TabPane tab="СЕО" key="2">
+            <FormItem>
+              {getFieldDecorator('title', {
+                rules: [{ required: true, message: 'Укажите заголовок!' }],
+              })(<Input placeholder="заголовок страницы ( тег title )" />)}
+            </FormItem>
 
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} /> 
+            <FormItem>
+              {getFieldDecorator('description', {
+                rules: [{ required: true, message: 'Укажите описание!' }],
+              })(
+                <TextArea
+                  rows={4}
+                  placeholder="краткое описание ( тег meta='description' )"
+                />,
+              )}
+            </FormItem>
 
-        <h3>СЕО</h3>
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
-
-        <FormItem>
-          {getFieldDecorator('title', {
-            rules: [{ required: true, message: 'Укажите заголовок!' }],
-          })(<Input placeholder="заголовок страницы ( тег title )" />)}
-        </FormItem>
-
-        <FormItem>
-          {getFieldDecorator('description', {
-            rules: [{ required: true, message: 'Укажите описание!' }],
-          })(
-            <TextArea
-              rows={4}
-              placeholder="краткое описание ( тег meta='description' )"
-            />,
-          )}
-        </FormItem>
-
-        <FormItem>
-          {getFieldDecorator('slug', {
-            rules: [{ required: true, message: 'Укажите ЧПУ!' }],
-          })(
-            <Input placeholder="адрес страницы, например: testpage" />,
-          )}
-        </FormItem>
+            <FormItem>
+              {getFieldDecorator('slug', {
+                rules: [{ required: true, message: 'Укажите ЧПУ!' }],
+              })(
+                <Input placeholder="адрес страницы, например: testpage" />,
+              )}
+            </FormItem>
+          </TabPane>
+        </Tabs>
 
         <FormItem>
           <Select defaultValue="0" onChange={this.handelChangeStatus}>
@@ -113,7 +114,6 @@ class PageCreateForm extends React.Component<any, any> {
             <Option value="1">Опубликованно</Option>
           </Select>
         </FormItem>
-
         <FormItem>
           <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
           <Button type="primary" htmlType="submit" style={{ float: 'right' }}>сохранить</Button>
@@ -123,9 +123,9 @@ class PageCreateForm extends React.Component<any, any> {
   }
 }
 
-const WrappedPageCreateForm = Form.create()(PageCreateForm as any);
+const WrappedPostCreateForm = Form.create()(PostCreateForm as any);
 
 export default connect(
   null,
-  { createPage },
-)(WrappedPageCreateForm as any);
+  { createPost },
+)(WrappedPostCreateForm as any);

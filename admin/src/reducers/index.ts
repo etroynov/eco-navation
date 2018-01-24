@@ -6,12 +6,14 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 import pages from './pagesReducer';
-import sections from './sectionsReducer';
-import courses from './coursesReducer';
 import users from './usersReducer';
-import organizations from './organizationsReducer';
 import posts from './postsReducer';
+import courses from './coursesReducer';
+import lessons from './lessonsReducer';
 import settings from './settingsReducer';
+import sections from './sectionsReducer';
+import questions from './questionsReducer';
+import organizations from './organizationsReducer';
 
 /**
  * Expo
@@ -22,8 +24,10 @@ export default combineReducers({
   users,
   posts,
   courses,
+  lessons,
   sections,
   settings,
+  questions,
   organizations,
   routing: routerReducer,
 });

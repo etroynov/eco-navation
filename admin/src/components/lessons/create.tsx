@@ -11,7 +11,7 @@ import { Form, Icon, Input, Button, Checkbox, Select, Tabs } from 'antd';
  * Actions
  */
 
-import { createCourse } from '../../actions/coursesActions';
+import { createLesson } from '../../actions/lessonsActions';
 import { success } from './../../utils/modals';
 
 /*!
@@ -27,7 +27,7 @@ const { TextArea } = Input;
  * Expo
  */
 
-class CourseCreateForm extends React.Component<any, any> {
+class LessonCreateForm extends React.Component<any, any> {
   state = {
     content: '',
     status: 0,
@@ -37,7 +37,7 @@ class CourseCreateForm extends React.Component<any, any> {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.createCourse({ ...values, ...this.state }).then(success);
+        this.props.createLesson({ ...values, ...this.state }).then(success);
       }
     });
   }
@@ -148,9 +148,9 @@ class CourseCreateForm extends React.Component<any, any> {
   }
 }
 
-const WrappedCourseCreateForm = Form.create()(CourseCreateForm as any);
+const WrappedLessonCreateForm = Form.create()(LessonCreateForm as any);
 
 export default connect(
   null,
-  { createCourse },
-)(WrappedCourseCreateForm as any);
+  { createLesson },
+)(WrappedLessonCreateForm as any);

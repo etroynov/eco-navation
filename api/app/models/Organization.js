@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Organization model
  *
@@ -19,54 +17,19 @@ const mongoose = require('mongoose'),
  */
 
 const OrganizationSchema = new Schema({
-  name: {
-    type: String,
-    default: '',
-  },
-  inn: {
-    type: String,
-    default: '',
-  },
-  kpp: {
-    type: String,
-    default: '',
-  },
-  bankAccount: {
-    type: String,
-    default: '',
-  },
-  bic: {
-    type: String,
-    default: ''
-  },
-  address: {
-    type: String,
-    default: ''
-  },
-  representativeFio: {
-    type: String,
-    default: ''
-  },
-  representativePosition: {
-    type: String,
-    default: ''
-  },
-  representativePhone: {
-    type: String,
-    default: ''
-  },
-  managerFio: {
-    type: String,
-    default: ''
-  },
-  managerPosition: {
-    type: String,
-    default: ''
-  },
-  managerPhone: {
-    type: String,
-    default: ''
-  },
+  name: String,
+  inn: String,
+  kpp: String,
+  bankAccount: String,
+  bic: String,
+  address: String,
+  representativeFio: String,
+  representativePosition: String,
+  representativePhone: String,
+  managerFio: String,
+  managerPosition: String,
+  managerPhone: String,
+
   email: {
     type: String,
     default: '',
@@ -76,7 +39,8 @@ const OrganizationSchema = new Schema({
   password: {
     type: String,
     default: ''
-  }
+  },
+  sections: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
 /**

@@ -12,7 +12,7 @@ import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
  */
 
 import { success } from './../../utils/modals';
-import { updateLesson } from '../../actions/lessonsActions';
+import { updateCourse } from '../../actions/coursesActions';
 
 /*!
  * Components
@@ -26,7 +26,7 @@ const { TextArea } = Input;
  * Expo
  */
 
-class LessonEditForm extends React.Component<any, {
+class CourseEditForm extends React.Component<any, {
   title: string;
   description: string;
   name: string;
@@ -46,12 +46,12 @@ class LessonEditForm extends React.Component<any, {
   };
 
   private componentDidMount() {
-    const { lessons, match: { params } } = this.props;
+    const { courses, match: { params } } = this.props;
 
-    const filteredLesson = lessons.data.filter(({ _id }) => _id === params.id);
+    const filteredCourse = courses.data.filter(({ _id }) => _id === params.id);
 
     return this.setState({
-      ...filteredLesson[0],
+      ...filteredCourse[0],
     });
   }
 
@@ -60,7 +60,7 @@ class LessonEditForm extends React.Component<any, {
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.updateLesson({ ...this.state, ...values }).then(() => success());
+        this.props.updateCourse({ ...this.state, ...values }).then(() => success());
       }
     });
   }
@@ -184,11 +184,11 @@ class LessonEditForm extends React.Component<any, {
   }
 }
 
-const WrappedLessonEditForm = Form.create()(LessonEditForm as any);
+const WrappedCourseEditForm = Form.create()(CourseEditForm as any);
 
-const mapStateToProps = ({ lessons }) => ({ lessons });
+const mapStateToProps = ({ courses }) => ({ courses });
 
 export default connect(
   mapStateToProps,
-  { updateLesson },
-)(WrappedLessonEditForm as any);
+  { updateCourse },
+)(WrappedCourseEditForm as any);

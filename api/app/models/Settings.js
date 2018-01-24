@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Settings model
  *
@@ -20,18 +18,13 @@ const Schema     = mongoose.Schema;
  */
 
 const SettingsSchema = new Schema({
-  name: {
-    type: String,
-    default: '',
-  },
-  value: {
-    type: String,
-    default: '',
-  },
+  name: String,
+  value: String,
+
   slug: {
     type: String,
-    default: '',
     unique: true,
+    required: true,
   },
 });
 

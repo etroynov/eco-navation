@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Post model
  *
@@ -20,42 +18,22 @@ const Schema     = mongoose.Schema;
  */
 
 const PostSchema = new Schema({
-  title: {
-    type: String,
-    default: '',
-  },
-  description: {
-    type: String,
-    default: '',
-  },
-  name: {
-    type: String,
-    default: '',
-  },
-  content: {
-    type: String,
-    default: '',
-  },
-  thumb: {
-    type: String,
-    default: '',
-  },
-  tags: {
-    type: String,
-    default: '',
-  },
-  rubrics: {
-    type: String,
-    default: '',
-  },
+  title: String,
+  description: String,
+  name: String,
+  content: String,
+  thumb: String,
+  tags: Array,
+  rubrics: Array,
+
   slug: {
     type: String,
-    default: '',
     unique: true,
+    required: true,
   },
   status: {
     type: Number,
-    default: ''
+    default: 0
   }
 });
 
