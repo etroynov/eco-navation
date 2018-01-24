@@ -8,8 +8,8 @@
  * Module dependencies
  */
 
-const mongoose = require('mongoose'),
-      Schema   = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema   = mongoose.Schema;
 
 /**
  * Section schema
@@ -31,25 +31,6 @@ const SectionSchema = new Schema({
     required: true,
   },
 });
-
-/**
- * Section plugin
- */
-
-// SectionSchema.plugin(SectionPlugin, {});
-
-/**
- * Add your
- * - pre-save hooks
- * - validations
- * - virtuals
- */
-
-/**
- * Statics
- */
-
-SectionSchema.statics = {};
 
 /**
  * Register

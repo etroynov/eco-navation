@@ -9,8 +9,6 @@
  */
 
 const mongoose   = require('mongoose');
-const bcrypt     = require('bcryptjs');
-const timestamps = require('mongoose-timestamp');
 const Schema     = mongoose.Schema;
 
 /**
@@ -36,33 +34,6 @@ const PostSchema = new Schema({
     default: 0
   }
 });
-
-/**
- * Post plugin
- */
-
-PostSchema.plugin(timestamps);
-
-/**
- * Add your
- * - pre-save hooks
- * - validations
- * - virtuals
- */
-
-/**
- * Methods
- */
-
-PostSchema.methods.authenticate = (Post, password) => {
-  return bcrypt.compareSync(password, Post.password);
-};
-
-/**
- * Statics
- */
-
-PostSchema.statics = {};
 
 /**
  * Register

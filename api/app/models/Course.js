@@ -8,8 +8,8 @@
  * Module dependencies
  */
 
-const mongoose = require('mongoose'),
-      Schema   = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema   = mongoose.Schema;
 
 /**
  * Course schema
@@ -40,25 +40,6 @@ const CourseSchema = new Schema({
     required: true,
   },
 });
-
-/**
- * Course plugin
- */
-
-// CourseSchema.plugin(CoursePlugin, {});
-
-/**
- * Add your
- * - pre-save hooks
- * - validations
- * - virtuals
- */
-
-/**
- * Statics
- */
-
-CourseSchema.statics = {};
 
 /**
  * Register

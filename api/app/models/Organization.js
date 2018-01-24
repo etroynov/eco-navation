@@ -8,9 +8,8 @@
  * Module dependencies
  */
 
-const mongoose = require('mongoose'),
-      bcrypt   = require('bcryptjs'),
-      Schema   = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema   = mongoose.Schema;
 
 /**
  * Organization schema
@@ -42,33 +41,6 @@ const OrganizationSchema = new Schema({
   },
   sections: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
-
-/**
- * Organization plugin
- */
-
-// OrganizationSchema.plugin(OrganizationPlugin, {});
-
-/**
- * Add your
- * - pre-save hooks
- * - validations
- * - virtuals
- */
-
-/**
- * Methods
- */
-
-OrganizationSchema.methods.authenticate = (organization, password) => {
-  return bcrypt.compareSync(password, organization.password);
-};
-
-/**
- * Statics
- */
-
-OrganizationSchema.statics = {};
 
 /**
  * Register

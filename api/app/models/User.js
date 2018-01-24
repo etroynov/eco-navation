@@ -8,11 +8,8 @@
  * Module dependencies
  */
 
-const mongoose = require('mongoose'),
-      bcrypt   = require('bcryptjs'),
-      Schema   = mongoose.Schema;
-
-// userPlugin = require('mongoose-user');
+const mongoose   = require('mongoose');
+const Schema     = mongoose.Schema;
 
 /**
  * User schema
@@ -25,6 +22,7 @@ const UserSchema = new Schema({
   organization: { type: Schema.Types.ObjectId, ref: 'Organization' },
   courses: { type: Schema.Types.ObjectId, ref: 'Course' },
 
+  payments: { type: Schema.Types.ObjectId, ref: 'Payment' },
   tests: {
     type: Array,
     default: []
@@ -35,14 +33,6 @@ const UserSchema = new Schema({
     default: 0
   }
 });
-
-/**
- * Methods
- */
-
-UserSchema.methods.authenticate = (user, password) => {
-  return bcrypt.compareSync(password, user.password);
-};
 
 /**
  * Register

@@ -9,7 +9,7 @@ import * as React from 'react';
  */
 
 import Header from '../components/common/Header';
-import Article from '../components/home/article';
+import Article from '../components/article';
 import Footer from '../components/common/Footer';
 
 /*!

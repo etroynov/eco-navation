@@ -14,9 +14,9 @@ import { Col, Row } from 'antd';
 
 import Site from '../components/layout';
 import Sections from '../components/sections';
-import Slider from '../components/home/widget/slider';
-import Works from '../components/home/works';
-import Reviews from '../components/home/reviews';
+import Slider from '../components/slider';
+import Works from '../components/works';
+import Reviews from '../components/reviews';
 
 /*!
  * Data

@@ -9,8 +9,6 @@
  */
 
 const mongoose   = require('mongoose');
-const bcrypt     = require('bcryptjs');
-const timestamps = require('mongoose-timestamp');
 const Schema     = mongoose.Schema;
 
 /**
@@ -36,33 +34,6 @@ const PageSchema = new Schema({
     default: 0
   }
 });
-
-/**
- * Page plugin
- */
-
-PageSchema.plugin(timestamps);
-
-/**
- * Add your
- * - pre-save hooks
- * - validations
- * - virtuals
- */
-
-/**
- * Methods
- */
-
-PageSchema.methods.authenticate = (Page, password) => {
-  return bcrypt.compareSync(password, Page.password);
-};
-
-/**
- * Statics
- */
-
-PageSchema.statics = {};
 
 /**
  * Register
