@@ -1,22 +1,21 @@
 /*!
- * Vendor
+ * Dependencies
  */
 
 import * as React from 'react';
 import Link from 'next/link';
-import { compose, lifecycle } from 'recompose';
 import withRedux from 'next-redux-wrapper';
-import { Col, Row } from 'antd';
 
-/*!
+import { compose, lifecycle } from 'recompose';
+import { Row, Col } from 'antd';
+
+/**
  * Components
  */
 
 import Site from '../components/layout';
-import Sections from '../components/sections';
-import Slider from '../components/home/widget/slider';
-import Works from '../components/home/works';
-import Reviews from '../components/home/reviews';
+import Index from '../components/courses';
+
 
 /*!
  * Data
@@ -28,9 +27,9 @@ import store from '../store';
  * Actions
  */
 
-import { fetchCourses } from '../actions/coursesActions';
-import { fetchPages } from '../actions/pagesActions';
-import { fetchPosts } from '../actions/postsActions';
+import { fetchPages }    from '../actions/pagesActions';
+import { fetchPosts }    from '../actions/postsActions';
+import { fetchCourses }  from '../actions/coursesActions';
 import { fetchSections } from '../actions/sectionsActions';
 import { fetchSettings } from '../actions/settingsActions';
 
@@ -38,12 +37,11 @@ import { fetchSettings } from '../actions/settingsActions';
  * Expo
  */
 
-const Home = () => (
+const Courses = (props) => (
   <Site>
-    <Slider />
-    <Sections />
-    <Works />
-    <Reviews />
+    <section className="courses">
+      <Index />
+    </section>
   </Site>
 );
 
@@ -65,4 +63,4 @@ export default compose(
       this.props.fetchSettings();
     }
   }),
-)(Home)
+)(Courses);

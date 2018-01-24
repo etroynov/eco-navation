@@ -27,6 +27,45 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 
 /*!
+ * TagsCloud
+ */
+
+const tagsCloud = [{
+  name: 'Дерматовенерология',
+  slug: 'dermatovenerologija',
+}, {
+  name: 'Кардиология',
+  slug: 'kardiologija',
+}, {
+  name: 'Организация здравоохранения и общественное здоровье',
+  slug: 'zdravoohranenija',
+}, {
+  name: 'Педиатрия',
+  slug: 'pediatrija',
+}, {
+  name: 'Психиатрия',
+  slug: 'psihiatrija',
+}, {
+  name: 'Психотерапия',
+  slug: 'psihoterapija',
+}, {
+  name: 'Рентгенология',
+  slug: 'rentgenologija',
+}, {
+  name: 'Терапевтическая стоматология',
+  slug: 'stomatologija',
+}, {
+  name: 'Терапия',
+  slug: 'terapija',
+}, {
+  name: 'Фармацевтическая химия и фармакогнозия',
+  slug: 'farmacevtika',
+}, {
+  name: 'Эндокринология',
+  slug: 'jendokrinologija',
+}];
+
+/*!
  * Expo
  */
 
@@ -38,6 +77,9 @@ class CourseEditForm extends React.Component<any, {
   price: number;
   duration: number;
   status: number;
+  tags: string[],
+  lessons: string[],
+  questions: string[],
   sections: string[],
   slug: string;
 
@@ -50,6 +92,9 @@ class CourseEditForm extends React.Component<any, {
     status: 0,
     price: 0,
     duration: 0,
+    tags: [],
+    lessons: [],
+    questions: [],
     sections: [],
     slug: '',
   };
@@ -95,6 +140,7 @@ class CourseEditForm extends React.Component<any, {
       price,
       duration,
       sections,
+      tags,
       slug,
       status,
     } = this.state;
@@ -162,6 +208,18 @@ class CourseEditForm extends React.Component<any, {
                   placeholder="раздел"
                 >
                   {this.props.sections.data.map(({ _id, name }) => <Option key={_id} value={_id}>{name}</Option>)}
+                </Select>,
+              )}
+            </FormItem>
+            <FormItem>
+              {getFieldDecorator('tags', {
+                initialValue: tags.map(({ slug }) => slug),
+              })(
+                <Select
+                  mode="tags"
+                  placeholder="раздел"
+                >
+                  {tagsCloud.map(({ name, slug }) => <Option key={slug} value={slug}>{name}</Option>)}
                 </Select>,
               )}
             </FormItem>

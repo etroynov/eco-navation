@@ -30,6 +30,7 @@ const CourseSchema = new Schema({
     type: Number,
     default: 0,
   },
+  tags: Array,
   sections: [{ type: Schema.Types.ObjectId, ref: 'Section' }],
   lessons: [{ type: Schema.Types.ObjectId, ref: 'Lesson' }],
   questions: [{ type: Schema.Types.ObjectId, ref: 'Question' }],

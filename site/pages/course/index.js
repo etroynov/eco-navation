@@ -9,7 +9,6 @@ import * as React from 'react';
  */
 
 import Site from '../../components/layout';
-import Container from '../../components/common/Container';
 
 import { Row, Col, Icon, Button } from 'antd';
 
@@ -29,7 +28,7 @@ export default ({
   },
 }) => (
   <Site>
-    <Container>
+    <section>
       <div className="article">
         <header className="article__header" style={{ textAlign: 'center' }}>
           <h1 className="article__title">{name}</h1>
@@ -60,6 +59,6 @@ export default ({
           </Col>
         </Row>
       </div>
-    </Container>
+    </section>
   </Site>
 );

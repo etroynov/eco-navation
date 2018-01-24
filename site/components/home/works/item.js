@@ -6,7 +6,7 @@ import { Row, Col } from 'antd';
  */
 
 
-const Content = ({ name, description, context } : IStepContent) => (
+const Content = ({ name, description, context }) => (
   <Col span={12} className={context}>
     <div className="step__description">
       <header className="step__header">
@@ -20,7 +20,7 @@ const Content = ({ name, description, context } : IStepContent) => (
   </Col>
 );
 
-const Img = ({ img, context } : IStepImg) => (
+const Img = ({ img, context }) => (
   <Col span={12} className={`step__timeline step__timeline--circle ${context}`}>
     <figure className="step__img-container">
       <img src={img} alt="" className="step__img" />
@@ -28,7 +28,7 @@ const Img = ({ img, context } : IStepImg) => (
   </Col>
 );
 
-const Step = ({ name, description, img, odd } : IStep) => {
+const Step = ({ name, description, img, odd }) => {
   let body;
 
   if (odd) {

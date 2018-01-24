@@ -1,13 +1,13 @@
-/**
- * Dependencies
+/*!
+ * Vendor
  */
-import * as React from 'react';
 
-/**
+import * as React from 'react';
+import { Layout } from 'antd';
+
+/*!
  * Components
  */
-
-import { Layout } from 'antd';
 
 import Header from './common/Header';
 import Footer from './common/Footer';
@@ -18,7 +18,7 @@ import Footer from './common/Footer';
 
 const { Content } = Layout;
 
-export default ({ children }) => (
+const Site = ({ children }) => (
   <Layout>
     <Header />
     <Content>
@@ -27,3 +27,5 @@ export default ({ children }) => (
     <Footer />
   </Layout>
 );
+
+export default Site;

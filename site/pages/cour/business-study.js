@@ -9,7 +9,7 @@ import * as React from 'react';
  */
 
 import Site from '../../components/layout';
-import List from '../../components/courses/List';
+import List from '../../components/courses';
 
 /*!
  * Data

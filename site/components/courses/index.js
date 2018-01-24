@@ -1,12 +1,16 @@
+/*!
+ * Vendor
+ */
+
 import * as React from 'react';
 import { Row, Tag } from 'antd';
+import { connect } from 'react-redux';
 
-/**
+/*!
  * Components
  */
 
 import Item from './Item';
-import Container from './../common/Container';
 
 const { CheckableTag } = Tag;
 
@@ -14,10 +18,8 @@ const { CheckableTag } = Tag;
  * Expos
  */
 
-class List extends React.Component<{ name: string; description: string; items: ICourse[]; tagsCloud?: any[] }> {
-  state: {
-    selectedTags: string[];
-  } = {
+class List extends React.Component {
+  state = {
     selectedTags: [],
   };
 
@@ -25,7 +27,7 @@ class List extends React.Component<{ name: string; description: string; items: I
     super(props);
   }
 
-  handleChange = (tag: string, checked: boolean) => {
+  handleChange = (tag, checked) => {
     const { selectedTags } = this.state;
 
     const nextSelectedTags = checked
@@ -51,8 +53,8 @@ class List extends React.Component<{ name: string; description: string; items: I
     }
 
     return (
-      <Container>
-        <section className="courses">
+      <section className="courses">
+        <div className="uc-container">
           <header className="courses__header">
             <h2 className="courses__title">{name}</h2>
             <p className="courses__description">{description}</p>
@@ -73,10 +75,18 @@ class List extends React.Component<{ name: string; description: string; items: I
           <Row>
             {currentItems.map((item, index) => <Item key={index} {...item} />)}
           </Row>
-        </section>
-      </Container>
+        </div>
+      </section>
     );
   }
 }
 
-export default List;
+const mapStateToProps = ({ courses }) => {
+  console.info('test', courses);
+
+  return {};
+}; 
+
+export default connect(
+  mapStateToProps,
+)(List);

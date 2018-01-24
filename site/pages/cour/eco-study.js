@@ -10,7 +10,7 @@ import * as React from 'react';
 
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
-import List from '../../components/courses/List';
+import List from '../../components/courses';
 
 /*!
  * Data

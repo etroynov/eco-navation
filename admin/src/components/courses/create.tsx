@@ -23,7 +23,46 @@ const TabPane = Tabs.TabPane;
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
-/**
+/*!
+ * tagsCloud
+ */
+
+const tagsCloud = [{
+  name: 'Дерматовенерология',
+  slug: 'dermatovenerologija',
+}, {
+  name: 'Кардиология',
+  slug: 'kardiologija',
+}, {
+  name: 'Организация здравоохранения и общественное здоровье',
+  slug: 'zdravoohranenija',
+}, {
+  name: 'Педиатрия',
+  slug: 'pediatrija',
+}, {
+  name: 'Психиатрия',
+  slug: 'psihiatrija',
+}, {
+  name: 'Психотерапия',
+  slug: 'psihoterapija',
+}, {
+  name: 'Рентгенология',
+  slug: 'rentgenologija',
+}, {
+  name: 'Терапевтическая стоматология',
+  slug: 'stomatologija',
+}, {
+  name: 'Терапия',
+  slug: 'terapija',
+}, {
+  name: 'Фармацевтическая химия и фармакогнозия',
+  slug: 'farmacevtika',
+}, {
+  name: 'Эндокринология',
+  slug: 'jendokrinologija',
+}];
+
+/*!
  * Expo
  */
 
@@ -115,6 +154,16 @@ class CourseCreateForm extends React.Component<any, any> {
                   placeholder="раздел"
                 >
                   {sections.data.map(({ _id, name }) => <Option key={_id} value={_id}>{name}</Option>)}
+                </Select>,
+              )}
+            </FormItem>
+            <FormItem>
+              {getFieldDecorator('tags')(
+                <Select
+                  mode="tags"
+                  placeholder="Теги"
+                >
+                  {tagsCloud.map(({ name, slug }) => <Option key={slug} value={slug}>{name}</Option>)}
                 </Select>,
               )}
             </FormItem>

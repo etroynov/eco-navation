@@ -9,13 +9,13 @@ import * as React from 'react';
  */
 
 import Site from '../../components/layout';
-import List from '../../components/courses/List';
+import List from '../../components/courses';
 
 /*!
  * Data
  */
 
-import personal from '../../data/personal';
+import medicina from '../../data/medicina';
 
 /*!
  * Expo
@@ -23,6 +23,6 @@ import personal from '../../data/personal';
 
 export default () => (
   <Site>
-    <List key="list" {...personal} />
+    <List key="list" {...medicina} />,
   </Site>
 );

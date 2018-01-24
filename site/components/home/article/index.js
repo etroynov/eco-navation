@@ -1,10 +1,9 @@
 import * as React from 'react';
-import Container from './../../common/Container';
 
 import { Row, Col } from 'antd';
 
-const Article = ({ title } : {title: string}) => (
-  <Container>
+const Article = ({ title }) => (
+  <section>
     <div className="article">
       <header className="article__header">
         <h1 className="article__title">{title}</h1>
@@ -52,7 +51,7 @@ const Article = ({ title } : {title: string}) => (
         </Row>
       </section>
     </div>
-  </Container>
+  </section>
 );
 
 export default Article;

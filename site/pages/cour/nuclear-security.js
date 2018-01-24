@@ -9,13 +9,13 @@ import * as React from 'react';
  */
 
 import Site from '../../components/layout';
-import List from '../../components/courses/List';
+import List from '../../components/courses';
 
 /*!
  * Data
  */
 
-import production from '../../data/production';
+import nuclear from '../../data/nuclear';
 
 /*!
  * Expo
@@ -23,6 +23,6 @@ import production from '../../data/production';
 
 export default () => (
   <Site>
-    <List {...production} />
+    <List key="list" {...nuclear} />
   </Site>
 );

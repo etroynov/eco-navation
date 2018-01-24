@@ -6,22 +6,25 @@ import * as React from 'react';
 
 import Head from 'next/head';
 import Link from 'next/link';
+import { connect } from 'react-redux';
 import { Menu, Icon } from 'antd';
 
-import Container from './Container';
+/*!
+ * Utils
+ */
 
 /*!
  * Expo
  */
 
-export default () => (
+const Header = ({ settings }) => (
   <header className="header">
     <Head>
       <title>Учебный центр "Автор"</title>
       <link rel="stylesheet" href="/static/css/antd.min.css"/>
       <link rel="stylesheet" href="/static/css/style.min.css"/>
     </Head>
-    <Container>
+    <section>
       <nav>
         <Menu
           mode="horizontal"
@@ -57,7 +60,12 @@ export default () => (
           </Menu.Item>
         </Menu>
       </nav>
-    </Container>
-    
+    </section>
   </header>
 );
+
+const mapStateToProps = ({ settings }) => ({ settings });
+
+export default connect(
+  mapStateToProps,
+)(Header);

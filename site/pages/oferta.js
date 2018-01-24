@@ -8,7 +8,6 @@ import * as React from 'react';
  * Components
  */
 
-import Container from '../components/common/Container';
 import Site from '../components/layout';
 
 /*!
@@ -16,7 +15,7 @@ import Site from '../components/layout';
  */
 
 const Content = () => (
-  <Container>
+  <section>
     <div className="article">
       <header className="article__header">
         <h1 className="article__title">ДОГОВОР - ПУБЛИЧНАЯ ОФЕРТА</h1>
@@ -179,7 +178,7 @@ const Content = () => (
       </section>
       {/* tslint:enable */}
     </div>
-  </Container>
+  </section>
 );
 
 export default () => (

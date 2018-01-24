@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const Review = ({ avatar, name, text } : {avatar: string; name: string; text: string;}) => (
+const Review = ({ avatar, name, text }) => (
   <section className="review"> 
     <figure className="review__img-container">
       <img className="review__img" src={avatar} alt={name} width="150" />

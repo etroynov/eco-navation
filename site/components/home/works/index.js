@@ -1,16 +1,12 @@
 import * as React from 'react';
-import Step from './Step';
+import Step from './item';
 import { Row } from 'antd';
-
-import Container from './../../common/Container';
 
 /*!
  * Expo
  */
 
-class Works extends React.Component<{}, {
-  steps: any[],
-}> {
+class Works extends React.Component {
   constructor(props) {
     super(props);
 
@@ -48,13 +44,11 @@ class Works extends React.Component<{}, {
 
     return (
       <div className="works">
-        <Container>
-          <header className="works__header">
-            <h2 className="works__title">Как мы работаем</h2>
-          </header>
+        <header className="works__header">
+          <h2 className="works__title">Как мы работаем</h2>
+        </header>
 
-          <Row className="steps">{steps.map(step => <Step key={step._id} {...step} />)}</Row>
-        </Container>
+        <Row className="steps">{steps.map(step => <Step key={step._id} {...step} />)}</Row>
       </div>
     );
   }
