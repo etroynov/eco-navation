@@ -21,6 +21,7 @@ const SectionSchema = new Schema({
   name: String,
   content: String,
   icon: String,
+  courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
   status: {
     type: Number,
     default: 0
