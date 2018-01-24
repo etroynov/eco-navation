@@ -17,7 +17,7 @@ const Section = mongoose.model('Section');
  */
 
 exports.index = async (req, res) => {
-  const sections = await Section.find();
+  const sections = await Section.find().populate('courses');
 
   return send(res, 200, sections);
 };
