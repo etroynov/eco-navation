@@ -43,10 +43,12 @@ exports.update = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-  const data = await json(req);
-  const { _id } = data;
-
-  const course = await Course.remove(_id);
-
-  return send(res, 200);
+  try {
+    const data   = await json(req);
+    const course = await Course.remove(data);
+    
+    return send(res, 200);
+  } catch(e) {
+    return send(res, 500);
+  }
 };

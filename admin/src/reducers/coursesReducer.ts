@@ -26,6 +26,9 @@ import {
 
   receiveUpdateCourse,
   requestUpdateCourse,
+
+  receiveDeleteCourse,
+  requestDeleteCourse,
 } from '../actions/coursesActions';
 
 /*!
@@ -65,6 +68,20 @@ const coursesReducer = createReducer(
 
         return item;
       });
+
+      return {
+        data,
+        loading: false,
+      };
+    },
+
+    // Delete course
+    [requestDeleteCourse]: (state: IReducerState) => ({
+      ...state,
+      loading: true,
+    }),
+    [receiveDeleteCourse]: (state: IReducerState, payload) => {
+      const data = state.data.filter(item => item._id !== payload._id);
 
       return {
         data,

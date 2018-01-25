@@ -19,7 +19,7 @@ import { deleteCourse } from '../../actions/coursesActions';
  * Columns
  */
 
-const columns = [
+const columns: any = [
   {
     title: 'Название',
     dataIndex: 'name',
@@ -46,18 +46,6 @@ const columns = [
         default: return <p>черновик</p>;
       }
     },
-  }, {
-    title: 'Действия',
-    key: 'action',
-    render: (text, record) => (
-      <div>
-        <Link to={`/courses/edit/${record._id}`}>
-          <Button type="primary" icon="edit" style={{ marginLeft: 10 }} />
-        </Link>
-
-        <Button type="primary" icon="delete" style={{ marginLeft: 10 }} onClick={() => deleteCourse(record._id)} />
-      </div>
-    ),
   },
 ];
 
@@ -65,9 +53,24 @@ const columns = [
  * Expo
  */
 
-const CoursesIndex = ({ loading, data }) => (
+const CoursesIndex = ({ loading, data, deleteCourse }) => (
   <Table 
-    columns={columns}
+    columns={[
+      ...columns,
+      {
+        title: 'Действия',
+        key: 'action',
+        render: (text, { _id }) => (
+          <div>
+            <Link to={`/courses/edit/${_id}`}>
+              <Button type="primary" icon="edit" style={{ marginLeft: 10 }} />
+            </Link>
+
+            <Button type="primary" icon="delete" style={{ marginLeft: 10 }} onClick={() => deleteCourse({ _id })} />
+          </div>
+        ),
+      },
+    ]}
     rowKey={(record: any) => record._id}
     dataSource={data}
     loading={loading}
@@ -78,4 +81,5 @@ const mapStateToProps = ({ courses: { loading, data } }) => ({ loading, data });
 
 export default connect(
   mapStateToProps,
+  { deleteCourse },
 )(CoursesIndex as any);

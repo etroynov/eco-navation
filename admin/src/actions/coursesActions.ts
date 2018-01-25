@@ -28,7 +28,7 @@ export const fetchCourses = () => (dispatch) => {
   dispatch(requestCourses());
 
   return axios.get(
-    'http://api.ucavtor.ru/courses',
+    'http://localhost:8081/courses',
   ).then(
     ({ data }) => dispatch(receiveCourses(data)),
     err => error(),
@@ -46,7 +46,7 @@ export const createCourse = data => (dispatch) => {
   dispatch(requestCreateCourse());
 
   return axios.post(
-    'http://api.ucavtor.ru/courses/create',
+    'http://localhost:8081/courses/create',
     data,
   ).then(
     ({ data }) => dispatch(receiveCreateCourse(data)),
@@ -65,7 +65,7 @@ export const updateCourse = data => (dispatch) => {
   dispatch(requestUpdateCourse());
 
   return axios.post(
-    'http://api.ucavtor.ru/courses/update',
+    'http://localhost:8081/courses/update',
     data,
   ).then(
     ({ data }) => dispatch(receiveUpdateCourse(data)),
@@ -84,10 +84,10 @@ export const deleteCourse = data => (dispatch) => {
   dispatch(requestDeleteCourse());
 
   return axios.post(
-    'http://api.ucavtor.ru/courses/delete',
+    'http://localhost:8081/courses/delete',
     data,
   ).then(
-    ({ data }) => dispatch(receiveDeleteCourse(data)),
+    () => dispatch(receiveDeleteCourse(data)),
     err => error(),
   );
 };
