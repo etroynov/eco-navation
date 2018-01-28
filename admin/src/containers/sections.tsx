@@ -37,11 +37,11 @@ const Sections = ({ location }) => {
 
   switch (pathname) {
     case '/sections/create':
-      title = 'Новый раздел';
+      title = 'Новое направление';
       break;
     
     default:
-      title = 'Раздел';
+      title = 'Направления';
       break;
   }
 

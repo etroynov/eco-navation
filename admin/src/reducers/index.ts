@@ -5,6 +5,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
+import menu from './menuReducer';
 import pages from './pagesReducer';
 import users from './usersReducer';
 import posts from './postsReducer';
@@ -20,6 +21,7 @@ import organizations from './organizationsReducer';
  */
 
 export default combineReducers({
+  menu,
   pages,
   users,
   posts,

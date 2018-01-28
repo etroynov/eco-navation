@@ -1,7 +1,16 @@
+/**
+ * Reducens
+ */
+
 interface IReducerState {
   loading: boolean;
   data: any[],
 }
+
+interface IMenuReducerState extends IReducerState {
+  selected: string[]
+}
+
 
 interface IPage {
   _id: string;
