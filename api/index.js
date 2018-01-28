@@ -32,6 +32,7 @@ fs.readdirSync(path.join(__dirname, '/app/models')).forEach((file) => {
  * Routes
  */
 
+const lessonsController         = require('./app/controllers/lessonsController');
 const pagesController         = require('./app/controllers/pagesController');
 const coursesController       = require('./app/controllers/coursesController');
 const sectionsController      = require('./app/controllers/sectionsController');
@@ -51,16 +52,22 @@ module.exports = compose(
   cors
 )(router(
   /** PAGES **/
-  get('/pages',         pagesController.index),
-  post('/pages/create', pagesController.create),
-  post('/pages/update', pagesController.update),
-  post('/pages/delete', pagesController.delete),
+  get('/pages',            pagesController.index),
+  post('/pages/create',    pagesController.create),
+  post('/pages/update',    pagesController.update),
+  post('/pages/delete',    pagesController.delete),
 
   /** COURSES **/
-  get('/courses',         coursesController.index),
-  post('/courses/create', coursesController.create),
-  post('/courses/update', coursesController.update),
-  post('/courses/delete', coursesController.delete),
+  get('/courses',          coursesController.index),
+  post('/courses/create',  coursesController.create),
+  post('/courses/update',  coursesController.update),
+  post('/courses/delete',  coursesController.delete),
+
+  /** LESSONS **/
+  get('/lessons',          lessonsController.index),
+  post('/lessons/create',  lessonsController.create),
+  post('/lessons/update',  lessonsController.update),
+  post('/lessons/delete',  lessonsController.delete),
   
   /** SECTIONS **/
   get('/sections',         sectionsController.index),
@@ -69,10 +76,10 @@ module.exports = compose(
   post('/sections/delete', sectionsController.delete),
 
   /** USERS **/
-  get('/users',         usersController.index),
-  post('/users/create', usersController.create),
-  post('/users/update', usersController.update),
-  post('/users/delete', usersController.delete),
+  get('/users',            usersController.index),
+  post('/users/create',    usersController.create),
+  post('/users/update',    usersController.update),
+  post('/users/delete',    usersController.delete),
   
   /** ORGANIZATIONS **/
   get('/organizations',           organizationsController.index),
@@ -81,10 +88,10 @@ module.exports = compose(
   post('/organizations/login',    organizationsController.login),
 
   /** POSTS **/
-  get('/posts',         postsController.index),
-  post('/posts/create', postsController.create),
-  post('/posts/update', postsController.update),
-  post('/posts/delete', postsController.delete),
+  get('/posts',            postsController.index),
+  post('/posts/create',    postsController.create),
+  post('/posts/update',    postsController.update),
+  post('/posts/delete',    postsController.delete),
 
   /** COURSES **/
   get('/settings',         settingsController.index),

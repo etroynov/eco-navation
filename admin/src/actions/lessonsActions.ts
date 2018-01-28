@@ -87,7 +87,7 @@ export const deleteLesson = data => (dispatch) => {
     'http://api.ucavtor.ru/lessons/delete',
     data,
   ).then(
-    ({ data }) => dispatch(receiveDeleteLesson(data)),
+    () => dispatch(receiveDeleteLesson(data)),
     err => error(),
   );
 };

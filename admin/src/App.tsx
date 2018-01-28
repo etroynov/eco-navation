@@ -12,6 +12,7 @@ import { Switch, Route } from 'react-router-dom';
 import Login         from './containers/login';
 import Home          from './containers/home';
 import Courses       from './containers/courses';
+import Lessons       from './containers/lessons';
 import Sections      from './containers/sections';
 import Pages         from './containers/pages';
 import Users         from './containers/users';
@@ -29,6 +30,7 @@ const App = () => (
     <Route exact path="/login"   component={Login} />
     <Route path="/users"         component={Users} />
     <Route path="/pages"         component={Pages} />
+    <Route path="/lessons"       component={Lessons} />
     <Route path="/courses"       component={Courses} />
     <Route path="/sections"      component={Sections} />
     <Route path="/organizations" component={Organizations} />

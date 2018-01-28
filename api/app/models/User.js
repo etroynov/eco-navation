@@ -21,12 +21,10 @@ const UserSchema = new Schema({
   password: String,
   organization: { type: Schema.Types.ObjectId, ref: 'Organization' },
   courses: { type: Schema.Types.ObjectId, ref: 'Course' },
+  finishedCourses: { type: Schema.Types.ObjectId, ref: 'Course' },
 
   payments: { type: Schema.Types.ObjectId, ref: 'Payment' },
-  tests: {
-    type: Array,
-    default: []
-  },
+  tests: Array,
 
   level: {
     type: Number,

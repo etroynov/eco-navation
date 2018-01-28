@@ -19,7 +19,8 @@
     "micro-cors": "^0.1.0",
     "microrouter": "^3.0.0",
     "mongoose": "^5.0.1",
-    "nodemailer": "^4.4.2"
+    "nodemailer": "^4.4.2",
+    "payture-official": "0.0.5"
   },
   "devDependencies": {
     "micro-dev": "^2.2.0"

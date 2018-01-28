@@ -119,18 +119,11 @@ class CourseEditForm extends React.Component<any, {
     });
   }
 
-  private updateContent = (content) => {
-    this.setState({ content });
-  }
-
-  private handleChangeContent = (e) => {
-    const content = e.editor.getData();
-
-    this.setState({ content });
-  }
+  private updateContent = content => this.setState({ content });
+  private handleChangeContent = e => this.setState({ content: e.editor.getData() });
 
   public render() {
-    const { getFieldDecorator } = this.props.form;
+    const { form: { getFieldDecorator }, match: { params }  } = this.props;
 
     const {
       title,
@@ -140,6 +133,8 @@ class CourseEditForm extends React.Component<any, {
       price,
       duration,
       sections,
+      lessons,
+      questions,
       tags,
       slug,
       status,
@@ -242,11 +237,11 @@ class CourseEditForm extends React.Component<any, {
             </FormItem>
           </TabPane>
           <TabPane tab="УРОКИ" key="4">
-            <Lessons />
+            <Lessons course={params.id} data={lessons} />
           </TabPane>
           
           <TabPane tab="ТЕСТЫ" key="5">
-            <Questions />
+            <Questions course={params.id} data={questions} />
           </TabPane>
         </Tabs>
 

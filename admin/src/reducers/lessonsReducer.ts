@@ -51,26 +51,6 @@ const lessonsReducer = createReducer(
       data: [...state.data, payload],
       loading: false,
     }),
-
-    // Update lesson
-    [requestUpdateLesson]: (state: IReducerState) => ({
-      ...state,
-      loading: true,
-    }),
-    [receiveUpdateLesson]: (state: IReducerState, payload) => {
-      const data = state.data.map((item) => {
-        if (item._id === payload._id) {
-          return { ...item, ...payload };
-        }
-
-        return item;
-      });
-
-      return {
-        data,
-        loading: false,
-      };
-    },
   },
   initialState,
 );

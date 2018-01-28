@@ -17,8 +17,7 @@ const Schema   = mongoose.Schema;
 
 const LessonSchema = new Schema({
   name: String,
-  content: { type: String, default: '' },
-  course: { type: Schema.Types.ObjectId, ref: 'Course' }
+  content: String,
 });
 
 /**
