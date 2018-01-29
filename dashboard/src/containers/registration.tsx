@@ -25,7 +25,7 @@ class PersonalRegistration extends React.Component<any, any> {
 
     this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
-        const { status } = await axios.post('http://localhost:8081/users/create', values);
+        const { status } = await axios.post('http://api.ucavtor.ru/users/create', values);
 
         if (status !== 200) {
           Modal.error({

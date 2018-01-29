@@ -24,7 +24,7 @@ export const setCurrentUser = user => ({
 });
 
 export const login = data => dispatch => axios.post(
-  'http://localhost:8081/users/login',
+  'http://api.ucavtor.ru/users/login',
   data,
 ).then(
   ({ data }) => {
