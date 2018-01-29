@@ -19,10 +19,8 @@ import { error } from './../utils/modals';
  * LIST Course
  */
 
-
 export const requestCourses: any = createAction('REQUEST_COURSES');
 export const receiveCourses: any = createAction('RECEIVE_COURSES');
-
 
 export const fetchCourses = () => (dispatch) => {
   dispatch(requestCourses());
@@ -35,60 +33,17 @@ export const fetchCourses = () => (dispatch) => {
   );
 };
 
-/**
- * CREATE COURSE
- */
 
-export const requestCreateCourse: any = createAction('REQUEST_CREATE_COURSE');
-export const receiveCreateCourse: any = createAction('RECEIVE_CREATE_COURSE');
+export const requestGetCourse: any = createAction('REQUEST_GET_COURSE');
+export const receiveGetCourse: any = createAction('RECEIVE_GET_COURSE');
 
-export const createCourse = data => (dispatch) => {
-  dispatch(requestCreateCourse());
+export const getCourse = (data) => (dispatch) => {
+  dispatch(requestGetCourse());
 
-  return axios.post(
-    'http://api.ucavtor.ru/courses/create',
-    data,
+  return axios.get(
+    `http://api.ucavtor.ru/courses/${data}`,
   ).then(
-    ({ data }) => dispatch(receiveCreateCourse(data)),
+    ({ data }) => dispatch(receiveGetCourse(data)),
     err => error(),
   );
 };
-
-/**
- * UPDATE COURSE
- */
-
-export const requestUpdateCourse: any = createAction('REQUEST_UPDATE_COURSE');
-export const receiveUpdateCourse: any = createAction('RECEIVE_UPDATE_COURSE');
-
-export const updateCourse = data => (dispatch) => {
-  dispatch(requestUpdateCourse());
-
-  return axios.post(
-    'http://api.ucavtor.ru/courses/update',
-    data,
-  ).then(
-    ({ data }) => dispatch(receiveUpdateCourse(data)),
-    err => error(),
-  );
-};
-
-/**
- * DELETE COURSE
- */
-
-export const requestDeleteCourse: any = createAction('REQUEST_DELETE_COURSE');
-export const receiveDeleteCourse: any = createAction('RECEIVE_DELETE_COURSE');
-
-export const deleteCourse = data => (dispatch) => {
-  dispatch(requestDeleteCourse());
-
-  return axios.post(
-    'http://api.ucavtor.ru/courses/delete',
-    data,
-  ).then(
-    () => dispatch(receiveDeleteCourse(data)),
-    err => error(),
-  );
-};
-

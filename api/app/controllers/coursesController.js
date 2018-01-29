@@ -17,10 +17,25 @@ const Course = mongoose.model('Course');
  */
 
 exports.index = async (req, res) => {
-  const courses = await Course.find().populate('sections').populate('lessons').populate('tests');
+  try {
+    const courses = await Course.find().populate('sections').populate('lessons').populate('tests');
 
-  return send(res, 200, courses);
+    return send(res, 200, courses);
+  } catch(e) {
+    return send(res, 500, e);
+  }
 };
+
+exports.show = async (req, res) => {
+  try {
+    const data = await json(req);
+    const course = await Course.findOne(data).populate('sections').populate('lessons').populate('tests');
+    
+    return send(res, 200, course);
+  } catch(e) {
+    return send(res, 500, e);
+  }
+}
 
 exports.create = async (req, res) => {
   try {

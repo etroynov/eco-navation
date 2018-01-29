@@ -41,10 +41,10 @@ const Index = ({ data, loaded }) => (
               />
               <div style={{ padding: 20 }} dangerouslySetInnerHTML={{ __html: content.slice(0, 125) }} />
               <Row>
-                <Col span={16}>
+                <Col span={12}>
                   <p style={{ margin: 0, padding: 20, textAlign: 'center', fontSize: 24 }}>{price} / {duration} ч.</p>
                 </Col>
-                <Col span={8}>
+                <Col span={12}>
                   <div style={{ padding: 20, textAlign: 'center' }}>
                     <Button type="primary">Купить</Button>
                   </div>
