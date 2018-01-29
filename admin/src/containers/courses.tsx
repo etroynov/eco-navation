@@ -1,4 +1,4 @@
-/**
+/*!
  * Vendor
  */
 
@@ -10,14 +10,14 @@ import { connect } from 'react-redux';
 import { Switch, Route, Link } from 'react-router-dom';
 import { Button } from 'antd';
 
-/**
+/*!
  * Actions
  */
 
 import { fetchCourses } from '../actions/coursesActions';
 import { fetchSections } from '../actions/sectionsActions';
 
-/**
+/*!
  * Components
  */
 

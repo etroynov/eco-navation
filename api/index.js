@@ -80,6 +80,7 @@ module.exports = compose(
   post('/users/create',    usersController.create),
   post('/users/update',    usersController.update),
   post('/users/delete',    usersController.delete),
+  post('/users/login',     usersController.login),
   
   /** ORGANIZATIONS **/
   get('/organizations',           organizationsController.index),

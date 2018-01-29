@@ -9,7 +9,7 @@ export const receiveEmployers = ({ employers }) => ({
 });
 
 export const fetchEmployers = () => dispatch => axios.get(
-  'http://localhost:8081/organizations/employers'
+  'http://api.ucavtor.ru/organizations/employers'
 ).then(
   ({ data }) => {
     dispatch(receiveEmployers(data));

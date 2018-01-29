@@ -7,7 +7,6 @@
  *
  * Module dependencies
  */
-
 const mongoose = require('mongoose');
 
 const { send, json } = require('micro');
@@ -16,25 +15,60 @@ const { generate } = require('generate-password');
 const { createTransport } = require('nodemailer');
 const { sign } = require('jsonwebtoken');
 
-const Organization = mongoose.model('Organization');
 const User = mongoose.model('User');
+
+const sendPasswordToEmail = async ({ fio, email }, password) => {
+  try {
+    const transporter = createTransport({
+      service: 'Yandex',
+      auth: {
+        user: 'access@ucavtor.ru',
+        pass: 'uSFC9keV4nZaOlYbAGVVwB',
+      },
+    });
+
+    const mailOptions = {
+      from: 'access@ucavtor.ru',
+      to: `${email}, access@ucavtor.ru`,
+      subject: `Доступ к сайту - ( ${email} ) - ucavtor.ru`,
+      html: `
+        <p>Доступы для входа на сайт:</p>
+
+        <p><strong>Имя пользователя:</strong> ${fio}
+        <p><strong>почта для входа на сайт:</strong> ${email}
+        <p><strong>Пароль:</strong>  ${password}
+
+        <p>Вход на сайт осуществляется через <a href="http://dashboard.ucavtor.ru/login">Панель управления</a></p>
+      `,
+    };
+
+    return transporter.sendMail(mailOptions);
+  } catch(e) {
+    return send(res, 500, e);
+  }
+}
 
 /*!
  * Expos
  */
 
 exports.index = async (req, res) => {
-  const users = await User.find().populate('organizations');
+  const users = await User.find();
 
   return send(res, 200, users);
 };
 
 exports.create = async (req, res) => {
-    try {
-    const data = await json(req);
-    const user = await User.create(data);
+  try {
+    const user = await json(req);
+    const hashPassword = generate({length: 10, numbers: true });
+    const password = hashSync(hashPassword, 8);
 
-    return send(res, 200, user);
+    const userObj = await User.create({ ...user, password });
+
+    const emailStatus = await sendPasswordToEmail(userObj, hashPassword);
+
+    return send(res, 200);
   } catch(e) {
     return send(res, 500, e);
   }
@@ -42,25 +76,40 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const data = await json(req);
-    const { _id } = data;
+    const user = await json(req);
 
-    const user = await User.findOneAndUpdate({ _id }, data, { new: true });
-
-    return send(res, 200, user)
+    await User.update({_id: user.id }, user);
+    return send(res, 200);
   } catch(e) {
     return send(res, 500, e);
   }
 };
 
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = await json(req);
+    const user = await User.findOne({ email });
+
+    if (compareSync(password, user.password)) {
+      const token = sign(user.toObject(), '123');
+      return send(res, 200, { token })
+    }
+
+    return send(res, 403);
+  } catch(e) {
+    console.info(e);
+    return send(res, 500, e)
+  }
+}
+
 exports.delete = async (req, res) => {
   try {
     const { id } = await json(req);
 
-    await Organization.findByIdAndRemove(id);
+    await User.findByIdAndRemove(id);
     
     return send(res, 200);
   } catch(e) {
     return send(res, 500, e);
   }
-}
+};

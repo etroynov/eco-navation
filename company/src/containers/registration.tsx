@@ -1,13 +1,18 @@
-/**
- * Dependencies
+/*!
+ * Vendor
  */
 
 import * as React from 'react';
 import axios from 'axios';
 
+/*!
+ * Components
+ */
+
 import { Layout, Row, Col, Form, Icon, Input, Button, Checkbox, Modal } from 'antd';
 
 declare const require: any;
+
 /*!
  * Expo
  */
@@ -21,7 +26,7 @@ class CompanyRegistration extends React.Component<any, any> {
 
     this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
-        const { status } = await axios.post('http://localhost:8081/organizations/create', values);
+        const { status } = await axios.post('http://api.ucavtor.ru/organizations/create', values);
 
         if (status !== 200) {
           Modal.error({

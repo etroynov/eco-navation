@@ -7,10 +7,14 @@ import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { setCurrentUser } from './actions/authActions';
+
+import { decode } from 'jsonwebtoken';
+import thunk from 'redux-thunk';
 
 import rootReducer from './reducers';
+import setAuthorizationToken from './utils/setAuthorizationToket';
 
 /**
  * Styles
@@ -37,6 +41,16 @@ const store = createStore(
     ),
   ),
 );
+
+/**
+ * Auth Settings
+ */
+
+if (localStorage.jwtToken) {
+  setAuthorizationToken(localStorage.jwtToken);
+  store.dispatch(setCurrentUser(decode(localStorage.jwtToken)));
+}
+
 
 /**
  * Expo

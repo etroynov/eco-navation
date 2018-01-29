@@ -25,6 +25,8 @@ const UserSchema = new Schema({
 
   payments: { type: Schema.Types.ObjectId, ref: 'Payment' },
   tests: Array,
+  email: String,
+  position: String,
 
   level: {
     type: Number,
