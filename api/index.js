@@ -59,13 +59,13 @@ module.exports = compose(
 
   /** COURSES **/
   get('/courses',          coursesController.index),
+  get('/courses/:id',      coursesController.show),
   post('/courses/create',  coursesController.create),
   post('/courses/update',  coursesController.update),
   post('/courses/delete',  coursesController.delete),
 
   /** LESSONS **/
   get('/lessons',          lessonsController.index),
-  get('/lessons/:id',      lessonsController.show),
   post('/lessons/create',  lessonsController.create),
   post('/lessons/update',  lessonsController.update),
   post('/lessons/delete',  lessonsController.delete),
