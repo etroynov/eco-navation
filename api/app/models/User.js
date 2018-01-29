@@ -25,7 +25,11 @@ const UserSchema = new Schema({
 
   payments: { type: Schema.Types.ObjectId, ref: 'Payment' },
   tests: Array,
-  email: String,
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+  },
   position: String,
 
   level: {
