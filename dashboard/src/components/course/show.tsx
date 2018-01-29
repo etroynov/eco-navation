@@ -8,6 +8,12 @@ import { Col, Row, Steps, Button } from 'antd';
 import { Link } from 'react-router-dom';
 
 /*!
+ * Actions
+ */
+
+import { getCourse } from '../../actions/coursesActions'
+
+/*!
  * Components
  */
 
@@ -19,29 +25,32 @@ const Step = Steps.Step;
  */
 
 class Course extends React.Component<{
-  lessons: any[],
+  getCourse: any;
 }, {
+  lessons: any[];
   currentLesson: number;
 }> {
   state = {
+    lessons: [],
     currentLesson: 0,
   }
 
-  componentDidMount() {
-    const { courses, match: { params } } = this.props;
+  async componentDidMount() {
+    const { match: { params } } = this.props;
 
-    // const filteredCourse = courses.data.filter(({ _id }) => _id === params.id);
+    this.getCourse(params.id);
+  }
 
-    console.info(this.props);
+  getCourse = async (id) => {
+    const { payload } = await this.props.getCourse(id);
 
-    // return this.setState({
-      // ...filteredCourse[0],
-    // });
+    return this.setState({
+      ...payload,
+    });
   }
 
   handleClickNext = () => {
-    const { currentLesson } = this.state;
-    const { lessons } = this.props;
+    const { lessons, currentLesson } = this.state;
 
     if (currentLesson >= lessons.length - 1) { return false; }
 
@@ -61,8 +70,9 @@ class Course extends React.Component<{
   }
 
   render() {
-    const { currentLesson } = this.state;
-    const { lessons = [] } = this.props;
+    const { lessons, currentLesson } = this.state;
+
+    console.info(lessons);
 
     return (
       <Dashboard>
@@ -95,7 +105,7 @@ class Course extends React.Component<{
               }}
             >
               <header style={{ marginBottom: '20px', textAlign: 'center', borderBottom: '1px solid #eeeeee' }}>
-                {/* <h2>{lessons[currentLesson].title}</h2> */}
+                <h2>{lessons[currentLesson] && lessons[currentLesson].name}</h2>
                 <hr style={{ margin: 0, border: 'none', borderBottom: '1px solid #eeeeee' }} />
                 <div style={{ padding: '15px 0', overflow: 'hidden' }}>
                   <Link to="/tests/trud">
@@ -107,7 +117,7 @@ class Course extends React.Component<{
                   <Button type="primary" icon="arrow-left" onClick={this.handleClickPrev} style={{ marginRight: 15, float: 'right' }} />
                 </div>
               </header>
-              {/* <section dangerouslySetInnerHTML={{ __html: lessons[currentLesson].content }} /> */}
+              <section dangerouslySetInnerHTML={{ __html: lessons[currentLesson] && lessons[currentLesson].content }} />
               <footer style={{ overflow: 'hidden' }}>
                 <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
                 <Button type="primary" icon="arrow-right" onClick={this.handleClickNext} style={{ float: 'right' }} />
@@ -121,8 +131,6 @@ class Course extends React.Component<{
   }
 }
 
-const mapStateToProps = ({ courses }) => ({ courses });
-
-export default connect(
-  mapStateToProps,
-)(Course);
+export default connect(null,
+  { getCourse },
+)(Course as any);

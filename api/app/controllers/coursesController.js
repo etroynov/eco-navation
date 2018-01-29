@@ -28,8 +28,7 @@ exports.index = async (req, res) => {
 
 exports.show = async (req, res) => {
   try {
-    const data = await json(req);
-    const course = await Course.findOne(data).populate('sections').populate('lessons').populate('tests');
+    const course = await Course.findOne({ _id: req.params.id }).populate('sections').populate('lessons').populate('tests');
     
     return send(res, 200, course);
   } catch(e) {
