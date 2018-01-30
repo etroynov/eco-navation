@@ -18,7 +18,7 @@ const Course = mongoose.model('Course');
 
 exports.index = async (req, res) => {
   try {
-    const courses = await Course.find().populate('sections').populate('lessons').populate('tests');
+    const courses = await Course.find();
 
     return send(res, 200, courses);
   } catch(e) {
