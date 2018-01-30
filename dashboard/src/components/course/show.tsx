@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
  * Actions
  */
 
-import { getCourse } from '../../actions/coursesActions'
+import { fetchCourse } from '../../actions/coursesActions';
 
 /*!
  * Components
@@ -25,7 +25,7 @@ const Step = Steps.Step;
  */
 
 class Course extends React.Component<{
-  getCourse: any;
+  fetchCourse: any;
 }, {
   lessons: any[];
   currentLesson: number;
@@ -38,11 +38,11 @@ class Course extends React.Component<{
   async componentDidMount() {
     const { match: { params } } = this.props;
 
-    this.getCourse(params.id);
+    this.fetchCourse(params.id);
   }
 
-  getCourse = async (id) => {
-    const { payload } = await this.props.getCourse(id);
+  fetchCourse = async (id) => {
+    const { payload } = await this.props.fetchCourse(id);
 
     return this.setState({
       ...payload,
@@ -132,5 +132,5 @@ class Course extends React.Component<{
 }
 
 export default connect(null,
-  { getCourse },
+  { fetchCourse },
 )(Course as any);

@@ -1,5 +1,5 @@
-/**
- * Dependencies
+/*!
+ * Vendor
  */
 
 import * as React from 'react';
@@ -12,20 +12,21 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import rootReducer from './reducers';
 
-/**
+/*!
  * Styles
  */
 
 import './assets/css/antd.min.css';
+import './assets/css/draftjs.min.css';
 import './assets/styl/index.styl';
 
-/**
+/*!
  * Root Component
  */
 
 import App from './App';
 
-/**
+/*!
  * Store settings
  */
 
@@ -38,7 +39,7 @@ const store = createStore(
   ),
 );
 
-/**
+/*!
  * Expo
  */
 

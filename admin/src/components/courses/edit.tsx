@@ -12,7 +12,7 @@ import { Form, Icon, Input, Button, Checkbox, Select, Tabs } from 'antd';
  */
 
 import { success } from './../../utils/modals';
-import { updateCourse } from '../../actions/coursesActions';
+import { fetchCourse, updateCourse } from '../../actions/coursesActions';
 
 /*!
  * Components
@@ -99,14 +99,16 @@ class CourseEditForm extends React.Component<any, {
     slug: '',
   };
 
-  private componentDidMount() {
-    const { courses, match: { params } } = this.props;
+  async componentDidMount() {
+    const { match: { params } } = this.props;
 
-    const filteredCourse = courses.data.filter(({ _id }) => _id === params.id);
+    this.fetchCourse(params.id);
+  }
 
-    return this.setState({
-      ...filteredCourse[0],
-    });
+  fetchCourse = async (id) => {
+    const { payload } = await this.props.fetchCourse(id);
+
+    return this.setState({ ...payload });
   }
 
   private handleSubmit = (e) => {
@@ -152,14 +154,9 @@ class CourseEditForm extends React.Component<any, {
             </FormItem>
             <FormItem>
               <CKEditor 
-                config={{
-                  language: 'ru',
-                  allowedContent: true,
-                }}
-                content={content} 
-                events={{
-                  change: this.handleChangeContent,
-                }}
+                content={content}
+                config={{ language: 'ru', allowedContent: true }}
+                events={{ change: this.handleChangeContent }}
               />
             </FormItem>
           </TabPane>
@@ -269,9 +266,9 @@ class CourseEditForm extends React.Component<any, {
 
 const WrappedCourseEditForm = Form.create()(CourseEditForm as any);
 
-const mapStateToProps = ({ courses, sections }) => ({ courses, sections });
+const mapStateToProps = ({ sections }) => ({ sections });
 
 export default connect(
   mapStateToProps,
-  { updateCourse },
+  { fetchCourse, updateCourse },
 )(WrappedCourseEditForm as any);

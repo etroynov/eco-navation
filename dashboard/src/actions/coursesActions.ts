@@ -16,7 +16,7 @@ import { error } from './../utils/modals';
  */
 
 /**
- * LIST Course
+ * FETCH COURSES
  */
 
 export const requestCourses: any = createAction('REQUEST_COURSES');
@@ -34,16 +34,21 @@ export const fetchCourses = () => (dispatch) => {
 };
 
 
-export const requestGetCourse: any = createAction('REQUEST_GET_COURSE');
-export const receiveGetCourse: any = createAction('RECEIVE_GET_COURSE');
+/**
+ * FETCH COURSE
+ */
 
-export const getCourse = (data) => (dispatch) => {
-  dispatch(requestGetCourse());
+
+export const requestCourse: any = createAction('REQUEST_COURSE');
+export const receiveCourse: any = createAction('RECEIVE_COURSE');
+
+export const fetchCourse = data => (dispatch) => {
+  dispatch(requestCourse());
 
   return axios.get(
     `http://api.ucavtor.ru/courses/${data}`,
   ).then(
-    ({ data }) => dispatch(receiveGetCourse(data)),
+    ({ data }) => dispatch(receiveCourse(data)),
     err => error(),
   );
 };

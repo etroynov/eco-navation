@@ -35,61 +35,58 @@ import {
  * Expo
  */
 
-const coursesReducer = createReducer(
-  {
-    // List course
-    [requestCourses]: (state: IReducerState) => ({ ...state, loading: true }),
-    [receiveCourses]: (state: IReducerState, payload) => ({
-      ...state,
-      data: payload,
+const coursesReducer = createReducer({
+  // FETCH COURSES
+  [requestCourses]: (state: IReducerState) => ({ ...state, loading: true }),
+  [receiveCourses]: (state: IReducerState, payload) => ({
+    ...state,
+    data: payload,
+    loading: false,
+  }),
+
+  // FETCH COURSE
+  [requestCreateCourse]: (state: IReducerState) => ({
+    ...state,
+    loading: true,
+  }),
+  [receiveCreateCourse]: (state: IReducerState, payload) => ({
+    data: [...state.data, payload],
+    loading: false,
+  }),
+
+  // UPDATE COURSE
+  [requestUpdateCourse]: (state: IReducerState) => ({
+    ...state,
+    loading: true,
+  }),
+  [receiveUpdateCourse]: (state: IReducerState, payload) => {
+    const data = state.data.map((item) => {
+      if (item._id === payload._id) {
+        return { ...item, ...payload };
+      }
+
+      return item;
+    });
+
+    return {
+      data,
       loading: false,
-    }),
-
-    // Create course
-    [requestCreateCourse]: (state: IReducerState) => ({
-      ...state,
-      loading: true,
-    }),
-    [receiveCreateCourse]: (state: IReducerState, payload) => ({
-      data: [...state.data, payload],
-      loading: false,
-    }),
-
-    // Update course
-    [requestUpdateCourse]: (state: IReducerState) => ({
-      ...state,
-      loading: true,
-    }),
-    [receiveUpdateCourse]: (state: IReducerState, payload) => {
-      const data = state.data.map((item) => {
-        if (item._id === payload._id) {
-          return { ...item, ...payload };
-        }
-
-        return item;
-      });
-
-      return {
-        data,
-        loading: false,
-      };
-    },
-
-    // Delete course
-    [requestDeleteCourse]: (state: IReducerState) => ({
-      ...state,
-      loading: true,
-    }),
-    [receiveDeleteCourse]: (state: IReducerState, payload) => {
-      const data = state.data.filter(item => item._id !== payload._id);
-
-      return {
-        data,
-        loading: false,
-      };
-    },
+    };
   },
-  initialState,
-);
+
+  // DELETE COURSE
+  [requestDeleteCourse]: (state: IReducerState) => ({
+    ...state,
+    loading: true,
+  }),
+  [receiveDeleteCourse]: (state: IReducerState, payload) => {
+    const data = state.data.filter(item => item._id !== payload._id);
+
+    return {
+      data,
+      loading: false,
+    };
+  },
+}, initialState);
 
 export default coursesReducer as any;

@@ -20,15 +20,6 @@ const initialState: IReducerState = {
 import {
   requestCourses,
   receiveCourses,
-
-  receiveCreateCourse,
-  requestCreateCourse,
-
-  receiveUpdateCourse,
-  requestUpdateCourse,
-
-  receiveDeleteCourse,
-  requestDeleteCourse,
 } from '../actions/coursesActions';
 
 /*!
@@ -37,57 +28,13 @@ import {
 
 const coursesReducer = createReducer(
   {
-    // List course
+    // fetch courses
     [requestCourses]: (state: IReducerState) => ({ ...state, loading: true }),
     [receiveCourses]: (state: IReducerState, payload) => ({
       ...state,
       data: payload,
       loading: false,
     }),
-
-    // Create course
-    [requestCreateCourse]: (state: IReducerState) => ({
-      ...state,
-      loading: true,
-    }),
-    [receiveCreateCourse]: (state: IReducerState, payload) => ({
-      data: [...state.data, payload],
-      loading: false,
-    }),
-
-    // Update course
-    [requestUpdateCourse]: (state: IReducerState) => ({
-      ...state,
-      loading: true,
-    }),
-    [receiveUpdateCourse]: (state: IReducerState, payload) => {
-      const data = state.data.map((item) => {
-        if (item._id === payload._id) {
-          return { ...item, ...payload };
-        }
-
-        return item;
-      });
-
-      return {
-        data,
-        loading: false,
-      };
-    },
-
-    // Delete course
-    [requestDeleteCourse]: (state: IReducerState) => ({
-      ...state,
-      loading: true,
-    }),
-    [receiveDeleteCourse]: (state: IReducerState, payload) => {
-      const data = state.data.filter(item => item._id !== payload._id);
-
-      return {
-        data,
-        loading: false,
-      };
-    },
   },
   initialState,
 );

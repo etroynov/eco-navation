@@ -28,7 +28,6 @@ declare const require: any;
 
 const Dashboard = ({ menu, collapsed, handleCollapse, handleMenuSelectItem, children }) => (
   <Layout style={{ minHeight: '100vh' }}>
-    {console.info(menu)}
     <Sider
       collapsible={true}
       collapsed={collapsed}

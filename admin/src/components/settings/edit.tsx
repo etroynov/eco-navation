@@ -65,8 +65,6 @@ class SettingsEditForm extends React.Component<any, {
       slug,
     } = this.state;
 
-    console.info(name, value, slug);
-
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem>
