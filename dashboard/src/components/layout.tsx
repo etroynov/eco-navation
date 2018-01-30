@@ -50,24 +50,6 @@ const Dashboard = ({ children, title = '', collapsed, onCollapse, auth }) => (
               <span>Курсы</span>
           </Link>
         </Menu.Item>
-        {/* <Menu.Item key="2">
-          <Link to="/vebinari">
-              <Icon type="customer-service" />
-              <span>Вебинары</span>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="3">
-          <Link to="/blog">
-              <Icon type="profile" />
-              <span>Блог</span>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="4">
-          <Link to="/career">
-              <Icon type="contacts" />
-              <span>Карьера</span>
-          </Link>
-        </Menu.Item> */}
       </Menu>
     </Sider>
     <Layout>

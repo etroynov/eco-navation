@@ -13,9 +13,9 @@ const initialState: IMenuReducerState = {
   selected: ['0'],
   data: [{
     _id: 0,
-    title: 'Главная',
+    title: 'Рабочий стол',
     href: '/',
-    icon: 'desktop',
+    icon: 'dashboard',
   }, {
     _id: 1,
     title: 'Страницы',
