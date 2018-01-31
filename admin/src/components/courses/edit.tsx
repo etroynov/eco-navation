@@ -116,7 +116,10 @@ class CourseEditForm extends React.Component<any, {
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.updateCourse({ ...this.state, ...values }).then(() => success());
+        const data = { ...this.state, ...values };
+        delete data.lessons;
+
+        this.props.updateCourse(data).then(() => success());
       }
     });
   }
