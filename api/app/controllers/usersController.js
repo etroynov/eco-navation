@@ -88,7 +88,10 @@ exports.update = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = await json(req);
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email })
+      .populate('courses')
+      .populate('payments')
+      .populate('finishedCourses');
 
     if (compareSync(password, user.password)) {
       const token = sign(user.toObject(), '123');

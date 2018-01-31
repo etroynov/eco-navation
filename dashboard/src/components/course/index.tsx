@@ -22,7 +22,7 @@ declare const require: any;
  * Expo
  */
 
-const Index = ({ data, loaded }) => (
+const Index = ({ courses: { data, loaded }, auth }) => (
   <Dashboard title="Курсы">
     <header
       style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}
@@ -31,34 +31,36 @@ const Index = ({ data, loaded }) => (
     </header>
     <Row gutter={16}>
       {data.map(({ _id, name, content, price, duration }) => (
-        <Col span={6}>
-          <Link to={`/courses/${_id}`}>
-            <Card title={name} className="uc-course-card">
-              <img
-                src={require('./../../assets/img/oot.svg')}
-                alt="го и чс"
-                className="uc-img-response"
-              />
-              <div style={{ padding: 20 }} dangerouslySetInnerHTML={{ __html: content.slice(0, 125) }} />
-              <Row>
-                <Col span={12}>
-                  <p style={{ margin: 0, padding: 20, textAlign: 'center', fontSize: 24 }}>{price} / {duration} ч.</p>
-                </Col>
-                <Col span={12}>
-                  <div style={{ padding: 20, textAlign: 'center' }}>
-                    <Button type="primary">Купить</Button>
-                  </div>
-                </Col>
-              </Row>
-            </Card>
-          </Link>
+        <Col key={_id} span={6}>
+          <Card title={name} className="uc-course-card">
+            <img
+              src={require('./../../assets/img/oot.svg')}
+              alt="го и чс"
+              className="uc-img-response"
+            />
+            <div style={{ padding: 20 }} dangerouslySetInnerHTML={{ __html: content.slice(0, 125) }} />
+            <Row>
+              <Col span={12}>
+                <p style={{ margin: 0, padding: 20, textAlign: 'center', fontSize: 24 }}>{price} / {duration} ч.</p>
+              </Col>
+              <Col span={12}>
+                <div style={{ padding: 20, textAlign: 'center' }}>
+                {
+                  auth.user.courses.includes(_id)
+                  ? <Button type="primary">Купить</Button>
+                  : <Button type="primary"><Link to={`/course/${_id}`}>Пройти</Link></Button>
+                }
+                </div>
+              </Col>
+            </Row>
+          </Card>
         </Col>
       )}
     </Row>
   </Dashboard>
 );
 
-const mapStateToProps = ({ courses: { data, loaded } }) => ({ data, loaded });
+const mapStateToProps = ({ courses, auth }) => ({ courses, auth });
 
 export default connect(
   mapStateToProps,
