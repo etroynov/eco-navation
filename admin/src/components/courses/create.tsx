@@ -78,19 +78,9 @@ class CourseCreateForm extends React.Component<any, any> {
         this.props.createCourse({ ...values, ...this.state }).then(success);
       }
     });
-  }
+  } 
 
-  updateContent = (content) => {
-    this.setState({ content });
-  }
-
-  handleChangeContent = (e) => {
-    const content = e.editor.getData();
-    
-    this.setState({ content });
-  }
-
-  handleSelectSection = value => console.info(value);
+  handleChangeContent = e => this.setState({ content: e.editor.getData() });
   
   render() {
     const { form: { getFieldDecorator }, sections } = this.props;

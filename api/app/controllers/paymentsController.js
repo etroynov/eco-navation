@@ -68,6 +68,15 @@ exports.create = async (req, res) => {
   }
 };
 
+exports.update = async (req, res) => {
+  const data = await json(req);
+  const { _id } = data;
+
+  const payment = await Payment.findOneAndUpdate({ _id }, data, { new: true });
+
+  return send(res, 200, payment);
+};
+
 exports.check = async (req, res) => {
   const data = await json(req);
   const { _id } = data;
@@ -76,6 +85,7 @@ exports.check = async (req, res) => {
 
   return send(res, 200, payment);
 };
+
 
 exports.delete = async (req, res) => {
   try {

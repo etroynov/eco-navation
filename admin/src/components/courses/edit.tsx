@@ -131,7 +131,7 @@ class CourseEditForm extends React.Component<any, {
       title,
       description,
       name,
-      content,
+      content = '',
       price,
       duration,
       sections,
@@ -141,6 +141,16 @@ class CourseEditForm extends React.Component<any, {
       slug,
       status,
     } = this.state;
+
+    let editor = <p />;
+
+    if (!!content.length) {
+      editor = <CKEditor 
+        content={content}
+        config={{ language: 'ru', allowedContent: true }}
+        events={{ change: this.handleChangeContent }}
+      />;
+    }
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -153,11 +163,7 @@ class CourseEditForm extends React.Component<any, {
               })(<Input placeholder="название курса" />)}
             </FormItem>
             <FormItem>
-              <CKEditor 
-                content={content}
-                config={{ language: 'ru', allowedContent: true }}
-                events={{ change: this.handleChangeContent }}
-              />
+              {editor}
             </FormItem>
           </TabPane>
           <TabPane tab="СЕО" key="2">
