@@ -3,12 +3,13 @@
  */
 
 import * as React from 'react';
+import axios from 'axios';
 import Helmet from 'react-helmet';
 
 import { compose, lifecycle } from 'recompose';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Card, Row, Col, Button } from 'antd';
+import { Card, Row, Col, Button, Modal } from 'antd';
 
 /*!
  * Components
@@ -17,6 +18,35 @@ import { Card, Row, Col, Button } from 'antd';
 import Dashboard from '../layout';
 
 declare const require: any;
+
+/*!
+ * Payment modal
+ */
+
+function confirm(userId, courseId) {
+  const modal = Modal.confirm({
+    title: 'подтверждение покупки',
+    content: 'вы уверены что хотите купить этот курс',
+    onOk: () => new Promise((resolve, reject) => {
+      console.info(userId, courseId);
+
+      resolve();
+    }),
+  });
+}
+
+function error(userId, courseId) {
+  const modal = Modal.error({
+    title: 'Ошибка',
+    content: 'На данный момент покупка курсов недоступна, мы работаем над тем что бы устранить эту ошибку как можно быстрее',
+    onOk: () => new Promise((resolve, reject) => {
+      console.info(userId, courseId);
+
+      resolve();
+    }),
+  });
+}
+
 
 /*!
  * Expo
@@ -47,8 +77,8 @@ const Index = ({ courses: { data, loaded }, auth }) => (
                 <div style={{ padding: 20, textAlign: 'center' }}>
                 {
                   auth.user.courses.includes(_id)
-                  ? <Button type="primary">Купить</Button>
-                  : <Button type="primary"><Link to={`/course/${_id}`}>Пройти</Link></Button>
+                  ? <Button type="primary"><Link to={`/courses/${_id}`}>Пройти</Link></Button>
+                  : <Button type="primary" onClick={() => error(auth.user._id, _id) }>Купить</Button>
                 }
                 </div>
               </Col>

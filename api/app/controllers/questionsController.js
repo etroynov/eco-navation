@@ -2,7 +2,7 @@
  * Questions controller
  *
  * @module       :: controller
- * @description  :: keep logic for handle user( login, logout and etc )
+ * @description  :: keep logic for handle questions ( create, update and etc )
  *
  *
  * Module dependencies

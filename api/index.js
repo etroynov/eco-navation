@@ -32,9 +32,10 @@ fs.readdirSync(path.join(__dirname, '/app/models')).forEach((file) => {
  * Routes
  */
 
-const lessonsController         = require('./app/controllers/lessonsController');
+const lessonsController       = require('./app/controllers/lessonsController');
 const pagesController         = require('./app/controllers/pagesController');
 const coursesController       = require('./app/controllers/coursesController');
+const paymentsController      = require('./app/controllers/paymentsController');
 const sectionsController      = require('./app/controllers/sectionsController');
 const usersController         = require('./app/controllers/usersController');
 const organizationsController = require('./app/controllers/organizationsController');
@@ -63,6 +64,15 @@ module.exports = compose(
   post('/courses/create',  coursesController.create),
   post('/courses/update',  coursesController.update),
   post('/courses/delete',  coursesController.delete),
+
+  /** PAYMENTS **/
+  get('/payments',          paymentsController.index),
+  get('/payments/:id',      paymentsController.show),
+  post('/payments/create',  paymentsController.create),
+  post('/payments/update',  paymentsController.update),
+  post('/payments/delete',  paymentsController.delete),
+
+  get('/payments/check/:id',  paymentsController.check),
 
   /** LESSONS **/
   get('/lessons',          lessonsController.index),
@@ -95,7 +105,7 @@ module.exports = compose(
   post('/posts/update',    postsController.update),
   post('/posts/delete',    postsController.delete),
 
-  /** COURSES **/
+  /** SETTINGS **/
   get('/settings',         settingsController.index),
   post('/settings/create', settingsController.create),
   post('/settings/update', settingsController.update),

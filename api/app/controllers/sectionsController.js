@@ -1,12 +1,13 @@
 /**
- * User controller
+ * Sections controller
  *
  * @module       :: controller
- * @description  :: keep logic for handle user( login, logout and etc )
+ * @description  :: keep logic for handle sections ( create, update and etc )
  *
  *
  * Module dependencies
  */
+
 const { send, json } = require('micro');
 const mongoose = require('mongoose');
 

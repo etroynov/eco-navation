@@ -1,8 +1,8 @@
 /**
- * User controller
+ * Settings controller
  *
  * @module       :: controller
- * @description  :: keep logic for handle user( login, logout and etc )
+ * @description  :: keep logic for handle settings ( create, update and etc )
  *
  *
  * Module dependencies

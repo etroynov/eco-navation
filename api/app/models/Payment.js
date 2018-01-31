@@ -16,7 +16,12 @@ const Schema     = mongoose.Schema;
  */
 
 const PaymentSchema = new Schema({
-  course: { type: Schema.Types.ObjectId, ref: 'User' },
+  ordertId: String,
+  sessionId: String,
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
+  course: { type: Schema.Types.ObjectId, ref: 'Course' },
+  ip: String,
+  status: String,
 });
 
 /**
