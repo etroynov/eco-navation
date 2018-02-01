@@ -10,6 +10,7 @@ import { compose, lifecycle } from 'recompose';
 import Login from './containers/login';
 import Home from './containers/home';
 import Courses from './containers/courses';
+import Payments from './containers/payments';
 import Test from './containers/tests';
 import Registration from './containers/registration';
 
@@ -31,6 +32,7 @@ class App extends React.Component<any, any> {
       <Switch>
         <Route path="/" exact={true} component={Home} />
         <Route path="/courses" component={Courses} />
+        <Route path="/payments" component={Payments} />
         <Route path="/tests" component={Test} />
         <Route path="/login" component={Login} />
         <Route path="/registration" exact={true} component={Registration} />

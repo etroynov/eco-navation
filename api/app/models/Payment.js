@@ -16,12 +16,12 @@ const Schema     = mongoose.Schema;
  */
 
 const PaymentSchema = new Schema({
-  ordertId: String,
-  sessionId: String,
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   course: { type: Schema.Types.ObjectId, ref: 'Course' },
+  total: Number,
   ip: String,
   status: String,
+  sessionId: String,
 });
 
 /**

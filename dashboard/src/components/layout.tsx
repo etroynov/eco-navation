@@ -64,6 +64,12 @@ const Dashboard = ({ children, title = '', collapsed, onCollapse, auth }) => (
               <span>Курсы</span>
           </Link>
         </Menu.Item>
+        <Menu.Item key="2">
+          <Link to="/payments">
+              <Icon type="wallet" />
+              <span>Платежи</span>
+          </Link>
+        </Menu.Item>
       </Menu>
     </Sider>
     <Layout>

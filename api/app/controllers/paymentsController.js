@@ -47,23 +47,36 @@ exports.create = async (req, res) => {
   try {
     const { userId, courseId } = await json(req);
     const user = await User.findOne({ _id: userId });
-    const course = await User.findOne({ _id: courseId });
+    const course = await Course.findOne({ _id: courseId }); 
+    const payment = await Payment.create({
+      user: user.id,
+      course: course.id,
+      ip: String(req.connection.remoteAddress),
+      total: course.price,
+    });
 
     const data = {
-      OrderId: "ORD00000000000000005",
+      OrderId: payment._id,
       Amount: course.price * 100,
-      IP: "127.0.0.1",
-      SessionType: "Pay",
-      Url: "http://dashboard.ucavtor.ru",
-      Language: "RU",
+      IP: payment.id,
+      SessionType: 'Pay',
+      Url: `http://dashboard.ucavtor.ru/payments?check=${payment.id}`,
+      Language: 'RU',
       Total: course.price,
-      Product: "курс промышленая безопасность"
+      Product: 'курс промышленая безопасность'
     }
 
-    // const payment = await Payment.create(data);
+    const paymentStatus = await init(data);
+    payment.sessionId = paymentStatus.SessionId;
+    await payment.save();
 
-    return send(res, 200, data);
+    if (paymentStatus.Success === "True") {
+      return send(res, 200, paymentStatus);
+    } else {
+      return send(res, 500);
+    }
   } catch(e) {
+    console.info(e);
     return send(res, 500, e);
   }
 };

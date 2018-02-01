@@ -101,7 +101,6 @@ module.exports = compose(
   get('/payments/:id',     paymentsController.show),
   post('/payments/create', paymentsController.create),
   post('/payments/update', paymentsController.update),
-  post('/payments/delete', paymentsController.delete),
 
   get('/payments/check/:id',  paymentsController.check),
 

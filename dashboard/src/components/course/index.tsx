@@ -20,30 +20,19 @@ import Dashboard from '../layout';
 declare const require: any;
 
 /*!
+ * Utils
+ */
+
+import { init } from '../../utils/payment';
+
+/*!
  * Payment modal
  */
 
-function confirm(userId, courseId) {
-  const modal = Modal.confirm({
-    title: 'подтверждение покупки',
-    content: 'вы уверены что хотите купить этот курс',
-    onOk: () => new Promise((resolve, reject) => {
-      console.info(userId, courseId);
-
-      resolve();
-    }),
-  });
-}
-
-function error(userId, courseId) {
+function error() {
   const modal = Modal.error({
     title: 'Ошибка',
     content: 'На данный момент покупка курсов недоступна, мы работаем над тем что бы устранить эту ошибку как можно быстрее',
-    onOk: () => new Promise((resolve, reject) => {
-      console.info(userId, courseId);
-
-      resolve();
-    }),
   });
 }
 
@@ -54,9 +43,7 @@ function error(userId, courseId) {
 
 const Index = ({ courses: { data, loaded }, auth }) => (
   <Dashboard title="Курсы">
-    <header
-      style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}
-    >
+    <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}>
       <h1 style={{ margin: 0 }}>Доступные курсы</h1>
     </header>
     <Row gutter={16}>
@@ -75,11 +62,10 @@ const Index = ({ courses: { data, loaded }, auth }) => (
               </Col>
               <Col span={12}>
                 <div style={{ padding: 20, textAlign: 'center' }}>
-                {
-                  auth.user.courses.includes(_id)
-                  ? <Button type="primary"><Link to={`/courses/${_id}`}>Пройти</Link></Button>
-                  : <Button type="primary" onClick={() => error(auth.user._id, _id) }>Купить</Button>
-                }
+                  <Button type="primary" onClick={() => init(auth.user._id, _id).then(
+                    ({ data }) => location.href = data.RedirectUrl,
+                    () => error(),
+                  )}>Купить</Button>
                 </div>
               </Col>
             </Row>
