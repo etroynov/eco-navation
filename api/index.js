@@ -65,15 +65,6 @@ module.exports = compose(
   post('/courses/update',  coursesController.update),
   post('/courses/delete',  coursesController.delete),
 
-  /** PAYMENTS **/
-  get('/payments',          paymentsController.index),
-  get('/payments/:id',      paymentsController.show),
-  post('/payments/create',  paymentsController.create),
-  post('/payments/update',  paymentsController.update),
-  post('/payments/delete',  paymentsController.delete),
-
-  get('/payments/check/:id',  paymentsController.check),
-
   /** LESSONS **/
   get('/lessons',          lessonsController.index),
   post('/lessons/create',  lessonsController.create),
@@ -91,13 +82,7 @@ module.exports = compose(
   post('/users/create',    usersController.create),
   post('/users/update',    usersController.update),
   post('/users/delete',    usersController.delete),
-  post('/users/login',     usersController.login),
-  
-  /** ORGANIZATIONS **/
-  get('/organizations',           organizationsController.index),
-  get('/organizations/employers', organizationsController.employers),
-  post('/organizations/create',   organizationsController.create),
-  post('/organizations/login',    organizationsController.login),
+  post('/users/login',     usersController.login), 
 
   /** POSTS **/
   get('/posts',            postsController.index),
@@ -110,6 +95,21 @@ module.exports = compose(
   post('/settings/create', settingsController.create),
   post('/settings/update', settingsController.update),
   post('/settings/delete', settingsController.delete),
+
+  /** PAYMENTS **/
+  get('/payments',         paymentsController.index),
+  get('/payments/:id',     paymentsController.show),
+  post('/payments/create', paymentsController.create),
+  post('/payments/update', paymentsController.update),
+  post('/payments/delete', paymentsController.delete),
+
+  get('/payments/check/:id',  paymentsController.check),
+
+ /** ORGANIZATIONS **/
+  get('/organizations',           organizationsController.index),
+  get('/organizations/employers', organizationsController.employers),
+  post('/organizations/create',   organizationsController.create),
+  post('/organizations/login',    organizationsController.login),
   
   /** 404 **/
   get('/*', notfound)

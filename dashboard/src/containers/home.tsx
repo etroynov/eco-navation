@@ -4,7 +4,8 @@
 
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Card } from 'antd';
+import { Link } from 'react-router-dom';
+import { Row, Col, Card, Button } from 'antd';
 
 /*!
  * Components
@@ -29,7 +30,25 @@ const Home = ({ auth }) => (
         </Col>
         <Col span={10}>
           <Card title="активные курсы" className="dashboard-card">
-            <p className="label-empty-data">Активных курсов нет</p>
+            {
+              !!auth.user.courses.length
+              ? <Row gutter={8}>
+                  {auth.user.courses.map(({ _id, name, content, thumb, price, duration }) => (
+                    <Col key={_id} span={12}>
+                      <Link to={`/courses/${_id}`}>
+                        <Card title={name} className="uc-course-card">
+                          <img
+                            src={thumb}
+                            alt="го и чс"
+                            className="uc-img-response"
+                          />
+                        </Card>
+                      </Link>
+                    </Col>
+                  )}
+                </Row>
+              : <p className="label-empty-data">Активных курсов нет</p>
+            }
           </Card>
         </Col>
         <Col span={9}>

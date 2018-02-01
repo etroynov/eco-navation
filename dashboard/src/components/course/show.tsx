@@ -27,10 +27,12 @@ const Step = Steps.Step;
 class Course extends React.Component<{
   fetchCourse: any;
 }, {
+  tests: any[];
   lessons: any[];
   currentLesson: number;
 }> {
   state = {
+    tests: [],
     lessons: [],
     currentLesson: 0,
   }
@@ -70,7 +72,7 @@ class Course extends React.Component<{
   }
 
   render() {
-    const { lessons, currentLesson } = this.state;
+    const { lessons, tests, currentLesson } = this.state;
 
     console.info(lessons);
 
@@ -108,11 +110,15 @@ class Course extends React.Component<{
                 <h2>{lessons[currentLesson] && lessons[currentLesson].name}</h2>
                 <hr style={{ margin: 0, border: 'none', borderBottom: '1px solid #eeeeee' }} />
                 <div style={{ padding: '15px 0', overflow: 'hidden' }}>
-                  <Link to="/tests/trud">
-                    <Button type="primary" icon="exception" style={{ float: 'left' }}>
-                      Пройти тест
-                    </Button>
-                  </Link>
+                  {
+                    !!tests.length
+                    ? <Link to="/tests/trud">
+                        <Button type="primary" icon="exception" style={{ float: 'left' }}>
+                          Пройти тест
+                        </Button>
+                      </Link>
+                    : null
+                  }
                   <Button type="primary" icon="arrow-right" onClick={this.handleClickNext} style={{ float: 'right' }} />
                   <Button type="primary" icon="arrow-left" onClick={this.handleClickPrev} style={{ marginRight: 15, float: 'right' }} />
                 </div>

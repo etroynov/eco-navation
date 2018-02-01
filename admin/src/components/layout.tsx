@@ -15,12 +15,18 @@ import { handleMenuSelectItem } from '../actions/menuActions';
 
 /*!
  * Components
- */
+ */ 
 
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 
 declare const require: any;
+
+/*!
+ * Actions
+ */
+
+import './style';
 
 /*!
  * Expo
@@ -38,7 +44,6 @@ const Dashboard = ({ menu, collapsed, handleCollapse, handleMenuSelectItem, chil
         <figure className="profile__img-container">
           <img
             src={require('./../assets/img/whitecollar.svg')}
-            alt=""
             className="profile__img"
           />
           <figcaption className="profile__img-caption">
@@ -78,6 +83,4 @@ const mapDispatchToProps = ({ menu }) => ({ menu });
 export default compose(
   connect(mapDispatchToProps, { handleMenuSelectItem }),
   withState('collapsed', 'handleCollapse', false),
-)(
-  Dashboard as any,
-);
+)(Dashboard as any);

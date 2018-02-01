@@ -60,11 +60,11 @@ const Index = ({ courses: { data, loaded }, auth }) => (
       <h1 style={{ margin: 0 }}>Доступные курсы</h1>
     </header>
     <Row gutter={16}>
-      {data.map(({ _id, name, content, price, duration }) => (
+      {data.map(({ _id, name, content, thumb, price, duration }) => (
         <Col key={_id} span={6}>
           <Card title={name} className="uc-course-card">
             <img
-              src={require('./../../assets/img/oot.svg')}
+              src={thumb}
               alt="го и чс"
               className="uc-img-response"
             />

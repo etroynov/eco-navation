@@ -14,6 +14,7 @@ import { Button } from 'antd';
 
 import Dashboard from '../components/layout';
 import Create from '../components/lessons/create';
+import Edit from '../components/lessons/edit';
 
 /*!
  * Expo
@@ -22,7 +23,11 @@ import Create from '../components/lessons/create';
 const Courses = ({ location }) => (
   <Dashboard>
     <Helmet>
-      <title>Новый урок</title>
+      <title>{
+        location.pathname.split('/').includes('edit')
+        ? 'Редактирование урока'
+        : 'Новый урок'
+      }</title>
     </Helmet>
     <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
       <h1 style={{ margin: 0 }}>Новый урок</h1>
@@ -31,6 +36,7 @@ const Courses = ({ location }) => (
     <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
       <Switch>
         <Route exact path="/lessons/create/:course" component={Create} />
+        <Route path="/lessons/edit/:id" component={Edit} />
       </Switch>
     </section>
   </Dashboard>

@@ -19,22 +19,16 @@ import { deleteLesson } from '../../actions/lessonsActions';
  * Columns
  */
 
-const columns = [
-  {
-    title: 'Тема',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Создан',
-    dataIndex: 'createdAt',
-    key: 'createdAt',
-    render: (text, record) =>
-      moment(text)
-        .locale('ru')
-        .format('L')
-  }
-];
+const columns = [{
+  title: 'Тема',
+  dataIndex: 'name',
+  key: 'name',
+}, {
+  title: 'Создан',
+  dataIndex: 'createdAt',
+  key: 'createdAt',
+  render: (text, record) => moment(text).locale('ru').format('L'),
+}];
 
 /*!
  * Expo
@@ -49,12 +43,17 @@ const LessonsIndex = ({ course, data, deleteLesson }) => (
           title: 'Действия',
           key: 'action',
           render: (text, record) => (
-            <Button
-              type="primary"
-              icon="delete"
-              style={{ marginLeft: 10 }}
-              onClick={() => deleteLesson({ _id: record._id })}
-            />
+            <div className="table-controls">
+              <Link to={`/lessons/edit/${course}`} className="table-controls__item">
+                <Button icon="edit" type="primary" />
+              </Link>
+              <Button
+                className="table-controls__item"
+                type="primary"
+                icon="delete"
+                onClick={() => deleteLesson({ _id: record._id })}
+              />
+            </div>
           ),
         },
       ]}

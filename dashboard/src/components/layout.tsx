@@ -1,12 +1,26 @@
+/*!
+ * Vendor
+ */
+
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { withState } from 'recompose';
 import { Helmet } from 'react-helmet';
 
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+
+/*!
+ * Components
+ */
+
 const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
+
+/*!
+ * Declare
+ */
 
 declare const require: any;
 
@@ -53,7 +67,26 @@ const Dashboard = ({ children, title = '', collapsed, onCollapse, auth }) => (
       </Menu>
     </Sider>
     <Layout>
-      <Header style={{ background: '#fff', padding: 0 }} />
+      <Header style={{ background: '#fff', padding: '16px 0 0 0' }}>
+        <Menu mode="horizontal" onClick={() => {
+          localStorage.removeItem('jwtToken');
+          return location.pathname = '/login';
+        }}>
+          <SubMenu
+            style={{
+              float: 'right',
+            }}
+            title={<span>
+              <Icon type="user" />
+              {auth.user.fio}
+            </span>}
+          >
+            <Menu.Item key="logout">
+              Выйти
+            </Menu.Item>
+          </SubMenu>
+        </Menu>
+      </Header>
       <Content style={{ margin: '0 16px' }}>
         <Breadcrumb style={{ margin: '16px 0' }}>
           <Breadcrumb.Item>главная</Breadcrumb.Item>
