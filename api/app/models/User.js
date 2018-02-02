@@ -19,7 +19,7 @@ const UserSchema = new Schema({
   fio: String,
   telephone: String,
   password: String,
-  organization: [{ type: Schema.Types.ObjectId, ref: 'Organization' }],
+  organization: { type: Schema.Types.ObjectId, ref: 'Organization' },
   courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
   finishedCourses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
 
