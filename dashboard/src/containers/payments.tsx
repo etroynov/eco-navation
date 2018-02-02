@@ -14,7 +14,7 @@ import { Button } from 'antd';
  * Actions
  */
 
-import { fetchPayments } from '../actions/paymentsActions';
+import { fetchPayment } from '../actions/paymentsActions';
 
 /*!
  * Components
@@ -45,11 +45,13 @@ const Courses = ({ location }) => (
   </Dashboard>
 );
 
+const mapStateToProps = ({ auth }) => ({ auth });
+
 export default compose(
-  connect(null, { fetchPayments }),
+  connect(mapStateToProps, { fetchPayment }),
   lifecycle({
     componentDidMount() {
-      this.props.fetchPayments();
+      this.props.fetchPayment(this.props.auth.user._id);
     },
   }),
 )(Courses as any);

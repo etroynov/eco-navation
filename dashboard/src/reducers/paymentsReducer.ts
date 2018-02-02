@@ -20,6 +20,9 @@ const initialState: IReducerState = {
 import {
   requestPayments,
   receivePayments,
+
+  requestPayment,
+  receivePayment,
 } from '../actions/paymentsActions';
 
 /*!
@@ -34,6 +37,14 @@ const paymentsReducer = createReducer({
     data: payload,
     loading: false,
   }),
+
+  // fetch payments
+  [requestPayment]: state => ({ ...state, loading: true }),
+  [receivePayment]: (state, payload) => ({
+    ...state,
+    data: payload,
+    loading: false,
+  })
 }, initialState);
 
 export default paymentsReducer as any;

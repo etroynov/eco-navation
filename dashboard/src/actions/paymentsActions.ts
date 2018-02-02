@@ -26,7 +26,7 @@ export const fetchPayments = () => (dispatch) => {
   dispatch(requestPayments());
 
   return axios.get(
-    'http://api.ucavtor.ru/payments',
+    'http://localhost:8081/payments',
   ).then(
     ({ data }) => dispatch(receivePayments(data)),
     err => error(),
@@ -46,7 +46,7 @@ export const fetchPayment = data => (dispatch) => {
   dispatch(requestPayment());
 
   return axios.get(
-    `http://api.ucavtor.ru/payments/${data}`,
+    `http://localhost:8081/payments/${data}`,
   ).then(
     ({ data }) => dispatch(receivePayment(data)),
     err => error(),

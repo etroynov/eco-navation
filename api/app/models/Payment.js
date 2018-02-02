@@ -22,6 +22,7 @@ const PaymentSchema = new Schema({
   ip: String,
   status: String,
   sessionId: String,
+  type: Number,
 });
 
 /**

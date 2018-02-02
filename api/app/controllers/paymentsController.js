@@ -33,9 +33,9 @@ exports.index = async (req, res) => {
 
 exports.show = async (req, res) => {
   try {
-    const payment = await Payment.findOne({ _id: req.params.id })
+    const payment = await Payment.find({ user: req.params.id })
       .populate('user')
-      .populate('payment');
+      .populate('course');
     
     return send(res, 200, payment);
   } catch(e) {

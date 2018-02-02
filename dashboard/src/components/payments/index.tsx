@@ -23,10 +23,12 @@ const columns: any = [
     title: 'Тип платежа',
     dataIndex: 'type',
     key: 'type',
+    render: type => 'покупка курса',
   }, {
     title: 'Продукт',
     dataIndex: 'course',
     key: 'course',
+    render: course => course.name,
   }, {
     title: 'Создан',
     dataIndex: 'createdAt',
@@ -38,9 +40,9 @@ const columns: any = [
     key: 'status',
     render(text) {
       switch (status) {
-        case 'charged': return <p>опубликованно</p>;
-        case 'rejected': return <p>отклонен</p>;
-        default: return <p>черновик</p>;
+        case 'charged': return 'опубликованно';
+        case 'rejected': return 'отклонен';
+        default: return 'ожидает оплаты';
       }
     },
   },
@@ -50,15 +52,15 @@ const columns: any = [
  * Expo
  */
 
-const CoursesIndex = ({ loading, data, deleteCourse }) => (
+const CoursesIndex = ({ payments, deleteCourse }) => (
   <Table 
     columns={columns}
     rowKey={(record: any) => record._id}
-    dataSource={data}
-    loading={loading}
+    dataSource={payments.data}
+    loading={payments.loading}
   />
 );
 
 const mapStateToProps = ({ payments }) => ({ payments });
 
-export default connect(null, mapStateToProps)(CoursesIndex as any);
+export default connect(mapStateToProps)(CoursesIndex as any);
