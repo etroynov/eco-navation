@@ -9,6 +9,6 @@ import axios from 'axios';
  */
 
 export const init = (userId, courseId) => axios.post(
-  'http://localhost:8081/payments/create',
+  'http://api.ucavtor.ru/payments/create',
   { userId, courseId },
 );
