@@ -7,3 +7,9 @@ interface IReducerState {
   loading: boolean;
   data: any[];
 }
+
+interface IUserReducerState {
+  user: object;
+  loading: boolean;
+  isAuthenticated: boolean,
+}

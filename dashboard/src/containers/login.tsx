@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet';
 import { Link, Redirect } from 'react-router-dom';
 import { Layout, Form, Icon, Input, Button, Checkbox, Modal } from 'antd';
 
-import { login } from './../actions/authActions';
+import { login } from './../actions/userActions';
 
 /*!
  * Expo
@@ -21,9 +21,9 @@ const FormItem = Form.Item;
 
 class LoginForm extends React.Component<any, any> {
   componentWillMount() {
-    const { auth } = this.props;
+    const { user } = this.props;
 
-    if (auth.isAuthenticated) {
+    if (user.isAuthenticated) {
       location.pathname = '/';
     }
   }
@@ -87,7 +87,7 @@ class LoginForm extends React.Component<any, any> {
 
 const WrappedLoginForm = Form.create()(LoginForm as any);
 
-const mapDispatchToProps = ({ auth }) => ({ auth });
+const mapDispatchToProps = ({ user }) => ({ user });
 
 export default connect(
   mapDispatchToProps,

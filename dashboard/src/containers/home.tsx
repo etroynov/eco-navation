@@ -4,8 +4,16 @@
 
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { compose, lifecycle } from 'recompose';
 import { Link } from 'react-router-dom';
 import { Row, Col, Card, Button } from 'antd';
+
+/*!
+ * Actions
+ */
+
+import { fetchUserInfo } from '../actions/userActions';
+
 
 /*!
  * Components
@@ -18,7 +26,7 @@ import Profile from './../components/home/profile';
  * Expo
  */
 
-const Home = ({ auth }) => (
+const Home = ({ user }) => (
   <Dashboard title="Главная">
      <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}>
       <h1 style={{ margin: 0 }}>Главная</h1>
@@ -26,14 +34,14 @@ const Home = ({ auth }) => (
     <div>
       <Row gutter={16}>
         <Col span={5}>
-          <Profile user={auth.user} />
+          <Profile user={user} />
         </Col>
         <Col span={10}>
           <Card title="активные курсы" className="dashboard-card">
             {
-              !!auth.user.courses.length
+              user.courses && !!user.courses.length
               ? <Row gutter={8}>
-                  {auth.user.courses.map(({ _id, name, content, thumb, price, duration }) => (
+                  {user.courses.map(({ _id, name, content, thumb, price, duration }) => (
                     <Col key={_id} span={12}>
                       <Link to={`/courses/${_id}`}>
                         <Card title={name} className="uc-course-card">
@@ -61,8 +69,15 @@ const Home = ({ auth }) => (
   </Dashboard>
 );
 
-const mapDispatchToProps = ({ auth }) => ({ auth });
+const mapDispatchToProps = ({ user }) => ({ user });
 
-export default connect(
-  mapDispatchToProps,
-)(Home);
+export default compose(
+  connect(mapDispatchToProps, { fetchUserInfo }),
+  lifecycle({
+    componentDidMount() {
+      const { user, fetchUserInfo } = this.props;
+
+      fetchUserInfo(user._id);
+    },
+  }),
+)(Home as any);

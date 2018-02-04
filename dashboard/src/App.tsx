@@ -20,9 +20,9 @@ import Registration from './containers/registration';
 
 class App extends React.Component<any, any> {
   componentWillMount() {
-    const { auth } = this.props;
+    const { user } = this.props;
 
-    if (!auth.isAuthenticated && location.pathname !== '/login') {
+    if (!user.isAuthenticated && location.pathname !== '/login') {
       location.pathname = '/login';
     }
   }
@@ -41,6 +41,6 @@ class App extends React.Component<any, any> {
   }
 }
 
-const mapDispatchToProps = ({ auth }) => ({ auth });
+const mapDispatchToProps = ({ user }) => ({ user });
 
 export default withRouter(connect(mapDispatchToProps)(App as any) as any);

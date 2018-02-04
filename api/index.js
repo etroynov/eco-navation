@@ -2,13 +2,13 @@
  * Dependencies
  */
 
-const mongoose = require('mongoose');
 const fs       = require('fs');
 const path     = require('path');
-const { send } = require('micro');
-const compose  = require('micro-compose');
 const cors     = require('micro-cors')();
+const compose  = require('micro-compose');
+const mongoose = require('mongoose');
 
+const { send } = require('micro');
 const { router, get, post } = require('microrouter');
 
 /**
@@ -42,8 +42,7 @@ const organizationsController = require('./app/controllers/organizationsControll
 const postsController         = require('./app/controllers/postsController');
 const settingsController      = require('./app/controllers/settingsController');
 
-const notfound = (req, res) =>
-  send(res, 404, 'You shall not passs :)')
+const notfound = (req, res) => send(res, 404, 'You shall not passs :)')
 
 /**
  * Expo
@@ -79,6 +78,7 @@ module.exports = compose(
 
   /** USERS **/
   get('/users',            usersController.index),
+  get('/users/info/:id',   usersController.info),
   post('/users/create',    usersController.create),
   post('/users/update',    usersController.update),
   post('/users/delete',    usersController.delete),

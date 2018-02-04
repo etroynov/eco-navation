@@ -29,7 +29,7 @@ declare const require: any;
  */
 
 
-const Dashboard = ({ children, title = '', collapsed, onCollapse, auth }) => (
+const Dashboard = ({ children, title = '', collapsed, onCollapse, user }) => (
   <Layout style={{ minHeight: '100vh' }}>
     <Helmet>
       <title>{ title }</title>
@@ -45,8 +45,8 @@ const Dashboard = ({ children, title = '', collapsed, onCollapse, auth }) => (
         <figure className="profile__img-container">
           <img src={require('./../assets/img/whitecollar.svg')} alt="" className="profile__img" />
           <figcaption className="profile__img-caption">
-            <p style={{ margin: 0 }}>{auth.user.fio}</p>
-            <p>{auth.user.position}</p>
+            <p style={{ margin: 0 }}>{user.fio}</p>
+            <p>{user.position}</p>
             <hr className="profile__divider" />
           </figcaption>
         </figure>
@@ -84,7 +84,7 @@ const Dashboard = ({ children, title = '', collapsed, onCollapse, auth }) => (
             }}
             title={<span>
               <Icon type="user" />
-              {auth.user.fio}
+              {user.fio}
             </span>}
           >
             <Menu.Item key="logout">
@@ -103,13 +103,13 @@ const Dashboard = ({ children, title = '', collapsed, onCollapse, auth }) => (
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
-        УЦ "Автор" ©2017 разработанно <a href="http://troinof.ru/portfolio/author">troinof.ru</a>
+        УЦ "Автор" ©2017 разработанно <a href="http://troinof.ru/portfolio/ucavtor">troinof.ru</a>
       </Footer>
     </Layout>
   </Layout>
 );
 
-const mapDispatchToProps = ({ auth }) => ({ auth });
+const mapDispatchToProps = ({ user }) => ({ user });
 
 export default connect(mapDispatchToProps)(withState(
   'collapsed',

@@ -97,7 +97,17 @@ exports.login = async (req, res) => {
 
     return send(res, 403);
   } catch(e) {
-    console.info(e);
+    return send(res, 500, e)
+  }
+}
+
+exports.info = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const user = await User.findOne({ _id }).populate('organization').populate('courses').populate('finishedCourses');
+
+    return send(res, 200, user);
+  } catch(e) {
     return send(res, 500, e)
   }
 }
