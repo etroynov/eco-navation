@@ -45,7 +45,7 @@ export const fetchUserInfo = id => (dispatch) => {
   dispatch(requestUserInfo());
 
   return axios.get(
-    `http://localhost:8081/users/info/${id}`,
+    `http://api.ucavtor.ru/users/info/${id}`,
   ).then(
     ({ data }) => dispatch(receiveUserInfo(data)),
     err => error(),
