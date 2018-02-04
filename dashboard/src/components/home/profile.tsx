@@ -10,7 +10,7 @@ import { Card } from 'antd';
  * Expo
  */
 
-const Profile = ({ fio, position }) => (
+const Profile: React.SFC<IProfile> = ({ fio, position }) => (
   <Card title="ваш профиль" className="dashboard-card">
     <div className="profile">
       <figure className="profile__img-container">

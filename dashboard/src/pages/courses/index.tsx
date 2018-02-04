@@ -15,7 +15,7 @@ import { Card, Row, Col, Button, Modal } from 'antd';
  * Components
  */
 
-import Dashboard from '../layout';
+import Dashboard from '../../components/layout';
 
 declare const require: any;
 

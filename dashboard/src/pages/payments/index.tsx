@@ -14,15 +14,14 @@ import { Button } from 'antd';
  * Actions
  */
 
-import { fetchPayment } from '../actions/paymentsActions';
+import { fetchPayment } from '../../actions/paymentsActions';
 
 /*!
  * Components
  */
 
-import Dashboard from '../components/layout';
-
-import Index from '../components/payments';
+import Dashboard from '../../components/layout';
+import Index from '../../components/payments';
 
 /*!
  * Expo
@@ -45,13 +44,15 @@ const Courses = ({ location }) => (
   </Dashboard>
 );
 
-const mapStateToProps = ({ auth }) => ({ auth });
+const mapStateToProps = ({ user }) => ({ user });
 
 export default compose(
   connect(mapStateToProps, { fetchPayment }),
   lifecycle({
     componentDidMount() {
-      this.props.fetchPayment(this.props.auth.user._id);
+      const { user, fetchPayment } = this.props;
+
+      fetchPayment(user._id);
     },
   }),
 )(Courses as any);

@@ -17,11 +17,11 @@ import { fetchCourses } from '../actions/coursesActions';
 import { fetchSections } from '../actions/sectionsActions';
 
 /*!
- * Components
+ * Pages
  */
 
-import Index from '../components/course/index';
-import Show from '../components/course/show';
+import Index from '../pages/courses/index';
+import Show from '../pages/courses/show';
 
 /*!
  * Expo

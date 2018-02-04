@@ -8,8 +8,8 @@ import * as React from 'react';
  * Components
  */
 
-import Item from './../components/tests/item';
-import Result from './../components/tests/result';
+import Item from '../../components/tests/item';
+import Result from '../../components/tests/result';
 
 /**
  * Expo

@@ -1,5 +1,5 @@
-/**
- * Dependencies
+/*!
+ * Vendor
  */
 
 import * as React from 'react';
@@ -7,40 +7,28 @@ import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { compose, lifecycle } from 'recompose';
 
-import Login from './containers/login';
-import Home from './containers/home';
-import Courses from './containers/courses';
-import Payments from './containers/payments';
-import Test from './containers/tests';
-import Registration from './containers/registration';
+/*!
+ * Routes
+ */
 
-/**
+import Test     from './routes/tests';
+import Home     from './routes/home';
+import Auth     from './routes/auth';
+import Courses  from './routes/courses';
+import Payments from './routes/payments';
+
+/*!
  * Expo
  */
 
-class App extends React.Component<any, any> {
-  componentWillMount() {
-    const { user } = this.props;
+const App = () => (
+  <Switch>
+    <Route path="/" exact component={Home} />
+    <Route path="/courses" component={Courses} />
+    <Route path="/payments" component={Payments} />
+    <Route path="/tests" component={Test} />
+    <Route path="/auth" component={Auth} />
+  </Switch>
+);
 
-    if (!user.isAuthenticated && location.pathname !== '/login') {
-      location.pathname = '/login';
-    }
-  }
-
-  render() {
-    return (
-      <Switch>
-        <Route path="/" exact={true} component={Home} />
-        <Route path="/courses" component={Courses} />
-        <Route path="/payments" component={Payments} />
-        <Route path="/tests" component={Test} />
-        <Route path="/login" component={Login} />
-        <Route path="/registration" exact={true} component={Registration} />
-      </Switch>
-    );
-  }
-}
-
-const mapDispatchToProps = ({ user }) => ({ user });
-
-export default withRouter(connect(mapDispatchToProps)(App as any) as any);
+export default withRouter(App);
