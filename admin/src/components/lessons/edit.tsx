@@ -11,7 +11,7 @@ import { Form, Icon, Input, Button, Checkbox, Select, Tabs } from 'antd';
  * Actions
  */
 
-import { updateLesson } from '../../actions/lessonsActions';
+import { fetchLesson, updateLesson } from '../../actions/lessonsActions';
 import { success } from './../../utils/modals';
 
 /*!
@@ -28,6 +28,7 @@ class LessonUpdateForm extends React.Component<{
   _id: string;
   form: any;
   updateLesson: any;
+  fetchLesson: any;
   params: any;
 }, any> {
   state = {
@@ -37,17 +38,25 @@ class LessonUpdateForm extends React.Component<{
   };
 
   componentDidMount() {
-    const { id } = this.props.match.params;
+    const { match: { params } } = this.props;
 
-    this.setState({ _id: id });
+    this.fetchLesson(params.id);
   }
 
-  handleSubmit = (e) => {
+  fetchLesson = async (id) => {
+    const { payload } = await this.props.fetchLesson(id);
+
+    return this.setState({ ...payload });
+  }
+
+  private handleSubmit = (e) => {
     e.preventDefault();
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.updateLesson({ ...values, ...this.state }).then(success);
+        const data = { ...this.state, ...values };
+
+        this.props.updateLesson(data).then(() => success());
       }
     });
   }
@@ -90,5 +99,5 @@ class LessonUpdateForm extends React.Component<{
 const WrappedLessonUpdateForm = Form.create()(LessonUpdateForm as any);
 
 export default connect(null,
-  { updateLesson },
+  { fetchLesson, updateLesson },
 )(WrappedLessonUpdateForm as any);

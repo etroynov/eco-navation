@@ -99,7 +99,7 @@ class CourseEditForm extends React.Component<any, {
     slug: '',
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     const { match: { params } } = this.props;
 
     this.fetchCourse(params.id);

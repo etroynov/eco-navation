@@ -33,7 +33,10 @@ const Courses = ({ location }) => (
       <title>Платежи</title>
     </Helmet>
     <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
-      <h1 style={{ margin: 0 }}>Платежи</h1>
+      <h1 style={{ margin: 0 }}>
+        Платежи
+        <Button type="primary" style={{ marginTop: 5,  float: 'right' }}>Проверить статус оплаты</Button>
+      </h1>
     </header>
 
     <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>

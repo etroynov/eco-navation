@@ -44,7 +44,7 @@ const coursesReducer = createReducer({
     loading: false,
   }),
 
-  // FETCH COURSE
+  // CREATE COURSE
   [requestCreateCourse]: (state: IReducerState) => ({
     ...state,
     loading: true,

@@ -21,6 +21,9 @@ import {
   requestLessons,
   receiveLessons,
 
+  requestLesson,
+  receiveLesson,
+
   receiveCreateLesson,
   requestCreateLesson,
 
@@ -34,7 +37,7 @@ import {
 
 const lessonsReducer = createReducer(
   {
-    // List lesson
+    // FETCH LESSONS
     [requestLessons]: (state: IReducerState) => ({ ...state, loading: true }),
     [receiveLessons]: (state: IReducerState, payload) => ({
       ...state,
@@ -42,7 +45,7 @@ const lessonsReducer = createReducer(
       loading: false,
     }),
 
-    // Create lesson
+    // CREATE LESSON
     [requestCreateLesson]: (state: IReducerState) => ({
       ...state,
       loading: true,

@@ -23,6 +23,17 @@ exports.index = async (req, res) => {
   return send(res, 200, lessons);
 };
 
+exports.show = async (req, res) => {
+  try {
+    const lesson = await Lesson.findOne({ _id: req.params.id });
+    
+    return send(res, 200, lesson);
+  } catch(e) {
+    return send(res, 500, e);
+  }
+}
+
+
 exports.create = async (req, res) => {
   const data = await json(req);
   const lesson = await Lesson.create(data);
