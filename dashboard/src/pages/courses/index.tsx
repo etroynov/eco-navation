@@ -41,34 +41,25 @@ function error() {
  * Expo
  */
 
-const Index = ({ courses: { data, loaded }, auth }) => (
+const Index = ({ courses, user }) => (
   <Dashboard title="Курсы">
     <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}>
       <h1 style={{ margin: 0 }}>Доступные курсы</h1>
     </header>
     <Row gutter={16}>
-      {data.map(({ _id, name, content, thumb, price, duration }) => (
+      {courses.data.map(({ _id, name, content, thumb, price, duration }) => (
         <Col key={_id} span={6}>
-          <Card title={name} className="uc-course-card">
-            <img
-              src={thumb}
-              alt="го и чс"
-              className="uc-img-response"
-            />
-            <div style={{ padding: 20 }} dangerouslySetInnerHTML={{ __html: content.slice(0, 125) }} />
-            <Row>
-              <Col span={12}>
-                <p style={{ margin: 0, padding: 20, textAlign: 'center', fontSize: 24 }}>{price} / {duration} ч.</p>
-              </Col>
-              <Col span={12}>
-                <div style={{ padding: 20, textAlign: 'center' }}>
-                  <Button type="primary" onClick={() => init(auth.user._id, _id).then(
-                    ({ data }) => location.href = data.RedirectUrl,
-                    () => error(),
-                  )}>Купить</Button>
-                </div>
-              </Col>
-            </Row>
+          <Card title={name}
+            cover={<img src={thumb} alt={name} />}
+            actions={[
+              <p style={{ margin: 0, padding: 5, fontSize: 24 }}>{price} / {duration} ч.</p>,
+              <Button type="primary" onClick={() => init(user._id, _id).then(
+                ({ data }) => location.href = data.RedirectUrl,
+                () => error(),
+              )}>Купить</Button>,
+            ]}
+          >
+          <div style={{ padding: 20 }} dangerouslySetInnerHTML={{ __html: content.slice(0, 125) }} />
           </Card>
         </Col>
       )}
@@ -76,7 +67,7 @@ const Index = ({ courses: { data, loaded }, auth }) => (
   </Dashboard>
 );
 
-const mapStateToProps = ({ courses, auth }) => ({ courses, auth });
+const mapStateToProps = ({ courses, user }) => ({ courses, user });
 
 export default connect(
   mapStateToProps,

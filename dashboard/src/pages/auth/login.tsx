@@ -57,7 +57,7 @@ class LoginForm extends React.Component<any, any> {
           <title>Авторизация</title>
         </Helmet>
         <h2 style={{ margin: 0, textAlign: 'center', textTransform: 'uppercase' }}>авторизация</h2>
-        <h3 style={{ fontSize: 15, textAlign: 'center' }}>( 0.25.0 )</h3>
+        <h3 style={{ fontSize: 15, textAlign: 'center' }}>( 0.26.0 )</h3>
         <Form className="login-form" onSubmit={this.handleSubmit}>
           <FormItem>
             {getFieldDecorator('email', {

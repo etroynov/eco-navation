@@ -44,7 +44,7 @@ const LessonsIndex = ({ course, data, deleteLesson }) => (
           key: 'action',
           render: (text, record) => (
             <div className="table-controls">
-              <Link to={`/lessons/edit/${course}`} className="table-controls__item">
+              <Link to={`/lessons/edit/${record._id}`} className="table-controls__item">
                 <Button icon="edit" type="primary" />
               </Link>
               <Button
