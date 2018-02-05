@@ -9,7 +9,7 @@ import { Switch, Route, Link } from 'react-router-dom';
  * Pages
  */
 
-import Login from '../pages/auth/login';
+import Index from '../pages/auth';
 import Registration from '../pages/auth/registration';
 
 /*!
@@ -18,9 +18,8 @@ import Registration from '../pages/auth/registration';
 
 const Auth = () => (
   <Switch>
-    <Route path="/auth" component={Login} />
-    <Route exact path="/auth/login" component={Login} />
     <Route exact path="/auth/registration" component={Registration} />
+    <Route path="/auth" component={Index} />
   </Switch>
 );
 
