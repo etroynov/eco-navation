@@ -3,7 +3,9 @@
  */
 
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
+import { compose, lifecycle } from 'recompose';
 
 /*!
  * Pages
@@ -21,5 +23,16 @@ const Home = () => (
   </Switch>
 );
 
-export default Home;
+const mapStateToProps = ({ user }) => ({ user });
+
+export default compose(
+  connect(mapStateToProps),
+  lifecycle({
+    componentWillMount() {
+      if (!this.props.user.isAuthenticated) {
+        location.href = '/auth/login';
+      }
+    },
+  }),
+)(Home);
 

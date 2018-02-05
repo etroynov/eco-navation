@@ -15,7 +15,7 @@ import { Col, Row, Card } from 'antd';
  */
 
 const Course = ({ _id, name, thumb }) => (
-  <Col key={_id} span={12} className="">
+  <Col key={_id} span={12} style={{ marginBottom: 10, padding: '0 4px' }}>
     <Link to={`/courses/${_id}`}>
       <Card
         title={name}
