@@ -69,7 +69,7 @@ const Dashboard = ({ children, title = '', collapsed, onCollapse, user }) => (
       <Header style={{ background: '#fff', padding: '16px 0 0 0' }}>
         <Menu mode="horizontal" onClick={() => {
           localStorage.removeItem('jwtToken');
-          return location.pathname = '/auth/login';
+          return location.pathname = '/auth';
         }}>
           <SubMenu
             style={{

@@ -38,7 +38,7 @@ const sendPasswordToEmail = async ({ fio, email }, password) => {
         <p><strong>почта для входа на сайт:</strong> ${email}
         <p><strong>Пароль:</strong>  ${password}
 
-        <p>Вход на сайт осуществляется через <a href="http://dashboard.ucavtor.ru/login">Панель управления</a></p>
+        <p>Вход на сайт осуществляется через <a href="http://dashboard.ucavtor.ru/auth">Панель управления</a></p>
       `,
     };
 
