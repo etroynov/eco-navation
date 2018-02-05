@@ -19,8 +19,8 @@ import Registration from '../pages/auth/registration';
 const Auth = () => (
   <Switch>
     <Route path="/auth" component={Login} />
-    <Route exact path="/login" component={Login} />
-    <Route exact path="/registration" component={Registration} />
+    <Route exact path="/auth/login" component={Login} />
+    <Route exact path="/auth/registration" component={Registration} />
   </Switch>
 );
 
