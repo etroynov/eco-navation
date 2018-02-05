@@ -35,7 +35,9 @@ const Home = ({ user }) => (
     <div>
       <Row gutter={16}>
         <Col span={5}>
-          <Profile {...user} />
+          <Card title="ваш профиль" className="dashboard-card">
+            <Profile {...user} />
+          </Card>
         </Col>
         <Col span={10}>
           <Courses title="активные курсы" items={user.courses} />

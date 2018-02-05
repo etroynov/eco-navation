@@ -15,6 +15,8 @@ import { Layout, Menu, Breadcrumb, Icon } from 'antd';
  * Components
  */
 
+import Profile from './home/profile';
+
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -41,16 +43,7 @@ const Dashboard = ({ children, title = '', collapsed, onCollapse, user }) => (
       onCollapse={() => onCollapse(!collapsed)}
       className="sidebar"
     >
-      <div className="profile">
-        <figure className="profile__img-container">
-          <img src={require('./../assets/img/whitecollar.svg')} alt="" className="profile__img" />
-          <figcaption className="profile__img-caption">
-            <p style={{ margin: 0 }}>{user.fio}</p>
-            <p>{user.position}</p>
-            <hr className="profile__divider" />
-          </figcaption>
-        </figure>
-      </div>
+      <Profile {...user} />
       <Menu defaultSelectedKeys={['0']} mode="inline">
         <Menu.Item key="0">
           <Link to="/">
