@@ -30,7 +30,7 @@ export default compose(
   lifecycle({
     componentWillMount() {
       if (!this.props.user.isAuthenticated) {
-        location.href = '/auth/login';
+        location.href = '/auth';
       }
     },
   }),
