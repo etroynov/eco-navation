@@ -14,7 +14,10 @@ import { Button } from 'antd';
  * Actions
  */
 
-import { fetchPayment } from '../../actions/paymentsActions';
+import {
+  fetchPayment,
+  checkPaymentsStatus,
+} from '../../actions/paymentsActions';
 
 /*!
  * Components
@@ -27,19 +30,38 @@ import Index from '../../components/payments';
  * Expo
  */
 
-const Courses = ({ location }) => (
+const Courses = ({ location, checkPaymentsStatus }) => (
   <Dashboard>
     <Helmet>
       <title>Платежи</title>
     </Helmet>
-    <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
+    <header
+      style={{
+        marginBottom: 20,
+        padding: '10px 20px',
+        background: '#ffffff',
+        border: '1px solid #eeeeee',
+      }}
+    >
       <h1 style={{ margin: 0 }}>
         Платежи
-        <Button type="primary" style={{ marginTop: 5,  float: 'right' }}>Проверить статус оплаты</Button>
+        <Button 
+          type="primary"
+          style={{ marginTop: 5, float: 'right' }}
+          onClick={checkPaymentsStatus}
+        >
+          Проверить статус оплаты
+        </Button>
       </h1>
     </header>
 
-    <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
+    <section
+      style={{
+        padding: 10,
+        background: '#ffffff',
+        border: '1px solid #eeeeee',
+      }}
+    >
       <Switch>
         <Route exact path="/payments" component={Index} />
       </Switch>
@@ -50,12 +72,12 @@ const Courses = ({ location }) => (
 const mapStateToProps = ({ user }) => ({ user });
 
 export default compose(
-  connect(mapStateToProps, { fetchPayment }),
+  connect(mapStateToProps, { fetchPayment, checkPaymentsStatus }),
   lifecycle({
     componentDidMount() {
       const { user, fetchPayment } = this.props;
 
       fetchPayment(user._id);
-    },
-  }),
+    }
+  })
 )(Courses as any);

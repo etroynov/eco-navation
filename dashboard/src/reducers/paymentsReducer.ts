@@ -21,6 +21,9 @@ import {
   requestPayments,
   receivePayments,
 
+  requestPaymentStatus,
+  receivePaymentStatus,
+
   requestPayment,
   receivePayment,
 } from '../actions/paymentsActions';
@@ -30,7 +33,7 @@ import {
  */
 
 const paymentsReducer = createReducer({
-  // fetch payments
+  // FETCH PAYMENTS
   [requestPayments]: state => ({ ...state, loading: true }),
   [receivePayments]: (state, payload) => ({
     ...state,
@@ -38,13 +41,21 @@ const paymentsReducer = createReducer({
     loading: false,
   }),
 
-  // fetch payments
+  // FETCH PAYMENTS STATUS
+  [requestPaymentStatus]: state => ({ ...state, loading: true }),
+  [receivePaymentStatus]: (state, payload) => ({
+    ...state,
+    data: payload,
+    loading: false,
+  }),
+
+  // FETCH PAYMENT
   [requestPayment]: state => ({ ...state, loading: true }),
   [receivePayment]: (state, payload) => ({
     ...state,
     data: payload,
     loading: false,
-  })
+  }),
 }, initialState);
 
 export default paymentsReducer as any;

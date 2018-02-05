@@ -72,6 +72,7 @@ class LessonUpdateForm extends React.Component<{
     let editor = <p />;
 
     if (!!content.length) {
+      console.info(content);
       editor = <CKEditor 
         content={content}
         config={{ language: 'ru', allowedContent: true }}
@@ -88,14 +89,7 @@ class LessonUpdateForm extends React.Component<{
           })(<Input placeholder="тема урока" />)}
         </FormItem>
         <FormItem>
-          <CKEditor 
-            config={{
-              language: 'ru',
-              allowedContent: true,
-            }}
-            content={content} 
-            events={{ change: this.handleChangeContent }}
-          />
+          {editor}
         </FormItem>
 
         <FormItem>

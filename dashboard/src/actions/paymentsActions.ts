@@ -33,11 +33,9 @@ export const fetchPayments = () => (dispatch) => {
   );
 };
 
-
 /**
  * FETCH PAYMENT
  */
-
 
 export const requestPayment: any = createAction('REQUEST_PAYMENT');
 export const receivePayment: any = createAction('RECEIVE_PAYMENT');
@@ -52,3 +50,22 @@ export const fetchPayment = data => (dispatch) => {
     err => error(),
   );
 };
+
+/**
+ * CHECK PAYMENTS STATUS
+ */
+
+export const requestPaymentStatus: any = createAction('REQUEST_PAYMENTS_STATUS');
+export const receivePaymentStatus: any = createAction('RECEIVE_PAYMENTS_STATUS');
+
+export const checkPaymentsStatus = () => (dispatch) => {
+  dispatch(requestPaymentStatus());
+
+  return axios.get(
+    `http://api.ucavtor.ru/payments/check`,
+  ).then(
+    ({ data }) => dispatch(receivePaymentStatus(data)),
+    err => error(),
+  );
+};
+
