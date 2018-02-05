@@ -30,7 +30,11 @@ const Courses = ({ location }) => (
       }</title>
     </Helmet>
     <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
-      <h1 style={{ margin: 0 }}>Новый урок</h1>
+      <h1 style={{ margin: 0 }}>
+      {location.pathname.split('/').includes('edit')
+        ? 'Редактирование урока'
+        : 'Новый урок'}
+      </h1>
     </header>
 
     <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>

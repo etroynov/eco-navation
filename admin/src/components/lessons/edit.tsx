@@ -33,8 +33,8 @@ class LessonUpdateForm extends React.Component<{
 }, any> {
   state = {
     _id: '',
-    content: '',
-    status: 0,
+    name: '',
+    content: ''
   };
 
   componentDidMount() {
@@ -67,13 +67,24 @@ class LessonUpdateForm extends React.Component<{
   
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { content } = this.state;
+    const { name, content } = this.state;
+
+    let editor = <p />;
+
+    if (!!content.length) {
+      editor = <CKEditor 
+        content={content}
+        config={{ language: 'ru', allowedContent: true }}
+        events={{ change: this.handleChangeContent }}
+      />;
+    }
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem>
           {getFieldDecorator('name', {
             rules: [{ required: true, message: 'Укажите тему урока!' }],
+            initialValue: name,
           })(<Input placeholder="тема урока" />)}
         </FormItem>
         <FormItem>
