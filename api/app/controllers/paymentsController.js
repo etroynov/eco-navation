@@ -61,7 +61,7 @@ exports.create = async (req, res) => {
       Amount: course.price * 100,
       IP: req.headers['x-forwarded-for'],
       SessionType: 'Pay',
-      Url: `http://localhost:2000/payments/check?orderid={orderid}&result={success}`,
+      Url: `http://dashboard.ucavtor.ru/payments/check?orderid={orderid}&result={success}`,
       Language: 'RU',
       Total: course.price,
       Product: `"Курс ${course.name}"`,
