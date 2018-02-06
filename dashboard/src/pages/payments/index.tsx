@@ -16,8 +16,15 @@ import { Button } from 'antd';
 
 import {
   fetchPayment,
+  updatePayment,
   checkPaymentsStatus,
 } from '../../actions/paymentsActions';
+
+/*!
+ * Utils
+ */
+
+import searchToObject from '../../utils/searchToObject';
 
 /*!
  * Components
@@ -30,7 +37,7 @@ import Index from '../../components/payments';
  * Expo
  */
 
-const Courses = ({ location, checkPaymentsStatus }) => (
+const Courses = ({ payments, location, checkPaymentsStatus }) => (
   <Dashboard>
     <Helmet>
       <title>Платежи</title>
@@ -45,13 +52,14 @@ const Courses = ({ location, checkPaymentsStatus }) => (
     >
       <h1 style={{ margin: 0 }}>
         Платежи
-        <Button 
+        {/* <Button 
           type="primary"
+          loading={payments.loading}
           style={{ marginTop: 5, float: 'right' }}
           onClick={checkPaymentsStatus}
         >
           Проверить статус оплаты
-        </Button>
+        </Button> */}
       </h1>
     </header>
 
@@ -63,19 +71,27 @@ const Courses = ({ location, checkPaymentsStatus }) => (
       }}
     >
       <Switch>
-        <Route exact path="/payments" component={Index} />
+        <Route path="/payments" component={Index} />
       </Switch>
     </section>
   </Dashboard>
 );
 
-const mapStateToProps = ({ user }) => ({ user });
+const mapStateToProps = ({ user, payments }) => ({ user, payments });
 
 export default compose(
-  connect(mapStateToProps, { fetchPayment, checkPaymentsStatus }),
+  connect(mapStateToProps, { fetchPayment, updatePayment, checkPaymentsStatus }),
   lifecycle({
     componentDidMount() {
-      const { user, fetchPayment } = this.props;
+      const { user, location, fetchPayment, updatePayment } = this.props;
+      const { orderid, result } = searchToObject(location.search);
+
+      if (orderid && result === 'True') {
+        updatePayment({
+          _id: orderid,
+          state: 'Charged',
+        });
+      }
 
       fetchPayment(user._id);
     }

@@ -9,6 +9,7 @@
  */
 
 const mongoose         = require('mongoose');
+const { decode }       = require('jsonwebtoken');
 const { send, json }   = require('micro');
 const { init, status } = require('../utils/payture');
 
@@ -56,57 +57,64 @@ exports.create = async (req, res) => {
     });
 
     const data = {
-      OrderId: payment._id,
+      OrderId: String(payment._id),
       Amount: course.price * 100,
-      IP: payment.id,
+      IP: req.headers['x-forwarded-for'],
       SessionType: 'Pay',
-      Url: `http://dashboard.ucavtor.ru/payments?check=${payment.id}`,
+      Url: `http://localhost:2000/payments/check?orderid={orderid}&result={success}`,
       Language: 'RU',
       Total: course.price,
-      Product: 'курс промышленая безопасность'
+      Product: `"Курс ${course.name}"`,
     }
 
-    const paymentStatus = await init(data);
-    payment.sessionId = paymentStatus.SessionId;
+    const initStatus = await init(data);
+    payment.ip = req.headers['x-forwarded-for'];
+    payment.sessionId = initStatus.SessionId;
+
     await payment.save();
 
-    if (paymentStatus.Success === "True") {
-      return send(res, 200, paymentStatus);
-    } else {
-      return send(res, 500);
-    }
+    if (initStatus.Success === "True") { return send(res, 200, initStatus); } 
+
+    return send(res, 500);
   } catch(e) {
-    console.info(e);
     return send(res, 500, e);
   }
 };
 
 exports.update = async (req, res) => {
-  const data = await json(req);
-  const { _id } = data;
+  try {
+    const data = await json(req);
+    const { _id } = data;
 
-  const payment = await Payment.findOneAndUpdate({ _id }, data, { new: true });
+    const payment = await Payment.findOneAndUpdate({ _id }, data, { new: true });
 
-  return send(res, 200, payment);
+    if (payment.state === 'Charged') {
+      const user = await User.findOne({ _id: payment.user });
+      user.courses.push(payment.course);
+      
+      await user.save();
+    }
+
+    return send(res, 200, payment);
+  } catch(e) {
+    return send(res, 500, e);
+  }
 };
 
 exports.check = async (req, res) => {
-  const data = await json(req);
-  const { _id } = data;
-
-  const payment = await Payment.findOneAndUpdate({ _id }, data, { new: true });
-
-  return send(res, 200, payment);
-};
-
-
-exports.delete = async (req, res) => {
   try {
-    const data   = await json(req);
-    const payment = await Payment.remove(data);
-    
+    const token = req.headers.authorization.split(' ')[1];
+    const { _id }  = decode(token);
+
+    const payments = await Payment.find({ user: _id, state: 'processing' });
+    const results = await Promise.all(payments.map(payment => status(String(payment._id)) ));
+  
+    results.forEach(result => {
+      console.info(result);
+    });
+
     return send(res, 200);
   } catch(e) {
-    return send(res, 500);
+    return send(res, 500, e);
   }
 };

@@ -99,11 +99,12 @@ module.exports = compose(
 
   /** PAYMENTS **/
   get('/payments',         paymentsController.index),
-  get('/payments/:id',     paymentsController.show),
+  get('/payments/check',   paymentsController.check),
   post('/payments/create', paymentsController.create),
   post('/payments/update', paymentsController.update),
 
-  get('/payments/check/:id',  paymentsController.check),
+  get('/payments/:id',     paymentsController.show),
+
 
  /** ORGANIZATIONS **/
   get('/organizations',           organizationsController.index),

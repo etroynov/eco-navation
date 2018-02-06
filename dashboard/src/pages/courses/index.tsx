@@ -6,7 +6,7 @@ import * as React from 'react';
 import axios from 'axios';
 import Helmet from 'react-helmet';
 
-import { compose, lifecycle } from 'recompose';
+import { compose, withState } from 'recompose';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Card, Row, Col, Button, Modal } from 'antd';
@@ -41,7 +41,7 @@ function error() {
  * Expo
  */
 
-const Index = ({ courses, user }) => (
+const Index = ({ courses, user, status, setPaymentStatus }) => (
   <Dashboard title="Курсы">
     <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff' }}>
       <h1 style={{ margin: 0 }}>Доступные курсы</h1>
@@ -53,10 +53,14 @@ const Index = ({ courses, user }) => (
             cover={<img src={thumb} alt={name} />}
             actions={[
               <p style={{ margin: 0, padding: 5, fontSize: 24 }}>{price} / {duration} ч.</p>,
-              <Button type="primary" onClick={() => init(user._id, _id).then(
-                ({ data }) => location.href = data.RedirectUrl,
-                () => error(),
-              )}>Купить</Button>,
+              <Button type="primary" loading={status} onClick={() => {
+                setPaymentStatus(true);
+
+                return init(user._id, _id).then(
+                    ({ data }) => location.href = data.RedirectUrl,
+                    () => error(),
+                  );
+              }}>Купить</Button>,
             ]}
           >
           <div style={{ padding: 20 }} dangerouslySetInnerHTML={{ __html: content.slice(0, 125) }} />
@@ -69,6 +73,7 @@ const Index = ({ courses, user }) => (
 
 const mapStateToProps = ({ courses, user }) => ({ courses, user });
 
-export default connect(
-  mapStateToProps,
-)(Index);
+export default compose(
+  connect(mapStateToProps),
+  withState('status', 'setPaymentStatus', false),
+)(Index as any);

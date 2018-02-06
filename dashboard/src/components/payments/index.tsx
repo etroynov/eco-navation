@@ -36,12 +36,12 @@ const columns: any = [
     render: (text, record) => moment(text).locale('ru').format('L'),
   },  {
     title: 'Статус',
-    dataIndex: 'status',
-    key: 'status',
+    dataIndex: 'state',
+    key: 'state',
     render(text) {
-      switch (status) {
-        case 'charged': return 'опубликованно';
-        case 'rejected': return 'отклонен';
+      switch (text) {
+        case 'Charged': return 'оплачен';
+        case 'Rejected': return 'отклонен';
         default: return 'ожидает оплаты';
       }
     },

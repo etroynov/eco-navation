@@ -51,6 +51,27 @@ export const fetchPayment = data => (dispatch) => {
   );
 };
 
+
+/**
+ * UPDATE PAYMENT
+ */
+
+export const requestUpdatePayment: any = createAction('REQUEST_UPDATE_PAYMENT');
+export const receiveUpdatePayment: any = createAction('RECEIVE_UPDATE_PAYMENT');
+
+export const updatePayment = data => (dispatch) => {
+  dispatch(requestUpdatePayment());
+
+  return axios.post(
+    'http://api.ucavtor.ru/payments/update',
+    data,
+  ).then(
+    ({ data }) => dispatch(receiveUpdatePayment(data)),
+    err => error(),
+  );
+};
+
+
 /**
  * CHECK PAYMENTS STATUS
  */

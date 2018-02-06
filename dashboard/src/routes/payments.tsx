@@ -17,7 +17,7 @@ import Index from '../pages/payments';
 
 const Payments = () => (
   <Switch>
-    <Route exact path="/payments" component={Index} />
+    <Route path="/payments" component={Index} />
   </Switch>
 );
 

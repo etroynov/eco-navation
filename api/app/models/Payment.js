@@ -18,11 +18,11 @@ const Schema     = mongoose.Schema;
 const PaymentSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   course: { type: Schema.Types.ObjectId, ref: 'Course' },
-  total: Number,
   ip: String,
-  status: String,
-  sessionId: String,
-  type: Number,
+  state: {
+    type: String,
+    default: 'processing'
+  }
 });
 
 /**

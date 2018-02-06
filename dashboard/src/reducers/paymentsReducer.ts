@@ -20,12 +20,15 @@ const initialState: IReducerState = {
 import {
   requestPayments,
   receivePayments,
+ 
+  requestPayment,
+  receivePayment,
 
   requestPaymentStatus,
   receivePaymentStatus,
-
-  requestPayment,
-  receivePayment,
+  
+  requestUpdatePayment,
+  receiveUpdatePayment,
 } from '../actions/paymentsActions';
 
 /*!
@@ -41,6 +44,14 @@ const paymentsReducer = createReducer({
     loading: false,
   }),
 
+  // FETCH PAYMENT
+  [requestPayment]: state => ({ ...state, loading: true }),
+  [receivePayment]: (state, payload) => ({
+    ...state,
+    data: payload,
+    loading: false,
+  }),
+
   // FETCH PAYMENTS STATUS
   [requestPaymentStatus]: state => ({ ...state, loading: true }),
   [receivePaymentStatus]: (state, payload) => ({
@@ -49,13 +60,25 @@ const paymentsReducer = createReducer({
     loading: false,
   }),
 
-  // FETCH PAYMENT
-  [requestPayment]: state => ({ ...state, loading: true }),
-  [receivePayment]: (state, payload) => ({
+  // UPDATE COURSE
+  [requestUpdatePayment]: (state: IReducerState) => ({
     ...state,
-    data: payload,
-    loading: false,
+    loading: true,
   }),
+  [receiveUpdatePayment]: (state: IReducerState, payload) => {
+    const data = state.data.map((item) => {
+      if (item._id === payload._id) {
+        return { ...item, ...payload };
+      }
+
+      return item;
+    });
+
+    return {
+      data,
+      loading: false,
+    };
+  }, 
 }, initialState);
 
 export default paymentsReducer as any;
