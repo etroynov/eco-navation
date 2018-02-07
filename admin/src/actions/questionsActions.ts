@@ -64,7 +64,7 @@ export const createQuestion = data => (dispatch) => {
   dispatch(requestCreateQuestion());
 
   return axios.post(
-    'http://localhost:8081/questions/create',
+    'http://api.ucavtor.ru/questions/create',
     data,
   ).then(
     ({ data }) => dispatch(receiveCreateQuestion(data)),
