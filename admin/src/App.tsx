@@ -13,6 +13,7 @@ import Login         from './containers/login';
 import Home          from './containers/home';
 import Courses       from './containers/courses';
 import Lessons       from './containers/lessons';
+import Questions     from './containers/questions';
 import Sections      from './containers/sections';
 import Pages         from './containers/pages';
 import Users         from './containers/users';
@@ -32,6 +33,7 @@ const App = () => (
     <Route path="/pages"         component={Pages} />
     <Route path="/lessons"       component={Lessons} />
     <Route path="/courses"       component={Courses} />
+    <Route path="/questions"     component={Questions} />
     <Route path="/sections"      component={Sections} />
     <Route path="/organizations" component={Organizations} />
     <Route path="/posts"         component={Posts} />

@@ -22,6 +22,16 @@ exports.index = async (req, res) => {
   return send(res, 200, questions);
 };
 
+exports.show = async (req, res) => {
+  try {
+    const question = await Question.findOne({ _id: req.params.id });
+    
+    return send(res, 200, question);
+  } catch(e) {
+    return send(res, 500, e);
+  }
+}
+
 exports.create = async (req, res) => {
   const data = await json(req);
   const question = await Question.create(data);

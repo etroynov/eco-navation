@@ -16,7 +16,7 @@ import { error } from './../utils/modals';
  */
 
 /**
- * LIST Question
+ * FETCH QUESTIONS
  */
 
 
@@ -36,6 +36,24 @@ export const fetchQuestions = () => (dispatch) => {
 };
 
 /**
+ * FETCH QUESTION
+ */
+
+export const requestQuestion: any = createAction('REQUEST_QUESTION');
+export const receiveQuestion: any = createAction('RECEIVE_QUESTION');
+
+export const fetchQuestion = data => (dispatch) => {
+  dispatch(requestQuestion());
+
+  return axios.get(
+    `http://api.ucavtor.ru/questions/${data}`,
+  ).then(
+    ({ data }) => dispatch(receiveQuestion(data)),
+    err => error(),
+  );
+};
+
+/**
  * CREATE QUESTION
  */
 
@@ -46,7 +64,7 @@ export const createQuestion = data => (dispatch) => {
   dispatch(requestCreateQuestion());
 
   return axios.post(
-    'http://api.ucavtor.ru/questions/create',
+    'http://localhost:8081/questions/create',
     data,
   ).then(
     ({ data }) => dispatch(receiveCreateQuestion(data)),
@@ -87,8 +105,7 @@ export const deleteQuestion = data => (dispatch) => {
     'http://api.ucavtor.ru/questions/delete',
     data,
   ).then(
-    ({ data }) => dispatch(receiveDeleteQuestion(data)),
+    () => dispatch(receiveDeleteQuestion(data)),
     err => error(),
   );
 };
-

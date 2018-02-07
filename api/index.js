@@ -33,6 +33,7 @@ fs.readdirSync(path.join(__dirname, '/app/models')).forEach((file) => {
  */
 
 const lessonsController       = require('./app/controllers/lessonsController');
+const questionsController     = require('./app/controllers/questionsController');
 const pagesController         = require('./app/controllers/pagesController');
 const coursesController       = require('./app/controllers/coursesController');
 const paymentsController      = require('./app/controllers/paymentsController');
@@ -70,6 +71,13 @@ module.exports = compose(
   post('/lessons/create',  lessonsController.create),
   post('/lessons/update',  lessonsController.update),
   post('/lessons/delete',  lessonsController.delete),
+
+  /** QUESTIONS **/
+  get('/questions',          questionsController.index),
+  get('/questions/:id',      questionsController.show),
+  post('/questions/create',  questionsController.create),
+  post('/questions/update',  questionsController.update),
+  post('/questions/delete',  questionsController.delete),
   
   /** SECTIONS **/
   get('/sections',         sectionsController.index),

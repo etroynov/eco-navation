@@ -33,7 +33,6 @@ exports.show = async (req, res) => {
   }
 }
 
-
 exports.create = async (req, res) => {
   const data = await json(req);
   const lesson = await Lesson.create(data);

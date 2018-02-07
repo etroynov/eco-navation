@@ -48,7 +48,7 @@ const columns = [
  * Expo
  */
 
-const QuestionsIndex = ({ loading, data }) => (
+const QuestionsIndex = ({ course, loading, data }) => (
   <div>
     <Table 
       columns={columns}
@@ -57,7 +57,7 @@ const QuestionsIndex = ({ loading, data }) => (
       loading={loading}
     />
     <div style={{ float: 'right', margin: '10px 0 5px 0' }}>
-      <Link to="/questions/create">
+      <Link to={`/questions/create/${course}`}>
         <Button type="primary" style={{ marginLeft: 10 }}>Добавить вопрос</Button>
       </Link>
     </div>

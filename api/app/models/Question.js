@@ -17,7 +17,7 @@ const Schema   = mongoose.Schema;
 
 const QuestionSchema = new Schema({
   question: String,
-  answers: { type: Array, default: '' },
+  answers: { type: Array, default: [] },
   rightAnswer: { type: Number, default: 0 },
   course: { type: Schema.Types.ObjectId, ref: 'Course' },
 });
