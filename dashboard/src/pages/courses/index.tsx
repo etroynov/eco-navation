@@ -63,7 +63,6 @@ const Index = ({ courses, user, status, setPaymentStatus }) => (
               }}>Купить</Button>,
             ]}
           >
-          <div style={{ padding: 20 }} dangerouslySetInnerHTML={{ __html: content.slice(0, 125) }} />
           </Card>
         </Col>
       )}
