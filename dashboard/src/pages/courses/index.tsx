@@ -47,9 +47,10 @@ const Index = ({ courses, user, status, setPaymentStatus }) => (
       <h1 style={{ margin: 0 }}>Доступные курсы</h1>
     </header>
     <Row gutter={16}>
-      {courses.data.map(({ _id, name, content, thumb, price, duration }) => (
+      {courses.data.filter(item => item.status > 0).map(({ _id, name, content, thumb, price, duration }) => (
         <Col key={_id} span={6}>
           <Card title={name}
+            style={{ marginBottom: 15 }}
             cover={<img src={thumb} alt={name} />}
             actions={[
               <p style={{ margin: 0, padding: 5, fontSize: 24 }}>{price} / {duration} ч.</p>,
