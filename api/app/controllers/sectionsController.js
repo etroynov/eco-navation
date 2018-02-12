@@ -12,20 +12,24 @@ const { send, json } = require('micro');
 const mongoose = require('mongoose');
 
 const Section = mongoose.model('Section');
+const Course = mongoose.model('Course');
 
 /*!
  * Expos
  */
 
 exports.index = async (req, res) => {
-  const sections = await Section.find().populate('courses');
+  const sections = await Section.find();
 
   return send(res, 200, sections);
 };
 
 exports.show = async (req, res) => {
   try {
-    const section = await Section.findOne({ slug: req.params.slug }).populate('courses');
+    const section = await Section.findOne({ slug: req.params.slug });
+    const courses = await Course.find({ sections: section.id });
+
+    section.courses = courses;
 
     return send(res, 200, section);
   } catch(e) {
