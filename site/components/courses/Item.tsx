@@ -2,18 +2,15 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Row, Col } from 'antd';
 
-const Course = ({ img, banner, name, description, duration, price }) => (
+const Course = ({ icon, name, content, slug }) => (
   <Col span={12}>
     <article className="course">
-      <Link
-        as={`/курс/${name.toLowerCase().replace(/\s/g, '-')}`}
-        href={`/course?name=${name}&description=${description}&img=${img}&banner=${banner}&duration=${duration}&price=${price}`}
-      >
+      <Link href={`/courses/${slug}`}>
         <a className="course__link">
           <Row>
             <Col span={6} className="left-column">
               <figure className="course__img-container">
-                <img src={img} alt={name} className="course__img" width="100" height="100" />
+                <img src={icon} alt={name} className="course__img" width="100" height="100" />
               </figure>
             </Col>
             
@@ -21,9 +18,7 @@ const Course = ({ img, banner, name, description, duration, price }) => (
               <header className="course__header">
                 <h3 className="course__title">{`${name.slice(0, 40)}...`}</h3>
               </header>
-              <section className="course__body">
-                <p className="course__text">{`${description.slice(0, 90)}...`}</p>
-              </section>
+              <section className="course__body" dangerouslySetInnerHTML={{__html: `${content.slice(0, 100)}...` }} />
             </Col>
           </Row>
         </a>

@@ -11,7 +11,7 @@ import { Row, Col } from 'antd';
  */
 
 import Site from '../components/layout';
-import Courses from '../components/courses';
+import Course from '../components/courses/Item';
 
 /*!
  * Expo
@@ -37,7 +37,10 @@ const Section = ({ section: { name, content, courses }, settings }) => (
             ))}
           </div> */}
         </header>
-        <Courses courses={courses} />
+        <Row>
+          {courses.map((item, index) => <Course key={index} {...item} />)}
+        </Row>
+        
         <section className="courses__content" dangerouslySetInnerHTML={{__html: content }} />
       </div>
     </section>
@@ -47,12 +50,12 @@ const Section = ({ section: { name, content, courses }, settings }) => (
 Section.getInitialProps = async ({ query }) => {
   try {
     console.info(query);
-    const [ sectionRes, settingsRes ] = await Promise.all([
+    const [sectionRes, settingsRes] = await Promise.all([
       axios.get(`http://api.ucavtor.ru/sections/${query.slug}`),
       axios.get('http://api.ucavtor.ru/settings'),
     ]);
     
-    let settings = {};
+    const settings = {};
 
     if (Array.isArray(settingsRes.data) && !!settingsRes.data.length) {
       settingsRes.data.forEach(({ value, slug }) => settings[slug] = value );
@@ -65,6 +68,6 @@ Section.getInitialProps = async ({ query }) => {
   } catch (e) {
     return {};
   }
-}
+};
 
 export default Section;

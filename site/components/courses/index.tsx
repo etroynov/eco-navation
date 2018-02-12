@@ -39,6 +39,7 @@ class Courses extends React.Component {
       items = [],
       tagsCloud = [],
     } = this.props;
+    console.info(this.props);
     const { selectedTags } = this.state;
 
     let currentItems = items;
