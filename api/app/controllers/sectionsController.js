@@ -26,9 +26,7 @@ exports.index = async (req, res) => {
 exports.show = async (req, res) => {
   try {
     const section = await Section.findOne({ slug: req.params.slug }).populate('courses');
-    
-    console.info(req.params);
-    
+
     return send(res, 200, section);
   } catch(e) {
     return send(res, 500, e);

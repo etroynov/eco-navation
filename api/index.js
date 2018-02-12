@@ -82,7 +82,7 @@ module.exports = compose(
   
   /** SECTIONS **/
   get('/sections',         sectionsController.index),
-  get('/sections/:id',     sectionsController.show),
+  get('/sections/:slug',   sectionsController.show),
   post('/sections/create', sectionsController.create),
   post('/sections/update', sectionsController.update),
   post('/sections/delete', sectionsController.delete),
