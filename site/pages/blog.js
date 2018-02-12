@@ -27,8 +27,8 @@ const Page = ({ page: { _id = 0, title = '', description = '', name = '', conten
 Page.getInitialProps = async ({ query }) => {
   try {
     const [ pageRes, settingsRes ] = await Promise.all([
-      axios.get(`http://localhost:8081/pages/${query.slug}`),
-      axios.get('http://localhost:8081/settings'),
+      axios.get(`http://api.ucavtor.ru/pages/${query.slug}`),
+      axios.get('http://api.ucavtor.ru/settings'),
     ]);
     
     let settings = {};

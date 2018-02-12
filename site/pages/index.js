@@ -35,7 +35,7 @@ const Home = ({ sections, settings }) => (
 Home.getInitialProps = async () => {
   const [ sectionsRes, settingsRes ] = await Promise.all([
     axios.get('http://api.ucavtor.ru/sections'),
-    axios.get('http://localhost:8081/settings'),
+    axios.get('http://api.ucavtor.ru/settings'),
   ]);
 
   let settings = {};

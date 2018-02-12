@@ -44,15 +44,15 @@ const Footer = ({ settings }) => (
                   as="/oferta"
                   href="/page?slug=oferta"
                 >
-                  <a className="footer-menu__text">Пользовательское соглашение</a>
+                  <a className="footer-menu__text">Оферта</a>
                 </Link>
               </li>
               <li className="footer-menu__item">
                 <Link
                   as="/polzovatelskoe-soglashenie"
-                  href="/page?sulg=polzovatelskoe-soglashenie"
+                  href="/page?slug=polzovatelskoe-soglashenie"
                 >
-                  <a className="footer-menu__text">Оферта</a>
+                  <a className="footer-menu__text">Пользовательское соглашение</a>
                 </Link>
               </li>
               <li className="footer-menu__item">
