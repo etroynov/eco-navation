@@ -1,10 +1,10 @@
 {
   "name": "ucavtor-api",
-  "version": "0.31.0",
+  "version": "0.60.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "../node_modules/micro-dev/bin/micro.js -p 8084",
+    "start": "../node_modules/micro/bin/micro.js -p 8084",
     "start-dev-api": "../node_modules/micro-dev/bin/micro-dev.js -p 8081"
   },
   "keywords": [],
