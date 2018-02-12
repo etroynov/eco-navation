@@ -6,7 +6,7 @@
   "scripts": {
     "start-dev-site": "../node_modules/next/dist/bin/next-dev -p 4000",
     "start": "../node_modules/next/dist/bin/next-start -p 8083",
-    "build": "../node_modules/next/dist/bin/next-build build"
+    "build": "../node_modules/next/dist/bin/next-build"
   },
   "keywords": [],
   "author": "",
