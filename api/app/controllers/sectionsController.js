@@ -23,6 +23,18 @@ exports.index = async (req, res) => {
   return send(res, 200, sections);
 };
 
+exports.show = async (req, res) => {
+  try {
+    const section = await Section.findOne({ slug: req.params.slug }).populate('courses');
+    
+    console.info(req.params);
+    
+    return send(res, 200, section);
+  } catch(e) {
+    return send(res, 500, e);
+  }
+}
+
 exports.create = async (req, res) => {
   const data = await json(req);
   const section = await Section.create(data);

@@ -54,6 +54,7 @@ module.exports = compose(
 )(router(
   /** PAGES **/
   get('/pages',            pagesController.index),
+  get('/pages/:slug',      pagesController.show),
   post('/pages/create',    pagesController.create),
   post('/pages/update',    pagesController.update),
   post('/pages/delete',    pagesController.delete),
@@ -81,6 +82,7 @@ module.exports = compose(
   
   /** SECTIONS **/
   get('/sections',         sectionsController.index),
+  get('/sections/:id',     sectionsController.show),
   post('/sections/create', sectionsController.create),
   post('/sections/update', sectionsController.update),
   post('/sections/delete', sectionsController.delete),

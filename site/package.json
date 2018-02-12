@@ -4,21 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev-site": "next -p 4000",
-    "start": "next start -p 8083",
-    "build": "next build"
+    "start-dev-site": "../node_modules/next/dist/bin/next-dev -p 4000",
+    "start": "../node_modules/next/dist/bin/next-start -p 8083",
+    "build": "../node_modules/next/dist/bin/next-build build"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "next": "^4.2.1",
-    "next-redux-wrapper": "^1.3.5",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-yandex-metrika": "^2.3.0"
-  },
-  "devDependencies": {
-    "babel-plugin-import": "^1.6.3"
-  }
+  "license": "ISC"
 }

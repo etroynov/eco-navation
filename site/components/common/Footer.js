@@ -1,8 +1,10 @@
 /*!
  * Vendor
  */
+
 import * as React from 'react';
 import Link from 'next/link';
+import get from 'lodash/get';
 
 import { Col, Row } from 'antd';
 import { YMInitializer } from 'react-yandex-metrika';
@@ -11,39 +13,68 @@ import { YMInitializer } from 'react-yandex-metrika';
  * Expo
  */
 
-const Footer = () => (
+const Footer = ({ settings }) => (
   <footer className="footer">
     <div className="uc-container">
       <Row>
-        <Col span={12}>
+        <Col span={6}>
           <section className="menu-footer">
             <header className="footer-menu__header">
               <h4 className="footer-menu__title">О нас</h4>
             </header>
             <ul className="footer-menu__body">
               <li className="footer-menu__item">
-                <Link href="/about">
+                <Link 
+                  as="/o-companii"
+                  href="/page?slug=o-companii"
+                >
                   <a className="footer-menu__text">Компания</a>
                 </Link>
               </li>
               <li className="footer-menu__item">
-                <Link href="/job">
+                <Link
+                  as="/rabota"
+                  href="/page?slug=rabota"
+                >
                   <a className="footer-menu__text">Работа</a>
                 </Link>
               </li>
               <li className="footer-menu__item">
-                <Link href="/oferta">
+                <Link
+                  as="/oferta"
+                  href="/page?slug=oferta"
+                >
                   <a className="footer-menu__text">Пользовательское соглашение</a>
                 </Link>
               </li>
               <li className="footer-menu__item">
-                <Link href="/oferta">
+                <Link
+                  as="/polzovatelskoe-soglashenie"
+                  href="/page?sulg=polzovatelskoe-soglashenie"
+                >
                   <a className="footer-menu__text">Оферта</a>
                 </Link>
               </li>
               <li className="footer-menu__item">
-                <Link href="/confidentiality">
+                <Link
+                  as="/confidentiality"
+                  href="/page?slug=confidentiality"
+                >
                   <a className="footer-menu__text">Положение о конфиденциальности</a>
+                </Link>
+              </li>
+            </ul>
+          </section>
+        </Col>
+        <Col span={6}>
+          <section className="menu-footer">
+            <header className="footer-menu__header">
+              <h4 className="footer-menu__title">Полезная информация</h4>
+            </header>
+            <ul className="footer-menu__body">
+              <li className="footer-menu__item">
+                <Link href="/blog">
+                  <a className="footer-menu__text">Блог</a>
                 </Link>
               </li>
             </ul>
@@ -51,12 +82,12 @@ const Footer = () => (
         </Col>
         <Col span={12}>
           <div className="footer__about">
-            <p><strong>Учебный центр "Автор"</strong> преподаем в режиме онлайн посредством браузера видео уроки, скринкасты и многое другое. Мы стремимся помочь вам учиться.</p>
+            <p>{get(settings, 'footer-description')}</p>
           </div>
         </Col>
       </Row>
       <div className="footer__copyright">
-        <p className="footer_copyright-light uk-text-small">© 2017 Автор. Россия, Челябинск. | проспект Ленина д.83,офис 510 | +7 (904) 812-57-38 | <a href="mailto:kursy@ucavtor.ru">kursy@ucavtor.ru</a></p>
+        <p className="footer_copyright-light uk-text-small">{`© 2017 Автор. ${get(settings, 'address')} | ${get(settings, 'header-phone')} | `}<a href={`mailto:${get(settings, 'email')}`}>{get(settings, 'email')}</a></p>
       </div>
     </div>
     <YMInitializer accounts={[47130420]} version="2" />

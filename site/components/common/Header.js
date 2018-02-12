@@ -1,27 +1,23 @@
-import * as React from 'react';
-
 /*!
- * Components
+ * Vendor
  */
 
+import * as React from 'react';
+import get from 'lodash/get';
 import Head from 'next/head';
 import Link from 'next/link';
-import { connect } from 'react-redux';
 import { Menu, Icon } from 'antd';
-
-/*!
- * Utils
- */
 
 /*!
  * Expo
  */
 
-const Header = ({ settings }) => (
+const Header = ({ title, description, settings }) => (
   <header className="header">
     <div className="uc-container">
       <Head>
-        <title>Учебный центр "Автор"</title>
+        <title>{ title ? title : 'Учебный центр "Автор"' }</title>
+        <meta name="description" content={description} />
         <link rel="stylesheet" href="/static/css/antd.min.css"/>
         <link rel="stylesheet" href="/static/css/style.min.css"/>
       </Head>
@@ -54,10 +50,10 @@ const Header = ({ settings }) => (
               </Link>
             </Menu.Item>
             <Menu.Item key={4} style={{ float: 'right' }}>
-              <Icon type="phone" /> +7 (904) 812-57-38
+              <Icon type="phone" /> {get(settings, 'header-phone')}
             </Menu.Item>
             <Menu.Item key={5} style={{ float: 'right' }}>
-              <a href="mailto:kursy@ucavtor.ru"><Icon type="mail" />kursy@ucavtor.ru</a>
+              <a href={`mailto:${get(settings, 'email')}`}><Icon type="mail" />{get(settings, 'email')}</a>
             </Menu.Item>
           </Menu>
         </nav>
@@ -66,8 +62,4 @@ const Header = ({ settings }) => (
   </header>
 );
 
-const mapStateToProps = ({ settings }) => ({ settings });
-
-export default connect(
-  mapStateToProps,
-)(Header);
+export default Header;

@@ -2,10 +2,9 @@
  * Vendor
  */
 
+import axios from 'axios';
 import * as React from 'react';
 import Link from 'next/link';
-import { compose, lifecycle } from 'recompose';
-import withRedux from 'next-redux-wrapper';
 import { Col, Row } from 'antd';
 
 /*!
@@ -17,52 +16,38 @@ import Sections from '../components/sections';
 import Slider from '../components/slider';
 import Works from '../components/works';
 import Reviews from '../components/reviews';
-
-/*!
- * Data
- */
-
-import store from '../store';
-
-/*!
- * Actions
- */
-
-import { fetchCourses } from '../actions/coursesActions';
-import { fetchPages } from '../actions/pagesActions';
-import { fetchPosts } from '../actions/postsActions';
-import { fetchSections } from '../actions/sectionsActions';
-import { fetchSettings } from '../actions/settingsActions';
+import Banner from '../components/banner';
 
 /*!
  * Expo
  */
 
-const Home = () => (
-  <Site>
+const Home = ({ sections, settings }) => (
+  <Site settings={settings}>
     <Slider />
-    <Sections />
+    <Sections sections={sections} />
     <Works />
+    <Banner settings={settings} />
     <Reviews />
   </Site>
 );
 
-export default compose(
-  withRedux(store, null, {
-    fetchCourses,
-    fetchPages,
-    fetchPosts,
-    fetchSections,
-    fetchSettings,
-  }),
+Home.getInitialProps = async () => {
+  const [ sectionsRes, settingsRes ] = await Promise.all([
+    axios.get('http://api.ucavtor.ru/sections'),
+    axios.get('http://localhost:8081/settings'),
+  ]);
 
-  lifecycle({
-    componentDidMount() {
-      this.props.fetchCourses();
-      this.props.fetchPages();
-      this.props.fetchPosts();
-      this.props.fetchSections();
-      this.props.fetchSettings();
-    }
-  }),
-)(Home)
+  let settings = {};
+
+  if (Array.isArray(settingsRes.data) && !!settingsRes.data.length) {
+    settingsRes.data.forEach(({ value, slug }) => settings[slug] = value );
+  }
+
+  return {
+    settings,
+    sections: sectionsRes.data,
+  };
+}
+
+export default Home;

@@ -29,7 +29,7 @@ export const fetchPages = () => (dispatch) => {
   dispatch(requestPages());
 
   return axios.get(
-    'http://api.ucavtor.ru/pages',
+    'http://localhost:8081/pages',
   ).then(
     ({ data }) => dispatch(receivePages(data)),
     err => error(),
@@ -47,7 +47,7 @@ export const createPage = data => (dispatch) => {
   dispatch(requestCreatePage());
 
   return axios.post(
-    'http://api.ucavtor.ru/pages/create',
+    'http://localhost:8081/pages/create',
     data,
   ).then(
     ({ data }) => dispatch(receiveCreatePage(data)),
@@ -66,7 +66,7 @@ export const updatePage = data => (dispatch) => {
   dispatch(requestUpdatePage());
 
   return axios.post(
-    'http://api.ucavtor.ru/pages/update',
+    'http://localhost:8081/pages/update',
     data,
   ).then(
     ({ data }) => dispatch(receiveUpdatePage(data)),
@@ -85,7 +85,7 @@ export const deletePage = data => (dispatch) => {
   dispatch(requestDeletePage());
 
   return axios.post(
-    'http://api.ucavtor.ru/pages/delete',
+    'http://localhost:8081/pages/delete',
     data,
   ).then(
     ({ data }) => dispatch(receiveDeletePage(data)),

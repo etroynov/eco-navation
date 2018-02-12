@@ -22,6 +22,17 @@ exports.index = async (req, res) => {
   return send(res, 200, pages);
 };
 
+exports.show = async (req, res) => {
+  try {
+    console.info(req.params);
+    const page = await Page.findOne({ slug: req.params.slug });
+    
+    return send(res, 200, page);
+  } catch(e) {
+    return send(res, 500, e);
+  }
+}
+
 exports.create = async (req, res) => {
   const data = await json(req);
   const page = await Page.create(data);

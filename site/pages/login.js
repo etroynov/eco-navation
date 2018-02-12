@@ -20,7 +20,7 @@ export default () => (
     <h2 style={{ textAlign: 'center', textTransform: 'uppercase' }}>Войти как:</h2>
     <Row type="flex" justify="space-between">
       <Col>
-        <a href="http://dashboard.ucavtor.ru/login">
+        <a href="http://dashboard.ucavtor.ru/auth">
           <Card
             hoverable={true}
             title="абитуриент"

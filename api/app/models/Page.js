@@ -20,9 +20,6 @@ const PageSchema = new Schema({
   description: String,
   name: String,
   content: String,
-  thumb: String,
-  tags: Array,
-  rubrics: Array,
 
   slug: {
     type: String,

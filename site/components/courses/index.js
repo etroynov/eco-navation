@@ -4,7 +4,6 @@
 
 import * as React from 'react';
 import { Row, Tag } from 'antd';
-import { connect } from 'react-redux';
 
 /*!
  * Components
@@ -18,14 +17,10 @@ const { CheckableTag } = Tag;
  * Expos
  */
 
-class List extends React.Component {
+class Courses extends React.Component {
   state = {
     selectedTags: [],
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   handleChange = (tag, checked) => {
     const { selectedTags } = this.state;
@@ -81,12 +76,4 @@ class List extends React.Component {
   }
 }
 
-const mapStateToProps = ({ courses }) => {
-  console.info('test', courses);
-
-  return {};
-}; 
-
-export default connect(
-  mapStateToProps,
-)(List);
+export default Courses;

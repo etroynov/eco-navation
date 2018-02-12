@@ -18,13 +18,13 @@ import Footer from './common/Footer';
 
 const { Content } = Layout;
 
-const Site = ({ children }) => (
+const Site = ({ title, description, settings, children }) => (
   <Layout>
-    <Header />
+    <Header title={title} description={description} settings={settings} />
     <Content>
       {children}
     </Content>
-    <Footer />
+    <Footer settings={settings} />
   </Layout>
 );
 
