@@ -27,7 +27,7 @@ exports.index = async (req, res) => {
 exports.show = async (req, res) => {
   try {
     const section = await Section.findOne({ slug: req.params.slug });
-    const courses = await Course.find({ sections: section.id });
+    const courses = await Course.find({ sections: section._id });
 
     section.courses = courses;
 
