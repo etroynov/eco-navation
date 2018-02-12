@@ -4,8 +4,6 @@
 
 import axios from 'axios';
 import * as React from 'react';
-import Link from 'next/link';
-import { Col, Row } from 'antd';
 
 /*!
  * Components
@@ -33,21 +31,21 @@ const Home = ({ sections, settings }) => (
 );
 
 Home.getInitialProps = async () => {
-  const [ sectionsRes, settingsRes ] = await Promise.all([
+  const [sectionsRes, settingsRes] = await Promise.all([
     axios.get('http://api.ucavtor.ru/sections'),
     axios.get('http://api.ucavtor.ru/settings'),
   ]);
 
-  let settings = {};
+  const settings = {};
 
   if (Array.isArray(settingsRes.data) && !!settingsRes.data.length) {
-    settingsRes.data.forEach(({ value, slug }) => settings[slug] = value );
+    settingsRes.data.forEach(({ value, slug }) => settings[slug] = value);
   }
 
   return {
     settings,
     sections: sectionsRes.data,
   };
-}
+};
 
 export default Home;
