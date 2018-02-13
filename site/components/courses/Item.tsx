@@ -2,10 +2,10 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Row, Col } from 'antd';
 
-const Course = ({ icon, name, content, slug }) => (
+const Course = ({ _id, icon, name, content, slug }) => (
   <Col span={12}>
     <article className="course">
-      <Link href={`/courses/${slug}`}>
+      <Link as={`/courses/${slug}`}  href={`/courses?id=${_id}`}>
         <a className="course__link">
           <Row>
             <Col span={6} className="left-column">
@@ -18,7 +18,7 @@ const Course = ({ icon, name, content, slug }) => (
               <header className="course__header">
                 <h3 className="course__title">{`${name.slice(0, 40)}...`}</h3>
               </header>
-              <section className="course__body" dangerouslySetInnerHTML={{__html: `${content.slice(0, 100)}...` }} />
+              <section className="course__body" dangerouslySetInnerHTML={{ __html: `${content.slice(0, 100)}...` }} />
             </Col>
           </Row>
         </a>
