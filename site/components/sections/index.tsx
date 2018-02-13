@@ -28,7 +28,7 @@ const Sections = ({ sections }) => (
       {sections.map(({ _id, name, content, icon, slug }) => (
         <Col key={_id} span={12}>
           <article className="course">
-            <Link as={`/courses/${slug}`}  href={`/courses?slug=${slug}`}>
+            <Link as={`/sections/${slug}`}  href={`/sections?slug=${slug}`}>
               <a className="course__link">
                 <Row>
                   <Col span={6} className="left-column">
