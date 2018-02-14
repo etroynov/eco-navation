@@ -8,7 +8,6 @@ const Review = ({ avatar, name, text }) => (
     <header className="review__header">
       <h3 className="review__title" style={{ textAlign: 'center' }}>{name}</h3>
     </header>
-    <section className="review__body">{text}</section> 
   </section>
 );
 

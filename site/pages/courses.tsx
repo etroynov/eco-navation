@@ -6,7 +6,7 @@ import axios from 'axios';
 import * as React from 'react';
 import { Row, Col, Button, Icon } from 'antd';
 
-/**
+/*!
  * Components
  */
 
@@ -29,7 +29,7 @@ const Course = ({ course: { title, description, name, content, thumb, duration, 
             <figure className="article__img-container">
               <img src={thumb} style={{ maxWidth: 800, width: '100%' }} />
             </figure>
-            <p>{content}</p>
+            <section dangerouslySetInnerHTML={{ __html: content }} />
           </Col>
           <Col span={6} className="article__properties">
             <ul className="params" style={{ listStyle: 'none' }}>
