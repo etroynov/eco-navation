@@ -1,3 +1,7 @@
+/*!
+ * Vendor
+ */
+
 import * as React from 'react';
 
 import { Row, Col } from 'antd';
@@ -9,7 +13,7 @@ import { Row, Col } from 'antd';
 export default () => (
   <div className="reviews">
     <section className="reviews__body" style={{ textAlign: 'center' }}>
-      <img src="/static/img/content/banner-ep.jpg" /> 
+      <img src="/static/img/content/banner-ep.jpg" style={{ width: '100%' }} /> 
     </section>
   </div>
 );
