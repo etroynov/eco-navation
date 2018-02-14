@@ -16,25 +16,25 @@ import Article from '../components/article';
  * Expo
  */
 
-const Page = ({ page: { _id = 0, title = '', description = '', name = '', content = '' }, settings}) => [
+const Post = ({ page: { _id = 0, title = '', description = '', name = '', content = '' }, settings }) => [
   <Site title={title} description={description} settings={settings}>
     <section className="uc-container page">
       <Article key={_id} name={name} content={content} />
     </section>
-  </Site>
+  </Site>,
 ];
 
 Page.getInitialProps = async ({ query }) => {
   try {
-    const [ pageRes, settingsRes ] = await Promise.all([
-      axios.get(`http://api.ucavtor.ru/pages/${query.slug}`),
+    const [pageRes, settingsRes] = await Promise.all([
+      axios.get(`http://api.ucavtor.ru/posts/${query.slug}`),
       axios.get('http://api.ucavtor.ru/settings'),
     ]);
     
-    let settings = {};
+    const settings = {};
 
     if (Array.isArray(settingsRes.data) && !!settingsRes.data.length) {
-      settingsRes.data.forEach(({ value, slug }) => settings[slug] = value );
+      settingsRes.data.forEach(({ value, slug }) => settings[slug] = value);
     }
 
     return {
