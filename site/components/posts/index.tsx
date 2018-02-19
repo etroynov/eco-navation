@@ -4,6 +4,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import styled from 'styled-components';
 
 import { Layout, Card, Row, Col } from 'antd';
 
@@ -14,17 +15,22 @@ import { Layout, Card, Row, Col } from 'antd';
 const { Meta } = Card;
 const { Content } = Layout;
 
+const Header = styled.header`
+  margin-bottom: 40px;
+  text-align: center;
+`;
+
 /*!
  * Expo
  */
 
 const Posts = ({ posts }) => (
   <Content className="uc-container courses">
-    <header className="courses__header">
+    <Header>
       <h2 className="courses__title">Записи</h2>
-    </header>
+    </Header>
 
-    <Row>
+    <Row gutter={12}>
       {posts.map(({ _id, title, description, slug }) => (
         <Col key={_id} span={6}>
           <Link as={`/posts/${slug}`} href={`/posts?id=${_id}`}>
@@ -35,7 +41,7 @@ const Posts = ({ posts }) => (
               >
                 <Meta
                   title={title}
-                  description={description}
+                  description={`${description.slice(0, 70)}...`}
                 />
               </Card>
             </a>
