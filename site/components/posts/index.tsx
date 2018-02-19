@@ -2,10 +2,10 @@
  * Vendor
  */
 
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-import { Layout, Card, Row, Col } from "antd";
+import { Layout, Card, Row, Col } from 'antd';
 
 /*!
  * Components
@@ -25,13 +25,13 @@ const Posts = ({ posts }) => (
     </header>
 
     <Row>
-      {posts.map(({ _id, title, description, content, icon, slug }) => (
+      {posts.map(({ _id, title, description, slug }) => (
         <Col key={_id} span={6}>
-          <Link as={`/posts/${slug}`} href={`/posts?_id=${_id}`}>
+          <Link as={`/posts/${slug}`} href={`/posts?id=${_id}`}>
             <a>
               <Card
                 hoverable
-                cover={<img alt="example" src="https://image.freepik.com/vector-gratis/e-mail-de-noticias-suscripcion-promocion-plana-ilustracion-vectorial-diseno-newsletter-icon-plano_1200-330.jpg" />}
+                cover={<img alt={title} src="https://image.freepik.com/vector-gratis/e-mail-de-noticias-suscripcion-promocion-plana-ilustracion-vectorial-diseno-newsletter-icon-plano_1200-330.jpg" />}
               >
                 <Meta
                   title={title}
