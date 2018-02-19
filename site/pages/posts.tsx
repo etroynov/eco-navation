@@ -27,7 +27,7 @@ const Post = ({ page: { _id = 0, title = '', description = '', name = '', conten
 Post.getInitialProps = async ({ query }) => {
   try {
     const [postRes, settingsRes] = await Promise.all([
-      axios.get(`http://api.ucavtor.ru/posts/${query.slug}`),
+      axios.get(`http://api.ucavtor.ru/posts/${query._id}`),
       axios.get('http://api.ucavtor.ru/settings'),
     ]);
     
@@ -36,7 +36,7 @@ Post.getInitialProps = async ({ query }) => {
     console.info(postRes);
 
     if (Array.isArray(settingsRes.data) && !!settingsRes.data.length) {
-      settingsRes.data.forEach(({ value, slug }) => settings[slug] = value );
+      settingsRes.data.forEach(({ value, slug }) => settings[slug] = value);
     }
 
     return {

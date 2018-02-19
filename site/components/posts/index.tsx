@@ -27,7 +27,7 @@ const Posts = ({ posts }) => (
     <Row>
       {posts.map(({ _id, title, description, content, icon, slug }) => (
         <Col key={_id} span={6}>
-          <Link as={`/posts/${slug}`} href={`/posts?slug=${slug}`}>
+          <Link as={`/posts/${slug}`} href={`/posts?_id=${_id}`}>
             <a>
               <Card
                 hoverable

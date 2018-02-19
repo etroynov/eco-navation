@@ -24,7 +24,8 @@ exports.index = async (req, res) => {
 
 exports.show = async (req, res) => {
   try {
-    const post = await Posts.findOne({ _id: req.params.id });
+    const { id } = req.params;
+    const post = await Posts.findOne({ _id: id });
     
     return send(res, 200, post);
   } catch(e) {
