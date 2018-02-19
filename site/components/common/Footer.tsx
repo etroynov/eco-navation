@@ -66,20 +66,6 @@ const Footer = ({ settings }) => (
             </ul>
           </section>
         </Col>
-        <Col span={6}>
-          <section className="menu-footer">
-            <header className="footer-menu__header">
-              <h4 className="footer-menu__title">Полезная информация</h4>
-            </header>
-            <ul className="footer-menu__body">
-              <li className="footer-menu__item">
-                <Link href="/blog">
-                  <a className="footer-menu__text">Блог</a>
-                </Link>
-              </li>
-            </ul>
-          </section>
-        </Col>
         <Col span={12}>
           <div className="footer__about">
             <p>{get(settings, 'footer-description')}</p>

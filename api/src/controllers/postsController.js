@@ -22,6 +22,16 @@ exports.index = async (req, res) => {
   return send(res, 200, posts);
 };
 
+exports.show = async (req, res) => {
+  try {
+    const post = await Posts.findOne({ _id: req.params.id });
+    
+    return send(res, 200, post);
+  } catch(e) {
+    return send(res, 500, e);
+  }
+}
+
 exports.create = async (req, res) => {
   const data = await json(req);
   const post = await Post.create(data);
