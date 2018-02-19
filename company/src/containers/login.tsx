@@ -5,6 +5,7 @@
 import * as React from 'react';
 import axios from 'axios';
 
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Link, Redirect } from 'react-router-dom';
@@ -13,11 +14,42 @@ import { Layout, Form, Icon, Input, Button, Checkbox, Modal } from 'antd';
 import { login } from './../actions/authActions';
 
 /*!
- * Expo
+ * Components
  */
 
 const { Content } = Layout;
 const FormItem = Form.Item;
+
+
+const Title = styled.h2`
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+`;
+
+const Version = styled.h3`
+  font-size: 15px;
+  text-align: center;
+`;
+
+const Submit = styled(Button)`
+  width: 100%;
+`;
+
+const LoginFormContainer = styled(Content)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 300px;
+  height: 500px;
+`;
+
+/*!
+ * Expo
+ */
 
 class LoginForm extends React.Component<any, any> {
   componentWillMount() {
@@ -42,22 +74,13 @@ class LoginForm extends React.Component<any, any> {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <Content style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        margin: 'auto',
-        width: 300,
-        height: 500,
-      }}>
+      <LoginFormContainer>
         <Helmet>
           <meta charSet="utf-8" />
           <title>Авторизация</title>
         </Helmet>
-        <h2 style={{ margin: 0, textAlign: 'center', textTransform: 'uppercase' }}>авторизация</h2>
-        <h3 style={{ fontSize: 15, textAlign: 'center' }}>( 0.31.0 )</h3>
+        <Title>авторизация</Title>
+        <Version>( 0.31.0 )</Version>
         <Form className="login-form" onSubmit={this.handleSubmit}>
           <FormItem>
             {getFieldDecorator('email', {
@@ -74,13 +97,13 @@ class LoginForm extends React.Component<any, any> {
             )}
           </FormItem>
           <FormItem>
-            <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: '100%' }}>
+            <Submit type="primary" htmlType="submit" className="login-form-button">
               войти
-            </Button>
-            или <Link to="/registration">зарегистрироватся!</Link>
+            </Submit>
+            или <Link to="/registration">зарегистрироваться!</Link>
           </FormItem>
         </Form>
-      </Content>
+      </LoginFormContainer>
     );
   }
 }

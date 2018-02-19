@@ -42,7 +42,7 @@ const Header = ({ title, description, settings }) => (
               </Link>
             </Menu.Item>
             <Menu.Item key={3} style={{ float: 'right' }}>
-              <Link href="/login">
+              <Link href="/auth">
                 <a>
                   <Icon type="lock" style={{ fontSize: '18px' }} />
                   вход

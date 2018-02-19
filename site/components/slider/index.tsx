@@ -15,10 +15,10 @@ export default () => (
         </section>
         <section className="slider__control">
           <Link href="/registration">
-            <Button href="/registration" size="large" type="primary" className="slider__button">регистрация</Button>
+            <Button size="large" type="primary" className="slider__button">регистрация</Button>
           </Link>
-          <Link href="/courses">
-            <Button href="/courses" size="large" className="slider__button">наши курсы</Button>
+          <Link href="/auth">
+            <Button size="large" className="slider__button">вход</Button>
           </Link>
         </section>
       </section>

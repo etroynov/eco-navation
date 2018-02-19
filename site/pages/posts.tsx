@@ -16,22 +16,24 @@ import Article from '../components/article';
  * Expo
  */
 
-const Page = ({ page: { _id = 0, title = '', description = '', name = '', content = '' }, settings}) => [
+const Post = ({ page: { _id = 0, title = '', description = '', name = '', content = '' }, settings }) => (
   <Site title={title} description={description} settings={settings}>
     <section className="uc-container page">
       <Article key={_id} name={name} content={content} />
     </section>
   </Site>
-];
+);
 
-Page.getInitialProps = async ({ query }) => {
+Post.getInitialProps = async ({ query }) => {
   try {
-    const [ pageRes, settingsRes ] = await Promise.all([
-      axios.get(`http://api.ucavtor.ru/pages/${query.slug}`),
+    const [postRes, settingsRes] = await Promise.all([
+      axios.get(`http://api.ucavtor.ru/posts/${query.slug}`),
       axios.get('http://api.ucavtor.ru/settings'),
     ]);
     
     let settings = {};
+
+    console.info(postRes);
 
     if (Array.isArray(settingsRes.data) && !!settingsRes.data.length) {
       settingsRes.data.forEach(({ value, slug }) => settings[slug] = value );
@@ -39,11 +41,11 @@ Page.getInitialProps = async ({ query }) => {
 
     return {
       settings,
-      page: pageRes.data,
+      page: postRes.data,
     };
   } catch (e) {
     return {};
   }
-}
+};
 
-export default Page;
+export default Post;

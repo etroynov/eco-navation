@@ -22,9 +22,9 @@ mongoose.Promise = global.Promise;
  * Models require
  */
 
-fs.readdirSync(path.join(__dirname, '/app/models')).forEach((file) => {
+fs.readdirSync(path.join(__dirname, '/models')).forEach((file) => {
   if (file.includes('.js')) {
-    require(path.join(__dirname, '/app/models/', file));
+    require(path.join(__dirname, '/models/', file));
   }
 });
 
@@ -32,16 +32,16 @@ fs.readdirSync(path.join(__dirname, '/app/models')).forEach((file) => {
  * Routes
  */
 
-const lessonsController       = require('./app/controllers/lessonsController');
-const questionsController     = require('./app/controllers/questionsController');
-const pagesController         = require('./app/controllers/pagesController');
-const coursesController       = require('./app/controllers/coursesController');
-const paymentsController      = require('./app/controllers/paymentsController');
-const sectionsController      = require('./app/controllers/sectionsController');
-const usersController         = require('./app/controllers/usersController');
-const organizationsController = require('./app/controllers/organizationsController');
-const postsController         = require('./app/controllers/postsController');
-const settingsController      = require('./app/controllers/settingsController');
+const lessonsController       = require('./controllers/lessonsController');
+const questionsController     = require('./controllers/questionsController');
+const pagesController         = require('./controllers/pagesController');
+const coursesController       = require('./controllers/coursesController');
+const paymentsController      = require('./controllers/paymentsController');
+const sectionsController      = require('./controllers/sectionsController');
+const usersController         = require('./controllers/usersController');
+const organizationsController = require('./controllers/organizationsController');
+const postsController         = require('./controllers/postsController');
+const settingsController      = require('./controllers/settingsController');
 
 const notfound = (req, res) => send(res, 404, 'You shall not passs :)')
 
@@ -97,6 +97,7 @@ module.exports = compose(
 
   /** POSTS **/
   get('/posts',            postsController.index),
+  get('/posts/:id',        postsController.show),
   post('/posts/create',    postsController.create),
   post('/posts/update',    postsController.update),
   post('/posts/delete',    postsController.delete),

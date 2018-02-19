@@ -77,7 +77,7 @@ class LoginForm extends React.Component<any, any> {
             <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: '100%' }}>
               войти
             </Button>
-            или <Link to="/auth/registration">зарегистрироватся!</Link>
+            или <Link to="/auth/registration">зарегистрироваться!</Link>
           </FormItem>
         </Form>
       </Content>
