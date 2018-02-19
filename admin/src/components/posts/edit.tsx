@@ -4,6 +4,7 @@
 
 import * as React from 'react';
 import CKEditor from 'react-ckeditor-component';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
 
@@ -21,6 +22,11 @@ import { updatePage } from '../../actions/pagesActions';
 const Option = Select.Option;
 const FormItem = Form.Item;
 const { TextArea } = Input;
+
+const Devider = styled.hr`
+  border: none; 
+  border-bottom: 1px solid #eeeeee;
+`;
 
 /*!
  * Expo
@@ -44,10 +50,11 @@ class PageEditForm extends React.Component<any, {
   };
 
   private componentDidMount() {
-    const { pages, match: { params } } = this.props;
+    const { posts, match: { params } } = this.props;
 
-    const filteredPage = pages.data.filter(({ _id }) => _id === params.id);
+    const filteredPage = posts.data.filter(({ _id }) => _id === params.id);
 
+    console.info(filteredPage);
     return this.setState({
       ...filteredPage[0],
     });
@@ -109,10 +116,10 @@ class PageEditForm extends React.Component<any, {
           />
         </FormItem>
 
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
+        <Devider />
 
         <h3>СЕО</h3>
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
+        <Devider />
 
         <FormItem>
           {getFieldDecorator('title', {
@@ -150,7 +157,7 @@ class PageEditForm extends React.Component<any, {
         </FormItem>
 
         <FormItem>
-          <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
+          <Devider />
           <Button type="primary" htmlType="submit" style={{ float: 'right' }}>сохранить</Button>
         </FormItem>
       </Form>
@@ -160,7 +167,7 @@ class PageEditForm extends React.Component<any, {
 
 const WrappedPageEditForm = Form.create()(PageEditForm as any);
 
-const mapStateToProps = ({ pages }) => ({ pages });
+const mapStateToProps = ({ posts }) => ({ posts });
 
 export default connect(
   mapStateToProps,
