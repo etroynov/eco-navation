@@ -13,7 +13,7 @@ import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
  */
 
 import { success } from './../../utils/modals';
-import { updatePage } from '../../actions/pagesActions';
+import { updatePost } from '../../actions/postsActions';
 
 /*!
  * Components
@@ -32,7 +32,7 @@ const Devider = styled.hr`
  * Expo
  */
 
-class PageEditForm extends React.Component<any, {
+class PostEditForm extends React.Component<any, {
   title: string;
   description: string;
   name: string;
@@ -52,11 +52,10 @@ class PageEditForm extends React.Component<any, {
   private componentDidMount() {
     const { posts, match: { params } } = this.props;
 
-    const filteredPage = posts.data.filter(({ _id }) => _id === params.id);
+    const filteredPost = posts.data.filter(({ _id }) => _id === params.id);
 
-    console.info(filteredPage);
     return this.setState({
-      ...filteredPage[0],
+      ...filteredPost[0],
     });
   }
 
@@ -65,7 +64,7 @@ class PageEditForm extends React.Component<any, {
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.updatePage({ ...this.state, ...values }).then(() => success());
+        this.props.updatePost({ ...this.state, ...values }).then(() => success());
       }
     });
   }
@@ -165,11 +164,11 @@ class PageEditForm extends React.Component<any, {
   }
 }
 
-const WrappedPageEditForm = Form.create()(PageEditForm as any);
+const WrappedPostEditForm = Form.create()(PostEditForm as any);
 
 const mapStateToProps = ({ posts }) => ({ posts });
 
 export default connect(
   mapStateToProps,
-  { updatePage },
-)(WrappedPageEditForm as any);
+  { updatePost },
+)(WrappedPostEditForm as any);
