@@ -4,6 +4,7 @@
 
 import axios from 'axios';
 import * as React from 'react';
+import Link from 'next/link';
 import { Row, Col, Button, Icon } from 'antd';
 
 /*!
@@ -43,7 +44,9 @@ const Course = ({ course: { title, description, name, content, thumb, duration, 
               </li>
             </ul>
             <div style={{ textAlign: 'center' }}>
-              <Button type="primary" size="large" href="/login" style={{ width: '100%', margin: '0 20px' }}>Заказать</Button>
+              <Link href="/auth">
+                <Button type="primary" size="large" style={{ width: '100%', margin: '0 20px' }}>Заказать</Button>
+              </Link>
             </div>
           </Col>
         </Row>

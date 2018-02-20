@@ -36,9 +36,9 @@ const Posts = ({ posts }) => (
           <Link as={`/posts/${slug}`} href={`/posts?id=${_id}`}>
             <a>
               <Card
-                hoverable
+                hoverable={true}
                 cover={<img alt={title} src="https://image.freepik.com/vector-gratis/e-mail-de-noticias-suscripcion-promocion-plana-ilustracion-vectorial-diseno-newsletter-icon-plano_1200-330.jpg" />}
-              >
+                >
                 <Meta
                   title={title}
                   description={`${description.slice(0, 70)}...`}
