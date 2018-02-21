@@ -1,9 +1,24 @@
+/*!
+ * Vendor
+ */
+
 import * as React from 'react';
 import Link from 'next/link';
 
+import { withState } from 'recompose';
 import { Button } from 'antd';
 
-export default () => (
+/*!
+ * Components
+ */
+
+import LeaveRquest from '../leaveRequest';
+
+/*!
+ * Expo
+ */
+
+const Slider = ({ visilble, showLeaveRequest }) => (
   <div className="slider">
     <div className="uk-container">
       <section className="slider__item">
@@ -17,11 +32,11 @@ export default () => (
           <Link href="/registration">
             <Button size="large" type="primary" className="slider__button">регистрация</Button>
           </Link>
-          <Link href="/auth">
-            <Button size="large" className="slider__button">вход</Button>
-          </Link>
+          <LeaveRquest visilble={visilble} />
         </section>
       </section>
     </div>
   </div>
 );
+
+export default withState('visible', 'showLeaveRquest', false)(Slider);

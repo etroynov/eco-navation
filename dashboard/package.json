@@ -1,13 +1,8 @@
 {
   "name": "ucavtor-dashboard",
-  "version": "0.60.0",
-  "description": "",
-  "main": "index.js",
+  "version": "",
   "scripts": {
     "start-dev-dashboard": "../node_modules/parcel-bundler/bin/cli.js -p 2000 ./src/index.html --no-cache",
     "build": "../node_modules/parcel-bundler/bin/cli.js build ./src/index.html --no-cache --public-url ./"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }
