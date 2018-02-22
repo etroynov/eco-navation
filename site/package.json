@@ -1,6 +1,10 @@
 {
   "name": "ucavtor-site",
+<<<<<<< HEAD
   "main": "server.js",
+=======
+  "version": "",
+>>>>>>> e7b2a353e05dd7bacce0a77ce36e3dc33ee7d596
   "scripts": {
     "start-dev-site": "../node_modules/next/dist/bin/next-dev -p 4000",
     "start": "../node_modules/next/dist/bin/next-start -p 8083",
