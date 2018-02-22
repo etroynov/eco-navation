@@ -6,8 +6,27 @@ import * as React from 'react';
 import Link from 'next/link';
 import get from 'lodash/get';
 
+import styled from 'styled-components';
+import Vk from 'react-icons/lib/fa/vk';
 import { Col, Row } from 'antd';
 import { YMInitializer } from 'react-yandex-metrika';
+
+/*!
+ * Components
+ */
+
+const VK = styled(Vk)`
+  color: #fff;
+  font-size: 28px;
+  &:hover {
+    color: #aebdc1;
+  }
+`;
+
+const SocialTitle = styled.h4`
+  color: #fff;
+  text-transform: uppercase;
+`;
 
 /*!
  * Expo
@@ -69,6 +88,10 @@ const Footer = ({ settings }) => (
         <Col span={12}>
           <div className="footer__about">
             <p>{get(settings, 'footer-description')}</p>
+            <div className="footer__social-links">
+              <SocialTitle>мы в социальных сетях</SocialTitle>
+              <a href="https://vk.com/ucavtor"><VK /></a>
+            </div>
           </div>
         </Col>
       </Row>

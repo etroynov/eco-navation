@@ -5,6 +5,7 @@
 import axios from 'axios';
 import * as React from 'react';
 import Link from 'next/link';
+import styled from 'styled-components';
 import { Row, Col, Button, Icon } from 'antd';
 
 /*!
@@ -12,6 +13,17 @@ import { Row, Col, Button, Icon } from 'antd';
  */
 
 import Site from '../components/layout';
+
+const Devider = styled.hr`
+  width: 15%;
+  margin: 30px auto;
+  border-color: #999;
+`;
+
+const OrderButton = styled(Button)`
+  width: 100%;
+  margin: 0 20px;
+`;
 
 /*!
  * Expo
@@ -23,7 +35,7 @@ const Course = ({ course: { title, description, name, content, thumb, duration, 
       <div className="article">
         <header className="article__header" style={{ textAlign: 'center' }}>
           <h1 className="article__title">{name}</h1>
-          <hr style={{ width: '15%', margin: '30px auto', borderColor: '#999' }} />
+          <Devider />
         </header>
          <Row className="article__body">
           <Col span={18} className="article__content" style={{ borderRight: '1px solid #eee' }}>
@@ -43,11 +55,9 @@ const Course = ({ course: { title, description, name, content, thumb, duration, 
                 <span className="params__text">{price} руб.</span>
               </li>
             </ul>
-            <div style={{ textAlign: 'center' }}>
-              <Link href="/auth">
-                <Button type="primary" size="large" style={{ width: '100%', margin: '0 20px' }}>Заказать</Button>
-              </Link>
-            </div>
+            <Link href="/auth">
+              <OrderButton type="primary" size="large">Заказать</OrderButton>
+            </Link>
           </Col>
         </Row>
       </div>

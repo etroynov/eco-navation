@@ -1,31 +1,19 @@
-const { parse } = require('url')
-const match = require('micro-route/match')
-const next = require('next')
+const { router, get } = require('microrouter');
+const { parse } = require('url');
+const next = require('next');
 
-const dev = process.env.NODE_ENV !== 'production'
+const dev = process.env.NODE_ENV !== 'production';
 
-const app = next({ dev })
-const handle = app.getRequestHandler()
-
-const isA = req => match(req, '/a')
-const isB = req => match(req, '/b')
-
-async function main (req, res) {
-  const parsedUrl = parse(req.url, true)
-  const { query } = parsedUrl
-
-  if (isA(req)) {
-    return app.render(req, res, '/b', query)
-  } else if (isB(req)) {
-    return app.render(req, res, '/a', query)
-  }
-
-  return handle(req, res, parsedUrl)
-}
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
 async function setup (handler) {
-  await app.prepare()
-  return handler
+  await app.prepare();
+  return handler;
 }
 
-module.exports = setup(main)
+module.exports = setup(router(
+  get('/pages', (req, res) => app.render(req, res, '/pages', req.params)),
+
+  get('*', (req, res) => handle(req, res))
+));
