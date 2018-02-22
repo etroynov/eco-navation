@@ -44,6 +44,14 @@ const Header = ({ title, description, settings }) => (
                 <a>документы</a>
               </Link>
             </Menu.Item>
+            <Menu.Item key={2}>
+              <Link
+                as="/info"
+                href="/page?slug=info"
+              >
+                <a>документы</a>
+              </Link>
+            </Menu.Item>
             <Menu.Item key={3} style={{ float: 'right' }}>
               <Link href="/auth">
                 <a>
