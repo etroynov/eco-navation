@@ -49,7 +49,7 @@ const Header = ({ title, description, settings }) => (
                 as="/info"
                 href="/page?slug=info"
               >
-                <a>документы</a>
+                <a>инфо</a>
               </Link>
             </Menu.Item>
             <Menu.Item key={3} style={{ float: 'right' }}>
