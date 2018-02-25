@@ -32,6 +32,7 @@ const Slider = ({ visilble, showLeaveRequest }) => (
           <Link href="/registration">
             <Button size="large" type="primary" className="slider__button">регистрация</Button>
           </Link>
+          <Button size="large" className="slider__button" onClick={showLeaveRequest(!visilble)}>оставить заявку</Button>
           <LeaveRquest visilble={visilble} />
         </section>
       </section>
