@@ -18,7 +18,7 @@ import LeaveRquest from '../leaveRequest';
  * Expo
  */
 
-const Slider = ({ visilble, showLeaveRequest }) => (
+const Slider = () => (
   <div className="slider">
     <div className="uk-container">
       <section className="slider__item">
@@ -30,14 +30,13 @@ const Slider = ({ visilble, showLeaveRequest }) => (
         </section>
         <section className="slider__control">
           <Link href="/registration">
-            <Button size="large" type="primary" className="slider__button">регистрация</Button>
+            <Button size="large" type="primary">регистрация</Button>
           </Link>
-          <Button size="large" className="slider__button" onClick={showLeaveRequest(!visilble)}>оставить заявку</Button>
-          <LeaveRquest visilble={visilble} />
+          <LeaveRquest />
         </section>
       </section>
     </div>
   </div>
 );
 
-export default withState('visible', 'showLeaveRquest', false)(Slider);
+export default Slider;

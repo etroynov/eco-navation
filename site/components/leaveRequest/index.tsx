@@ -1,12 +1,29 @@
+/*!
+ * Vendor
+ */
+
 import * as React from 'react';
 import { Modal, Button } from 'antd';
 
+/*!
+ * Components
+ */
+
+import Form from './form';
+
+/*!
+ * Expo
+ */
+
 class LeaveRequest extends React.Component {
   state = {
-    ModalText: 'Content of the modal',
     visible: false,
     confirmLoading: false,
   };
+
+  componentWillReceiveProps(nextPops) {
+    this.setState({ ...nextPops });
+  }
 
   showModal = () => {
     this.setState({
@@ -16,9 +33,9 @@ class LeaveRequest extends React.Component {
 
   handleOk = () => {
     this.setState({
-      ModalText: 'The modal will be closed after two seconds',
       confirmLoading: true,
     });
+
     setTimeout(() => {
       this.setState({
         visible: false,
@@ -28,25 +45,27 @@ class LeaveRequest extends React.Component {
   }
 
   handleCancel = () => {
-    console.log('Clicked cancel button');
     this.setState({
       visible: false,
     });
   }
 
   render() {
-    const { visible, confirmLoading, ModalText } = this.state;
+    const { visible, confirmLoading } = this.state;
 
-    return (
-      <Modal title="Title"
-          visible={visible}
-          onOk={this.handleOk}
-          confirmLoading={confirmLoading}
-          onCancel={this.handleCancel}
+    return [
+      <Button size="large" onClick={this.showModal}>оставить заявку</Button>,
+      <Modal
+        title="Оставить заявку"
+        visible={visible}
+        footer={null}
+        onOk={this.handleOk}
+        confirmLoading={confirmLoading}
+        onCancel={this.handleCancel}
       >
-          <p>{ModalText}</p>
-      </Modal>
-    );
+        <Form />
+      </Modal>,
+    ];
   }
 }
 

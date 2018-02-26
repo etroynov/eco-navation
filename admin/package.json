@@ -2,7 +2,7 @@
   "name": "ucavtor-admin",
   "version": "",
   "scripts": {
-    "start-dev-admin": "../node_modules/parcel-bundler/bin/cli.js -p 2000 ./src/index.html --no-cache",
-    "build": "../node_modules/parcel-bundler/bin/cli.js build ./src/index.html --no-cache --public-url ./"
+    "start-dev-admin": "../node_modules/webpack-cli/bin/webpack.js --watch --verbose --progress --mode development",
+    "build": "../node_modules/webpack-cli/bin/webpack.js --verbose --progress --mode production"
   }
 }
