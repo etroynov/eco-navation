@@ -25,11 +25,7 @@ class LeaveRequest extends React.Component {
     this.setState({ ...nextPops });
   }
 
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  }
+  showModal = () => this.setState({ visible: true });
 
   handleOk = () => {
     this.setState({
@@ -44,11 +40,7 @@ class LeaveRequest extends React.Component {
     }, 2000);
   }
 
-  handleCancel = () => {
-    this.setState({
-      visible: false,
-    });
-  }
+  handleCancel = () => this.setState({ visible: false });
 
   render() {
     const { visible, confirmLoading } = this.state;
