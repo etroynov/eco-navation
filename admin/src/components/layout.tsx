@@ -26,7 +26,7 @@ declare const require: any;
  * Actions
  */
 
-import './style';
+// import './style';
 
 /*!
  * Expo

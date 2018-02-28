@@ -18,7 +18,6 @@ import rootReducer from './reducers';
 
 import './assets/css/antd.min.css';
 import './assets/css/draftjs.min.css';
-import './assets/styl/index.styl';
 
 /*!
  * Root Component
