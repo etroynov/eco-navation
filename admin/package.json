@@ -1,0 +1,8 @@
+{
+  "name": "ucavtor-admin",
+  "version": "",
+  "scripts": {
+    "start-dev-admin": "webpack-dev-server --watch --progress --mode development",
+    "build": "webpack --progress --mode production"
+  }
+}

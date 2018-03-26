@@ -1,11 +1,9 @@
 const path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  devtool: 'none',
   resolve: {
-    extensions: ['.js', '.ts', '.tsx']
+    extensions: ['.js', '.ts', '.tsx', '.css']
   },
   module: {
     rules: [
@@ -42,22 +40,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      hash: true,
       template: 'src/index.html'
-    }),
-    // new UglifyJsPlugin({
-    //   uglifyOptions: {
-    //     ecma: 8,
-    //     output: {
-    //       comments: false,
-    //       beautify: false,
-    //     },
-    //     toplevel: false,
-    //     nameCache: null,
-    //     ie8: false,
-    //     keep_classnames: undefined,
-    //     keep_fnames: false,
-    //     safari10: false
-    //   }
-    // })
+    })
   ]
 };

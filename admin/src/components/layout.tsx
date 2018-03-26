@@ -3,6 +3,7 @@
  */
 
 import * as React from 'react';
+import { styled } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose, withState } from 'recompose';
@@ -23,10 +24,12 @@ const { Header, Content, Footer, Sider } = Layout;
 declare const require: any;
 
 /*!
- * Actions
+ * Styles
  */
 
-// import './style';
+const Sidebar = styled()`
+  background: #fff;
+`;
 
 /*!
  * Expo
@@ -34,11 +37,10 @@ declare const require: any;
 
 const Dashboard = ({ menu, collapsed, handleCollapse, handleMenuSelectItem, children }) => (
   <Layout style={{ minHeight: '100vh' }}>
-    <Sider
+    <Sidebar
       collapsible={true}
       collapsed={collapsed}
       onCollapse={handleCollapse}
-      className="sidebar"
     >
       <div className="profile">
         <figure className="profile__img-container">
@@ -62,7 +64,7 @@ const Dashboard = ({ menu, collapsed, handleCollapse, handleMenuSelectItem, chil
           </Menu.Item>
         ))} 
       </Menu>
-    </Sider>
+    </Sidebar>
     <Layout>
       <Header style={{ background: '#fff', padding: 0 }} />
       <Content style={{ margin: '0 16px' }}>
