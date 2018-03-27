@@ -5,7 +5,7 @@ import { Row, Col } from 'antd';
 const Course = ({ _id, icon, name, content, slug }) => (
   <Col span={12}>
     <article className="course">
-      <Link as={`/courses/${slug}`}  href={`/courses?id=${_id}`}>
+      <Link as={`/courses/${slug}`}  href={`/courses?slug=${slug}`}>
         <a className="course__link">
           <Row>
             <Col span={6} className="left-column">

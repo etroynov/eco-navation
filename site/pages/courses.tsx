@@ -68,7 +68,7 @@ const Course = ({ course: { title, description, name, content, thumb, duration, 
 Course.getInitialProps = async ({ query }) => {
   try {
     const [courseRes, settingsRes] = await Promise.all([
-      axios.get(`http://api.ucavtor.ru/courses/${query.id}`),
+      axios.get(`http://api.ucavtor.ru/courses/slug/${query.slug}`),
       axios.get('http://api.ucavtor.ru/settings'),
     ]);
     

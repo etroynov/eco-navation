@@ -44,7 +44,7 @@ const Footer = ({ settings }) => (
             <ul className="footer-menu__body">
               <li className="footer-menu__item">
                 <Link 
-                  as="/o-companii"
+                  as="/page/o-companii"
                   href="/page?slug=o-companii"
                 >
                   <a className="footer-menu__text">Компания</a>
@@ -52,7 +52,7 @@ const Footer = ({ settings }) => (
               </li>
               <li className="footer-menu__item">
                 <Link
-                  as="/rabota"
+                  as="/page/rabota"
                   href="/page?slug=rabota"
                 >
                   <a className="footer-menu__text">Работа</a>
@@ -60,7 +60,7 @@ const Footer = ({ settings }) => (
               </li>
               <li className="footer-menu__item">
                 <Link
-                  as="/oferta"
+                  as="/page/oferta"
                   href="/page?slug=oferta"
                 >
                   <a className="footer-menu__text">Оферта</a>
@@ -68,7 +68,7 @@ const Footer = ({ settings }) => (
               </li>
               <li className="footer-menu__item">
                 <Link
-                  as="/polzovatelskoe-soglashenie"
+                  as="/page/polzovatelskoe-soglashenie"
                   href="/page?slug=polzovatelskoe-soglashenie"
                 >
                   <a className="footer-menu__text">Пользовательское соглашение</a>
@@ -76,7 +76,7 @@ const Footer = ({ settings }) => (
               </li>
               <li className="footer-menu__item">
                 <Link
-                  as="/confidentiality"
+                  as="/page/confidentiality"
                   href="/page?slug=confidentiality"
                 >
                   <a className="footer-menu__text">Положение о конфиденциальности</a>

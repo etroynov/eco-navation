@@ -3,7 +3,7 @@
  */
 
 import * as React from 'react';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose, withState } from 'recompose';
@@ -27,9 +27,7 @@ declare const require: any;
  * Styles
  */
 
-const Sidebar = styled()`
-  background: #fff;
-`;
+import * as styles from './style.css';
 
 /*!
  * Expo
@@ -37,20 +35,21 @@ const Sidebar = styled()`
 
 const Dashboard = ({ menu, collapsed, handleCollapse, handleMenuSelectItem, children }) => (
   <Layout style={{ minHeight: '100vh' }}>
-    <Sidebar
+    <Sider
       collapsible={true}
       collapsed={collapsed}
       onCollapse={handleCollapse}
+      className={styles.sidebar}
     >
       <div className="profile">
-        <figure className="profile__img-container">
+        <figure className={styles.avatarContainer}>
           <img
             src={require('./../assets/img/whitecollar.svg')}
-            className="profile__img"
+            className={styles.avatar}
           />
-          <figcaption className="profile__img-caption">
+          <figcaption className={styles.caption}>
             Администратор
-            <hr className="profile__divider" />
+            <hr className={styles.devider} />
           </figcaption>
         </figure>
       </div>
@@ -64,7 +63,7 @@ const Dashboard = ({ menu, collapsed, handleCollapse, handleMenuSelectItem, chil
           </Menu.Item>
         ))} 
       </Menu>
-    </Sidebar>
+    </Sider>
     <Layout>
       <Header style={{ background: '#fff', padding: 0 }} />
       <Content style={{ margin: '0 16px' }}>

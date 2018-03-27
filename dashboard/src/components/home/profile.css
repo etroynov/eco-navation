@@ -1,14 +1,14 @@
-.sidebar {
-  border-right: 1px solid #eeeeee;
-  background: #ffffff;
-}
-
 .avatarContainer {
   margin: 0
 }
 
 .caption {
   padding: 15px 0;
+  font-size: 18px;
+  text-align: center;
+}
+
+.position {
   font-size: 15px;
   text-align: center;
 }

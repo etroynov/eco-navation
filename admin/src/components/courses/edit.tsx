@@ -136,6 +136,8 @@ class CourseEditForm extends React.Component<any, {
       name,
       content = '',
       price,
+      icon,
+      thumb,
       duration,
       sections,
       lessons,
@@ -242,11 +244,32 @@ class CourseEditForm extends React.Component<any, {
               )}
             </FormItem>
           </TabPane>
-          <TabPane tab="УРОКИ" key="4">
+
+          <TabPane tab="ИЗОБРАЖЕНИЯ" key="4">
+            <FormItem>
+              {getFieldDecorator('icon', {
+                rules: [{ required: true, message: 'Укажите ссылку на изображение!' }],
+                initialValue: icon,
+              })(
+                <Input placeholder="ссылка на изображение" />,
+              )}
+            </FormItem>
+
+            <FormItem>
+              {getFieldDecorator('thumb', {
+                rules: [{ required: true, message: 'Укажите ссылку на миниатюру' }],
+                initialValue: thumb,
+              })(
+                <Input placeholder="ссылка на миниатюру" />,
+              )}
+            </FormItem>
+          </TabPane>
+
+          <TabPane tab="УРОКИ" key="5">
             <Lessons course={params.id} data={lessons} />
           </TabPane>
           
-          <TabPane tab="ТЕСТЫ" key="5">
+          <TabPane tab="ТЕСТЫ" key="6">
             <Questions course={params.id} data={questions} />
           </TabPane>
         </Tabs>

@@ -17,13 +17,6 @@ import rootReducer from './reducers';
 import setAuthorizationToken from './utils/setAuthorizationToket';
 
 /**
- * Styles
- */
-
-import './assets/css/antd.min.css';
-import './assets/styl/index.styl';
-
-/**
  * Root Component
  */
 

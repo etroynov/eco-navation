@@ -22,12 +22,13 @@ import { deleteUser } from '../../actions/usersActions';
 const columns = [
   {
     title: 'ФИО',
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'fio',
+    key: 'fio',
   }, {
     title: 'Компания',
-    dataIndex: 'company',
-    key: 'company',
+    dataIndex: 'organization',
+    key: 'organization',
+    render: (text, record) => 'частное лицо',
   }, {
     title: 'Зарегистрирован',
     dataIndex: 'createdAt',

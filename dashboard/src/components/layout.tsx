@@ -27,9 +27,14 @@ const { SubMenu } = Menu;
 declare const require: any;
 
 /*!
- * Expo
+ * Style
  */
 
+import * as styles from './layout.css'
+
+/*!
+ * Expo
+ */
 
 const Dashboard = ({ children, title = '', collapsed, onCollapse, user }) => (
   <Layout style={{ minHeight: '100vh' }}>
@@ -41,7 +46,7 @@ const Dashboard = ({ children, title = '', collapsed, onCollapse, user }) => (
       collapsible={true}
       collapsed={collapsed}
       onCollapse={() => onCollapse(!collapsed)}
-      className="sidebar"
+      className={styles.sidebar}
     >
       <Profile {...user} />
       <Menu defaultSelectedKeys={['0']} mode="inline">

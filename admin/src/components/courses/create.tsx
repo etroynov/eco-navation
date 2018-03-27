@@ -173,7 +173,28 @@ class CourseCreateForm extends React.Component<any, any> {
               )}
             </FormItem>
           </TabPane>
+
+          <TabPane tab="ИЗОБРАЖЕНИЯ" key="4">
+            <FormItem>
+              {getFieldDecorator('icon', {
+                rules: [{ required: true, message: 'Укажите ссылку на изображение!' }],
+                initialValue: icon,
+              })(
+                <Input placeholder="ссылка на изображение" />,
+              )}
+            </FormItem>
+
+            <FormItem>
+              {getFieldDecorator('thumb', {
+                rules: [{ required: true, message: 'Укажите ссылку на миниатюру' }],
+                initialValue: thumb,
+              })(
+                <Input placeholder="ссылка на миниатюру" />,
+              )}
+            </FormItem>
+          </TabPane>
         </Tabs>
+
 
         <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
 

@@ -62,6 +62,7 @@ module.exports = compose(
   /** COURSES **/
   get('/courses',          coursesController.index),
   get('/courses/:id',      coursesController.show),
+  get('/courses/slug/:slug', coursesController.showBySlug),
   post('/courses/create',  coursesController.create),
   post('/courses/update',  coursesController.update),
   post('/courses/delete',  coursesController.delete),

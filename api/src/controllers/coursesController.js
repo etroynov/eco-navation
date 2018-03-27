@@ -36,6 +36,17 @@ exports.show = async (req, res) => {
   }
 }
 
+exports.showBySlug = async (req, res) => {
+  try {
+    const course = await Course.findOne({ slug: req.params.slug }).populate('sections').populate('lessons').populate('tests');
+    
+    return send(res, 200, course);
+  } catch(e) {
+    return send(res, 500, e);
+  }
+}
+
+
 exports.create = async (req, res) => {
   try {
     const data = await json(req);
