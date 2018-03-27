@@ -39,6 +39,10 @@ const CourseSchema = new Schema({
     unique: true,
     required: true,
   },
+  status: {
+    type: Number,
+    default: 0,
+  }
 });
 
 /**
