@@ -1,8 +1,0 @@
-{
-  "name": "ucavtor-api",
-  "version": "",
-  "scripts": {
-    "start": "../node_modules/micro/bin/micro.js src",
-    "start-dev-api": "../node_modules/micro-dev/bin/micro-dev.js -p 8081 src"
-  }
-}

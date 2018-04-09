@@ -1,8 +1,0 @@
-{
-  "name": "ucavtor-admin",
-  "version": "",
-  "scripts": {
-    "start-dev-admin": "../node_modules/parcel-bundler/bin/cli.js -p 2000 ./src/index.html",
-    "build": "../node_modules/parcel-bundler/bin/cli.js build ./src/index.html --public-url ./"
-  }
-}

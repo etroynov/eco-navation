@@ -1,0 +1,37 @@
+{
+  "name": "ucavtor-site",
+  "version": "",
+  "license": "MIT",
+  "scripts": {
+    "start-dev-site": "next -p 4000",
+    "start": "node index.js",
+    "build": "next"
+  },
+  "devDependencies": {
+    "@types/react": "^16.0.41",
+    "@types/react-dom": "^16.0.4",
+    "@types/react-helmet": "^5.0.4",
+    "@types/react-redux": "^5.0.15",
+    "@types/react-router-dom": "^4.2.4",
+    "@types/react-router-redux": "^5.0.12",
+    "@types/recompose": "^0.24.7",
+    "@zeit/next-typescript": "0.0.11",
+    "babel-plugin-import": "^1.6.5",
+    "babel-plugin-styled-components": "^1.5.1",
+    "cssnano": "^3.10.0",
+    "tslint": "^5.8.0",
+    "tslint-config-airbnb": "^5.6.0",
+    "typescript": "^2.7.2"
+  },
+  "dependencies": {
+    "antd": "^3.3.3",
+    "axios": "^0.18.0",
+    "next": "^5.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-icons": "^2.2.7",
+    "react-yandex-metrika": "^2.3.0",
+    "recompose": "^0.26.0",
+    "styled-components": "^3.1.6"
+  }
+}
