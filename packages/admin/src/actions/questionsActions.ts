@@ -16,7 +16,7 @@ import { error } from './../utils/modals';
  */
 
 /**
- * FETCH QUESTIONS
+ * FETCH COURSE QUESTIONS
  */
 
 
@@ -24,31 +24,13 @@ export const requestQuestions: any = createAction('REQUEST_QUESTIONS');
 export const receiveQuestions: any = createAction('RECEIVE_QUESTIONS');
 
 
-export const fetchQuestions = () => (dispatch) => {
+export const fetchQuestions = id => (dispatch) => {
   dispatch(requestQuestions());
 
   return axios.get(
-    'http://api.ucavtor.ru/questions',
+    `http://api.ucavtor.ru/questions/${id}`,
   ).then(
     ({ data }) => dispatch(receiveQuestions(data)),
-    err => error(),
-  );
-};
-
-/**
- * FETCH QUESTION
- */
-
-export const requestQuestion: any = createAction('REQUEST_QUESTION');
-export const receiveQuestion: any = createAction('RECEIVE_QUESTION');
-
-export const fetchQuestion = data => (dispatch) => {
-  dispatch(requestQuestion());
-
-  return axios.get(
-    `http://api.ucavtor.ru/questions/${data}`,
-  ).then(
-    ({ data }) => dispatch(receiveQuestion(data)),
     err => error(),
   );
 };

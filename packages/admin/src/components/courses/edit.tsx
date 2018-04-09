@@ -77,12 +77,13 @@ class CourseEditForm extends React.Component<any, {
   price: number;
   duration: number;
   status: number;
-  tags: string[],
-  lessons: string[],
-  questions: string[],
-  sections: string[],
+  icon: string;
+  thumb: string;
+  tags: string[];
+  lessons: string[];
+  questions: string[];
+  sections: string[];
   slug: string;
-
 }> {
   state = {
     title: '',
@@ -92,6 +93,8 @@ class CourseEditForm extends React.Component<any, {
     status: 0,
     price: 0,
     duration: 0,
+    icon: '',
+    thumb: '',
     tags: [],
     lessons: [],
     questions: [],

@@ -75,8 +75,7 @@ module.exports = compose(
   post('/lessons/delete',  lessonsController.delete),
 
   /** QUESTIONS **/
-  get('/questions',          questionsController.index),
-  get('/questions/:id',      questionsController.show),
+  get('/questions/:id',      questionsController.index),
   post('/questions/create',  questionsController.create),
   post('/questions/update',  questionsController.update),
   post('/questions/delete',  questionsController.delete),

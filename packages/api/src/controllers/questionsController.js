@@ -17,7 +17,7 @@ const Question = mongoose.model('Question');
  */
 
 exports.index = async (req, res) => {
-  const questions = await Question.find();
+  const questions = await Question.find({ course: req.params.id });
 
   return send(res, 200, questions);
 };
