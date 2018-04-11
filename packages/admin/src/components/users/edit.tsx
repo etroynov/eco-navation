@@ -3,7 +3,6 @@
  */
 
 import * as React from 'react';
-import CKEditor from 'react-ckeditor-component';
 import { connect } from 'react-redux';
 import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
 
@@ -12,7 +11,8 @@ import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
  */
 
 import { success } from './../../utils/modals';
-import { updatePage } from '../../actions/pagesActions';
+import { updateUser } from '../../actions/usersActions';
+import { fetchCourses } from '../../actions/coursesActions';
 
 /*!
  * Components
@@ -23,130 +23,108 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 
 /*!
+ * InitialState
+ */
+
+const initialState = {
+  fio: '',
+  telephone: '',
+  password: '',
+  organization: 0,
+  courses: [],
+  finishedCourses: [],
+  payments: [],
+  tests: [],
+  email: '',
+  position: '',
+  level: 0,
+};
+
+/*!
  * Expo
  */
 
-class PageEditForm extends React.Component<any, {
-  title: string;
-  description: string;
-  name: string;
-  content: string;
-  status: number;
-  slug: string;
-}> {
-  state = {
-    title: '',
-    description: '',
-    name: '',
-    content: '',
-    status: 0,
-    slug: '',
-  };
+class UserEditForm extends React.Component<any, IUser> {
+  state = initialState;
 
-  private componentDidMount() {
-    const { pages, match: { params } } = this.props;
+  public componentDidMount() {
+    const { users, match: { params } } = this.props;
 
-    const filteredPage = pages.data.filter(({ _id }) => _id === params.id);
+    const filteredUser = users.data.filter(({ _id }) => _id === params.id);
+    this.props.fetchCourses();
 
-    return this.setState({
-      ...filteredPage[0],
-    });
+    return this.setState({ ...filteredUser[0] });
   }
+
+  private handleChangeCourses = () => {};
+
+  private handleChangeLevel = () => {};
 
   private handleSubmit = (e) => {
     e.preventDefault();
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.updatePage({ ...this.state, ...values }).then(() => success());
+        const data = { ...this.state, ...values };
+        delete data.organization;
+        delete data.payments;
+        
+        this.props.updateUser(data).then(() => success());
       }
     });
   }
 
-  private updateContent = (content) => {
-    this.setState({ content });
-  }
-
-  private handleChangeContent = (e) => {
-    const content = e.editor.getData();
-
-    this.setState({ content });
-  }
-
-  private handelChangeStatus = status => this.setState({ status });
-
   public render() {
-    const { getFieldDecorator } = this.props.form;
+    const { form: { getFieldDecorator } } = this.props;
     const {
-      title,
-      description,
-      name,
-      content,
-      slug,
-      status,
+      fio,
+      telephone,
+      password,
+      organization,
+      courses,
+      finishedCourses,
+      payments,
+      tests,
+      email,
+      position,
+      level,
     } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem>
-          {getFieldDecorator('name', {
-            rules: [
-              { required: true, message: 'Укажите название!' }
-            ],
-            initialValue: name,
-          })(<Input placeholder="название страницы" />)}
-        </FormItem>
-        <FormItem>
-          <CKEditor
-            config={{
-              language: 'ru',
-              allowedContent: true,
-            }}
-            content={content}
-            events={{
-              change: this.handleChangeContent,
-            }}
-          />
-        </FormItem>
-
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
-
-        <h3>СЕО</h3>
-        <hr style={{ border: 'none', borderBottom: '1px solid #eeeeee' }} />
-
-        <FormItem>
-          {getFieldDecorator('title', {
-            rules: [{ required: true, message: 'Укажите заголовок!' }],
-            initialValue: title,
-          })(<Input placeholder="заголовок страницы ( тег title )" />)}
+          {getFieldDecorator('fio', {
+            rules: [{ required: true, message: 'Укажите ФИО!' }],
+            initialValue: fio,
+          })(<Input placeholder="Иванов Иван Иванович" />)}
         </FormItem>
 
         <FormItem>
-          {getFieldDecorator('description', {
-            rules: [{ required: true, message: 'Укажите описание!' }],
-            initialValue: description,
+          {getFieldDecorator('email', {
+            rules: [{ required: true, message: 'Укажите email!' }],
+            initialValue: email,
+          })(<Input placeholder="example@mail.ru" />)}
+        </FormItem>
+
+        <FormItem>
+          {getFieldDecorator('organization', {
+            initialValue: organization,
           })(
-            <TextArea
-              rows={4}
-              placeholder="краткое описание ( тег meta='description' )"
-            />,
+            <Select placeholder="организация">
+              <Option key={0} value={0}>Частное лицо</Option>
+              {this.props.organizations.data.map(({ _id, name }) => <Option key={_id} value={_id}>{name}</Option>)}
+            </Select>,
           )}
         </FormItem>
 
         <FormItem>
-          {getFieldDecorator('slug', {
-            rules: [{ required: true, message: 'Укажите ЧПУ!' }],
-            initialValue: slug,
+          {getFieldDecorator('courses', {
+            initialValue: courses,
           })(
-            <Input placeholder="адрес страницы, например: testpage" />,
+            <Select mode="multiple" placeholder="выберите курс">
+              {this.props.courses.data.map(({ _id, name }) => <Option key={_id} value={_id}>{name}</Option>)}
+            </Select>,
           )}
-        </FormItem>
-
-        <FormItem>
-          <Select defaultValue={String(status)} onChange={this.handelChangeStatus}>
-            <Option value="0">Черновик</Option>
-            <Option value="1">Опубликованно</Option>
-          </Select>
         </FormItem>
 
         <FormItem>
@@ -158,11 +136,11 @@ class PageEditForm extends React.Component<any, {
   }
 }
 
-const WrappedPageEditForm = Form.create()(PageEditForm as any);
+const WrappedUserEditForm = Form.create()(UserEditForm as any);
 
-const mapStateToProps = ({ pages }) => ({ pages });
+const mapStateToProps = ({ users, organizations, courses }) => ({ users, organizations, courses });
 
 export default connect(
   mapStateToProps,
-  { updatePage },
-)(WrappedPageEditForm as any);
+  { fetchCourses, updateUser },
+)(WrappedUserEditForm as any);

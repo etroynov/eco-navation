@@ -39,7 +39,7 @@ const OrganizationSchema = new Schema({
     type: String,
     default: ''
   },
-  sections: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  employers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
 /**

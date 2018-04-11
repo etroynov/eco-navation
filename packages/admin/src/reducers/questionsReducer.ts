@@ -21,9 +21,6 @@ import {
   requestQuestions,
   receiveQuestions,
 
-  requestQuestion,
-  receiveQuestion,
-
   receiveCreateQuestion,
   requestCreateQuestion,
 

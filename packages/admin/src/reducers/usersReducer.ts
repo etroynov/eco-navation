@@ -21,9 +21,6 @@ import {
   requestUsers,
   receiveUsers,
 
-  receiveCreateUser,
-  requestCreateUser,
-
   receiveUpdateUser,
   requestUpdateUser,
 
@@ -44,16 +41,6 @@ const usersReducer = createReducer({
     loading: false,
   }),
 
-  // Create user
-  [requestCreateUser]: (state: IReducerState) => ({
-    ...state,
-    loading: true,
-  }),
-  [receiveCreateUser]: (state: IReducerState, payload) => ({
-    data: [...state.data, payload],
-    loading: false,
-  }),
-
   // Update user
   [requestUpdateUser]: (state: IReducerState) => ({
     ...state,
@@ -61,7 +48,7 @@ const usersReducer = createReducer({
   }),
   [receiveUpdateUser]: (state: IReducerState, payload) => {
     const data = state.data.map((item) => {
-      if (item._id === payload.user._id) {
+      if (item._id === payload._id) {
         return { ...item, ...payload };
       }
 

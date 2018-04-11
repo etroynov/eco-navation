@@ -76,10 +76,11 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const user = await json(req);
+    const data = await json(req);
+    const { _id } = data;
 
-    await User.update({_id: user.id }, user);
-    return send(res, 200);
+    const user = await User.findOneAndUpdate({ _id }, data, { new: true });
+    return send(res, 200, user);
   } catch(e) {
     return send(res, 500, e);
   }

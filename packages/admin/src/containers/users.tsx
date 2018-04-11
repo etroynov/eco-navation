@@ -52,9 +52,6 @@ const Users = ({ location }) => {
       <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
         <h1 style={{ margin: 0 }}>
           {title}
-          <Button type="primary" style={{ float: 'right', marginTop: 5 }} >
-            <Link to="/users/create">Добавить страницу</Link>
-          </Button>
         </h1>
       </header>
 
