@@ -29,7 +29,7 @@ export const fetchUsers = () => (dispatch) => {
   dispatch(requestUsers());
 
   return axios.get(
-    'http://localhost:8081/users',
+    'http://api.ucavtor.ru/users',
   ).then(
     ({ data }) => dispatch(receiveUsers(data)),
     err => error(),
@@ -47,7 +47,7 @@ export const updateUser = data => (dispatch) => {
   dispatch(requestUpdateUser());
 
   return axios.post(
-    'http://localhost:8081/users/update',
+    'http://api.ucavtor.ru/users/update',
     data,
   ).then(
     ({ data }) => dispatch(receiveUpdateUser(data)),
