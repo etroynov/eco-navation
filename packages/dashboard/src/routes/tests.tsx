@@ -17,7 +17,7 @@ import Index from '../pages/tests';
 
 const Tests = () => (
   <Switch>
-    <Route exact path="/tests" component={Index} />
+    <Route path="/tests" component={Index} />
   </Switch>
 );
 

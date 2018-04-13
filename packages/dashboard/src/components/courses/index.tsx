@@ -19,7 +19,7 @@ const Courses: React.SFC<ICourses> = ({ title = '', items = [] }) => (
   <Card title={title} className="dashboard-card">
     {
       !!items.length
-      ? <Row gutter={8}>{ items.map(item => <Course {...item} />) }</Row>
+      ? <Row gutter={8}>{ items.map(item => <Course key={item._id} {...item} />) }</Row>
       : <p className="label-empty-data">курсов нет</p>
     }
   </Card>

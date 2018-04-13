@@ -17,12 +17,12 @@ const columns = [{
       : <Icon type="close-circle" style={{ color: 'red' }} />,
 }];
 
-class Result extends React.Component<{
+class TestResult extends React.Component<{
   name: string;
   steps: any[];
 }, {}> {
   render() {
-    const { name, steps  } = this.props;
+    const { name, questions, rightAnswers, userAnswers  } = this.props;
 
     return (
       <Dashboard>
@@ -45,7 +45,7 @@ class Result extends React.Component<{
             </header>
 
             <section style={{ overflow: 'hidden' }}>
-              <Table pagination={false} dataSource={steps} columns={columns} />
+              <Table pagination={false} dataSource={questions} columns={columns} />
               <div style={{ float: 'right', padding: '20px 0' }}>
                 <Button type="primary" icon="printer" style={{ marginRight: 10 }} onClick={() => window.print() }>Распечатать результат</Button>
                 <Button type="primary" icon="check"><Link to="/courses" style={{ color: '#fff' }}>завершить</Link></Button>
@@ -57,4 +57,4 @@ class Result extends React.Component<{
   }
 }
 
-export default Result;
+export default TestResult;

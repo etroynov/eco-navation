@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
  * Actions
  */
 
-import { fetchCourse } from '../../actions/coursesActions';
+import { fetchCourse, fetchCourseTestQuestions } from '../../actions/coursesActions';
 
 /*!
  * Components
@@ -26,36 +26,32 @@ const Step = Steps.Step;
 
 class Course extends React.Component<{
   fetchCourse: any;
+  fetchCourseTestQuestions: any;
+  match: any;
+  courses: {
+    current: {
+      _id: string;
+      questions: any[];
+      lessons: any[];
+    },
+  }
 }, {
-  tests: any[];
-  lessons: any[];
   currentLesson: number;
 }> {
   state = {
-    tests: [],
-    lessons: [],
     currentLesson: 0,
-  }
+  };
 
   async componentDidMount() {
     const { match: { params } } = this.props;
 
-    this.fetchCourse(params.id);
-  }
-
-  fetchCourse = async (id) => {
-    const { payload } = await this.props.fetchCourse(id);
-
-    return this.setState({
-      ...payload,
-    });
+    await this.props.fetchCourse(params.id);
+    await this.props.fetchCourseTestQuestions(params.id);
   }
 
   handleClickNext = () => {
-    const { lessons, currentLesson } = this.state;
-
-    if (currentLesson >= lessons.length - 1) { return false; }
-
+    const { currentLesson } = this.state;
+    
     return this.setState({
       currentLesson: this.state.currentLesson + 1,
     });
@@ -72,9 +68,12 @@ class Course extends React.Component<{
   }
 
   render() {
-    const { lessons, tests, currentLesson } = this.state;
-
-    console.info(lessons);
+    const { currentLesson } = this.state;
+    const {
+      _id = '',
+      lessons = [],
+      questions = [],
+    } = this.props.courses.current;
 
     return (
       <Dashboard>
@@ -111,13 +110,13 @@ class Course extends React.Component<{
                 <hr style={{ margin: 0, border: 'none', borderBottom: '1px solid #eeeeee' }} />
                 <div style={{ padding: '15px 0', overflow: 'hidden' }}>
                   {
-                    !!tests.length
-                    ? <Link to="/tests/trud">
+                    !!questions.length
+                    ? <Link to={`/tests/${_id}`}>
                         <Button type="primary" icon="exception" style={{ float: 'left' }}>
                           Пройти тест
                         </Button>
                       </Link>
-                    : null
+                    : questions.length
                   }
                   <Button type="primary" icon="arrow-right" onClick={this.handleClickNext} style={{ float: 'right' }} />
                   <Button type="primary" icon="arrow-left" onClick={this.handleClickPrev} style={{ marginRight: 15, float: 'right' }} />
@@ -137,6 +136,9 @@ class Course extends React.Component<{
   }
 }
 
-export default connect(null,
-  { fetchCourse },
+const mapStateToProps = ({ courses }) => ({ courses });
+
+export default connect(
+  mapStateToProps,
+  { fetchCourse, fetchCourseTestQuestions },
 )(Course as any);
