@@ -1,50 +1,72 @@
-/**
+/*!
  * Vendor
  */
 
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-/**
+/*!
  * Components
  */
 
 import Test from '../../components/test';
 import TestResult from '../../components/test/result';
 
-/**
+/*!
+ * Helpers
+ */
+
+function getRandomArrayElements(arr, count) {
+  const shuffled = arr.slice(0);
+  let i = arr.length;
+  let temp;
+  let index;
+  
+  const min = i - count;
+
+  while (i-- > min) {
+    index = Math.floor((i + 1) * Math.random());
+    temp = shuffled[index];
+    shuffled[index] = shuffled[i];
+    shuffled[i] = temp;
+  }
+  return shuffled.slice(min);
+}
+
+/*!
  * Expo
  */
 
 class Tests extends React.Component<{}, {}> {
   state = {
     questions: [],
-    chosenAnswer: 0,
     userAnswers: [],
-    rightAnswers: [],
     currentStep: 0,
+    chosenAnswer: 0,
+    rightAnswersCount: 0,
     inProgress: true,
   };
 
   componentDidMount() {
-    this.setState({
-      questions: this.props.courses.current.questions,
-    });
+    const allQuestions = this.props.courses.current.questions;
+    const questions = getRandomArrayElements(allQuestions, 10);
+
+    this.setState({ questions });
   }
 
   handleClickNext = (rightAnswer = 0, userAnswer = 0) => {
-    const { questions, currentStep, chosenAnswer, userAnswers } = this.state;
+    const { questions, currentStep, userAnswers } = this.state;
 
     return this.setState({
       currentStep: currentStep + 1,
       userAnswers: [...this.state.userAnswers, userAnswer],
-      rightAnswers: [...this.state.rightAnswers, rightAnswer],
       inProgress: currentStep >= questions.length - 1 ? false : true,
+      rightAnswersCount: userAnswer === rightAnswer ? this.state.rightAnswersCount + 1 : this.state.rightAnswersCount,
     });
   }
 
   render() {
-    const { inProgress, questions, currentStep, rightAnswers, userAnswers } = this.state;
+    const { inProgress, questions, currentStep, rightAnswersCount, userAnswers } = this.state;
     const question = questions[currentStep];
 
     return (
@@ -57,11 +79,11 @@ class Tests extends React.Component<{}, {}> {
             handleClickNext={this.handleClickNext}
           />
         }
-        {!inProgress && !!question && <TestResult
-            name={question.question}
+        {!inProgress && !!questions && <TestResult
             questions={questions}
-            rightAnswers={rightAnswers}
             userAnswers={userAnswers}
+            name={this.props.courses.current.name}
+            rightAnswersCount={this.state.rightAnswersCount}
           />
         }
       </div>

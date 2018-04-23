@@ -1,15 +1,25 @@
+/*!
+ * Vendor
+ */
+
 import * as React from 'react';
 import { Col, Row, Steps, Button, Radio } from 'antd';
+
+/*!
+ * Compnonents
+ */
 
 import Dashboard from '../layout';
 
 const Step = Steps.Step;
 const RadioGroup = Radio.Group;
 
+/*!
+ * Expo
+ */
+
 class Test extends React.Component<{}, {}> {
-  state = {
-    chosenAnswer: 0,
-  };
+  state = { chosenAnswer: 0 };
   
   handleSelectAnswer = e => this.setState({ chosenAnswer: e.target.value });
 
