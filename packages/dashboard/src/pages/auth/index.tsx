@@ -1,5 +1,5 @@
-/**
- * Dependencies
+/*!
+ * Vendors
  */
 
 import * as React from 'react';
@@ -10,7 +10,17 @@ import { Helmet } from 'react-helmet';
 import { Link, Redirect } from 'react-router-dom';
 import { Layout, Form, Icon, Input, Button, Checkbox, Modal } from 'antd';
 
+/*!
+ * Actions
+ */
+
 import { login } from './../../actions/userActions';
+
+/*!
+ * Styles
+ */
+
+import * as styles from './styles.css';
 
 /*!
  * Expo
@@ -42,39 +52,30 @@ class LoginForm extends React.Component<any, any> {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <Content style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        margin: 'auto',
-        width: 300,
-        height: 500,
-      }}>
+      <Content className={styles.panel}>
         <Helmet>
           <meta charSet="utf-8" />
           <title>Авторизация</title>
         </Helmet>
-        <h2 style={{ margin: 0, textAlign: 'center', textTransform: 'uppercase' }}>авторизация</h2>
-        <h3 style={{ fontSize: 15, textAlign: 'center' }}>( 0.101.4 )</h3>
+        <h2 className={styles.title}>авторизация</h2>
+        <h3 className={styles.subTitle}>( 0.101.4 )</h3>
         <Form className="login-form" onSubmit={this.handleSubmit}>
           <FormItem>
             {getFieldDecorator('email', {
-              rules: [{ required: true, message: 'Укажите имя пользователя!' }],
+              rules: [{ required: true, message: 'Укажите почту для входа!' }],
             })(
-              <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="имя пользователя" />,
+              <Input prefix={<Icon type="user" className={styles.formIcon} />} placeholder="example@mail.com" />,
             )}
           </FormItem>
           <FormItem>
             {getFieldDecorator('password', {
               rules: [{ required: true, message: 'Укажите пароль!' }],
             })(
-              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="пароль" />,
+              <Input prefix={<Icon type="lock" className={styles.formIcon} />} type="password" placeholder="пароль" />,
             )}
           </FormItem>
           <FormItem>
-            <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: '100%' }}>
+            <Button type="primary" htmlType="submit" className={`login-form-button ${styles.submit}`}>
               войти
             </Button>
             или <Link to="/auth/registration">зарегистрироваться!</Link>

@@ -51,7 +51,8 @@ const Index = ({ courses, user, status, setPaymentStatus }) => (
         <Col key={_id} span={6}>
           <Card title={name}
             style={{ marginBottom: 15 }}
-            cover={<img src={thumb} alt={name} />}
+            bodyStyle={{ padding: 0 }}
+            cover={<img src={thumb} alt={name} style={{ maxHeight: 230 }}/>}
             actions={[
               <p style={{ margin: 0, padding: 5, fontSize: 24 }}>{price} / {duration} ч.</p>,
               <Button type="primary" loading={status} onClick={() => {
