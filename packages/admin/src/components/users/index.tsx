@@ -28,26 +28,26 @@ const columns = [
     title: 'Компания',
     dataIndex: 'organization',
     key: 'organization',
+    align: 'center',
     render: (text, record) => 'частное лицо',
   }, {
     title: 'Зарегистрирован',
     dataIndex: 'createdAt',
     key: 'createdAt',
+    align: 'center',
     render: (text, record) => moment(text).locale('ru').format('L'),
   }, {
     title: 'Оплачен',
     dataIndex: 'status',
     key: 'status',
+    align: 'center',
     render: text => <Switch />,
   }, {
     title: 'Действия',
     key: 'action',
+    align: 'center',
     render: (text, record) => (
       <div>
-        {/* <Link to="/users/show">
-          <Button type="primary" icon="eye" />
-        </Link> */}
-
         <Link to={`/users/edit/${record._id}`}>
           <Button type="primary" icon="edit" style={{ marginLeft: 10 }} />
         </Link>

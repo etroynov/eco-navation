@@ -27,6 +27,7 @@ const columns = [{
   title: 'Создан',
   dataIndex: 'createdAt',
   key: 'createdAt',
+  align: 'center',
   render: (text, record) => moment(text).locale('ru').format('L'),
 }];
 
@@ -42,6 +43,7 @@ const LessonsIndex = ({ course, data, deleteLesson }) => (
         {
           title: 'Действия',
           key: 'action',
+          align: 'center',
           render: (text, record) => (
             <div className="table-controls">
               <Link to={`/lessons/edit/${record._id}`} className="table-controls__item">

@@ -27,27 +27,30 @@ const columns = [
   }, {
     title: 'Дата',
     dataIndex: 'createdAt',
+    align: 'center',
     key: 'createdAt',
     render: (text, record) => moment(text).locale('ru').format('L'),
   }, {
     title: 'Кол-во сотрудников',
     dataIndex: 'employersCount',
     key: 'employersCount',
+    align: 'center',
   },  {
     title: 'Подтверждена',
     dataIndex: 'status',
     key: 'status',
+    align: 'center',
     render(text) {
       return <Switch />;
     },
   }, {
+    title: 'Действия',
     key: 'action',
+    align: 'center',
     render: (text, record) => (
-      <div style={{ float: 'right' }}>
-        <Link to={`/organizations/show/${record._id}`}>
-          <Button type="primary" icon="eye" style={{ marginLeft: 10 }} />
-        </Link>
-      </div>
+      <Link to={`/organizations/show/${record._id}`}>
+        <Button type="primary" icon="eye" style={{ marginLeft: 10 }} />
+      </Link>
     ),
   },
 ];

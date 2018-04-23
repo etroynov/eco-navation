@@ -28,13 +28,16 @@ const columns = [
     title: 'Ключ',
     dataIndex: 'slug',
     key: 'sulg',
+    align: 'center',
   }, {
     title: 'значение',
     dataIndex: 'value',
     key: 'value',
+    align: 'center',
   }, {
     title: 'Действия',
     key: 'action',
+    align: 'center',
     render: (text, record) => (
       <div>
         <Link to={`/settings/edit/${record._id}`}>

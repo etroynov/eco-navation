@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start-dev-dashboard": "parcel -p 2100 ./src/index.html",
+    "start-dev-dashboard": "parcel -p 2200 ./src/index.html",
     "build": "parcel build ./src/index.html --public-url ./"
   },
   "devDependencies": {

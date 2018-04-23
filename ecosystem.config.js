@@ -2,7 +2,8 @@ module.exports = {
   apps: [
     {
       name: "ucavtor-api",
-      script: "./api",
+      script: "npm",
+      args: 'start --prefix packages/api',
       watch: true,
       env: {
         PORT: 8082,
@@ -13,7 +14,7 @@ module.exports = {
     {
       name: "ucavtor-site",
       script: "npm",
-      args: 'start --prefix site',
+      args: 'start --prefix packages/site',
       watch: true,
       env: {
         PORT: 8083,

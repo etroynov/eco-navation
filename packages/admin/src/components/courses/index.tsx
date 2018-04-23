@@ -24,18 +24,22 @@ const columns: any = [
     title: 'Название',
     dataIndex: 'name',
     key: 'name',
+    width: '40%',
   }, {
     title: 'Кол - во уроков',
+    align: 'center',
     dataIndex: 'lessons',
     key: 'lessons',
     render: (lessons, record) => lessons.length,
   }, {
     title: 'Создан',
+    align: 'center',
     dataIndex: 'createdAt',
     key: 'createdAt',
     render: (text, record) => moment(text).locale('ru').format('L'),
   },  {
     title: 'Статус',
+    align: 'center',
     dataIndex: 'status',
     key: 'status',
     render(text) {
@@ -59,6 +63,7 @@ const CoursesIndex = ({ loading, data, deleteCourse }) => (
       ...columns,
       {
         title: 'Действия',
+        align: 'center',
         key: 'action',
         render: (text, { _id }) => (
           <div>

@@ -6,6 +6,7 @@ interface IReduxAction {
 interface IReducerState {
   loading: boolean;
   data: any[];
+  current?: object;
 }
 
 interface IUserReducerState {

@@ -28,15 +28,18 @@ const columns = [
     title: 'Создана',
     dataIndex: 'createdAt',
     key: 'createdAt',
+    align: 'center',
     render: (text, record) => moment(text).locale('ru').format('L'),
   }, {
     title: 'Обновлена',
     dataIndex: 'updatedAt',
     key: 'updatedAt',
+    align: 'center',
     render: (text, record) => moment(text).locale('ru').format('L'),
   }, {
     title: 'Действия',
     key: 'action',
+    align: 'center',
     render: (text, record) => (
       <div>
         <Link to={`/sections/edit/${record._id}`}>

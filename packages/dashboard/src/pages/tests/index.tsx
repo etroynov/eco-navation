@@ -3,91 +3,73 @@
  */
 
 import * as React from 'react';
+import { connect } from 'react-redux';
 
 /**
  * Components
  */
 
-import Item from '../../components/tests/item';
-import Result from '../../components/tests/result';
+import Test from '../../components/test';
+import TestResult from '../../components/test/result';
 
 /**
  * Expo
  */
 
-export default class extends React.Component<{}, {}> {
+class Tests extends React.Component<{}, {}> {
   state = {
+    questions: [],
     chosenAnswer: 0,
     userAnswers: [],
+    rightAnswers: [],
     currentStep: 0,
     inProgress: true,
-    name: 'Тест по теме: Охрана труда',
-    description: '',
-    steps: [
-      {
-        key: 0,
-        title: 'Вопрос 1',
-        question:
-          'Что из перечисленного определяется как "обстановка на определенной территории, сложившаяся в результате аварии, опасного природного явления, катастрофы, стихийного или иного бедствия, которые могут повлечь или повлекли за собой человеческие жертвы, ущерб здоровью людей или окружающей среде, значительные материальные потери и нарушение условий жизнедеятельности людей?"',
-        answers: [
-          'Чрезвычайная ситуация',
-          'Зона чрезвычайной ситуации',
-          'Чрезвычайное происшествие',
-        ],
-        rightAnswer: 1,
-      },
-      {
-        key: 1,
-        title: 'Вопрос 2',
-        question:
-          'Что из перечисленного не входит в основные мероприятия, проводимые органами управления и силами единой системы предупреждения и ликвидации чрезвычайных ситуаций, в режиме чрезвычайной ситуации?',
-        answers: [
-          'Восполнение при необходимости резервов материальных ресурсов, созданных для ликвидации чрезвычайных ситуаций',
-          'Непрерывный контроль за состоянием окружающей среды, мониторинг и прогнозирование развития возникших чрезвычайных ситуаций, а также оценка их социально-экономических последствий',
-          'Проведение мероприятий по защите населения и территорий от чрезвычайных ситуаций',
-          'Непрерывный сбор, анализ и обмен информацией об обстановке в зоне чрезвычайной ситуации и в ходе проведения работ по ее ликвидации',
-          'Проведение мероприятий по жизнеобеспечению населения в чрезвычайной ситуации'
-        ],
-        rightAnswer: 0,
-      },
-    ],
   };
 
-  handleClickNext = () => {
-    const { steps, currentStep, chosenAnswer, userAnswers } = this.state;
-
-    return this.setState({
-      currentStep: currentStep + 1,
-      userAnswers: [...userAnswers, { ...steps[currentStep], userAnswer: chosenAnswer }],
-      inProgress: currentStep >= steps.length - 1 ? false : true,
+  componentDidMount() {
+    this.setState({
+      questions: this.props.courses.current.questions,
     });
   }
 
-  handleSelectAnswer = (e) => {
-    this.setState({ chosenAnswer: e.target.value });
+  handleClickNext = (rightAnswer = 0, userAnswer = 0) => {
+    const { questions, currentStep, chosenAnswer, userAnswers } = this.state;
+
+    return this.setState({
+      currentStep: currentStep + 1,
+      userAnswers: [...this.state.userAnswers, userAnswer],
+      rightAnswers: [...this.state.rightAnswers, rightAnswer],
+      inProgress: currentStep >= questions.length - 1 ? false : true,
+    });
   }
 
   render() {
-    const { inProgress, name, steps, currentStep, chosenAnswer, userAnswers } = this.state;
-    const step = steps[currentStep];
-
-    console.info(userAnswers);
+    const { inProgress, questions, currentStep, rightAnswers, userAnswers } = this.state;
+    const question = questions[currentStep];
 
     return (
       <div>
-        {inProgress ? (
-          <Item
-            steps={steps}
-            step={step}
+        {inProgress && !!question && <Test
+            name={question.question}
+            steps={questions}
+            step={question}
             currentStep={currentStep}
-            chosenAnswer={chosenAnswer}
-            handleSelectAnswer={this.handleSelectAnswer}
             handleClickNext={this.handleClickNext}
           />
-        ) : (
-          <Result name={name} steps={userAnswers} />
-        )}
+        }
+        {!inProgress && !!question && <TestResult
+            name={question.question}
+            questions={questions}
+            rightAnswers={rightAnswers}
+            userAnswers={userAnswers}
+          />
+        }
       </div>
     );
   }
 }
+
+const mapStateToProps = ({ courses }) => ({ courses });
+
+export default connect(mapStateToProps)(Tests);
+

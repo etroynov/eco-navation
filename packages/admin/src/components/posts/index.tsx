@@ -28,11 +28,13 @@ const columns = [
     title: 'Дата',
     dataIndex: 'createdAt',
     key: 'createdAt',
+    align: 'center',
     render: (text, record) => moment(text).locale('ru').format('L'),
   },  {
     title: 'Статус',
     dataIndex: 'status',
     key: 'status',
+    align: 'center',
     render(text) {
       const status = parseInt(text, 10);
 
@@ -44,12 +46,9 @@ const columns = [
   }, {
     title: 'Действия',
     key: 'action',
+    align: 'center',
     render: (text, record) => (
       <div>
-        {/* <Link to="/posts/show">
-          <Button type="primary" icon="eye" />
-        </Link> */}
-
         <Link to={`/posts/edit/${record._id}`}>
           <Button type="primary" icon="edit" style={{ marginLeft: 10 }} />
         </Link>
