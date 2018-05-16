@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "API_URL=http://localhost:8081 start-dev-admin": "parcel -p 2000 ./src/index.html",
-    "API_URL=http://api.ucavtor.ru build": "parcel build ./src/index.html --public-url ./"
+    "start-dev-admin": "API_URL=http://localhost:8081 parcel -p 2000 ./src/index.html",
+    "build": "API_URL=http://api.ucavtor.ru parcel build ./src/index.html --public-url ./"
   },
   "devDependencies": {
     "@types/react": "^16.0.41",
