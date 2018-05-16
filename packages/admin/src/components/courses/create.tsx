@@ -178,7 +178,7 @@ class CourseCreateForm extends React.Component<any, any> {
             <FormItem>
               {getFieldDecorator('icon', {
                 rules: [{ required: true, message: 'Укажите ссылку на изображение!' }],
-                initialValue: icon,
+                initialValue: '',
               })(
                 <Input placeholder="ссылка на изображение" />,
               )}
@@ -187,7 +187,7 @@ class CourseCreateForm extends React.Component<any, any> {
             <FormItem>
               {getFieldDecorator('thumb', {
                 rules: [{ required: true, message: 'Укажите ссылку на миниатюру' }],
-                initialValue: thumb,
+                initialValue: '',
               })(
                 <Input placeholder="ссылка на миниатюру" />,
               )}
