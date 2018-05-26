@@ -110,3 +110,43 @@ interface IUser {
   position: string;
   level: number;
 }
+
+/*!
+ * Containers
+ */
+
+interface ICourseContainerState {}
+interface ICourseContainerProps {
+  fetchSections: () => void;
+  fetchCourses: () => void;
+}
+
+interface IOrganizationsContainerState {}
+interface IOrganizationsContainerProps {
+  fetchOrganizations: () => void;
+}
+
+interface IPagesContainerState {}
+interface IPagesContainerProps {
+  fetchPages: () => void;
+}
+
+interface IPostsContainerState {}
+interface IPostsContainerProps {
+  fetchPosts: () => void;
+}
+
+interface ISectionsContainerState {}
+interface ISectionsContainerProps {
+  fetchSections: () => void;
+}
+
+interface ISettingsContainerState {}
+interface ISettingsContainerProps {
+  fetchSettings: () => void;
+}
+
+interface IUsersContainerState {}
+interface IUsersContainerProps {
+  fetchUsers: () => void;
+}

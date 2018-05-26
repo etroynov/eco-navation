@@ -40,7 +40,7 @@ const Courses = ({ location }) => {
     case '/courses/create':
       title = 'Новый курс';
       break;
-    
+
     default:
       title = 'Курсы';
       break;
@@ -73,7 +73,7 @@ const Courses = ({ location }) => {
 
 export default compose(
   connect(null, { fetchSections, fetchCourses }),
-  lifecycle({
+  lifecycle<ICourseContainerProps, ICourseContainerState>({
     componentDidMount() {
       this.props.fetchSections();
       this.props.fetchCourses();

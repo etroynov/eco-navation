@@ -39,7 +39,7 @@ const Organizations = ({ location }) => {
     case '/organizations/create':
       title = 'Новая организация';
       break;
-    
+
     default:
       title = 'Организации';
       break;
@@ -67,7 +67,7 @@ const Organizations = ({ location }) => {
 
 export default compose(
   connect(null, { fetchOrganizations }),
-  lifecycle({
+  lifecycle<IOrganizationsContainerProps, IOrganizationsContainerState>({
     componentDidMount() {
       this.props.fetchOrganizations();
     },

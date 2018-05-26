@@ -39,7 +39,7 @@ const Settings = ({ location }) => {
     case '/settings/create':
       title = 'Новый параметр';
       break;
-    
+
     default:
       title = 'Настройки';
       break;
@@ -72,7 +72,7 @@ const Settings = ({ location }) => {
 
 export default compose(
   connect(null, { fetchSettings }),
-  lifecycle({
+  lifecycle<ISettingsContainerProps, ISettingsContainerState>({
     componentDidMount() {
       this.props.fetchSettings();
     },

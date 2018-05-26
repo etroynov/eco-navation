@@ -21,7 +21,6 @@ class LoginForm extends React.Component<any, any> {
 
     this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
-        // const res = await axios.post('http://localhost:8081/users/login', values);
         return location.pathname = '/';
       }
     });

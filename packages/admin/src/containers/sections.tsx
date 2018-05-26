@@ -39,7 +39,7 @@ const Sections = ({ location }) => {
     case '/sections/create':
       title = 'Новое направление';
       break;
-    
+
     default:
       title = 'Направления';
       break;
@@ -72,7 +72,7 @@ const Sections = ({ location }) => {
 
 export default compose(
   connect(null, { fetchSections }),
-  lifecycle({
+  lifecycle<ISectionsContainerProps, ISectionsContainerState>({
     componentDidMount() {
       this.props.fetchSections();
     },

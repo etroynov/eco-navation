@@ -39,7 +39,7 @@ const Pages = ({ location }) => {
     case '/pages/create':
       title = 'Новая страница';
       break;
-    
+
     default:
       title = 'Страницы';
       break;
@@ -72,7 +72,7 @@ const Pages = ({ location }) => {
 
 export default compose(
   connect(null, { fetchPages }),
-  lifecycle({
+  lifecycle<IPagesContainerProps, IPagesContainerState>({
     componentDidMount() {
       this.props.fetchPages();
     },

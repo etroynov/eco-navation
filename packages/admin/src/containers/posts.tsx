@@ -39,7 +39,7 @@ const Posts = ({ location }) => {
     case '/posts/create':
       title = 'Новая Запись';
       break;
-    
+
     default:
       title = 'Записи';
       break;
@@ -72,7 +72,7 @@ const Posts = ({ location }) => {
 
 export default compose(
   connect(null, { fetchPosts }),
-  lifecycle({
+  lifecycle<IPostsContainerProps, IPostsContainerState>({
     componentDidMount() {
       this.props.fetchPosts();
     },

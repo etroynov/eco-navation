@@ -38,7 +38,7 @@ const Users = ({ location }) => {
     case '/users/create':
       title = 'Новый пользователь';
       break;
-    
+
     default:
       title = 'Пользователи';
       break;
@@ -67,7 +67,7 @@ const Users = ({ location }) => {
 
 export default compose(
   connect(null, { fetchUsers }),
-  lifecycle({
+  lifecycle<IUsersContainerProps, IUsersContainerState>({
     componentDidMount() {
       this.props.fetchUsers();
     },
