@@ -90,7 +90,7 @@ class Test extends React.Component<{}, {}> {
                   {step.answers.map((answer, index) => (
                     <Radio
                       key={index}
-                      style={{ display: 'block', marginBottom: '20px' }}
+                      style={{ display: 'block', marginBottom: '20px', whiteSpace: 'normal' }}
                       value={index}
                     >
                       {answer}
