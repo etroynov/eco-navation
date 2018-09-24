@@ -19,7 +19,7 @@ const Image = styled.img`
  * Expo
  */
 
-const Banner = (props: IBanner) => (
+const Banner = () => (
   <Block>
     <Image src="/static/img/content/banner-ep.jpg" />
   </Block>

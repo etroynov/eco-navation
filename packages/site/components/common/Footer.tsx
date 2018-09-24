@@ -7,7 +7,7 @@ import Link from 'next/link';
 import get from 'lodash/get';
 
 import styled from 'styled-components';
-import Vk from 'react-icons/lib/fa/vk';
+import { FaVk } from 'react-icons/fa';
 import { Col, Row } from 'antd';
 import { YMInitializer } from 'react-yandex-metrika';
 
@@ -15,7 +15,7 @@ import { YMInitializer } from 'react-yandex-metrika';
  * Components
  */
 
-const VK = styled(Vk)`
+const VK = styled(FaVk)`
   color: #fff;
   font-size: 28px;
   &:hover {
@@ -43,7 +43,7 @@ const Footer = ({ settings }) => (
             </header>
             <ul className="footer-menu__body">
               <li className="footer-menu__item">
-                <Link 
+                <Link
                   as="/page/o-companii"
                   href="/page?slug=o-companii"
                 >
@@ -96,10 +96,12 @@ const Footer = ({ settings }) => (
         </Col>
       </Row>
       <div className="footer__copyright">
-        <p className="footer_copyright-light uk-text-small">{`© 2017 Автор. ${get(settings, 'address')} | ${get(settings, 'header-phone')} | `}<a href={`mailto:${get(settings, 'email')}`}>{get(settings, 'email')}</a></p>
+        <p className="footer_copyright-light uk-text-small">{`
+          © 2017 Автор. ${get(settings, 'address')} | ${get(settings, 'header-phone')} | `}
+          <a href={`mailto:${get(settings, 'email')}`}>{get(settings, 'email')}</a></p>
       </div>
     </div>
-    <YMInitializer accounts={[47130420]} version="2" />
+    <YMInitializer accounts={[47130420, 50455168]} version="2" />
     <script  dangerouslySetInnerHTML={{__html: `(function(){ var widget_id = 'MLkTdVcinx';var d=document;var w=window;function l(){var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();` }} />
   </footer>
 );

@@ -18,7 +18,7 @@ import Footer from './common/Footer';
 
 const { Content } = Layout;
 
-const Site = ({ title, description, settings, children }: ILayout) => (
+const Site = ({ title, description, settings, children }) => (
   <Layout>
     <Header title={title} description={description} settings={settings} />
     <Content>
