@@ -34,12 +34,12 @@ class Courses extends React.Component {
 
   render() {
     const {
-      name = '', 
+      name = '',
       description = '',
       items = [],
       tagsCloud = [],
     } = this.props;
-    console.info(this.props);
+
     const { selectedTags } = this.state;
 
     let currentItems = items;

@@ -28,24 +28,18 @@ exports.index = async (req, res) => {
 
 exports.show = async (req, res) => {
   try {
-    const course = await Course.findOne({ _id: req.params.id }).populate('sections').populate('lessons').populate('tests');
+    const id = req.params.id;
+    const query = mongoose.Types.ObjectId.isValid(id)
+      ? { _id: req.params.id }
+      : { slug: req.params.id }
+
+    const course = await Course.findOne(query).populate('sections').populate('lessons').populate('tests');
     
     return send(res, 200, course);
   } catch(e) {
     return send(res, 500, e);
   }
 }
-
-exports.showBySlug = async (req, res) => {
-  try {
-    const course = await Course.findOne({ slug: req.params.slug }).populate('sections').populate('lessons').populate('tests');
-    
-    return send(res, 200, course);
-  } catch(e) {
-    return send(res, 500, e);
-  }
-}
-
 
 exports.create = async (req, res) => {
   try {
