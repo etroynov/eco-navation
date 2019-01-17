@@ -14,4 +14,5 @@ import { createAction } from 'redux-act';
 
 export const menuSelectItem: any = createAction('MENU_SELECT_ITEM');
 
-export const handleMenuSelectItem = data => dispatch => dispatch(menuSelectItem(data));
+export const handleMenuSelectItem = data => dispatch =>
+  dispatch(menuSelectItem(data));

@@ -7,28 +7,60 @@
  *
  * Module dependencies
  */
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const { send, json } = require('micro');
-const { hashSync, compareSync } = require('bcryptjs');
-const { generate } = require('generate-password');
-const { createTransport } = require('nodemailer');
-const { sign } = require('jsonwebtoken');
+const { send, json } = require("micro");
+const { hashSync, compareSync } = require("bcryptjs");
+const { generate } = require("generate-password");
+const { createTransport } = require("nodemailer");
+const { sign } = require("jsonwebtoken");
 
-const User = mongoose.model('User');
+const User = mongoose.model("User");
+
+const sendResetPasswordToEmail = async ({ fio, email }, password) => {
+  try {
+    const transporter = createTransport({
+      service: "Yandex",
+      auth: {
+        user: "access@ucavtor.ru",
+        pass: "uSFC9keV4nZaOlYbAGVVwB"
+      }
+    });
+
+    const mailOptions = {
+      from: "access@ucavtor.ru",
+      to: `${email}, access@ucavtor.ru`,
+      subject: `Сброс доступов к сайту - ( ${email} ) - ucavtor.ru`,
+      html: `
+        <p>Доступы для входа на сайт, были изменены на:</p>
+
+        <p><strong>Имя пользователя:</strong> ${fio}
+        <p><strong>почта для входа на сайт:</strong> ${email}
+        <p><strong>Пароль:</strong>  ${password}
+
+        <p>Вход на сайт осуществляется через <a href="http://dashboard.ucavtor.ru/auth">Панель управления</a></p>
+      `
+    };
+
+    return transporter.sendMail(mailOptions);
+  } catch (e) {
+    return send(res, 500, e);
+  }
+};
+
 
 const sendPasswordToEmail = async ({ fio, email }, password) => {
   try {
     const transporter = createTransport({
-      service: 'Yandex',
+      service: "Yandex",
       auth: {
-        user: 'access@ucavtor.ru',
-        pass: 'uSFC9keV4nZaOlYbAGVVwB',
-      },
+        user: "access@ucavtor.ru",
+        pass: "uSFC9keV4nZaOlYbAGVVwB"
+      }
     });
 
     const mailOptions = {
-      from: 'access@ucavtor.ru',
+      from: "access@ucavtor.ru",
       to: `${email}, access@ucavtor.ru`,
       subject: `Доступ к сайту - ( ${email} ) - ucavtor.ru`,
       html: `
@@ -39,14 +71,14 @@ const sendPasswordToEmail = async ({ fio, email }, password) => {
         <p><strong>Пароль:</strong>  ${password}
 
         <p>Вход на сайт осуществляется через <a href="http://dashboard.ucavtor.ru/auth">Панель управления</a></p>
-      `,
+      `
     };
 
     return transporter.sendMail(mailOptions);
-  } catch(e) {
+  } catch (e) {
     return send(res, 500, e);
   }
-}
+};
 
 /*!
  * Expos
@@ -61,7 +93,7 @@ exports.index = async (req, res) => {
 exports.create = async (req, res) => {
   try {
     const user = await json(req);
-    const hashPassword = generate({length: 10, numbers: true });
+    const hashPassword = generate({ length: 10, numbers: true });
     const password = hashSync(hashPassword, 8);
 
     const userObj = await User.create({ ...user, password });
@@ -69,7 +101,7 @@ exports.create = async (req, res) => {
     const emailStatus = await sendPasswordToEmail(userObj, hashPassword);
 
     return send(res, 200);
-  } catch(e) {
+  } catch (e) {
     return send(res, 500, e);
   }
 };
@@ -81,7 +113,7 @@ exports.update = async (req, res) => {
 
     const user = await User.findOneAndUpdate({ _id }, data, { new: true });
     return send(res, 200, user);
-  } catch(e) {
+  } catch (e) {
     return send(res, 500, e);
   }
 };
@@ -89,38 +121,65 @@ exports.update = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = await json(req);
-    const user = await User.findOne({ email }, { _id: 1, fio: 1, position: 1, email: 1, password: 1 });
+    const user = await User.findOne(
+      { email },
+      { _id: 1, fio: 1, position: 1, email: 1, password: 1 }
+    );
 
     if (compareSync(password, user.password)) {
-      const token = sign(user.toObject(), '123');
-      return send(res, 200, { token })
+      const token = sign(user.toObject(), "123");
+      return send(res, 200, { token });
     }
 
     return send(res, 403);
-  } catch(e) {
-    return send(res, 500, e)
+  } catch (e) {
+    return send(res, 500, e);
   }
-}
+};
 
 exports.info = async (req, res) => {
   try {
     const _id = req.params.id;
-    const user = await User.findOne({ _id }).populate('organization').populate('courses').populate('finishedCourses');
+    const user = await User.findOne({ _id })
+      .populate("organization")
+      .populate("courses")
+      .populate("finishedCourses");
 
     return send(res, 200, user);
-  } catch(e) {
-    return send(res, 500, e)
+  } catch (e) {
+    return send(res, 500, e);
   }
-}
+};
+
+exports.resetPassword = async (req, res) => {
+  try {
+    const { _id } = await json(req);
+
+    const hashPassword = generate({ length: 10, numbers: true });
+    const password = hashSync(hashPassword, 8);
+
+    const user = await User.findOneAndUpdate(
+      { _id },
+      { password },
+      { new: true }
+    );
+
+    const emailStatus = await sendResetPasswordToEmail(user, hashPassword);
+
+    return send(res, 200);
+  } catch (e) {
+    return send(res, 500, e);
+  }
+};
 
 exports.delete = async (req, res) => {
   try {
-    const { id } = await json(req);
+    const { _id } = await json(req);
 
-    await User.findByIdAndRemove(id);
-    
+    const result = await User.findByIdAndRemove(_id);
+
     return send(res, 200);
-  } catch(e) {
+  } catch (e) {
     return send(res, 500, e);
   }
 };

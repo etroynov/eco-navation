@@ -24,6 +24,9 @@ import {
   receiveUpdateUser,
   requestUpdateUser,
 
+  requestResetUserPassword,
+  receiveResetUserPassword,
+
   receiveDeleteUser,
   requestDeleteUser,
 } from '../actions/usersActions';
@@ -61,13 +64,25 @@ const usersReducer = createReducer({
     };
   },
   
+   // Delete user
+  [requestResetUserPassword]: (state: IReducerState) => ({
+    ...state,
+    loading: true,
+  }),
+
+  [receiveResetUserPassword]: (state: IReducerState) => ({
+    ...state,
+    loading: false,
+  }),
+
+
   // Delete user
   [requestDeleteUser]: (state: IReducerState) => ({
     ...state,
     loading: true,
   }),
   [receiveDeleteUser]: (state: IReducerState, payload) => {
-    const data = state.data.filter(item => item._id !== payload.user._id);
+    const data = state.data.filter(item => item._id !== payload._id);
 
     return {
       data,

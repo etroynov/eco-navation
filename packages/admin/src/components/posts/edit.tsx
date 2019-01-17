@@ -2,7 +2,7 @@
  * Vendor
  */
 
-import * as React from 'react';
+import React from 'react';
 import CKEditor from 'react-ckeditor-component';
 import styled from 'styled-components';
 import { connect } from 'react-redux';

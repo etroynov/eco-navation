@@ -11,7 +11,6 @@ import { createAction } from 'redux-act';
 
 import { error } from './../utils/modals';
 
-
 /*!
  * Expo
  */
@@ -20,76 +19,79 @@ import { error } from './../utils/modals';
  * LIST ORGANIZATION
  */
 
-
 export const requestOrganizations: any = createAction('REQUEST_ORGANIZATIONS');
 export const receiveOrganizations: any = createAction('RECEIVE_ORGANIZATIONS');
 
-
-export const fetchOrganizations = () => (dispatch) => {
+export const fetchOrganizations = () => dispatch => {
   dispatch(requestOrganizations());
 
-  return axios.get(
-    'http://api.ucavtor.ru/organizations',
-  ).then(
-    ({ data }) => dispatch(receiveOrganizations(data)),
-    err => error(),
-  );
+  return axios
+    .get(`${process.env.API_URL}/organizations`)
+    .then(({ data }) => dispatch(receiveOrganizations(data)), err => error());
 };
 
 /**
  * CREATE ORGANIZATION
  */
 
-export const requestCreateOrganization: any = createAction('REQUEST_CREATE_ORGANIZATION');
-export const receiveCreateOrganization: any = createAction('RECEIVE_CREATE_ORGANIZATION');
+export const requestCreateOrganization: any = createAction(
+  'REQUEST_CREATE_ORGANIZATION',
+);
+export const receiveCreateOrganization: any = createAction(
+  'RECEIVE_CREATE_ORGANIZATION',
+);
 
-export const createOrganization = data => (dispatch) => {
+export const createOrganization = data => dispatch => {
   dispatch(requestCreateOrganization());
 
-  return axios.post(
-    'http://api.ucavtor.ru/organizations/store',
-    data,
-  ).then(
-    ({ data }) => dispatch(receiveCreateOrganization(data)),
-    err => error(),
-  );
+  return axios
+    .post(`${process.env.API_URL}/organizations/store`, data)
+    .then(
+      ({ data }) => dispatch(receiveCreateOrganization(data)),
+      err => error(),
+    );
 };
 
 /**
  * UPDATE ORGANIZATION
  */
 
-export const requestUpdateOrganization: any = createAction('REQUEST_UPDATE_ORGANIZATION');
-export const receiveUpdateOrganization: any = createAction('RECEIVE_UPDATE_ORGANIZATION');
+export const requestUpdateOrganization: any = createAction(
+  'REQUEST_UPDATE_ORGANIZATION',
+);
+export const receiveUpdateOrganization: any = createAction(
+  'RECEIVE_UPDATE_ORGANIZATION',
+);
 
-export const updateOrganization = data => (dispatch) => {
+export const updateOrganization = data => dispatch => {
   dispatch(requestUpdateOrganization());
 
-  return axios.post(
-    'http://api.ucavtor.ru/organizations/update',
-    data,
-  ).then(
-    ({ data }) => dispatch(receiveUpdateOrganization(data)),
-    err => error(),
-  );
+  return axios
+    .post(`${process.env.API_URL}/organizations/update`, data)
+    .then(
+      ({ data }) => dispatch(receiveUpdateOrganization(data)),
+      err => error(),
+    );
 };
 
 /**
  * DELETE ORGANIZATION
  */
 
-export const requestDeleteOrganization: any = createAction('REQUEST_DELETE_ORGANIZATION');
-export const receiveDeleteOrganization: any = createAction('RECEIVE_DELETE_ORGANIZATION');
+export const requestDeleteOrganization: any = createAction(
+  'REQUEST_DELETE_ORGANIZATION',
+);
+export const receiveDeleteOrganization: any = createAction(
+  'RECEIVE_DELETE_ORGANIZATION',
+);
 
-export const deleteOrganization = data => (dispatch) => {
+export const deleteOrganization = data => dispatch => {
   dispatch(requestDeleteOrganization());
 
-  return axios.post(
-    'http://api.ucavtor.ru/organizations/delete',
-    data,
-  ).then(
-    ({ data }) => dispatch(receiveDeleteOrganization(data)),
-    err => error(),
-  );
+  return axios
+    .post(`${process.env.API_URL}/organizations/delete`, data)
+    .then(
+      ({ data }) => dispatch(receiveDeleteOrganization(data)),
+      err => error(),
+    );
 };
-
