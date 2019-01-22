@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "target": "es2017",
-    "module": "commonjs",                  /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
-    "lib": [
-      "es2015",
-      "es2016",
-      "dom"
-    ],
-    "rootDir": "src",
-    "outDir": "dist",
     "jsx": "react",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-  }
+    "strict": false,
+    "module": "system",
+    "target": "es5",
+    "outFile": "bin/body.js",
+    "lib": ["dom", "es2015", "es2015.promise", "es5"],
+    "types": [],
+    "strictNullChecks": false
+  },
+
+  "include": [
+    "src/typings/*.d.ts",
+    "src/typescript/**/*.ts",
+    "src/typescript/**/*.tsx"
+  ]
 }
