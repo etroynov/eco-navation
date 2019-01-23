@@ -1,10 +1,23 @@
+.header {
+  background: #fff;
+  padding: 0;
+}
+
+.content {
+  padding: 0 15px;
+}
+
+.breadcrumb {
+  padding: 15px 0;
+}
+
 .sidebar {
   border-right: 1px solid #eeeeee;
   background: #ffffff;
 }
 
 .avatarContainer {
-  margin: 0
+  margin: 0;
 }
 
 .caption {
@@ -18,8 +31,12 @@
   padding: 30px 50px 0 50px;
 }
 
-.divider {
+.devider {
   width: 30%;
   border: none;
   border-bottom: 1px solid #eeeeee;
+}
+
+.footer {
+  text-align: center;
 }

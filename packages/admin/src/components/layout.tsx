@@ -26,7 +26,7 @@ declare const require: any;
  * Styles
  */
 
-import './style.scss';
+import styles from './style.scss';
 
 /*!
  * Expo
@@ -44,17 +44,17 @@ const Dashboard = ({
       collapsible={true}
       collapsed={collapsed}
       onCollapse={handleCollapse}
-      className="sidebar"
+      className={styles.sidebar}
     >
-      <div className="profile">
-        <figure className="avatarContainer">
+      <div>
+        <figure className={styles.avatarContainer}>
           <img
-            src={require('./../assets/img/whitecollar.svg')}
-            className="avatar"
+            src={require('../assets/img/whitecollar.svg')}
+            className={styles.avatar}
           />
-          <figcaption className="caption">
+          <figcaption className={styles.caption}>
             Администратор
-            <hr className="devider" />
+            <hr className={styles.devider} />
           </figcaption>
         </figure>
       </div>
@@ -74,14 +74,14 @@ const Dashboard = ({
       </Menu>
     </Sider>
     <Layout>
-      <Header style={{ background: '#fff', padding: 0 }} />
-      <Content style={{ margin: '0 16px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
+      <Header className={styles.header} />
+      <Content className={styles.content}>
+        <Breadcrumb className={styles.breadcrumb}>
           <Breadcrumb.Item>главная</Breadcrumb.Item>
         </Breadcrumb>
         <div className="content">{children}</div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>
+      <Footer className={styles.footer}>
         УЦ "Автор" ©2017 разработанно{' '}
         <a href="http://troinof.ru/portfolio/author">troinof.ru</a>
       </Footer>

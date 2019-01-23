@@ -1,13 +1,14 @@
 {
   "presets": ["@babel/preset-react", "@babel/preset-typescript"],
   "plugins": [
-    "babel-plugin-styled-components",
+    ["@babel/plugin-proposal-class-properties"],
+    ["babel-plugin-styled-components"],
     [
       "import",
       {
         "libraryName": "antd",
         "libraryDirectory": "es",
-        "style": true
+        "style": "css"
       }
     ]
   ]

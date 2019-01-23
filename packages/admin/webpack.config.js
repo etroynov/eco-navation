@@ -87,7 +87,7 @@ module.exports = {
 
       // Images
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         use: [
           {
             loader: 'file-loader',
@@ -130,7 +130,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist', 'zip']),
     new Dotenv({
-      path: './.env.dev'
+      path: './.env.development'
     }),
 
     new HtmlWebpackPlugin({
@@ -157,8 +157,6 @@ module.exports = {
     historyApiFallback: true,
     contentBase: path.resolve(__dirname, 'stage'),
     compress: true,
-    host: '0.0.0.0',
-    port: 3000,
     stats: 'minimal',
     watchContentBase: true,
     watchOptions: {
