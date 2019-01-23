@@ -128,7 +128,6 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin(['dist', 'zip']),
     new Dotenv({
       path: './.env.development'
     }),
@@ -136,7 +135,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: require('html-webpack-template'),
       mobile: true,
-      title: 'Instant Games',
       inject: false,
       appMountId: 'root',
       filename: 'index.html',

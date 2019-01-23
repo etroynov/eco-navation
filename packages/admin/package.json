@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --progress --mode=development",
-    "publish": "webpack --progress --mode=production"
+    "build": "webpack --progress --mode=production"
   },
   "dependencies": {
     "antd": "^3.12.4",

@@ -9,10 +9,8 @@ const path = require('path');
  */
 
 const Zip = require('zip-webpack-plugin');
-const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -23,17 +21,13 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
  */
 
 module.exports = {
-  entry: [
-    path.resolve(__dirname, 'src/index.tsx'),
-    path.resolve(__dirname, 'src/legacy.js'),
-  ],
+  entry: [path.resolve(__dirname, 'src/index.tsx')],
 
   output: {
     path: path.resolve(__dirname, 'dist'),
 
     filename: '[name].[hash:8].js',
     chunkFilename: '[name].[hash:8].js',
-    publicPath: './',
   },
 
   resolve: {
@@ -44,6 +38,15 @@ module.exports = {
   },
 
   optimization: {
+    splitChunks: {
+      cacheGroups: {
+        node_vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'async',
+          priority: 1
+        }
+      }
+    },
     minimizer: [
       new TerserPlugin({
         cache: true,
@@ -110,13 +113,12 @@ module.exports = {
 
       // Images
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
-              publicPath: './',
+              name: '[hash:8].[ext]',
             },
           },
           {
@@ -143,7 +145,7 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-            name: '[name].[hash:5].[ext]',
+            name: '[hash:8].[ext]',
           },
         },
       },
@@ -154,10 +156,6 @@ module.exports = {
     new CleanWebpackPlugin(['dist', 'zip']),
     new Dotenv(),
 
-    new CopyWebpackPlugin([
-      { from: 'src/config/fb/*', to: './', flatten: true },
-    ]),
-
     new MiniCssExtractPlugin({
       filename: '[name].[hash:8].css',
       chunkFilename: '[name].[hash:8].css',
@@ -167,7 +165,7 @@ module.exports = {
       template: require('html-webpack-template'),
       mobile: true,
       inject: false,
-      headHtmlSnippet: ` <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.12.3/antd.min.css"/>`,
+      headHtmlSnippet: `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.12.3/antd.min.css"/>`,
       appMountId: 'root',
       filename: 'index.html',
       template: 'src/index.html',
