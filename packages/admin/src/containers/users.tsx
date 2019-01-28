@@ -2,13 +2,11 @@
  * Vendor
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Helmet from 'react-helmet';
 
-import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
-import { Switch, Route, Link } from 'react-router-dom';
-import { Button } from 'antd';
+import { Switch, Route } from 'react-router-dom';
 
 /**
  * Actions
@@ -25,51 +23,43 @@ import Dashboard from '../components/layout';
 import Index from '../components/users';
 import Edit from '../components/users/edit';
 
+import { Header, Main, Title } from '../components/common';
+
 /*!
  * Expo
  */
 
-const Users = ({ location }) => {
-  const { pathname } = location;
+const Users = ({ location: { pathname }, fetchUsers }) => {
+  let title = 'Пользователи';
 
-  let title = '';
-
-  switch (pathname) {
-    case '/users/create':
-      title = 'Новый пользователь';
-      break;
-
-    default:
-      title = 'Пользователи';
-      break;
+  if (pathname.includes('create')) {
+    title = 'Новый пользователь';
   }
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   return (
     <Dashboard>
       <Helmet>
         <title>{title}</title>
       </Helmet>
-      <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
-        <h1 style={{ margin: 0 }}>
-          {title}
-        </h1>
-      </header>
+      <Header>
+        <Title>{title}</Title>
+      </Header>
 
-      <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
+      <Main>
         <Switch>
-          <Route exact path="/users" component={Index} />
+          <Route exact={true} path="/users" component={Index} />
           <Route path="/users/edit/:id" component={Edit} />
         </Switch>
-      </section>
+      </Main>
     </Dashboard>
   );
 };
 
-export default compose(
-  connect(null, { fetchUsers }),
-  lifecycle<IUsersContainerProps, IUsersContainerState>({
-    componentDidMount() {
-      this.props.fetchUsers();
-    },
-  }),
+export default connect(
+  null,
+  { fetchUsers }
 )(Users as any);

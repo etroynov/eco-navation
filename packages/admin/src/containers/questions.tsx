@@ -5,8 +5,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import { Switch, Route, Link } from 'react-router-dom';
-import { Button } from 'antd';
+import { Switch, Route } from 'react-router-dom';
 
 /**
  * Components
@@ -16,34 +15,40 @@ import Dashboard from '../components/layout';
 import Create from '../components/questions/create';
 import Edit from '../components/questions/edit';
 
+import { Header, Main, Title } from '../components/common';
+
 /*!
  * Expo
  */
 
-const Questions = ({ location }) => (
-  <Dashboard>
-    <Helmet>
-      <title>{
-        location.pathname.split('/').includes('edit')
-        ? 'Редактирование вопроса'
-        : 'Новый вопрос'
-      }</title>
-    </Helmet>
-    <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
-      <h1 style={{ margin: 0 }}>
-      {location.pathname.split('/').includes('edit')
-        ? 'Редактирование вопроса'
-        : 'Новый вопрос'}
-      </h1>
-    </header>
+const Questions = ({ location: { pathname } }) => {
+  let title = 'Новый вопрос';
 
-    <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
-      <Switch>
-        <Route exact path="/questions/create/:course" component={Create} />
-        <Route path="/questions/edit/:id" component={Edit} />
-      </Switch>
-    </section>
-  </Dashboard>
-);
+  if (pathname.includes('edit')) {
+    title = 'Редактирование вопроса';
+  }
+
+  return (
+    <Dashboard>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
+      <Header>
+        <Title>{title}</Title>
+      </Header>
+
+      <Main>
+        <Switch>
+          <Route
+            exact={true}
+            path="/questions/create/:course"
+            component={Create}
+          />
+          <Route path="/questions/edit/:id" component={Edit} />
+        </Switch>
+      </Main>
+    </Dashboard>
+  );
+};
 
 export default Questions;

@@ -2,13 +2,12 @@
  * Vendor
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Helmet from 'react-helmet';
 
-import { compose, lifecycle } from 'recompose';
+import { Button } from 'antd';
 import { connect } from 'react-redux';
 import { Switch, Route, Link } from 'react-router-dom';
-import { Button } from 'antd';
 
 /**
  * Actions
@@ -26,13 +25,13 @@ import Index from '../components/pages';
 import Create from '../components/pages/create';
 import Edit from '../components/pages/edit';
 
+import { Header, Main, Title } from '../components/common';
+
 /*!
  * Expo
  */
 
-const Pages = ({ location }) => {
-  const { pathname } = location;
-
+const Pages = ({ location: { pathname }, fetchPages }) => {
   let title = '';
 
   switch (pathname) {
@@ -44,37 +43,35 @@ const Pages = ({ location }) => {
       title = 'Страницы';
       break;
   }
+  
+  useEffect(() => { fetchPages() }, []);
 
   return (
     <Dashboard>
       <Helmet>
         <title>{title}</title>
       </Helmet>
-      <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
-        <h1 style={{ margin: 0 }}>
+      <Header>
+        <Title>
           {title}
-          <Button type="primary" style={{ float: 'right', marginTop: 5 }} >
+          <Button type="primary" style={{ float: 'right', marginTop: 5 }}>
             <Link to="/pages/create">Добавить страницу</Link>
           </Button>
-        </h1>
-      </header>
+        </Title>
+      </Header>
 
-      <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
+      <Main>
         <Switch>
-          <Route exact path="/pages" component={Index} />
-          <Route exact path="/pages/create" component={Create} />
+          <Route exact={true} path="/pages" component={Index} />
+          <Route exact={true} path="/pages/create" component={Create} />
           <Route path="/pages/edit/:id" component={Edit} />
         </Switch>
-      </section>
+      </Main>
     </Dashboard>
   );
 };
 
-export default compose(
-  connect(null, { fetchPages }),
-  lifecycle<IPagesContainerProps, IPagesContainerState>({
-    componentDidMount() {
-      this.props.fetchPages();
-    },
-  }),
-)(Pages as any);
+export default connect(
+  null,
+  { fetchPages }
+)(Pages);

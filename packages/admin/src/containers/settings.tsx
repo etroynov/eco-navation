@@ -2,10 +2,9 @@
  * Vendor
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Helmet from 'react-helmet';
 
-import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 import { Switch, Route, Link } from 'react-router-dom';
 import { Button } from 'antd';
@@ -22,59 +21,53 @@ import { fetchSettings } from '../actions/settingsActions';
 
 import Dashboard from '../components/layout';
 
-import Index from '../components/settings';
-import Create from '../components/settings/create';
-import Edit from '../components/settings/edit';
+import { Header, Main, Title } from '../components/common';
+import { Index, Create, Edit } from '../components/settings';
 
 /*!
  * Expo
  */
 
-const Settings = ({ location }) => {
-  const { pathname } = location;
+const Settings: React.FunctionComponent<any> = ({
+  location: { pathname },
+  fetchSettings,
+}) => {
+  let title = 'Настройки';
 
-  let title = '';
-
-  switch (pathname) {
-    case '/settings/create':
-      title = 'Новый параметр';
-      break;
-
-    default:
-      title = 'Настройки';
-      break;
+  if (pathname.includes('create')) {
+    title = 'Новый параметр';
   }
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
 
   return (
     <Dashboard>
       <Helmet>
         <title>{title}</title>
       </Helmet>
-      <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
-        <h1 style={{ margin: 0 }}>
+      <Header>
+        <Title>
           {title}
-          <Button type="primary" style={{ float: 'right', marginTop: 5 }} >
+          <Button type="primary" style={{ float: 'right', marginTop: 5 }}>
             <Link to="/settings/create">Добавить параметр</Link>
           </Button>
-        </h1>
-      </header>
+        </Title>
+      </Header>
 
-      <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
+      <Main>
         <Switch>
-          <Route exact path="/settings" component={Index} />
-          <Route exact path="/settings/create" component={Create} />
+          <Route exact={true} path="/settings" component={Index} />
+          <Route exact={true} path="/settings/create" component={Create} />
           <Route path="/settings/edit/:id" component={Edit} />
         </Switch>
-      </section>
+      </Main>
     </Dashboard>
   );
 };
 
-export default compose(
-  connect(null, { fetchSettings }),
-  lifecycle<ISettingsContainerProps, ISettingsContainerState>({
-    componentDidMount() {
-      this.props.fetchSettings();
-    },
-  }),
+export default connect(
+  null,
+  { fetchSettings }
 )(Settings as any);

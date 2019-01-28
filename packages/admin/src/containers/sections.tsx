@@ -2,10 +2,9 @@
  * Vendor
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Helmet from 'react-helmet';
 
-import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 import { Switch, Route, Link } from 'react-router-dom';
 import { Button } from 'antd';
@@ -22,59 +21,48 @@ import { fetchSections } from '../actions/sectionsActions';
 
 import Dashboard from '../components/layout';
 
-import Index from '../components/sections';
-import Create from '../components/sections/create';
-import Edit from '../components/sections/edit';
+import { Header, Main, Title } from '../components/common';
+import { Index, Create, Edit } from '../components/sections';
 
 /*!
  * Expo
  */
 
-const Sections = ({ location }) => {
-  const { pathname } = location;
+const Sections = ({ location: { pathname } }) => {
+  let title = 'Направления';
 
-  let title = '';
-
-  switch (pathname) {
-    case '/sections/create':
-      title = 'Новое направление';
-      break;
-
-    default:
-      title = 'Направления';
-      break;
+  if (pathname.includes('create')) {
+    title = 'Новое направление';
   }
+
+  useEffect(() => { fetchSections() }, []);
 
   return (
     <Dashboard>
       <Helmet>
         <title>{title}</title>
       </Helmet>
-      <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
-        <h1 style={{ margin: 0 }}>
+      <Header>
+        <Title>
           {title}
-          <Button type="primary" style={{ float: 'right', marginTop: 5 }} >
+          <Button type="primary" style={{ float: 'right', marginTop: 5 }}>
             <Link to="/sections/create">Добавить раздел</Link>
           </Button>
-        </h1>
-      </header>
+        </Title>
+      </Header>
 
-      <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
+      <Main>
         <Switch>
-          <Route exact path="/sections" component={Index} />
-          <Route exact path="/sections/create" component={Create} />
+          <Route exact={true} path="/sections" component={Index} />
+          <Route exact={true} path="/sections/create" component={Create} />
           <Route path="/sections/edit/:id" component={Edit} />
         </Switch>
-      </section>
+      </Main>
     </Dashboard>
   );
 };
 
-export default compose(
-  connect(null, { fetchSections }),
-  lifecycle<ISectionsContainerProps, ISectionsContainerState>({
-    componentDidMount() {
-      this.props.fetchSections();
-    },
-  }),
+export default connect(
+  null,
+  { fetchSections }
 )(Sections as any);

@@ -126,6 +126,10 @@ exports.login = async (req, res) => {
       { _id: 1, fio: 1, position: 1, email: 1, password: 1 }
     );
 
+    if (user == null) return send(res, 404, {
+      msg: 'пользователь с таким email не найден'
+    })
+
     if (compareSync(password, user.password)) {
       const token = sign(user.toObject(), "123");
       return send(res, 200, { token });

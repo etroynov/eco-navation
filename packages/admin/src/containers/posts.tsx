@@ -2,10 +2,9 @@
  * Vendor
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Helmet from 'react-helmet';
 
-import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 import { Switch, Route, Link } from 'react-router-dom';
 import { Button } from 'antd';
@@ -26,14 +25,16 @@ import Index from '../components/posts';
 import Create from '../components/posts/create';
 import Edit from '../components/posts/edit';
 
+import { Header, Main, Title } from '../components/common';
+
 /*!
  * Expo
  */
 
-const Posts = ({ location }) => {
-  const { pathname } = location;
-
+const Posts = ({ location: { pathname }, fetchPosts }) => {
   let title = '';
+
+  useEffect(() => {fetchPosts()}, []);
 
   switch (pathname) {
     case '/posts/create':
@@ -50,31 +51,27 @@ const Posts = ({ location }) => {
       <Helmet>
         <title>{title}</title>
       </Helmet>
-      <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
-        <h1 style={{ margin: 0 }}>
+      <Header>
+        <Title>
           {title}
-          <Button type="primary" style={{ float: 'right', marginTop: 5 }} >
+          <Button type="primary" style={{ float: 'right', marginTop: 5 }}>
             <Link to="/posts/create">Добавить запись</Link>
           </Button>
-        </h1>
-      </header>
-
-      <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
+        </Title>
+      </Header>
+      
+      <Main>
         <Switch>
-          <Route exact path="/posts" component={Index} />
-          <Route exact path="/posts/create" component={Create} />
+          <Route exact={true} path="/posts" component={Index} />
+          <Route exact={true} path="/posts/create" component={Create} />
           <Route path="/posts/edit/:id" component={Edit} />
         </Switch>
-      </section>
+      </Main>
     </Dashboard>
   );
 };
 
-export default compose(
-  connect(null, { fetchPosts }),
-  lifecycle<IPostsContainerProps, IPostsContainerState>({
-    componentDidMount() {
-      this.props.fetchPosts();
-    },
-  }),
-)(Posts as any);
+export default connect(
+  null,
+  { fetchPosts }
+)(Posts);

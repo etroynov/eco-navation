@@ -27,14 +27,14 @@ import Index from '../components/courses';
 import Create from '../components/courses/create';
 import Edit from '../components/courses/edit';
 
+import { Header, Main, Title } from '../components/common';
+
 /*!
  * Expo
  */
 
-const Courses = ({ location }) => {
-  const { pathname } = location;
-
-  let title = '';
+const Courses = ({ location: { pathname } }) => {
+  const title = '';
 
   switch (pathname) {
     case '/courses/create':
@@ -51,32 +51,35 @@ const Courses = ({ location }) => {
       <Helmet>
         <title>{title}</title>
       </Helmet>
-      <header style={{ marginBottom: 20, padding: '10px 20px', background: '#ffffff', border: '1px solid #eeeeee' }}>
-        <h1 style={{ margin: 0 }}>
+      <Header>
+        <Title>
           {title}
-          <Button type="primary" style={{ float: 'right', marginTop: 5 }} >
+          <Button type="primary" style={{ float: 'right', marginTop: 5 }}>
             <Link to="/courses/create">Добавить курс</Link>
           </Button>
-        </h1>
-      </header>
+        </Title>
+      </Header>
 
-      <section style={{ padding: 10, background: '#ffffff', border: '1px solid #eeeeee' }}>
+      <Main>
         <Switch>
-          <Route exact path="/courses" component={Index} />
-          <Route exact path="/courses/create" component={Create} />
+          <Route exact={true} path="/courses" component={Index} />
+          <Route exact={true} path="/courses/create" component={Create} />
           <Route path="/courses/edit/:id" component={Edit} />
         </Switch>
-      </section>
+      </Main>
     </Dashboard>
   );
 };
 
 export default compose(
-  connect(null, { fetchSections, fetchCourses }),
+  connect(
+    null,
+    { fetchSections, fetchCourses }
+  ),
   lifecycle<ICourseContainerProps, ICourseContainerState>({
     componentDidMount() {
       this.props.fetchSections();
       this.props.fetchCourses();
     },
-  }),
+  })
 )(Courses as any);
