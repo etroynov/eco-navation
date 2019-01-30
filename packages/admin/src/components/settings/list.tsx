@@ -3,42 +3,38 @@
  */
 
 import React from 'react';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Table, Button } from 'antd';
 
 /*!
- * Actions
- */
-
-import { deleteSettings } from '../../actions/settingsActions';
-
-/*!
  * Columns
  */
 
-const columns = [
+const columns: any[] = [
   {
     title: 'Название',
     dataIndex: 'name',
     key: 'name',
-  }, {
+  },
+  {
     title: 'Ключ',
     dataIndex: 'slug',
     key: 'sulg',
     align: 'center',
-  }, {
+  },
+  {
     title: 'значение',
     dataIndex: 'value',
     key: 'value',
     align: 'center',
-  }, {
+  },
+  {
     title: 'Действия',
     key: 'action',
     align: 'center',
-    render: (text, record) => (
+    render: (_, record) => (
       <div>
         <Link to={`/settings/edit/${record._id}`}>
           <Button type="primary" icon="edit" style={{ marginLeft: 10 }} />
@@ -52,8 +48,11 @@ const columns = [
  * Expo
  */
 
-const SettingssIndex = ({ loading, data }) => (
-  <Table 
+const SettingssIndex: React.FunctionComponent<{
+  loading: boolean;
+  data: any[];
+}> = ({ loading, data }) => (
+  <Table
     columns={columns}
     rowKey={(record: any) => record._id}
     dataSource={data}
@@ -61,8 +60,9 @@ const SettingssIndex = ({ loading, data }) => (
   />
 );
 
-const mapStateToProps = ({ settings: { loading, data } }) => ({ loading, data });
+const mapStateToProps = ({ settings: { loading, data } }) => ({
+  loading,
+  data,
+});
 
-export default connect(
-  mapStateToProps,
-)(SettingssIndex as any);
+export default connect(mapStateToProps)(SettingssIndex);

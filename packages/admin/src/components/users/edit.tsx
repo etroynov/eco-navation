@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Form, Icon, Input, Button, Checkbox, Select } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 
 /*!
  * Actions
@@ -20,7 +20,6 @@ import { fetchCourses } from '../../actions/coursesActions';
 
 const Option = Select.Option;
 const FormItem = Form.Item;
-const { TextArea } = Input;
 
 /*!
  * InitialState
@@ -56,10 +55,6 @@ class UserEditForm extends React.Component<any, IUser> {
     return this.setState({ ...filteredUser[0] });
   }
 
-  private handleChangeCourses = () => {};
-
-  private handleChangeLevel = () => {};
-
   private handleSubmit = (e) => {
     e.preventDefault();
 
@@ -78,16 +73,9 @@ class UserEditForm extends React.Component<any, IUser> {
     const { form: { getFieldDecorator } } = this.props;
     const {
       fio,
-      telephone,
-      password,
       organization,
       courses,
-      finishedCourses,
-      payments,
-      tests,
       email,
-      position,
-      level,
     } = this.state;
 
     return (
@@ -111,7 +99,7 @@ class UserEditForm extends React.Component<any, IUser> {
             initialValue: organization,
           })(
             <Select placeholder="организация">
-              <Option key={0} value={0}>Частное лицо</Option>
+              <Option key="0" value={0}>Частное лицо</Option>
               {this.props.organizations.data.map(({ _id, name }) => <Option key={_id} value={_id}>{name}</Option>)}
             </Select>,
           )}
