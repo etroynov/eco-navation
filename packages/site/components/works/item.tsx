@@ -2,13 +2,12 @@
  * Vendor
  */
 
-import * as React from 'react';
+import React from 'react';
 import { Row, Col } from 'antd';
 
 /*!
  * Expo
  */
-
 
 const Content = ({ name, description, context }) => (
   <Col span={12} className={context}>
@@ -24,7 +23,12 @@ const Content = ({ name, description, context }) => (
   </Col>
 );
 
-const Img = ({ img, context }) => (
+interface IImgProps {
+  img: string;
+  context?: string;
+}
+
+const Img: React.FC<IImgProps> = ({ img, context }) => (
   <Col span={12} className={`step__timeline step__timeline--circle ${context}`}>
     <figure className="step__img-container">
       <img src={img} alt="" className="step__img" />

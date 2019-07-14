@@ -12,13 +12,24 @@ import { Layout } from 'antd';
 import Header from './common/Header';
 import Footer from './common/Footer';
 
+/**
+ * Types
+ */
+
+interface IProps {
+  title?: string;
+  description?: string;
+  settings?: any;
+  children?: any;
+}
+
 /*!
  * Expo
  */
 
 const { Content } = Layout;
 
-const Site = ({ title, description, settings, children }) => (
+const Site: React.FC<IProps> = ({ title, description, settings, children }) => (
   <Layout>
     <Header title={title} description={description} settings={settings} />
     <Content>

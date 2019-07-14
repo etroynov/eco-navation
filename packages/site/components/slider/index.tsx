@@ -5,7 +5,6 @@
 import * as React from 'react';
 import Link from 'next/link';
 
-import { withState } from 'recompose';
 import { Button } from 'antd';
 
 /*!

@@ -2,7 +2,7 @@
  * Vendor
  */
 
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Row, Tag } from 'antd';
 
 /*!
@@ -14,42 +14,45 @@ import Item from './Item';
 const { CheckableTag } = Tag;
 
 /*!
+ * Types
+ */
+
+interface Props {
+  name: string;
+  description: string;
+  items: ReadonlyArray<any>;
+  tagsCloud: ReadonlyArray<any>;
+}
+
+/*!
  * Expos
  */
 
-class Courses extends React.Component {
-  state = {
-    selectedTags: [],
-  };
+export const Courses: React.FC<Props> = ({
+  name = '',
+  description = '',
+  items = [],
+  tagsCloud = [],
+}) => {
+  const [tags, setTags] = useState([]);
 
-  handleChange = (tag, checked) => {
-    const { selectedTags } = this.state;
+  let currentItems = items;
 
-    const nextSelectedTags = checked
-      ? [...selectedTags, tag]
-      : selectedTags.filter(t => t !== tag);
-
-    this.setState({ selectedTags: nextSelectedTags });
+  if (!!tags.length) {
+    currentItems = items.filter(({ tags }) => tags.includes(tags));
   }
 
-  render() {
-    const {
-      name = '',
-      description = '',
-      items = [],
-      tagsCloud = [],
-    } = this.props;
+  const handleChange = (tag, checked) => {
+    const nextSelectedTags = checked
+      ? [...tags, tag]
+      : tags.filter(t => t !== tag);
 
-    const { selectedTags } = this.state;
+    setTags(nextSelectedTags);
+    this.setState({ selectedTags: nextSelectedTags });
+  };
 
-    let currentItems = items;
-
-    if (!!selectedTags.length) {
-      currentItems = items.filter(({ tags }) => selectedTags.includes(tags));
-    }
-
-    return (
-      <section className="courses">
+  return (
+    <section className="courses">
         <div className="uc-container">
           <header className="courses__header">
             <h2 className="courses__title">{name}</h2>
@@ -59,8 +62,8 @@ class Courses extends React.Component {
                 <CheckableTag
                   key={index}
                   className="tags-cloud__item"
-                  checked={selectedTags.includes(slug)}
-                  onChange={checked => this.handleChange(slug, checked)}
+                  checked={tags.includes(slug)}
+                  onChange={handleChange.bind(null, slug)}
                 >
                   {name}
                 </CheckableTag>
@@ -73,8 +76,5 @@ class Courses extends React.Component {
           </Row>
         </div>
       </section>
-    );
-  }
-}
-
-export default Courses;
+  );
+};

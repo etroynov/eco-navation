@@ -1,9 +1,14 @@
 import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
-export default class extends Document {
+interface IDocumentProps {
+  styleTags: any;
+}
+
+export default class extends Document<IDocumentProps> {
   static getInitialProps ({ renderPage }) {
-    const sheet = new ServerStyleSheet()
+    const sheet = new ServerStyleSheet();
+
     const page = renderPage(App => props => sheet.collectStyles(<App {...props} />));
     const styleTags = sheet.getStyleElement();
     return { ...page, styleTags };
@@ -13,7 +18,6 @@ export default class extends Document {
     return (
       <html>
         <Head>
-          <title>My page</title>
           {this.props.styleTags}
         </Head>
         <body>

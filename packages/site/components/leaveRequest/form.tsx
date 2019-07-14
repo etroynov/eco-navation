@@ -1,8 +1,30 @@
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+/**
+ * Vendor
+ */
+
+import React from 'react';
+import { Form, Icon, Input, Button } from 'antd';
+
+/**
+ * Components
+ */
+
 const FormItem = Form.Item;
 
-class NormalLoginForm extends React.Component {
-  handleSubmit = (e) => {
+/**
+ * Types
+ */
+
+interface Props {
+  form: any;
+}
+
+/**
+ * Expo
+ */
+
+class NormalLoginForm extends React.Component<Props> {
+  handleSubmit = (e: any) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -25,7 +47,7 @@ class NormalLoginForm extends React.Component {
           {getFieldDecorator('password', {
             rules: [{ required: true, message: 'Please input your Password!' }],
           })(
-            <Input prefix={<Icon type="lock" />} type="password" placeholder="Password" />
+            <Input prefix={<Icon type="lock" />} type="password" placeholder="Password" />,
           )}
         </FormItem>
         <FormItem>

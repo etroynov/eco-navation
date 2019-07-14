@@ -1,5 +1,5 @@
 {
-  "name": "ucavtor-root",
+  "name": "@ucavtor/root",
   "version": "0.110.5",
   "license": "MIT",
   "private": true,

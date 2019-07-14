@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import { Row, Col } from 'antd';
-
 const Article = ({ name, content }) => (
   <section>
     <div className="article">

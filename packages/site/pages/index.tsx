@@ -2,8 +2,8 @@
  * Vendor
  */
 
+import React from 'react';
 import axios from 'axios';
-import * as React from 'react';
 
 /*!
  * Components
@@ -26,7 +26,7 @@ const Home = ({ posts, sections, settings }) => (
     <Slider />
     <Sections sections={sections} />
     <Works />
-    <Banner settings={settings} />
+    <Banner />
     <Reviews />
     <Posts posts={posts} />
   </Site>

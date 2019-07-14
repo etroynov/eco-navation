@@ -1,7 +1,24 @@
-import * as React from 'react';
+/**
+ * Vendor
+ */
 
-const Review = ({ avatar, name, text }) => (
-  <section className="review">  
+import React from 'react';
+
+/**
+ * Types
+ */
+
+interface Props {
+  avatar: string;
+  name: string;
+}
+
+/**
+ * Expo
+ */
+
+const Review: React.FC<Props> = ({ avatar, name }) => (
+  <section className="review">
     <figure className="review__img-container" >
       <img className="review__img" src={avatar} alt={name} width="150" />
     </figure>
