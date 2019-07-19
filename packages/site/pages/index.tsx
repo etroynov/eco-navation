@@ -9,7 +9,7 @@ import axios from 'axios';
  * Components
  */
 
-import Site from '../components/layout';
+import { Layout } from '../components/Layout';
 import Sections from '../components/sections';
 import Slider from '../components/slider';
 import Works from '../components/works';
@@ -22,14 +22,14 @@ import Banner from '../components/banner';
  */
 
 const Home = ({ posts, sections, settings }) => (
-  <Site settings={settings}>
+  <Layout settings={settings}>
     <Slider />
     <Sections sections={sections} />
     <Works />
     <Banner />
     <Reviews />
     <Posts posts={posts} />
-  </Site>
+  </Layout>
 );
 
 Home.getInitialProps = async () => {

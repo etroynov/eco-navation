@@ -11,7 +11,7 @@ import { Row } from 'antd';
  * Components
  */
 
-import Site from '../components/layout';
+import { Layout } from '../components/Layout';
 import Course from '../components/courses/Item';
 
 /*!
@@ -37,7 +37,7 @@ const Devider = styled.hr`
  */
 
 const Section = ({ section: { name, content, courses }, settings }) => (
-  <Site settings={settings}>
+  <Layout settings={settings}>
     <section className="courses">
       <div className="uc-container">
         <header className="courses__header">
@@ -65,7 +65,7 @@ const Section = ({ section: { name, content, courses }, settings }) => (
         <Content dangerouslySetInnerHTML={{ __html: content }} />
       </div>
     </section>
-  </Site>
+  </Layout>
 );
 
 Section.getInitialProps = async ({ query }) => {

@@ -16,10 +16,12 @@
     "@types/react-router-dom": "^4.3.4",
     "@types/react-router-redux": "^5.0.18",
     "@types/recompose": "^0.30.6",
+    "@zeit/next-sass": "^1.0.1",
     "@zeit/next-typescript": "1.1.1",
     "babel-plugin-import": "^1.12.0",
     "babel-plugin-styled-components": "^1.10.6",
     "cssnano": "^4.1.10",
+    "node-sass": "^4.12.0",
     "tslint": "^5.18.0",
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.5.3"

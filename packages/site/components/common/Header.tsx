@@ -12,7 +12,7 @@ import { Menu, Icon } from 'antd';
  * Expo
  */
 
-const Header = ({ title, description, settings }) => (
+export const Header = ({ title, description, settings }) => (
   <header className="header">
     <div className="uc-container">
       <Head>
@@ -72,5 +72,3 @@ const Header = ({ title, description, settings }) => (
     </div>
   </header>
 );
-
-export default Header;

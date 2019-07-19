@@ -9,7 +9,7 @@ import * as React from 'react';
  * Components
  */
 
-import Site from '../components/layout';
+import { Layout } from '../components/Layout';
 import Article from '../components/article';
 
 /*!
@@ -17,11 +17,11 @@ import Article from '../components/article';
  */
 
 const Post = ({ page: { _id = 0, title = '', description = '', name = '', content = '' }, settings }) => (
-  <Site title={title} description={description} settings={settings}>
+  <Layout title={title} description={description} settings={settings}>
     <section className="uc-container page">
       <Article key={_id} name={name} content={content} />
     </section>
-  </Site>
+  </Layout>
 );
 
 Post.getInitialProps = async ({ query }) => {

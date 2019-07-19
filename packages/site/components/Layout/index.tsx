@@ -3,16 +3,20 @@
  */
 
 import * as React from 'react';
-import { Layout } from 'antd';
 
 /*!
  * Components
  */
 
-import Header from './common/Header';
-import Footer from './common/Footer';
+import { Header, Footer, Sidebar } from '../common';
 
-/**
+/*!
+ * Styles
+ */
+
+import styles from './styles.scss';
+
+/*!
  * Types
  */
 
@@ -27,16 +31,15 @@ interface IProps {
  * Expo
  */
 
-const { Content } = Layout;
-
-const Site: React.FC<IProps> = ({ title, description, settings, children }) => (
-  <Layout>
+export const Layout: React.FC<IProps> = ({
+  title, description, settings, children,
+}) => (
+  <div className={styles.container}>
     <Header title={title} description={description} settings={settings} />
-    <Content>
+    <Sidebar />
+    <main>
       {children}
-    </Content>
+    </main>
     <Footer settings={settings} />
-  </Layout>
+  </div>
 );
-
-export default Site;

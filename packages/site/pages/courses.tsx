@@ -12,7 +12,7 @@ import { Row, Col, Button, Icon } from 'antd';
  * Components
  */
 
-import Site from '../components/layout';
+import { Layout } from '../components/Layout';
 
 const Devider = styled.hr`
   width: 15%;
@@ -30,7 +30,7 @@ const OrderButton = styled(Button)`
  */
 
 const Course = ({ course: { title, description, name, content, thumb, duration, price }, settings }) => (
-  <Site title={title} description={description} settings={settings}>
+  <Layout title={title} description={description} settings={settings}>
     <section className="uc-container">
       <div className="article">
         <header className="article__header" style={{ textAlign: 'center' }}>
@@ -62,7 +62,7 @@ const Course = ({ course: { title, description, name, content, thumb, duration, 
         </Row>
       </div>
     </section>
-  </Site>
+  </Layout>
 );
 
 Course.getInitialProps = async ({ query }) => {

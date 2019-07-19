@@ -1,10 +1,4 @@
-interface ILayout {
-  title?: string;
-  description?: string;
-  settings?: object;
-  children?: object;
-}
-
-interface IBanner {
-  settings?: object;
+declare module '*.scss' {
+  const content: {[className: string]: string};
+  export default content;
 }
