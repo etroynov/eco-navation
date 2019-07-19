@@ -1,30 +1,25 @@
-import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-interface IDocumentProps {
-  styleTags: any;
-}
-
-export default class extends Document<IDocumentProps> {
-  static getInitialProps ({ renderPage }) {
-    const sheet = new ServerStyleSheet();
-
-    const page = renderPage(App => props => sheet.collectStyles(<App {...props} />));
-    const styleTags = sheet.getStyleElement();
-    return { ...page, styleTags };
+class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx);
+    return { ...initialProps };
   }
 
-  render () {
+  render() {
     return (
-      <html>
+      <Html>
         <Head>
-          {this.props.styleTags}
+          <link rel="stylesheet" href="/static/css/style.min.css"/>
+          <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet"></link>
         </Head>
         <body>
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
+
+export default MyDocument;

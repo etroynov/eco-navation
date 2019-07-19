@@ -12,6 +12,12 @@ import { Col, Row } from 'antd';
 import { YMInitializer } from 'react-yandex-metrika';
 
 /*!
+ * Styles
+ */
+
+import styles from './styles.scss';
+
+/*!
  * Components
  */
 
@@ -33,7 +39,7 @@ const SocialTitle = styled.h4`
  */
 
 export const Footer = ({ settings }) => (
-  <footer className="footer">
+  <footer className={styles.container}>
     <div className="uc-container">
       <Row>
         <Col span={6}>

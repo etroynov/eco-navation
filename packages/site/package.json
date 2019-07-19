@@ -8,6 +8,7 @@
     "build": "next build"
   },
   "devDependencies": {
+    "@svgr/webpack": "^4.3.2",
     "@types/node": "^12.6.2",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
@@ -21,6 +22,8 @@
     "babel-plugin-import": "^1.12.0",
     "babel-plugin-styled-components": "^1.10.6",
     "cssnano": "^4.1.10",
+    "next-compose-plugins": "^2.2.0",
+    "next-svgr": "0.0.2",
     "node-sass": "^4.12.0",
     "tslint": "^5.18.0",
     "tslint-config-airbnb": "^5.11.1",
@@ -29,6 +32,7 @@
   "dependencies": {
     "antd": "^3.20.2",
     "axios": "^0.19.0",
+    "classnames": "^2.2.6",
     "next": "^9.0.1",
     "polka": "^0.5.2",
     "react": "^16.8.6",

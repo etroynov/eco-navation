@@ -1,9 +1,17 @@
 @import '../../colors.scss';
 
 .container {
-  background-color: $sidebar-bg;
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar article"
+    "footer footer";
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 300px 1fr;
+  height: 100vh;
+  margin: 0;
 }
 
-.link {
-  color: $text-color;
+.content {
+  padding: 60px 50px;
 }

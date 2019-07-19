@@ -1,9 +1,46 @@
 @import '../../../colors.scss';
 
 .container {
+  grid-area: sidebar;
+  padding: 0 30px;
   background-color: $sidebar-bg;
 }
 
+.searchInput {
+  border: none;
+}
+
+.authContainer {
+  padding: 35px 0;
+  border-bottom: 1px solid $sidebar-border-color;
+}
+
+.list {
+  list-style: none;
+}
+
 .link {
+  font-size: 20px;
   color: $text-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $secondary-color;
+    & svg {
+      fill: $secondary-color;
+    }
+  }
+}
+
+.authContainer svg {
+  fill: $primary-color;
+}
+
+.authLink {
+  display: flex;
+  align-items: center;
+}
+
+.authLinkText {
+  padding-left: 15px;
 }

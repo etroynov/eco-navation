@@ -37,7 +37,7 @@ export const Layout: React.FC<IProps> = ({
   <div className={styles.container}>
     <Header title={title} description={description} settings={settings} />
     <Sidebar />
-    <main>
+    <main className={styles.content}>
       {children}
     </main>
     <Footer settings={settings} />
