@@ -1,43 +1,40 @@
 # UCAVTOR
 
-Проект учебного центра.
+Online Course Platform.
 
 ## Архитектура
 
-Проект состоит из 5 микросервисов:
+Project contanins 5 services:
 
-* *site* - выполняет *server side rendering* информационной части приложения необходимой для сео;
-* *admin* - панель управления контентом для административного персонала;
-* *company* - личный кабинет компаний;
-* *dashboard* - личный кабинет ученика;
-* *api* - сервис хранения и управления данными;
+* *site* - used for *server side rendering* for сео;
+* *admin* - Admin control panel;
+* *company* - Company control panel;
+* *dashboard* - User control panel;
+* *api* - source of data;
 
-## Зависимости
+## Services
 
 ### Front-end
 
-* система сборки: *parcel-bundler*
-* интерфес: *React*
-* библиотека компонентов: *Antd*
-* хранение данных: *redux*
-* авторизация: *JWT*
+* bundler: *webpack*
+* render library: *React*
+* UI library: *Antd*
+* store manager: *redux*
+* authorization: *JWT*
 
 ### Back-end
 
-* база данных: *mongodb*
-* работа с http: *micro*
-* менеджер сервисов: *pm2*
-* веб сервер: *nginx*
-* поиск: *Apache solr*
-
+* Database: *mongodb*
+* Server: *micro*
+* Instance Manager: *pm2*
 
 ## TO DO
 
-* внедрить *jwt* авторизацию для сервисов *admin*, *dashboard*;
-* внедрить *Storybook*;
-* описать интерфейсы для основных типов данных и заменить все *any* заглушки в проекте, введенные из за нехватки времени;
-* дописать документацию;
-* написать тесты;
-* провести оптимизацию используемых компонентов;
-* внедрить *Ramda*;
-* поместить сервисы в докер контейнеры;
+* add *jwt* authorization for services *admin*, *dashboard*;
+* add *Storybook*;
+* add type defenitions, replace *any* with types;
+* add docs;
+* add tests;
+* replace stateful components with stateless;
+* add *Ramda*;
+* move all services in docker containers;
