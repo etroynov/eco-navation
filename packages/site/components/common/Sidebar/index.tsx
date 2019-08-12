@@ -3,20 +3,89 @@
  */
 
 import React from 'react';
-import Link from 'next/link';
-import cn from 'classnames';
+
+/**
+ * Components
+ */
+
+import { Menu } from '../../Menu';
+import { MenuItem } from '../../MenuItem';
 
 /*!
  * Assets
  */
 
 import LoginIcon from './login.svg';
+import CollectionsIcon from './collections.svg';
+import DirectionsIcon from './directions.svg';
+import CoursesIcon from './courses.svg';
+import VebinarsIcon from './vebinars.svg';
+import ArticlesIcon from './articles.svg';
+import DocsIcon from './docs.svg';
+import EnvelopIcon from './envelop.svg';
+import AboutIcon from './about.svg';
 
 /*!
  * Styles
  */
 
 import styles from './styles.scss';
+
+/**
+ * Menu
+ */
+
+const menu: ReadonlyArray<{
+  label: string;
+  link: string;
+  icon: React.ReactElement;
+}> = [
+  {
+    label: 'Главная',
+    link: '/',
+    icon: <CollectionsIcon className={styles.icon} />,
+  },
+  {
+    label: 'Подборки',
+    link: '/',
+    icon: <CollectionsIcon className={styles.icon} />,
+  },
+  {
+    label: 'Направления',
+    link: '/',
+    icon: <DirectionsIcon className={styles.icon} />,
+  },
+  {
+    label: 'Курсы',
+    link: '/',
+    icon: <CoursesIcon className={styles.icon} />,
+  },
+  {
+    label: 'Вебинары',
+    link: '/',
+    icon: <VebinarsIcon className={styles.icon} />,
+  },
+  {
+    label: 'Статьи',
+    link: '/',
+    icon: <ArticlesIcon className={styles.icon} />,
+  },
+  {
+    label: 'Документы',
+    link: '/',
+    icon: <DocsIcon className={styles.icon} />,
+  },
+  {
+    label: 'Обратная связь',
+    link: '/',
+    icon: <EnvelopIcon className={styles.icon} />,
+  },
+  {
+    label: 'О проекте',
+    link: '/',
+    icon: <AboutIcon className={styles.icon} />,
+  },
+];
 
 /*!
  * Expo
@@ -25,32 +94,17 @@ import styles from './styles.scss';
 export const Sidebar = () => (
   <aside className={styles.container}>
     <section className={styles.authContainer}>
-      <Link href="/auth">
-        <a className={cn(styles.link, styles.authLink)}>
-          <LoginIcon className={styles.authIcon} />
-          <span className={styles.authLinkText}>Войти в систему</span>
-        </a>
-      </Link>
+      <MenuItem
+        label="Войти в систему"
+        link="/auth"
+        icon={<LoginIcon className={styles.icon} />}
+      />
     </section>
     <section className={styles.block}>
       <nav className={styles.menu}>
-        <ul className={styles.list}>
-          <li className={styles.item}>
-            <Link href="/">
-              <a className={styles.link}>главная</a>
-            </Link>
-          </li>
-          <li className={styles.item}>
-            <Link as="/documents" href="/page?slug=documents">
-              <a className={styles.link}>документы</a>
-            </Link>
-          </li>
-          <li>
-            <Link as="/info" href="/page?slug=info">
-              <a className={styles.link}>инфо</a>
-            </Link>
-          </li>
-        </ul>
+        <Menu>
+          {menu.map(item => <MenuItem key={item.link} {...item} />)}
+        </Menu>
       </nav>
     </section>
   </aside>

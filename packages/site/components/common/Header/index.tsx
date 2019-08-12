@@ -3,9 +3,15 @@
  */
 
 import React from 'react';
-import get from 'lodash/get';
 import Head from 'next/head';
 import cn from 'classnames';
+
+/*!
+ * Assets
+ */
+
+import logoSrc from './logo.png';
+import companySrc from './company.png';
 
 /*!
  * Styles
@@ -13,11 +19,17 @@ import cn from 'classnames';
 
 import styles from './styles.scss';
 
+/**
+ * Types
+ */
+
+import { IProps } from './interfaces';
+
 /*!
  * Expo
  */
 
-export const Header = ({ title, description, settings }) => (
+export const Header: React.FC<IProps> = ({ title, description }) => (
   <>
     <Head>
       <title>{ title ? title : 'Учебный центр "Автор"' }</title>
@@ -25,8 +37,7 @@ export const Header = ({ title, description, settings }) => (
     </Head>
     <header className={styles.container}>
       <section className={cn(styles.row, styles.left)}>
-        <div>УЦ "АВТОР"</div>
-        <div>Обучающая платформа</div>
+        <img src={logoSrc} alt=""/>
       </section>
 
       <section className={cn(styles.row, styles.search, styles.center)}>
@@ -34,14 +45,7 @@ export const Header = ({ title, description, settings }) => (
       </section>
 
       <section className={cn(styles.row, styles.right)}>
-        <div>
-          {get(settings, 'header-phone')}
-        </div>
-        <div>
-          <a href={`mailto:${get(settings, 'email')}`}>
-            {get(settings, 'email')}
-          </a>
-        </div>
+        <img src={companySrc} alt=""/>
       </section>
     </header>
   </>

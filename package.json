@@ -3,8 +3,11 @@
   "version": "0.110.5",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "boot": "lerna bootstrap"
+  },
   "devDependencies": {
-    "lerna": "^3.10.5"
+    "lerna": "^3.16.4"
   },
   "workspaces": [
     "packages/*"

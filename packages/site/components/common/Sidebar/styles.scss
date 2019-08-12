@@ -15,25 +15,12 @@
   border-bottom: 1px solid $sidebar-border-color;
 }
 
-.list {
-  list-style: none;
-}
-
-.link {
-  font-size: 20px;
-  color: $text-color;
-  text-decoration: none;
-
-  &:hover {
-    color: $secondary-color;
-    & svg {
-      fill: $secondary-color;
-    }
-  }
+.icon {
+  margin-right: 23px;
 }
 
 .authContainer svg {
-  fill: $primary-color;
+  fill: $secondary-color;
 }
 
 .authLink {
